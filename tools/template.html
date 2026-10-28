@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Socialistomètre — indice mondial inspiré de Milton Friedman</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1d2430;--mut:#5b6575;--line:#d9dee6;--acc:#1f4e8c;--s:#b5412c;--l:#1f6fa8;--A:#1f4e8c;--B:#a35a00;--C:#5a7d2a;--D:#7a3d8c}
+@media (prefers-color-scheme:dark){:root{--bg:#12161c;--card:#1b212b;--ink:#e6eaf0;--mut:#9aa6b8;--line:#2d3644;--acc:#7fb0ea;--s:#e0715c;--l:#6fb2e6;--A:#7fb0ea;--B:#e0a24d;--C:#9cc760;--D:#c48ad6}}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{padding:14px 16px;background:var(--card);border-bottom:1px solid var(--line)}
+h1{font-size:20px;margin:0}h2{font-size:17px;margin:0 0 8px}h3{font-size:15px;margin:14px 0 6px}
+.sub{color:var(--mut);font-size:13px}
+nav{display:flex;flex-wrap:wrap;gap:4px;padding:8px 12px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+nav button{border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:6px 10px;border-radius:6px;cursor:pointer;font:inherit;font-size:14px}
+nav button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+main{padding:12px 16px;max-width:1280px;margin:0 auto}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:12px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+input[type=text],input[type=search],select{padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit;max-width:100%}
+button.b{padding:6px 10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;cursor:pointer;font:inherit}
+button.b:hover{border-color:var(--acc)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:5px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{cursor:pointer;white-space:nowrap;background:var(--bg);position:sticky;top:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+tr.sel td{background:rgba(31,78,140,.12)}
+tr:hover td{background:rgba(127,127,127,.08)}
+.warn{background:#fff4d6;color:#5c4400;border:1px solid #e8cf85;border-radius:6px;padding:8px 10px;font-size:13px;margin:8px 0}
+@media (prefers-color-scheme:dark){.warn{background:#3a3217;color:#f1dc9a;border-color:#6b5a21}}
+.pill{display:inline-block;padding:1px 7px;border-radius:10px;font-size:12px;border:1px solid var(--line);color:var(--mut)}
+.bar{height:12px;background:var(--line);border-radius:6px;position:relative;min-width:80px}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:6px;display:block}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+svg text{fill:var(--ink);font:11px system-ui,sans-serif}
+svg .ax{stroke:var(--line)}svg .mut{fill:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,1.3fr) 3fr 56px;gap:8px;align-items:center;margin:6px 0}
+.sl input{width:100%}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);padding:4px 8px;border-radius:5px;font-size:12px;z-index:50;display:none;max-width:260px}
+.chip{display:inline-flex;align-items:center;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:2px 4px 2px 10px;margin:2px}
+.chip button{border:0;background:none;color:var(--mut);cursor:pointer;font-size:15px}
+.mini{font-size:12.5px;color:var(--mut)}
+a{color:var(--acc)}
+.cite{border-left:3px solid var(--line);padding-left:8px;margin:4px 0;color:var(--mut);font-size:13px}
+details{margin:6px 0}summary{cursor:pointer}
+footer{padding:16px;color:var(--mut);font-size:12.5px;text-align:center}
+@media (max-width:600px){main{padding:8px}.sl{grid-template-columns:1fr 56px}.sl label{grid-column:1/3}}
+</style>
+</head>
+<body>
+<header>
+<h1>Socialistomètre <span class="sub">— indice mondial continu, 0 = pôle socialisant · 100 = pôle libéral</span></h1>
+<div class="sub">Indice contemporain construit à partir de <em>Capitalisme et liberté</em> de Milton Friedman, avec des choix méthodologiques explicites. Ce n'est pas un indice publié par Friedman. <span id="hdrmeta"></span></div>
+</header>
+<nav id="nav"></nav>
+<main>
+
+<section id="s-classement" class="on">
+<div class="card">
+<h2>Tous les pays sur le curseur 0–100</h2>
+<div class="row">
+<input type="search" id="q" placeholder="Rechercher un pays ou un territoire…" aria-label="Recherche" size="28">
+<label>Zoom de <input type="number" id="zmin" min="0" max="99" value="0" style="width:64px"> à <input type="number" id="zmax" min="1" max="100" value="100" style="width:64px"></label>
+<button class="b" id="zreset">Réinitialiser le zoom</button>
+<label><input type="checkbox" id="onlycomplet"> Seulement les scores « complets » (4 dimensions)</label>
+</div>
+<div id="wnotice"></div>
+<svg id="swarm" width="100%" height="230" role="img" aria-label="Positions des pays sur l'axe 0 à 100"></svg>
+<div class="mini">Chaque point est une entité ; les points creux ont un score partiel (moins de 4 dimensions). Cliquer sur un point ouvre la fiche. Un score n'a de sens qu'avec sa fiabilité : voir le tableau.</div>
+</div>
+<div class="card">
+<div class="row"><h2 style="margin:0">Classement</h2><span class="mini" id="cnt"></span></div>
+<div class="tablewrap" style="max-height:560px;overflow:auto"><table id="tbl"></table></div>
+</div>
+</section>
+
+<section id="s-comparer">
+<div class="card">
+<h2>Comparer plusieurs pays</h2>
+<div class="row"><input type="search" id="cq" list="dl" placeholder="Ajouter un pays…" size="26"><datalist id="dl"></datalist><button class="b" id="cadd">Ajouter</button><button class="b" id="cclear">Vider</button></div>
+<div id="chips"></div>
+<div id="cmp"></div>
+</div>
+</section>
+
+<section id="s-fiche">
+<div class="card">
+<div class="row"><h2 style="margin:0">Fiche détaillée</h2><select id="fsel" aria-label="Pays"></select></div>
+<div id="fiche"></div>
+</div>
+</section>
+
+<section id="s-dispersion">
+<div class="card">
+<h2>Graphique de dispersion</h2>
+<div class="row"><label>Axe X <select id="sx"></select></label><label>Axe Y <select id="sy"></select></label></div>
+<svg id="scat" width="100%" height="460" role="img" aria-label="Dispersion de deux dimensions"></svg>
+<div class="mini" id="scatinfo"></div>
+</div>
+</section>
+
+<section id="s-distribution">
+<div class="card">
+<h2>Distribution des scores</h2>
+<div class="row"><label>Variable <select id="dsel"></select></label></div>
+<svg id="hist" width="100%" height="320" role="img" aria-label="Histogramme"></svg>
+<div class="mini" id="histinfo"></div>
+</div>
+</section>
+
+<section id="s-poids">
+<div class="card">
+<h2>Pondérations interactives</h2>
+<div class="warn">Les pondérations officielles de la méthodologie V1.0 sont fixes : 45 / 20 / 20 / 15. Toute autre valeur ci-dessous est un <b>scénario d'exploration</b>, non une nouvelle version de l'indice ; les scores et rangs de tous les onglets sont recalculés immédiatement.</div>
+<div id="sliders"></div>
+<div class="row"><button class="b" id="wreset">Revenir aux pondérations V1.0 (45/20/20/15)</button><button class="b" id="weq">Poids égaux (25 % chacune)</button></div>
+<div id="wsum" class="mini" style="margin-top:8px"></div>
+</div>
+</section>
+
+<section id="s-methode">
+<div class="card" id="meth"></div>
+</section>
+
+</main>
+<footer id="foot"></footer>
+<div id="tip"></div>
+
+<script>
+"use strict";
+var DATA = /*__DATA__*/null;
+(function(){
+var DIMS = ["A","B","C","D"];
+var DN = {}; DATA.dimensions.forEach(function(d){DN[d.id]=d.nom;});
+var W0 = {}; DATA.dimensions.forEach(function(d){W0[d.id]=d.poids;});
+var W = Object.assign({}, W0);
+var IND = {}; DATA.indicateurs.forEach(function(i){IND[i.id]=i;});
+var P = DATA.pays;
+var BYID = {}; P.forEach(function(p){BYID[p.id]=p;});
+var COL = {A:"var(--A)",B:"var(--B)",C:"var(--C)",D:"var(--D)",G:"var(--acc)"};
+var state = {sel:null, cmp:[], sortKey:"rang", sortDir:1, zmin:0, zmax:100, q:"", onlyComplet:false, tab:"classement"};
+
+function $(id){return document.getElementById(id);}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function f1(x){return x==null?"—":(Math.round(x*10)/10).toFixed(1).replace(".",",");}
+function fn(x,d){if(x==null)return "—";var s=Number(x).toFixed(d==null?2:d);return s.replace(".",",");}
+function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");}
+function weightsModified(){return DIMS.some(function(d){return Math.abs(W[d]-W0[d])>1e-9;});}
+
+/* ---- Calcul (miroir de engine/scoring.py : moyenne pondérée sur les dimensions disponibles, A exigée, >= 2 dimensions) ---- */
+function globalScore(dims, w){
+  if(dims.A==null) return null;
+  var num=0, den=0, n=0;
+  DIMS.forEach(function(d){ if(dims[d]!=null && w[d]>0){ num+=w[d]*dims[d]; den+=w[d]; } if(dims[d]!=null) n++; });
+  if(n<2 || den<=0) return null;
+  return num/den;
+}
+function compRank(items){ /* items: [{id,v}] -> rang de compétition (1 = score le plus élevé) */
+  var s = items.slice().sort(function(a,b){return b.v-a.v;});
+  var r = {}, last=null, rk=0;
+  s.forEach(function(it,i){ if(last===null || it.v!==last){rk=i+1; last=it.v;} r[it.id]=rk; });
+  return r;
+}
+function recompute(){
+  var items=[], itemsC=[];
+  P.forEach(function(p){
+    p.g = globalScore(p.dims, W);
+    if(p.g!=null){ items.push({id:p.id,v:Math.round(p.g*1e6)/1e6}); if(p.couv==="complet") itemsC.push({id:p.id,v:Math.round(p.g*1e6)/1e6}); }
+  });
+  var r = compRank(items), rc = compRank(itemsC);
+  P.forEach(function(p){ p.r = p.g==null?null:r[p.id]; p.rc = (p.g==null||p.couv!=="complet")?null:rc[p.id]; });
+}
+
+/* ---- Tooltip ---- */
+var tip = $("tip");
+function showTip(e,html){ tip.innerHTML=html; tip.style.display="block"; var x=e.clientX+12,y=e.clientY+12; if(x+270>window.innerWidth) x=e.clientX-270; if(y+60>window.innerHeight) y=e.clientY-50; tip.style.left=Math.max(4,x)+"px"; tip.style.top=Math.max(4,y)+"px"; }
+function hideTip(){ tip.style.display="none"; }
+
+/* ---- SVG helpers ---- */
+var NS="http://www.w3.org/2000/svg";
+function el(tag,attrs,parent){ var e=document.createElementNS(NS,tag); for(var k in attrs) e.setAttribute(k,attrs[k]); if(parent) parent.appendChild(e); return e; }
+function svgW(svg){ var w=svg.getBoundingClientRect().width; return w>50?w:600; }
+
+/* ---- Navigation ---- */
+var TABS=[["classement","Classement"],["comparer","Comparer"],["fiche","Fiche pays"],["dispersion","Dispersion"],["distribution","Distribution"],["poids","Pondérations"],["methode","Méthodologie & tests"]];
+function buildNav(){
+  var nav=$("nav");
+  TABS.forEach(function(t){ var b=document.createElement("button"); b.textContent=t[1]; b.setAttribute("data-t",t[0]); b.onclick=function(){go(t[0]);}; nav.appendChild(b); });
+}
+function go(t){
+  state.tab=t;
+  Array.prototype.forEach.call(document.querySelectorAll("section"),function(s){s.classList.toggle("on", s.id==="s-"+t);});
+  Array.prototype.forEach.call($("nav").children,function(b){b.classList.toggle("on", b.getAttribute("data-t")===t);});
+  render();
+}
+function openFiche(id){ state.sel=id; $("fsel").value=id; go("fiche"); }
+
+/* ---- Classement : curseur + tableau ---- */
+function visibleCountries(){
+  var q=norm(state.q);
+  return P.filter(function(p){ return (!q || norm(p.nom).indexOf(q)>=0 || norm(p.nom_en).indexOf(q)>=0 || p.id.toLowerCase()===q); });
+}
+function renderSwarm(){
+  var svg=$("swarm"); while(svg.firstChild) svg.removeChild(svg.firstChild);
+  var W_=svgW(svg), H=230, m=24, r=4.2;
+  var lo=state.zmin, hi=state.zmax; if(hi<=lo){hi=lo+1;}
+  var X=function(v){return m+(v-lo)/(hi-lo)*(W_-2*m);};
+  el("line",{x1:m,x2:W_-m,y1:H-26,y2:H-26,"class":"ax"},svg);
+  var step = (hi-lo)>60?10:((hi-lo)>25?5:((hi-lo)>10?2:1));
+  for(var v=Math.ceil(lo/step)*step; v<=hi; v+=step){ el("line",{x1:X(v),x2:X(v),y1:H-30,y2:H-22,"class":"ax"},svg); var t=el("text",{x:X(v),y:H-8,"text-anchor":"middle","class":"mut"},svg); t.textContent=v; }
+  var t0=el("text",{x:m,y:12,"class":"mut"},svg); t0.textContent="◀ pôle socialisant";
+  var t1=el("text",{x:W_-m,y:12,"text-anchor":"end","class":"mut"},svg); t1.textContent="pôle libéral ▶";
+  var q=norm(state.q), hasQ=q.length>0;
+  var pts=P.filter(function(p){return p.g!=null && p.g>=lo && p.g<=hi && (!state.onlyComplet || p.couv==="complet");}).sort(function(a,b){return a.g-b.g;});
+  var rows=[]; /* empilement : dernier x occupé par rangée */
+  var maxRows=Math.floor((H-60)/(2*r+0.6));
+  pts.forEach(function(p){
+    var x=X(p.g), row=0;
+    while(row<maxRows && rows[row]!==undefined && x-rows[row]<2*r+0.5) row++;
+    if(row>=maxRows) row=maxRows-1;
+    rows[row]=x; p._x=x; p._row=row;
+  });
+  pts.forEach(function(p){
+    var y=H-36-p._row*(2*r+0.6);
+    var match = hasQ && (norm(p.nom).indexOf(q)>=0||norm(p.nom_en).indexOf(q)>=0);
+    var sel = (state.cmp.indexOf(p.id)>=0)||state.sel===p.id;
+    var c=el("circle",{cx:p._x,cy:y,r:(match||sel)?r+2.2:r,fill:p.couv==="complet"?"var(--acc)":"var(--card)",stroke:match?"var(--s)":"var(--acc)","stroke-width":match?2.5:1.2,opacity:(hasQ&&!match)?0.25:1,style:"cursor:pointer"},svg);
+    c.addEventListener("mousemove",function(e){showTip(e,"<b>"+esc(p.nom)+"</b><br>Score : "+f1(p.g)+" · rang "+(p.r)+"<br>Fiabilité : "+f1(p.fiab.fiabilite)+" ("+esc(p.fiab.niveau)+")<br>Couverture : "+esc(p.couv));});
+    c.addEventListener("mouseleave",hideTip);
+    c.addEventListener("click",function(){openFiche(p.id);});
+  });
+}
+var COLS=[["r","Rang","n"],["nom","Pays / territoire",""],["g","Score","n"],["A","A","n"],["B","B","n"],["C","C","n"],["D","D","n"],["fiab","Fiabilité","n"],["couv","Couverture",""]];
+function sortVal(p,k){
+  if(k==="r"||k==="rang") return p.r==null?1e9:p.r;
+  if(k==="nom") return norm(p.nom);
+  if(k==="g") return p.g==null?-1e9:-p.g;
+  if(DIMS.indexOf(k)>=0) return p.dims[k]==null?1e9:-p.dims[k];
+  if(k==="fiab") return -p.fiab.fiabilite;
+  if(k==="couv") return p.couv;
+  return 0;
+}
+function renderTable(){
+  var list=visibleCountries().filter(function(p){return !state.onlyComplet||p.couv==="complet";});
+  var k=state.sortKey==="rang"?"r":state.sortKey;
+  list.sort(function(a,b){var x=sortVal(a,k),y=sortVal(b,k); if(x<y)return -state.sortDir; if(x>y)return state.sortDir; return norm(a.nom)<norm(b.nom)?-1:1;});
+  $("cnt").textContent=list.length+" entité(s) affichée(s) sur "+P.length+" · "+P.filter(function(p){return p.g!=null;}).length+" avec un score global";
+  var h="<thead><tr>"+COLS.map(function(c){var arrow=(c[0]===k)?(state.sortDir>0?" ▲":" ▼"):""; return "<th class='"+c[2]+"' data-k='"+c[0]+"'>"+c[1]+arrow+"</th>";}).join("")+"</tr></thead><tbody>";
+  list.forEach(function(p){
+    h+="<tr"+(state.cmp.indexOf(p.id)>=0?" class='sel'":"")+"><td class='n'>"+(p.r==null?"—":p.r)+"</td><td><a href='#' data-f='"+p.id+"'>"+esc(p.nom)+"</a>"+(p.type==="territoire"?" <span class='pill'>territoire</span>":"")+"</td><td class='n'><b>"+f1(p.g)+"</b></td>"+
+    DIMS.map(function(d){return "<td class='n'>"+f1(p.dims[d])+"</td>";}).join("")+
+    "<td class='n' title='"+esc(p.fiab.niveau)+"'>"+f1(p.fiab.fiabilite)+"</td><td>"+esc(p.couv)+(p.g==null?" (pas de score global)":"")+"</td></tr>";
+  });
+  var t=$("tbl"); t.innerHTML=h+"</tbody>";
+  Array.prototype.forEach.call(t.querySelectorAll("th"),function(th){th.onclick=function(){var kk=th.getAttribute("data-k"); if(state.sortKey===kk||(kk==="r"&&state.sortKey==="rang")) state.sortDir*=-1; else {state.sortKey=kk;state.sortDir=1;} renderTable();};});
+  Array.prototype.forEach.call(t.querySelectorAll("a[data-f]"),function(a){a.onclick=function(e){e.preventDefault();openFiche(a.getAttribute("data-f"));};});
+}
+function renderWNotice(){
+  $("wnotice").innerHTML = weightsModified()? "<div class='warn'>⚠ Pondérations modifiées ("+DIMS.map(function(d){return d+" "+Math.round(W[d]*100)+" %";}).join(" · ")+") : scénario d'exploration, différent de la méthodologie V1.0. Les rangs affichés sont recalculés.</div>" : "";
+}
+function renderClassement(){ renderWNotice(); renderSwarm(); renderTable(); }
+
+/* ---- Barres de dimensions ---- */
+function bar(v,color){ return "<div class='bar' title='"+f1(v)+"'><i style='width:"+(v==null?0:Math.max(0,Math.min(100,v)))+"%;background:"+color+"'></i></div>"; }
+
+/* ---- Comparer ---- */
+function renderCompare(){
+  var chips=$("chips"); chips.innerHTML="";
+  state.cmp.forEach(function(id){ var s=document.createElement("span"); s.className="chip"; s.innerHTML=esc(BYID[id].nom)+" <button aria-label='Retirer'>×</button>"; s.querySelector("button").onclick=function(){state.cmp=state.cmp.filter(function(x){return x!==id;});renderCompare();}; chips.appendChild(s); });
+  var c=$("cmp");
+  if(state.cmp.length<2){ c.innerHTML="<p class='mini'>Ajoutez au moins deux pays ou territoires.</p>"; return; }
+  var L=state.cmp.map(function(id){return BYID[id];});
+  var h="<div class='tablewrap'><table><thead><tr><th>Mesure</th>"+L.map(function(p){return "<th class='n'><a href='#' data-f='"+p.id+"'>"+esc(p.nom)+"</a></th>";}).join("")+"</tr></thead><tbody>";
+  h+="<tr><td><b>Score global</b></td>"+L.map(function(p){return "<td class='n'><b>"+f1(p.g)+"</b> <span class='mini'>(rang "+(p.r==null?"—":p.r)+")</span></td>";}).join("")+"</tr>";
+  DIMS.forEach(function(d){ h+="<tr><td>"+d+" · "+esc(DN[d])+"</td>"+L.map(function(p){return "<td class='n'>"+f1(p.dims[d])+bar(p.dims[d],COLS_[d])+"<span class='mini'>"+p.n_dim[d]+" ind.</span></td>";}).join("")+"</tr>"; });
+  h+="<tr><td>Fiabilité</td>"+L.map(function(p){return "<td class='n'>"+f1(p.fiab.fiabilite)+" <span class='mini'>"+esc(p.fiab.niveau)+"</span></td>";}).join("")+"</tr>";
+  h+="<tr><td>Couverture</td>"+L.map(function(p){return "<td class='n'>"+esc(p.couv)+" · "+p.fiab.n_indicateurs+"/"+p.fiab.n_indicateurs_total+"</td>";}).join("")+"</tr>";
+  DATA.indicateurs.forEach(function(i){ h+="<tr><td class='mini'>"+i.id+" · "+esc(i.nom)+"</td>"+L.map(function(p){var o=p.ind[i.id]; return "<td class='n mini'>"+(o?fn(o[0])+" "+esc(i.unite)+" <br>→ "+f1(o[1])+" ("+o[2]+")":"—")+"</td>";}).join("")+"</tr>"; });
+  c.innerHTML=h+"</tbody></table></div><p class='mini'>— : indicateur non disponible pour cette entité (non remplacé, non estimé). Valeur brute → valeur normalisée (0–100) entre parenthèses l'année.</p>";
+  Array.prototype.forEach.call(c.querySelectorAll("a[data-f]"),function(a){a.onclick=function(e){e.preventDefault();openFiche(a.getAttribute("data-f"));};});
+}
+var COLS_={A:"var(--A)",B:"var(--B)",C:"var(--C)",D:"var(--D)"};
+
+/* ---- Fiche ---- */
+function renderFiche(){
+  var p=BYID[state.sel]; var c=$("fiche");
+  if(!p){c.innerHTML="";return;}
+  var h="<h3 style='margin-top:10px'>"+esc(p.nom)+" <span class='mini'>("+esc(p.nom_en)+" · "+esc(p.id)+")</span></h3>";
+  h+="<div class='mini'>"+esc(p.type)+" · "+esc(p.region)+" · "+esc(p.revenu)+(p.statut_pol?" · Statut : "+esc(p.statut_pol):"")+"</div>";
+  h+="<div class='row' style='margin:10px 0'><div style='font-size:34px;font-weight:700'>"+(p.g==null?"Score global indisponible":f1(p.g))+"</div>"+(p.g!=null?"<div>rang <b>"+p.r+"</b> / "+P.filter(function(x){return x.g!=null;}).length+(p.rc?" · rang parmi les scores complets : <b>"+p.rc+"</b>":"")+"</div>":"")+"</div>";
+  if(p.stab && !weightsModified()) h+="<div class='mini'>Stabilité (600 rééchantillonnages) : rang plausible "+p.stab.rang_p5+" – "+p.stab.rang_p95+" ; score "+f1(p.stab.score_p5)+" – "+f1(p.stab.score_p95)+".</div>";
+  h+="<div class='warn'>Fiabilité des données : <b>"+f1(p.fiab.fiabilite)+" / 100 ("+esc(p.fiab.niveau)+")</b> — couverture "+Math.round(p.fiab.couverture*100)+" % ("+p.fiab.n_indicateurs+"/"+p.fiab.n_indicateurs_total+" indicateurs), qualité des sources "+Math.round(p.fiab.qualite_source*100)+" %, fraîcheur "+Math.round(p.fiab.anciennete*100)+" %, comparabilité "+Math.round(p.fiab.comparabilite*100)+" %. Statut de couverture : <b>"+esc(p.couv)+"</b>."+(p.absentes.length?" Dimensions absentes : "+p.absentes.join(", ")+".":"")+"</div>";
+  if(p.avert.length) h+="<details><summary>Avertissements et limites ("+p.avert.length+")</summary><ul>"+p.avert.map(function(a){return "<li>"+esc(a)+"</li>";}).join("")+"</ul></details>";
+  h+="<h3>Décomposition par dimension</h3><div class='tablewrap'><table><thead><tr><th>Dimension</th><th class='n'>Poids</th><th class='n'>Score</th><th>Indicateurs</th><th></th></tr></thead><tbody>";
+  var wsum=0; DIMS.forEach(function(d){if(p.dims[d]!=null)wsum+=W[d];});
+  DIMS.forEach(function(d){ h+="<tr><td>"+d+" · "+esc(DN[d])+"</td><td class='n'>"+Math.round(W[d]*100)+" %"+(p.dims[d]!=null&&wsum>0&&p.g!=null?" <span class='mini'>(effectif "+Math.round(W[d]/wsum*100)+" %)</span>":"")+"</td><td class='n'><b>"+f1(p.dims[d])+"</b></td><td class='n'>"+p.n_dim[d]+" / "+DATA.indicateurs.filter(function(i){return i.dim===d;}).length+"</td><td style='min-width:120px'>"+bar(p.dims[d],COLS_[d])+"</td></tr>"; });
+  h+="</tbody></table></div>";
+  h+="<h3>Indicateurs : valeurs brutes, normalisées, années et sources</h3><div class='tablewrap'><table><thead><tr><th>Id</th><th>Indicateur</th><th class='n'>Brut</th><th class='n'>Norm. 0–100</th><th class='n'>Année</th><th>Validation</th><th>Source</th></tr></thead><tbody>";
+  DATA.indicateurs.forEach(function(i){
+    var o=p.ind[i.id];
+    h+="<tr><td>"+i.id+"</td><td>"+esc(i.nom)+"<div class='mini'>sens : "+(i.orientation>0?"valeur élevée → pôle libéral":"valeur élevée → pôle socialisant")+"</div></td>";
+    if(o) h+="<td class='n'>"+fn(o[0])+" "+esc(i.unite)+"</td><td class='n'><b>"+f1(o[1])+"</b></td><td class='n'>"+o[2]+"</td><td>"+esc(o[3])+(o[5]?"<div class='mini'>"+esc(o[5])+"</div>":"")+"</td><td><a href='"+esc(i.url)+"' target='_blank' rel='noopener'>"+esc(i.source)+"</a><div class='mini'>révision source : "+esc(o[4]||"n.d.")+" · collecte : "+esc(DATA.meta.collecte)+"</div></td>";
+    else h+="<td class='n' colspan='4'><span class='mini'>donnée non disponible (non estimée, non substituée)</span></td><td><a href='"+esc(i.url)+"' target='_blank' rel='noopener'>"+esc(i.source)+"</a></td>";
+    h+="</tr>";
+  });
+  h+="</tbody></table></div>";
+  c.innerHTML=h;
+}
+
+/* ---- Dispersion ---- */
+function dimVal(p,k){ return k==="G"?p.g:p.dims[k]; }
+function renderScatter(){
+  var kx=$("sx").value, ky=$("sy").value, svg=$("scat"); while(svg.firstChild) svg.removeChild(svg.firstChild);
+  var w=svgW(svg), h=460, m={l:46,r:16,t:14,b:42};
+  var X=function(v){return m.l+v/100*(w-m.l-m.r);}, Y=function(v){return h-m.b-v/100*(h-m.t-m.b);};
+  for(var v=0;v<=100;v+=20){ el("line",{x1:X(v),x2:X(v),y1:Y(0),y2:Y(100),"class":"ax",opacity:.5},svg); el("line",{x1:X(0),x2:X(100),y1:Y(v),y2:Y(v),"class":"ax",opacity:.5},svg); var a=el("text",{x:X(v),y:h-m.b+14,"text-anchor":"middle","class":"mut"},svg);a.textContent=v; var b=el("text",{x:m.l-6,y:Y(v)+4,"text-anchor":"end","class":"mut"},svg);b.textContent=v; }
+  var lx=el("text",{x:(w+m.l)/2,y:h-6,"text-anchor":"middle"},svg); lx.textContent=LBL[kx]+" (0 = socialisant · 100 = libéral)";
+  var ly=el("text",{x:12,y:h/2,"text-anchor":"middle",transform:"rotate(-90 12 "+h/2+")"},svg); ly.textContent=LBL[ky];
+  var pts=P.filter(function(p){return dimVal(p,kx)!=null&&dimVal(p,ky)!=null;});
+  var xs=pts.map(function(p){return dimVal(p,kx);}), ys=pts.map(function(p){return dimVal(p,ky);});
+  pts.forEach(function(p){
+    var c=el("circle",{cx:X(dimVal(p,kx)),cy:Y(dimVal(p,ky)),r:(state.cmp.indexOf(p.id)>=0||state.sel===p.id)?6:3.6,fill:p.couv==="complet"?"var(--acc)":"var(--card)",stroke:"var(--acc)","stroke-width":1.1,opacity:.8,style:"cursor:pointer"},svg);
+    c.addEventListener("mousemove",function(e){showTip(e,"<b>"+esc(p.nom)+"</b><br>"+LBL[kx]+" : "+f1(dimVal(p,kx))+"<br>"+LBL[ky]+" : "+f1(dimVal(p,ky)));});
+    c.addEventListener("mouseleave",hideTip); c.addEventListener("click",function(){openFiche(p.id);});
+  });
+  var rho = pts.length>3 ? spearman(xs,ys) : null;
+  $("scatinfo").textContent=pts.length+" entités ayant les deux valeurs · corrélation de rang de Spearman : "+(rho==null?"—":fn(rho,3))+" · une corrélation n'est pas une causalité. Points pleins : score complet ; creux : partiel.";
+}
+var LBL={A:"A · Libéralisme économique",B:"B · Redistribution et protection sociale",C:"C · Place de l'État",D:"D · Libertés individuelles et politiques",G:"Score global"};
+function ranks(a){ var idx=a.map(function(v,i){return [v,i];}).sort(function(x,y){return x[0]-y[0];}); var r=new Array(a.length); var i=0; while(i<idx.length){ var j=i; while(j+1<idx.length&&idx[j+1][0]===idx[i][0]) j++; var avg=(i+j)/2+1; for(var k=i;k<=j;k++) r[idx[k][1]]=avg; i=j+1; } return r; }
+function spearman(x,y){ var a=ranks(x),b=ranks(y),n=a.length,ma=0,mb=0,i; for(i=0;i<n;i++){ma+=a[i];mb+=b[i];} ma/=n;mb/=n; var sab=0,saa=0,sbb=0; for(i=0;i<n;i++){sab+=(a[i]-ma)*(b[i]-mb);saa+=(a[i]-ma)*(a[i]-ma);sbb+=(b[i]-mb)*(b[i]-mb);} return sab/Math.sqrt(saa*sbb); }
+
+/* ---- Distribution ---- */
+function renderHist(){
+  var k=$("dsel").value, svg=$("hist"); while(svg.firstChild) svg.removeChild(svg.firstChild);
+  var w=svgW(svg), h=320, m={l:40,r:12,t:12,b:36}, nb=20;
+  var vals=P.map(function(p){return dimVal(p,k);}).filter(function(v){return v!=null;});
+  var bins=[]; for(var i=0;i<nb;i++) bins.push(0);
+  vals.forEach(function(v){ var b=Math.min(nb-1,Math.floor(v/100*nb)); bins[b]++; });
+  var mx=Math.max.apply(null,bins.concat([1]));
+  var bw=(w-m.l-m.r)/nb;
+  for(var t=0;t<=mx;t+=Math.max(1,Math.ceil(mx/5))){ var y=h-m.b-t/mx*(h-m.t-m.b); el("line",{x1:m.l,x2:w-m.r,y1:y,y2:y,"class":"ax",opacity:.5},svg); var tx=el("text",{x:m.l-5,y:y+4,"text-anchor":"end","class":"mut"},svg); tx.textContent=t; }
+  bins.forEach(function(c,i){ var bh=c/mx*(h-m.t-m.b); var r=el("rect",{x:m.l+i*bw+1,y:h-m.b-bh,width:Math.max(1,bw-2),height:bh,fill:COL[k]||"var(--acc)",opacity:.85},svg);
+    r.addEventListener("mousemove",function(e){showTip(e,(i*5)+"–"+((i+1)*5)+" : "+c+" entité(s)");}); r.addEventListener("mouseleave",hideTip); });
+  for(var v=0;v<=100;v+=10){ var a=el("text",{x:m.l+v/100*(w-m.l-m.r),y:h-m.b+15,"text-anchor":"middle","class":"mut"},svg); a.textContent=v; }
+  var s=vals.slice().sort(function(a,b){return a-b;}); var q=function(p){var i=(s.length-1)*p, lo=Math.floor(i), hi=Math.ceil(i); return s[lo]+(s[hi]-s[lo])*(i-lo);};
+  var mean=vals.reduce(function(a,b){return a+b;},0)/vals.length;
+  $("histinfo").textContent=LBL[k]+" : n="+vals.length+" · moyenne "+f1(mean)+" · médiane "+f1(q(.5))+" · quartiles "+f1(q(.25))+" – "+f1(q(.75))+" · min "+f1(s[0])+" · max "+f1(s[s.length-1])+" (barres de 5 points).";
+}
+
+/* ---- Pondérations ---- */
+function buildSliders(){
+  var c=$("sliders"); c.innerHTML="";
+  DIMS.forEach(function(d){
+    var r=document.createElement("div"); r.className="sl";
+    r.innerHTML="<label for='w"+d+"'><b>"+d+"</b> · "+esc(DN[d])+" <span class='mini'>(V1.0 : "+Math.round(W0[d]*100)+" %)</span></label><input type='range' id='w"+d+"' min='0' max='100' step='1' value='"+Math.round(W[d]*100)+"'><span id='wv"+d+"' class='n'>"+Math.round(W[d]*100)+" %</span>";
+    c.appendChild(r);
+    r.querySelector("input").oninput=function(e){ setRawWeight(d, +e.target.value); };
+  });
+  updateWSum();
+}
+var RAW={};
+function setRawWeight(d,v){ RAW[d]=v; var tot=0; DIMS.forEach(function(x){ if(RAW[x]==null) RAW[x]=Math.round(W[x]*100); tot+=RAW[x]; });
+  if(tot<=0){ tot=1; }
+  DIMS.forEach(function(x){ W[x]=RAW[x]/tot; $("wv"+x).textContent=RAW[x]+" %"; });
+  updateWSum(); recompute(); render(); }
+function updateWSum(){ var tot=0; DIMS.forEach(function(x){tot+=(RAW[x]==null?Math.round(W[x]*100):RAW[x]);}); $("wsum").textContent="Somme saisie : "+tot+" %. Les poids sont normalisés pour totaliser 100 % ; poids effectifs : "+DIMS.map(function(d){return d+" "+fn(W[d]*100,1)+" %";}).join(" · ")+". Pour un pays sans une dimension, les poids restants sont renormalisés (avertissement de comparabilité dans sa fiche)."; }
+function setWeights(obj){ DIMS.forEach(function(d){RAW[d]=Math.round(obj[d]*100);W[d]=obj[d];}); buildSliders(); recompute(); render(); }
+
+/* ---- Méthodologie ---- */
+function renderMeth(){
+  var M=DATA.meta, h="";
+  h+="<h2>Méthodologie V"+esc(M.version)+"</h2>";
+  h+="<p>Indice contemporain, construit à partir du seul ouvrage <em>Capitalisme et liberté</em> de Milton Friedman (traduction Leduc.s 2010, pagination imprimée). <b>Il n'est pas attribué à Friedman</b> : les choix de mesure sont ceux de ce projet. 0 = pôle socialisant, 100 = pôle libéral ; aucun pays n'est étiqueté politiquement, le score continu est le résultat.</p>";
+  h+="<h3>Formules</h3><ul><li>Normalisation (principale, « minmax ») : <code>t = clip((x − bas)/(haut − bas), 0, 1)</code> ; score = 100·t si l'indicateur est orienté +1, 100·(1−t) s'il est orienté −1. Bornes fixes pour les échelles naturelles, percentiles P5–P95 mondiaux pour A1, B1, B3, C2, C3.</li><li>Score de dimension = moyenne simple des indicateurs disponibles (poids égaux).</li><li>Score global = moyenne pondérée des dimensions disponibles (45/20/20/15), poids renormalisés sur les dimensions disponibles.</li><li>Règle V1 : "+esc(M.regle)+"</li><li>Fiabilité = 100·(0,4·couverture + 0,2·qualité des sources + 0,2·fraîcheur + 0,2·comparabilité). Elle est présentée séparément du score.</li><li>Année de référence "+esc(M.annee)+", fenêtre 2019–2023 : dernière valeur non nulle, année réelle conservée.</li></ul>";
+  h+="<p class='mini'>Jeu de données : empreinte SHA-256 <code>"+esc(M.hash)+"</code> · collecte : "+esc(M.collecte)+" · "+M.n+" entités, "+M.n_score+" avec score global.</p>";
+  h+="<h3>Principes de Friedman retenus (citations vérifiées automatiquement, page imprimée)</h3>";
+  DATA.principes.forEach(function(p){ h+="<details><summary><b>"+esc(p.id)+"</b> · "+esc(p.nom)+"</summary><p>"+esc(p.resume)+"</p>"+p.refs.map(function(r){return "<div class='cite'>« "+esc(r.citation)+" » — chap. "+r.chap+", p. "+r.page+"</div>";}).join("")+"</details>"; });
+  h+="<h3>Dictionnaire des indicateurs admis ("+DATA.indicateurs.length+")</h3><div class='tablewrap'><table><thead><tr><th>Id</th><th>Dim.</th><th>Indicateur</th><th>Sens</th><th>Principes</th><th>Source</th></tr></thead><tbody>";
+  DATA.indicateurs.forEach(function(i){ h+="<tr><td>"+i.id+"</td><td>"+i.dim+"</td><td>"+esc(i.nom)+" <span class='mini'>["+esc(i.unite)+"]</span><div class='mini'><b>Lien avec Friedman :</b> "+esc(i.lien)+"</div><div class='mini'><b>Limites :</b> "+esc(i.limites)+"</div>"+(i.chevauchement?"<div class='mini'><b>Chevauchement :</b> "+esc(i.chevauchement)+"</div>":"")+"</td><td>"+(i.orientation>0?"+1 (élevé = libéral)":"−1 (élevé = socialisant)")+"</td><td>"+esc(i.principes.join(", "))+"</td><td><a href='"+esc(i.url)+"' target='_blank' rel='noopener'>"+esc(i.source)+"</a> <span class='pill'>"+esc(i.source_type)+"</span></td></tr>"; });
+  h+="</tbody></table></div>";
+  h+="<h3>Candidats exclus</h3><ul>"+DATA.exclus.map(function(e){return "<li><b>"+esc(e.candidat)+"</b> ("+esc(e.principe||"—")+") : "+esc(e.raison)+"</li>";}).join("")+"</ul>";
+  h+="<h3>Limites principales</h3><ul><li>Les dimensions B et C ne comptent que 4 et 3 indicateurs admissibles (cible 5–10 non atteinte) : aucun indicateur n'a été ajouté sans justification suffisante dans le corpus.</li><li>La couverture OCDE (A2, A3, B2, B4, C1) est limitée : la composition des dimensions B et C diffère d'un pays à l'autre ; comparer les scores en regardant la couverture et la fiabilité.</li><li>B1 (cotisations sociales en % des recettes) est un proxy imparfait : il avantage les pays qui financent la protection sociale par l'impôt général.</li><li>Les indicateurs D (Freedom House, WGI) sont fortement corrélés entre eux ; la dimension D est peu discriminante entre eux et corrélée à A (voir tests).</li><li>Freedom House est une ONG (qualité de source pondérée 0,8) ; WGI sont des indicateurs agrégés de perception.</li><li>Corrélation n'est pas causalité. Le texte de <em>Free to Choose</em> n'étant pas accessible, il n'est pas utilisé.</li></ul>";
+  h+="<h3>Tests de robustesse et de validation</h3><div class='tablewrap'><table><thead><tr><th>Test</th><th>Résultat</th><th>Détail</th></tr></thead><tbody>"+DATA.tests.map(function(t){return "<tr><td><b>"+esc(t.id)+"</b> "+esc(t.nom)+(t.critique?" <span class='pill'>critique</span>":"")+"</td><td>"+esc(t.statut)+"</td><td class='mini'>"+esc(t.detail)+"</td></tr>";}).join("")+"</tbody></table></div>";
+  h+="<h3>Audit</h3><p>Ce fichier contient l'ensemble des données de l'édition (valeurs brutes, normalisées, années, statuts, sources et URL). L'onglet « Fiche pays » liste chaque observation. Le dépôt GitHub contient les données brutes, le moteur de calcul Python et les tests permettant de reproduire cette édition.</p>";
+  $("meth").innerHTML=h;
+}
+
+/* ---- Rendu ---- */
+function render(){
+  if(state.tab==="classement") renderClassement();
+  else if(state.tab==="comparer") renderCompare();
+  else if(state.tab==="fiche") renderFiche();
+  else if(state.tab==="dispersion") renderScatter();
+  else if(state.tab==="distribution") renderHist();
+}
+
+/* ---- Initialisation ---- */
+function init(){
+  $("hdrmeta").textContent="Édition V"+DATA.meta.version+" · données "+DATA.meta.annee+" · "+DATA.meta.n+" entités.";
+  $("foot").textContent="Socialistomètre V"+DATA.meta.version+" · empreinte du jeu de données "+DATA.meta.hash.slice(0,16)+"… · fichier autonome, aucune connexion requise (les liens de sources s'ouvrent avec Internet).";
+  buildNav(); recompute();
+  var fs=$("fsel"); P.forEach(function(p){var o=document.createElement("option");o.value=p.id;o.textContent=p.nom;fs.appendChild(o);});
+  var fra=BYID.FRA?"FRA":P[0].id; state.sel=fra; fs.value=fra; fs.onchange=function(){state.sel=fs.value;renderFiche();};
+  var dl=$("dl"); P.forEach(function(p){var o=document.createElement("option");o.value=p.nom;dl.appendChild(o);});
+  ["sx","sy"].forEach(function(id,i){var s=$(id);["G","A","B","C","D"].forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=LBL[k];s.appendChild(o);}); s.value=i===0?"A":"D"; s.onchange=renderScatter;});
+  var ds=$("dsel"); ["G","A","B","C","D"].forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=LBL[k];ds.appendChild(o);}); ds.onchange=renderHist;
+  $("q").oninput=function(e){state.q=e.target.value;renderClassement();};
+  $("onlycomplet").onchange=function(e){state.onlyComplet=e.target.checked;renderClassement();};
+  function zoom(){var a=+$("zmin").value,b=+$("zmax").value; if(isNaN(a)||isNaN(b))return; state.zmin=Math.max(0,Math.min(99,a)); state.zmax=Math.max(state.zmin+1,Math.min(100,b)); renderSwarm();}
+  $("zmin").onchange=zoom; $("zmax").onchange=zoom;
+  $("zreset").onclick=function(){$("zmin").value=0;$("zmax").value=100;zoom();};
+  $("cadd").onclick=function(){var v=norm($("cq").value); var p=P.filter(function(x){return norm(x.nom)===v;})[0]||P.filter(function(x){return norm(x.nom).indexOf(v)>=0&&v;})[0]; if(p&&state.cmp.indexOf(p.id)<0){state.cmp.push(p.id);} $("cq").value=""; renderCompare();};
+  $("cq").onkeydown=function(e){if(e.key==="Enter")$("cadd").onclick();};
+  $("cclear").onclick=function(){state.cmp=[];renderCompare();};
+  $("wreset").onclick=function(){setWeights(W0);}; $("weq").onclick=function(){setWeights({A:.25,B:.25,C:.25,D:.25});};
+  buildSliders(); renderMeth();
+  window.addEventListener("resize",function(){render();});
+  /* présélection de comparaison */
+  ["FRA","DEU","USA","CHE"].forEach(function(i){if(BYID[i]) state.cmp.push(i);});
+  go("classement");
+  window.__socialistometre={recompute:recompute,P:P,W:W,state:state,setWeights:setWeights,globalScore:globalScore,go:go,render:render,openFiche:openFiche};
+}
+init();
+})();
+</script>
+</body>
+</html>

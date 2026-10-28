@@ -1,15 +1,49 @@
 {
-  "version_methodologie": "1.0",
-  "annee_cible": 2023,
-  "fenetre_annees": [2019, 2023],
-  "dimensions": [
-    {"id": "A", "nom": "Libéralisme économique", "poids": 0.45},
-    {"id": "B", "nom": "Redistribution et protection sociale", "poids": 0.20},
-    {"id": "C", "nom": "Place de l'État dans l'économie", "poids": 0.20},
-    {"id": "D", "nom": "Libertés individuelles et politiques", "poids": 0.15}
-  ],
-  "regle_score_global": "Moyenne pondérée des scores de dimension disponibles, poids renormalisés sur les dimensions disponibles ; score global non calculé si la dimension A (poids 45 %, ancrage de l'indice) est absente ou si moins de 2 dimensions sont disponibles. Règle ajoutée à la V1 après constat qu'un score reposant sur B et C seuls (1 à 2 indicateurs, ex. taux d'IS) plaçait des territoires en tête du classement ; testée en sensibilité.",
-  "qualite_source": {"intergouvernementale": 1.0, "recherche_institutionnelle": 0.9, "ong": 0.8},
-  "fiabilite": {"poids": {"couverture": 0.4, "qualite_source": 0.2, "anciennete": 0.2, "comparabilite": 0.2},
-                "niveaux": {"elevee": 75, "moyenne": 50, "faible": 25}}
+ "version_methodologie": "1.1",
+ "annee_cible": 2023,
+ "fenetre_annees": [
+  2019,
+  2023
+ ],
+ "dimensions": [
+  {
+   "id": "A",
+   "nom": "Libéralisme économique",
+   "poids": 0.45
+  },
+  {
+   "id": "B",
+   "nom": "Redistribution et protection sociale",
+   "poids": 0.2
+  },
+  {
+   "id": "C",
+   "nom": "Place de l'État dans l'économie",
+   "poids": 0.2
+  },
+  {
+   "id": "D",
+   "nom": "Libertés individuelles et politiques",
+   "poids": 0.15
+  }
+ ],
+ "regle_score_global": "Moyenne pondérée des scores de dimension disponibles, poids renormalisés sur les dimensions disponibles ; score global non calculé si la dimension A (poids 45 %, ancrage de l'indice) est absente ou si moins de 2 dimensions sont disponibles. Règle ajoutée à la V1 après constat qu'un score reposant sur B et C seuls (1 à 2 indicateurs, ex. taux d'IS) plaçait des territoires en tête du classement ; testée en sensibilité.",
+ "qualite_source": {
+  "intergouvernementale": 1.0,
+  "recherche_institutionnelle": 0.9,
+  "ong": 0.8
+ },
+ "fiabilite": {
+  "poids": {
+   "couverture": 0.4,
+   "qualite_source": 0.2,
+   "anciennete": 0.2,
+   "comparabilite": 0.2
+  },
+  "niveaux": {
+   "elevee": 75,
+   "moyenne": 50,
+   "faible": 25
+  }
+ }
 }

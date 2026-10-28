@@ -123,9 +123,9 @@ def t03():
     rows = list(csv.DictReader(open(os.path.join(ROOT, "data/processed/observations.csv"), encoding="utf-8")))
     echant = rnd.sample(rows, 120)
     # contrôle croisé : relecture indépendante des fichiers bruts pour WB et OCDE CIT/PIT/Kaitz, FH
-    wbcode = {"A1": "TM.TAX.MRCH.SM.AR.ZS", "B1": "GC.REV.SOCL.ZS", "C2": "SE.PRM.PRIV.ZS", "C3": "NE.CON.GOVT.ZS",
+    wbcode = {"A1": "TM.TAX.MRCH.SM.AR.ZS", "C2": "SE.PRM.PRIV.ZS", "C3": "NE.CON.GOVT.ZS",
               "A4": "GOV_WGI_RL.EST", "A5": "GOV_WGI_RQ.EST", "D1": "GOV_WGI_VA.EST"}
-    cache, echec, verifie = {}, [], 0
+    cache, echec, verifie, non_rapproches = {}, [], 0, []
     import openpyxl
     fh = None
     for r in echant:
@@ -146,6 +146,17 @@ def t03():
                     if (ind == "B3" and x["MEASURE"] == "CIT_C" and x["TARGETING"] == "ST" and x["SECTOR"] == "S13") or \
                        (ind == "B2" and x["MEASURE"] == "TS_PIT") or (ind == "B4" and x["AGGREGATION_OPERATION"] == "MEDIAN"):
                         ref = float(x["OBS_VALUE"]) / (100.0 if ind == "B4" else 1.0)
+        elif ind in ("B5", "B6"):
+            d = {}
+            for x in csv.DictReader(open(os.path.join(ROOT, "data/raw", "oecd_rev_global.csv"), encoding="utf-8")):
+                if x["REF_AREA"] == iso3 and x["SECTOR"] == "S13" and x["UNIT_MEASURE"] == "PT_B1GQ" and int(x["TIME_PERIOD"]) == an and x["OBS_VALUE"] != "":
+                    d[x["STANDARD_REVENUE"]] = float(x["OBS_VALUE"])
+            ref = d.get("_T") if ind == "B5" else sum(d[k] for k in ("T_1100", "T_2000", "T_3000"))
+        elif ind == "B7":
+            for x in csv.DictReader(open(os.path.join(ROOT, "data/raw", "oecd_tw_comp.csv"), encoding="utf-8")):
+                if (x["REF_AREA"] == iso3 and x["MEASURE"] == "AV_TW" and x["HOUSEHOLD_TYPE"] == "S_C0" and x["INCOME_PRINCIPAL"] == "AW100"
+                        and x["UNIT_MEASURE"] == "PT_COS_LB" and int(x["TIME_PERIOD"]) == an):
+                    ref = float(x["OBS_VALUE"])
         elif ind in ("A2", "A3", "C1"):
             vals = {}
             for f in ("oecd_pmr.csv", "oecd_pmr_wbg.csv"):
@@ -162,14 +173,16 @@ def t03():
                 rr = list(ws.iter_rows(values_only=True)); h = rr[1]
                 fh = {x[0]: dict(zip(h, x)) for x in rr[2:] if x[0] and x[3] == 2024}
             p = {q["iso3"]: q for q in csv.DictReader(open(os.path.join(ROOT, "data/processed/pays.csv"), encoding="utf-8"))}[iso3]
-            row = fh.get(p["nom_en"]) or next((v for n, v in fh.items() if n.startswith(p["nom_en"].split(",")[0])), None)
+            row = fh.get(p["nom_en"])  # rapprochement par nom exact uniquement (un préfixe mène à de fausses correspondances)
             col = {"A6": "G2", "D2": "PR", "D3": "D", "D4": "E"}[ind]
-            ref = float(row[col]) if row else None
+            if row is None:
+                non_rapproches.append((iso3, ind)); continue
+            ref = float(row[col]) if row[col] is not None else None
         verifie += 1
         if ref is None or abs(ref - val) > 1e-4:
             echec.append((iso3, ind, val, ref))
-    ok = not bad and len(echec) <= 3  # le rapprochement FH par nom peut échouer sur quelques noms ; seuil documenté
-    detail = f"{len(man)} fichiers bruts : {len(bad)} empreinte(s) divergente(s) ; échantillon de {verifie} observations relu dans les fichiers bruts : {len(echec)} écart(s)"
+    ok = not bad and not echec
+    detail = f"{len(man)} fichiers bruts : {len(bad)} empreinte(s) divergente(s) ; échantillon de {verifie} observations relu dans les fichiers bruts : {len(echec)} écart(s) ; {len(non_rapproches)} observation(s) Freedom House non rapprochables par nom exact (non vérifiées ici : {non_rapproches[:6]})"
     if echec:
         detail += " " + str(echec[:5])
     record("T03", "Données brutes : empreintes SHA-256 du manifeste et relecture indépendante d'un échantillon (120 obs.)",
@@ -241,7 +254,7 @@ def t06():
         cmp["n_sans_score"] = sum(1 for c in ranked if g[c] is None)
         out[k] = cmp
     pire = min(v["spearman"] for v in out.values()); kk = min(out, key=lambda x: out[x]["spearman"])
-    record("T06", "Recalcul en retirant un indicateur à la fois (17 recalculs)", "RÉUSSI" if pire >= 0.97 else "AVERTISSEMENT",
+    record("T06", "Recalcul en retirant un indicateur à la fois (un recalcul par indicateur)", "RÉUSSI" if pire >= 0.97 else "AVERTISSEMENT",
            f"Spearman minimal {pire:.4f} (retrait de {kk}) ; écart de score moyen max {max(v['ecart_score_moyen'] for v in out.values()):.2f} pts", False, out)
 
 
@@ -403,7 +416,7 @@ def main():
             record(f.__name__.upper(), f.__name__, "ÉCHEC", f"exception : {e!r} {traceback.format_exc()[-300:]}", True)
     out = {"version_methodologie": data["dim"]["version_methodologie"], "graine": SEED, "tests": results, "echecs_critiques": critiques}
     json.dump(out, open(os.path.join(ROOT, "docs", "robustesse.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1, default=str)
-    lines = ["# Tests de robustesse et de validation — Socialistomètre V1.0", "",
+    lines = ["# Tests de robustesse et de validation — Socialistomètre V1.1", "",
              "Généré par `python3 tools/run_robustness.py` (graine %d). Les tests marqués CRITIQUE bloquent la validation en cas d'échec." % SEED, "",
              "| Test | Nom | Critique | Résultat | Détail |", "|---|---|---|---|---|"]
     for r in results:

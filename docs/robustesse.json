@@ -1,5 +1,5 @@
 {
- "version_methodologie": "1.0",
+ "version_methodologie": "1.1",
  "graine": 20261028,
  "tests": [
   {
@@ -7,10 +7,10 @@
    "nom": "Recalcul mathématique indépendant (numpy) de toutes les valeurs normalisées, dimensions et scores globaux",
    "statut": "RÉUSSI",
    "critique": true,
-   "detail": "3487 valeurs comparées ; écart maximal 5.00e-07 (arrondi du fichier : 1e-6)",
+   "detail": "3693 valeurs comparées ; écart maximal 5.00e-07 (arrondi du fichier : 1e-6)",
    "mesures": {
     "ecart_max": 4.999999987376214e-07,
-    "valeurs": 3487
+    "valeurs": 3693
    }
   },
   {
@@ -30,12 +30,12 @@
    "nom": "Données brutes : empreintes SHA-256 du manifeste et relecture indépendante d'un échantillon (120 obs.)",
    "statut": "RÉUSSI",
    "critique": true,
-   "detail": "16 fichiers bruts : 0 empreinte(s) divergente(s) ; échantillon de 120 observations relu dans les fichiers bruts : 3 écart(s) [('COD', 'D4', 3.0, 2.0), ('SYR', 'A6', 0.0, None), ('SYR', 'D4', 0.0, None)]",
+   "detail": "18 fichiers bruts : 0 empreinte(s) divergente(s) ; échantillon de 114 observations relu dans les fichiers bruts : 0 écart(s) ; 6 observation(s) Freedom House non rapprochables par nom exact (non vérifiées ici : [('SVK', 'D3'), ('SYR', 'A6'), ('RUS', 'D4'), ('FSM', 'A6'), ('KGZ', 'D4'), ('SVK', 'D2')])",
    "mesures": {
-    "fichiers": 16,
+    "fichiers": 18,
     "divergences": 0,
-    "echantillon": 120,
-    "ecarts": 3
+    "echantillon": 114,
+    "ecarts": 0
    }
   },
   {
@@ -43,7 +43,7 @@
    "nom": "Données brutes et normalisées : plage [0,100], monotonie et sens d'orientation de chaque indicateur",
    "statut": "RÉUSSI",
    "critique": true,
-   "detail": "17 indicateurs contrôlés ; problèmes : aucun",
+   "detail": "19 indicateurs contrôlés ; problèmes : aucun",
    "mesures": {
     "spearman_brut_norm_x_orientation": {
      "A1": 0.9999,
@@ -52,10 +52,12 @@
      "A4": 1.0,
      "A5": 1.0,
      "A6": 1.0,
-     "B1": 0.9998,
      "B2": 1.0,
      "B3": 0.9999,
      "B4": 0.9997,
+     "B5": 0.9998,
+     "B6": 0.9999,
+     "B7": 0.9999,
      "C1": 1.0,
      "C2": 0.9999,
      "C3": 0.9999,
@@ -71,107 +73,111 @@
    "nom": "Analyse de sensibilité aux pondérations (±10 points par dimension, poids égaux, 2 000 tirages Dirichlet)",
    "statut": "AVERTISSEMENT",
    "critique": false,
-   "detail": "Spearman minimal sur scénarios déterministes : 0.9719 ; Monte-Carlo : moyenne 0.9807, P5 0.9438, min 0.8440",
+   "detail": "Spearman minimal sur scénarios déterministes : 0.9612 ; Monte-Carlo : moyenne 0.9757, P5 0.9285, min 0.8078",
    "mesures": {
     "scenarios": {
      "A -10%": {
       "n": 222,
-      "spearman": 0.9899126446211648,
+      "spearman": 0.9850910708204298,
       "decalage_rang_median": 6.0,
-      "decalage_rang_max": 27,
-      "ecart_score_moyen": 1.8158104778464628,
+      "decalage_rang_max": 36,
+      "ecart_score_moyen": 1.81618309215812,
       "ecart_score_max": 6.357693023255813
      },
      "A +10%": {
       "n": 222,
-      "spearman": 0.989816125400404,
-      "decalage_rang_median": 4.0,
+      "spearman": 0.987924129311626,
+      "decalage_rang_median": 5.0,
       "decalage_rang_max": 32,
-      "ecart_score_moyen": 1.7459133532090036,
+      "ecart_score_moyen": 1.7555995263615616,
       "ecart_score_max": 5.359532269116322
      },
      "B -10%": {
       "n": 222,
-      "spearman": 0.9831760417357885,
-      "decalage_rang_median": 6.0,
-      "decalage_rang_max": 37,
-      "ecart_score_moyen": 2.0764790043123154,
-      "ecart_score_max": 8.226705516322951
+      "spearman": 0.9799887138320269,
+      "decalage_rang_median": 5.0,
+      "decalage_rang_max": 38,
+      "ecart_score_moyen": 2.1108560111729386,
+      "ecart_score_max": 8.309643751812214
      },
      "B +10%": {
       "n": 222,
-      "spearman": 0.9811458476718302,
-      "decalage_rang_median": 6.0,
-      "decalage_rang_max": 53,
-      "ecart_score_moyen": 2.068244929811128,
-      "ecart_score_max": 7.728117303212471
+      "spearman": 0.9662994366238893,
+      "decalage_rang_median": 9.0,
+      "decalage_rang_max": 44,
+      "ecart_score_moyen": 2.1071243864059115,
+      "ecart_score_max": 8.309643751812217
      },
      "C -10%": {
       "n": 222,
-      "spearman": 0.9805184727368847,
+      "spearman": 0.9783160796086146,
       "decalage_rang_median": 6.0,
-      "decalage_rang_max": 41,
-      "ecart_score_moyen": 2.251170526359012,
+      "decalage_rang_max": 50,
+      "ecart_score_moyen": 2.211090080278113,
       "ecart_score_max": 10.765695615129871
      },
      "C +10%": {
       "n": 222,
-      "spearman": 0.9773728235875426,
-      "decalage_rang_median": 5.5,
+      "spearman": 0.9754446327909794,
+      "decalage_rang_median": 6.0,
       "decalage_rang_max": 42,
-      "ecart_score_moyen": 2.191751480236167,
+      "ecart_score_moyen": 2.167331755561937,
       "ecart_score_max": 10.113229214212915
      },
      "D -10%": {
       "n": 222,
-      "spearman": 0.9841785254605091,
+      "spearman": 0.983580764377388,
       "decalage_rang_median": 6.0,
-      "decalage_rang_max": 40,
-      "ecart_score_moyen": 2.22566150195333,
+      "decalage_rang_max": 37,
+      "ecart_score_moyen": 2.1658045965330186,
       "ecart_score_max": 6.327262596531426
      },
      "D +10%": {
       "n": 222,
-      "spearman": 0.9880612304774795,
+      "spearman": 0.985618636106634,
       "decalage_rang_median": 5.0,
-      "decalage_rang_max": 43,
-      "ecart_score_moyen": 2.1616995773310563,
+      "decalage_rang_max": 52,
+      "ecart_score_moyen": 2.115186162861396,
       "ecart_score_max": 6.3272625965314475
      },
      "poids égaux 25 %": {
       "n": 222,
-      "spearman": 0.9719293588984963,
-      "decalage_rang_median": 8.0,
-      "decalage_rang_max": 49,
-      "ecart_score_moyen": 2.9866591629010424,
+      "spearman": 0.9611894019701986,
+      "decalage_rang_median": 11.0,
+      "decalage_rang_max": 55,
+      "ecart_score_moyen": 3.0242701407925185,
       "ecart_score_max": 12.814725000000003
      }
     },
     "monte_carlo": {
      "tirages": 2000,
      "loi": "Dirichlet(40·w)",
-     "spearman_min": 0.8440106807292247,
-     "spearman_moyen": 0.9806802285311913,
-     "spearman_p5": 0.9437632953855586,
-     "decalage_rang_median_moyen": 5.91975
+     "spearman_min": 0.80778745590141,
+     "spearman_moyen": 0.9756662957623127,
+     "spearman_p5": 0.9285022904120768,
+     "decalage_rang_median_moyen": 6.48625
     }
    }
   },
   {
    "id": "T06",
-   "nom": "Recalcul en retirant un indicateur à la fois (17 recalculs)",
+   "nom": "Recalcul en retirant un indicateur à la fois (un recalcul par indicateur)",
    "statut": "AVERTISSEMENT",
    "critique": false,
-   "detail": "Spearman minimal 0.9524 (retrait de B3) ; écart de score moyen max 3.29 pts",
+   "detail": "Spearman minimal 0.9596 (retrait de B3) ; écart de score moyen max 3.28 pts",
    "mesures": {
     "A1": {
      "n": 222,
-     "spearman": 0.9846753800855621,
+     "spearman": 0.9826035072671844,
      "decalage_rang_median": 6.0,
-     "decalage_rang_max": 47,
-     "ecart_score_moyen": 2.0957270310750684,
-     "ecart_score_max": 11.339560588235301,
+     "decalage_rang_max": 43,
+     "ecart_score_moyen": 2.075008745408776,
+     "ecart_score_max": 12.881160479461908,
      "pays_les_plus_affectes": [
+      [
+       "Myanmar (Birmanie)",
+       12.88
+      ],
       [
        "Bermudes",
        11.34
@@ -179,20 +185,16 @@
       [
        "Soudan",
        11.3
-      ],
-      [
-       "Îles Caïmans",
-       10.37
       ]
      ],
      "n_sans_score": 0
     },
     "A2": {
      "n": 222,
-     "spearman": 0.9993517856878448,
+     "spearman": 0.9990742929281573,
      "decalage_rang_median": 0.0,
-     "decalage_rang_max": 11,
-     "ecart_score_moyen": 0.19276851965331265,
+     "decalage_rang_max": 12,
+     "ecart_score_moyen": 0.19342429326532298,
      "ecart_score_max": 2.265740324999996,
      "pays_les_plus_affectes": [
       [
@@ -212,10 +214,10 @@
     },
     "A3": {
      "n": 222,
-     "spearman": 0.9992892675562156,
+     "spearman": 0.9990929386867134,
      "decalage_rang_median": 1.0,
      "decalage_rang_max": 13,
-     "ecart_score_moyen": 0.18346239301005984,
+     "ecart_score_moyen": 0.1836435838517998,
      "ecart_score_max": 3.508182812499996,
      "pays_les_plus_affectes": [
       [
@@ -235,10 +237,10 @@
     },
     "A4": {
      "n": 221,
-     "spearman": 0.9921787274728451,
+     "spearman": 0.9905711141005259,
      "decalage_rang_median": 3,
-     "decalage_rang_max": 39,
-     "ecart_score_moyen": 1.298882045674081,
+     "decalage_rang_max": 45,
+     "ecart_score_moyen": 1.2896685522079852,
      "ecart_score_max": 6.171924705882354,
      "pays_les_plus_affectes": [
       [
@@ -250,24 +252,20 @@
        6.16
       ],
       [
-       "Guam",
-       4.97
+       "Myanmar (Birmanie)",
+       5.41
       ]
      ],
      "n_sans_score": 1
     },
     "A5": {
      "n": 222,
-     "spearman": 0.9931449417073263,
+     "spearman": 0.9921742654530837,
      "decalage_rang_median": 3.0,
-     "decalage_rang_max": 39,
-     "ecart_score_moyen": 1.2952073957987398,
-     "ecart_score_max": 7.426944375000005,
+     "decalage_rang_max": 43,
+     "ecart_score_moyen": 1.2653961503098852,
+     "ecart_score_max": 7.154638125000005,
      "pays_les_plus_affectes": [
-      [
-       "Îles Marshall",
-       7.43
-      ],
       [
        "Micronésie",
        7.15
@@ -275,85 +273,66 @@
       [
        "Tuvalu",
        7.15
+      ],
+      [
+       "Samoa américaines",
+       6.16
       ]
      ],
      "n_sans_score": 0
     },
     "A6": {
      "n": 208,
-     "spearman": 0.9855939255252757,
-     "decalage_rang_median": 5.0,
-     "decalage_rang_max": 35,
-     "ecart_score_moyen": 1.8215405677362924,
-     "ecart_score_max": 7.407386249999995,
+     "spearman": 0.9828882025678365,
+     "decalage_rang_median": 6.0,
+     "decalage_rang_max": 41,
+     "ecart_score_moyen": 1.7780372391103105,
+     "ecart_score_max": 7.407386249999988,
      "pays_les_plus_affectes": [
       [
        "Bahamas",
        7.41
       ],
       [
-       "Nauru",
-       7.27
-      ],
-      [
        "Saint-Vincent-et-les Grenadines",
        6.39
+      ],
+      [
+       "Nauru",
+       5.46
       ]
      ],
      "n_sans_score": 14
     },
-    "B1": {
-     "n": 222,
-     "spearman": 0.9743182096123273,
-     "decalage_rang_median": 6.0,
-     "decalage_rang_max": 59,
-     "ecart_score_moyen": 1.605730353644563,
-     "ecart_score_max": 17.00185806706741,
-     "pays_les_plus_affectes": [
-      [
-       "Myanmar (Birmanie)",
-       17.0
-      ],
-      [
-       "Irak",
-       13.49
-      ],
-      [
-       "Mozambique",
-       12.15
-      ]
-     ],
-     "n_sans_score": 0
-    },
     "B2": {
      "n": 222,
-     "spearman": 0.999471337904469,
+     "spearman": 0.9997762508973271,
      "decalage_rang_median": 0.0,
-     "decalage_rang_max": 13,
-     "ecart_score_moyen": 0.15509691510653797,
-     "ecart_score_max": 3.787885269949342,
+     "decalage_rang_max": 8,
+     "ecart_score_moyen": 0.07987118494701179,
+     "ecart_score_max": 1.1764345671837475,
      "pays_les_plus_affectes": [
       [
-       "Danemark",
-       3.79
+       "Irlande",
+       1.18
       ],
       [
-       "Suède",
-       2.91
+       "Hongrie",
+       1.12
       ],
       [
-       "Costa Rica",
-       2.51
+       "Slovaquie",
+       1.02
       ]
      ],
      "n_sans_score": 0
     },
     "B3": {
      "n": 222,
-     "spearman": 0.9523886039317324,
-     "decalage_rang_median": 10.5,
-     "decalage_rang_max": 71,
-     "ecart_score_moyen": 2.533597026719388,
+     "spearman": 0.9595551560732252,
+     "decalage_rang_median": 7.0,
+     "decalage_rang_max": 83,
+     "ecart_score_moyen": 2.0051090730353236,
      "ecart_score_max": 14.750103804979922,
      "pays_les_plus_affectes": [
       [
@@ -361,46 +340,115 @@
        14.75
       ],
       [
-       "Papouasie-Nouvelle-Guinée",
-       12.51
-      ],
-      [
        "Saint-Christophe-et-Niévès",
        12.48
+      ],
+      [
+       "Monaco",
+       10.8
       ]
      ],
      "n_sans_score": 0
     },
     "B4": {
      "n": 222,
-     "spearman": 0.999382496348996,
+     "spearman": 0.9992761058442936,
      "decalage_rang_median": 0.0,
      "decalage_rang_max": 17,
-     "ecart_score_moyen": 0.1422728686202793,
-     "ecart_score_max": 3.4902349917798574,
+     "ecart_score_moyen": 0.11061911462965732,
+     "ecart_score_max": 2.2194321568627515,
      "pays_les_plus_affectes": [
       [
-       "États-Unis",
-       3.49
+       "Roumanie",
+       2.22
       ],
       [
-       "Japon",
-       2.74
+       "Colombie",
+       1.97
       ],
       [
        "Chili",
-       2.28
+       1.96
+      ]
+     ],
+     "n_sans_score": 0
+    },
+    "B5": {
+     "n": 222,
+     "spearman": 0.9906014408784126,
+     "decalage_rang_median": 3.0,
+     "decalage_rang_max": 50,
+     "ecart_score_moyen": 1.0044571283129504,
+     "ecart_score_max": 13.782853569082821,
+     "pays_les_plus_affectes": [
+      [
+       "Tchad",
+       13.78
+      ],
+      [
+       "Laos",
+       13.54
+      ],
+      [
+       "Guinée",
+       10.42
+      ]
+     ],
+     "n_sans_score": 0
+    },
+    "B6": {
+     "n": 222,
+     "spearman": 0.9944874363233636,
+     "decalage_rang_median": 4.0,
+     "decalage_rang_max": 39,
+     "ecart_score_moyen": 0.7801470721429458,
+     "ecart_score_max": 7.563566547512288,
+     "pays_les_plus_affectes": [
+      [
+       "Nauru",
+       7.56
+      ],
+      [
+       "Samoa",
+       4.01
+      ],
+      [
+       "Papouasie-Nouvelle-Guinée",
+       3.81
+      ]
+     ],
+     "n_sans_score": 0
+    },
+    "B7": {
+     "n": 222,
+     "spearman": 0.9994548857645665,
+     "decalage_rang_median": 0.0,
+     "decalage_rang_max": 11,
+     "ecart_score_moyen": 0.13173063342420857,
+     "ecart_score_max": 2.1694781462464334,
+     "pays_les_plus_affectes": [
+      [
+       "Nouvelle-Zélande",
+       2.17
+      ],
+      [
+       "Chili",
+       2.04
+      ],
+      [
+       "Colombie",
+       2.03
       ]
      ],
      "n_sans_score": 0
     },
     "C1": {
      "n": 222,
-     "spearman": 0.9950139048002409,
-     "decalage_rang_median": 1.0,
-     "decalage_rang_max": 22,
-     "ecart_score_moyen": 0.8059096553937385,
-     "ecart_score_max": 5.603678676037738,
+     "spearman": 0.9912715913771044,
+     "decalage_rang_median": 2.0,
+     "decalage_rang_max": 27,
+     "ecart_score_moyen": 0.80998988772272,
+     "ecart_score_max": 5.603678676037731,
      "pays_les_plus_affectes": [
       [
        "Pays-Bas",
@@ -419,19 +467,19 @@
     },
     "C2": {
      "n": 222,
-     "spearman": 0.9669509413640249,
-     "decalage_rang_median": 10.0,
-     "decalage_rang_max": 64,
-     "ecart_score_moyen": 3.290490716408304,
-     "ecart_score_max": 15.622903332306493,
+     "spearman": 0.9595617369291861,
+     "decalage_rang_median": 9.5,
+     "decalage_rang_max": 60,
+     "ecart_score_moyen": 3.281091307502263,
+     "ecart_score_max": 15.637118702800834,
      "pays_les_plus_affectes": [
       [
        "Liechtenstein",
-       15.62
+       15.64
       ],
       [
        "Andorre",
-       12.76
+       14.21
       ],
       [
        "Liberia",
@@ -442,10 +490,10 @@
     },
     "C3": {
      "n": 221,
-     "spearman": 0.9673974673974673,
+     "spearman": 0.9631849867143985,
      "decalage_rang_median": 7,
-     "decalage_rang_max": 90,
-     "ecart_score_moyen": 3.101809888519502,
+     "decalage_rang_max": 99,
+     "ecart_score_moyen": 3.0564040738496216,
      "ecart_score_max": 20.62278843616823,
      "pays_les_plus_affectes": [
       [
@@ -453,27 +501,27 @@
        20.62
       ],
       [
-       "Kiribati",
-       16.82
-      ],
-      [
        "Polynésie française",
        16.21
+      ],
+      [
+       "Turkménistan",
+       15.09
       ]
      ],
      "n_sans_score": 1
     },
     "D1": {
      "n": 219,
-     "spearman": 0.99828510059753,
+     "spearman": 0.99829309812972,
      "decalage_rang_median": 1,
-     "decalage_rang_max": 27,
-     "ecart_score_moyen": 0.682604910642272,
-     "ecart_score_max": 6.109167122459667,
+     "decalage_rang_max": 26,
+     "ecart_score_moyen": 0.6669244739690259,
+     "ecart_score_max": 5.447988081296515,
      "pays_les_plus_affectes": [
       [
        "R.A.S. chinoise de Macao",
-       6.11
+       5.45
       ],
       [
        "Groenland",
@@ -488,10 +536,10 @@
     },
     "D2": {
      "n": 222,
-     "spearman": 0.9994768219511031,
+     "spearman": 0.9994285623407227,
      "decalage_rang_median": 1.0,
      "decalage_rang_max": 7,
-     "ecart_score_moyen": 0.35710296061686686,
+     "ecart_score_moyen": 0.34956119969969984,
      "ecart_score_max": 2.118055555555557,
      "pays_les_plus_affectes": [
       [
@@ -503,18 +551,18 @@
        1.84
       ],
       [
-       "Niger",
-       1.51
+       "Burkina Faso",
+       1.46
       ]
      ],
      "n_sans_score": 0
     },
     "D3": {
      "n": 222,
-     "spearman": 0.9993759151509343,
+     "spearman": 0.9995130163919748,
      "decalage_rang_median": 1.0,
-     "decalage_rang_max": 8,
-     "ecart_score_moyen": 0.443710954861111,
+     "decalage_rang_max": 10,
+     "ecart_score_moyen": 0.4323052187812816,
      "ecart_score_max": 1.5625,
      "pays_les_plus_affectes": [
       [
@@ -526,18 +574,18 @@
        1.46
       ],
       [
-       "Guinée",
-       1.41
+       "Pérou",
+       1.39
       ]
      ],
      "n_sans_score": 0
     },
     "D4": {
      "n": 222,
-     "spearman": 0.9995552435742152,
+     "spearman": 0.9994148519033897,
      "decalage_rang_median": 1.0,
      "decalage_rang_max": 8,
-     "ecart_score_moyen": 0.3514780261198697,
+     "ecart_score_moyen": 0.34623738845095126,
      "ecart_score_max": 1.1805555555555571,
      "pays_les_plus_affectes": [
       [
@@ -549,8 +597,8 @@
        1.09
       ],
       [
-       "Afghanistan",
-       1.0
+       "Liban",
+       1.06
       ]
      ],
      "n_sans_score": 0
@@ -560,41 +608,41 @@
   {
    "id": "T07",
    "nom": "Comparaison de plusieurs méthodes de normalisation (rang, z-score logistique, percentiles partout, P10-P90)",
-   "statut": "RÉUSSI",
+   "statut": "AVERTISSEMENT",
    "critique": false,
-   "detail": "Spearman minimal par rapport à la méthode principale : 0.9401",
+   "detail": "Spearman minimal par rapport à la méthode principale : 0.9261",
    "mesures": {
     "rang": {
      "n": 222,
-     "spearman": 0.9400549830515539,
-     "decalage_rang_median": 11.0,
-     "decalage_rang_max": 149,
-     "ecart_score_moyen": 4.8299068534639185,
+     "spearman": 0.9261233109821873,
+     "decalage_rang_median": 9.5,
+     "decalage_rang_max": 158,
+     "ecart_score_moyen": 5.428041520777826,
      "ecart_score_max": 33.94710624999999
     },
     "zscore": {
      "n": 222,
-     "spearman": 0.9522427282912643,
-     "decalage_rang_median": 10.0,
-     "decalage_rang_max": 136,
-     "ecart_score_moyen": 4.87991244044479,
+     "spearman": 0.9379469155253909,
+     "decalage_rang_median": 7.5,
+     "decalage_rang_max": 148,
+     "ecart_score_moyen": 5.3843570528303895,
      "ecart_score_max": 32.435141438621415
     },
     "minmax_percentiles_partout": {
      "n": 222,
-     "spearman": 0.9743028260974377,
+     "spearman": 0.966389338124783,
      "decalage_rang_median": 6.0,
-     "decalage_rang_max": 113,
-     "ecart_score_moyen": 4.746005348158463,
+     "decalage_rang_max": 132,
+     "ecart_score_moyen": 4.676228531544526,
      "ecart_score_max": 26.644867536311935
     },
     "minmax_P10_P90": {
      "n": 222,
-     "spearman": 0.9900892309227841,
+     "spearman": 0.9861319428715895,
      "decalage_rang_median": 5.0,
-     "decalage_rang_max": 33,
-     "ecart_score_moyen": 1.549035345167656,
-     "ecart_score_max": 8.109322906641218
+     "decalage_rang_max": 39,
+     "ecart_score_moyen": 1.603069399309561,
+     "ecart_score_max": 6.716857111738278
     }
    }
   },
@@ -603,10 +651,10 @@
    "nom": "Stabilité des rangs et des scores (600 rééchantillonnages : 80 % des indicateurs + poids perturbés)",
    "statut": "RÉUSSI",
    "critique": false,
-   "detail": "largeur médiane de l'intervalle de rang P5-P95 : 59.0 places ; P90 : 103 places ; intervalles enregistrés pour 222 entités (affichés dans l'interface)",
+   "detail": "largeur médiane de l'intervalle de rang P5-P95 : 64.0 places ; P90 : 110 places ; intervalles enregistrés pour 222 entités (affichés dans l'interface)",
    "mesures": {
-    "largeur_mediane": 59.0,
-    "largeur_p90": 103,
+    "largeur_mediane": 64.0,
+    "largeur_p90": 110,
     "n_entites": 222
    }
   },
@@ -615,11 +663,11 @@
    "nom": "Comportement en présence de données manquantes (masquage aléatoire de 1/3 des indicateurs ; règle « dimension A exigée » ; avertissements)",
    "statut": "RÉUSSI",
    "critique": true,
-   "detail": "masquage 1/3 sur 144 pays complets × 300 tirages : écart absolu médian 3.53 pts, P95 12.94 pts, Spearman moyen 0.8790 ; règle assouplie (A non exigée) ajouterait 5 entités à score global (Curaçao, Îles Féroé, Gibraltar, Îles Turques-et-Caïques, Îles Vierges britanniques…) ; incohérences d'avertissements : 0",
+   "detail": "masquage 1/3 sur 158 pays complets × 300 tirages : écart absolu médian 3.31 pts, P95 12.51 pts, Spearman moyen 0.8645 ; règle assouplie (A non exigée) ajouterait 5 entités à score global (Curaçao, Îles Féroé, Gibraltar, Îles Turques-et-Caïques, Îles Vierges britanniques…) ; incohérences d'avertissements : 0",
    "mesures": {
-    "ecart_median": 3.5290931172425175,
-    "ecart_p95": 12.935654860708453,
-    "spearman_moyen": 0.8790045318963572,
+    "ecart_median": 3.306946944425043,
+    "ecart_p95": 12.506160165504944,
+    "spearman_moyen": 0.8644582012054214,
     "regle_assouplie_nouveaux": [
      "Curaçao",
      "Îles Féroé",
@@ -635,23 +683,23 @@
    "nom": "Variantes d'indicateurs (tarif pondéré ; scolarisation privée secondaire) et redondances intra-dimension",
    "statut": "RÉUSSI",
    "critique": false,
-   "detail": "variantes : A1→A1alt ρ=0.9948, C2→C2alt ρ=0.9786 ; paires redondantes (|ρ|≥0,85) : {'A4~A5': {'n': 205, 'spearman': 0.883}, 'D1~D2': {'n': 195, 'spearman': 0.963}, 'D1~D3': {'n': 195, 'spearman': 0.922}, 'D1~D4': {'n': 195, 'spearman': 0.949}, 'D2~D3': {'n': 210, 'spearman': 0.925}, 'D2~D4': {'n': 210, 'spearman': 0.936}, 'D3~D4': {'n': 210, 'spearman': 0.938}}",
+   "detail": "variantes : A1→A1alt ρ=0.9943, C2→C2alt ρ=0.9743 ; paires redondantes (|ρ|≥0,85) : {'A4~A5': {'n': 205, 'spearman': 0.883}, 'B5~B6': {'n': 115, 'spearman': 0.89}, 'D1~D2': {'n': 195, 'spearman': 0.963}, 'D1~D3': {'n': 195, 'spearman': 0.922}, 'D1~D4': {'n': 195, 'spearman': 0.949}, 'D2~D3': {'n': 210, 'spearman': 0.925}, 'D2~D4': {'n': 210, 'spearman': 0.936}, 'D3~D4': {'n': 210, 'spearman': 0.938}}",
    "mesures": {
     "variantes": {
      "A1→A1alt": {
       "n": 222,
-      "spearman": 0.9947934461255484,
+      "spearman": 0.9943404638735686,
       "decalage_rang_median": 2.0,
-      "decalage_rang_max": 35,
-      "ecart_score_moyen": 0.7885215562220034,
+      "decalage_rang_max": 33,
+      "ecart_score_moyen": 0.7737209991869932,
       "ecart_score_max": 6.036132823792514
      },
      "C2→C2alt": {
       "n": 222,
-      "spearman": 0.9786418319786824,
+      "spearman": 0.9743412426081907,
       "decalage_rang_median": 3.0,
-      "decalage_rang_max": 62,
-      "ecart_score_moyen": 1.3890800743211238,
+      "decalage_rang_max": 75,
+      "ecart_score_moyen": 1.3568901314938444,
       "ecart_score_max": 11.79810210741256
      }
     },
@@ -716,18 +764,6 @@
       "n": 195,
       "spearman": 0.749
      },
-     "B1~B2": {
-      "n": 36,
-      "spearman": -0.078
-     },
-     "B1~B3": {
-      "n": 76,
-      "spearman": -0.246
-     },
-     "B1~B4": {
-      "n": 31,
-      "spearman": -0.263
-     },
      "B2~B3": {
       "n": 38,
       "spearman": 0.246
@@ -736,9 +772,57 @@
       "n": 30,
       "spearman": 0.061
      },
+     "B2~B5": {
+      "n": 38,
+      "spearman": 0.527
+     },
+     "B2~B6": {
+      "n": 38,
+      "spearman": 0.532
+     },
+     "B2~B7": {
+      "n": 38,
+      "spearman": 0.286
+     },
      "B3~B4": {
       "n": 33,
       "spearman": 0.489
+     },
+     "B3~B5": {
+      "n": 101,
+      "spearman": -0.162
+     },
+     "B3~B6": {
+      "n": 93,
+      "spearman": -0.12
+     },
+     "B3~B7": {
+      "n": 38,
+      "spearman": -0.254
+     },
+     "B4~B5": {
+      "n": 32,
+      "spearman": -0.144
+     },
+     "B4~B6": {
+      "n": 32,
+      "spearman": -0.348
+     },
+     "B4~B7": {
+      "n": 30,
+      "spearman": -0.354
+     },
+     "B5~B6": {
+      "n": 115,
+      "spearman": 0.89
+     },
+     "B5~B7": {
+      "n": 38,
+      "spearman": 0.705
+     },
+     "B6~B7": {
+      "n": 38,
+      "spearman": 0.775
      },
      "C1~C2": {
       "n": 53,
@@ -784,14 +868,14 @@
    "nom": "Corrélations de rang entre dimensions (pays à score complet) — documentation de la relation liberté économique / liberté politique (Friedman, p. 51)",
    "statut": "INFORMATIF",
    "critique": false,
-   "detail": "n=144 ; A-B: -0.047, A-C: -0.052, A-D: 0.744, B-C: 0.039, B-D: -0.17, C-D: -0.026 (corrélation ≠ causalité)",
+   "detail": "n=158 ; A-B: -0.474, A-C: -0.054, A-D: 0.723, B-C: -0.04, B-D: -0.494, C-D: -0.068 (corrélation ≠ causalité)",
    "mesures": {
-    "A-B": -0.047,
-    "A-C": -0.052,
-    "A-D": 0.744,
-    "B-C": 0.039,
-    "B-D": -0.17,
-    "C-D": -0.026
+    "A-B": -0.474,
+    "A-C": -0.054,
+    "A-D": 0.723,
+    "B-C": -0.04,
+    "B-D": -0.494,
+    "C-D": -0.068
    }
   },
   {
@@ -799,16 +883,16 @@
    "nom": "Reproductibilité d'une édition : reconstruction complète depuis data/raw (jeu de données + scores) et comparaison d'empreintes",
    "statut": "RÉUSSI",
    "critique": true,
-   "detail": "5 fichiers recalculés ; divergences : aucune ; empreinte du jeu de données 0db87080a1839ec9…",
+   "detail": "5 fichiers recalculés ; divergences : aucune ; empreinte du jeu de données 7a4334e20d5bc7fa…",
    "mesures": {
     "empreintes": {
      "data/processed/pays.csv": "75ddf7199989710db50a68a1276413232c4558306d653854ece7147fcf8ebd80",
-     "data/processed/observations.csv": "9d25c509a7ccd2df14bc8ff5eede719b114fb802e1d227407b06abd0507edce6",
+     "data/processed/observations.csv": "725df6b6579c80943a5ae0ca348ba0eae79b8549cc0c5d7e0b9996e4457921c3",
      "data/processed/indicateurs_alt.csv": "2c66f5b4876e029d6debe8316f62a0557bb8ba7aceff4cc0da2d0922389c90d3",
-     "data/processed/anomalies.csv": "dd0580a47edcdb8d71f36697a562c1c3cc9b0c4629130eb11840feb9821674e7",
-     "data/processed/scores.json": "7c9167975a03b3d73a1e2f07fdc6d0dfecf4827f87c485050e8ed1f6eb901a12"
+     "data/processed/anomalies.csv": "d8360c4105e5926690ffd05860414b1d43d44a4069ec2af4dc75e24270adabd7",
+     "data/processed/scores.json": "c706106af12ddd5f27b66d7d4d2fed47c00e2d05ca6f025eb833b310552a2a1b"
     },
-    "empreinte_jeu_de_donnees": "0db87080a1839ec99aa33b244c146620fa398135c8cb9080843ae536b501bf70"
+    "empreinte_jeu_de_donnees": "7a4334e20d5bc7fab8e6559f99e61fdaa178d30fc61f86c46c8be0cbd2a16627"
    }
   }
  ],

@@ -1,5 +1,21 @@
 niveau,code,iso3,indicateur,detail
 info,CHEVAUCHEMENT_TERRITOIRES,CHI,,"La Banque mondiale agrège Jersey et Guernesey (CHI) ; l'OCDE les publie séparément (JEY, GGY). Aucune variable commune dans l'indice."
+info,B6_INCOMPLET,ARM,B6,"composantes manquantes (T_3000) : B6 non calculé, aucune valeur supposée nulle"
+info,B6_INCOMPLET,BWA,B6,"composantes manquantes (T_1100) : B6 non calculé, aucune valeur supposée nulle"
+info,B6_INCOMPLET,COG,B6,"composantes manquantes (T_2000) : B6 non calculé, aucune valeur supposée nulle"
+info,B6_INCOMPLET,ECU,B6,"composantes manquantes (T_1100) : B6 non calculé, aucune valeur supposée nulle"
+info,B6_INCOMPLET,GIN,B6,"composantes manquantes (T_2000) : B6 non calculé, aucune valeur supposée nulle"
+info,B6_INCOMPLET,KGZ,B6,"composantes manquantes (T_2000) : B6 non calculé, aucune valeur supposée nulle"
+info,B6_INCOMPLET,KHM,B6,"composantes manquantes (T_2000) : B6 non calculé, aucune valeur supposée nulle"
+info,B6_INCOMPLET,LAO,B6,"composantes manquantes (T_2000) : B6 non calculé, aucune valeur supposée nulle"
+info,B6_INCOMPLET,LIE,B6,"composantes manquantes (T_3000) : B6 non calculé, aucune valeur supposée nulle"
+info,B6_INCOMPLET,MDV,B6,"composantes manquantes (T_3000) : B6 non calculé, aucune valeur supposée nulle"
+info,B6_INCOMPLET,PAK,B6,"composantes manquantes (T_1100) : B6 non calculé, aucune valeur supposée nulle"
+info,B6_INCOMPLET,SLE,B6,"composantes manquantes (T_2000) : B6 non calculé, aucune valeur supposée nulle"
+info,B6_INCOMPLET,TCD,B6,"composantes manquantes (T_2000) : B6 non calculé, aucune valeur supposée nulle"
+info,B6_INCOMPLET,TGO,B6,"composantes manquantes (T_2000) : B6 non calculé, aucune valeur supposée nulle"
+info,CODE_OCDE_HORS_REFERENTIEL,TKL,B5,Code OCDE TKL non rattaché à une entité du référentiel
+info,CODE_OCDE_HORS_REFERENTIEL,EU22OECD,B7,Code OCDE EU22OECD non rattaché à une entité du référentiel
 avertissement,VALEUR_EXTREME,BLZ,C2,valeur 81.11879 (5.8 MAD de la médiane 11.117)
 avertissement,VALEUR_EXTREME,LBN,C2,valeur 73.445312 (5.1 MAD de la médiane 11.117)
 avertissement,VALEUR_EXTREME,MAC,C2,valeur 96.687271 (7.0 MAD de la médiane 11.117)

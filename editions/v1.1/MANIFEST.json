@@ -1,0 +1,45 @@
+{
+ "annee_donnees": 2023,
+ "date_generation": "2026-10-28",
+ "echecs_critiques": [],
+ "edition": "V1.1",
+ "empreinte_jeu_de_donnees_sha256": "7a4334e20d5bc7fab8e6559f99e61fdaa178d30fc61f86c46c8be0cbd2a16627",
+ "empreintes_fichiers": {
+  "config/dimensions.json": "3c43649fe00ac7b5e6b8d091e07823da5202262410517857c8f24662bae19fb3",
+  "config/indicateurs.json": "b0458f5a4e8e2f8e45f7e124a79af6afb67094dbf662c6c537a915885c0de67c",
+  "corpus/principes.json": "95f61095a4a16d743be3e1440402796ce4cd403e1743881e195bc816be44dfd5",
+  "corpus/verification_citations.json": "9a4bbe64b798493c82e3d40cea59c5cf6518e0295e5ff239e10c542da94bd7da",
+  "data/processed/anomalies.csv": "d8360c4105e5926690ffd05860414b1d43d44a4069ec2af4dc75e24270adabd7",
+  "data/processed/indicateurs_alt.csv": "2c66f5b4876e029d6debe8316f62a0557bb8ba7aceff4cc0da2d0922389c90d3",
+  "data/processed/observations.csv": "725df6b6579c80943a5ae0ca348ba0eae79b8549cc0c5d7e0b9996e4457921c3",
+  "data/processed/pays.csv": "75ddf7199989710db50a68a1276413232c4558306d653854ece7147fcf8ebd80",
+  "data/processed/scores.json": "c706106af12ddd5f27b66d7d4d2fed47c00e2d05ca6f025eb833b310552a2a1b",
+  "data/processed/stabilite.json": "bad1d2f9b349f6da1a116c9e4fd4c3fbaa974c396c83aaf339e35d7bfc1744c9",
+  "data/raw/MANIFEST.json": "2477b65b5a88610b0613b0d89e2bd6aa90854a6c20edad3ad08e1adaf9381560",
+  "dist/socialistometre.html": "b210db19cbb698257cb5e5abe2ad86c801f2129c30f16bf7b100020a1b8da43b",
+  "docs/robustesse.json": "97af494c083c178695d1313c785740fb68c28fea475fb2f5e2e76e4ab5f3940f"
+ },
+ "n_avec_score_global": 222,
+ "n_entites": 237,
+ "poids_dimensions": {
+  "A": 0.45,
+  "B": 0.2,
+  "C": 0.2,
+  "D": 0.15
+ },
+ "reproduction": "python3 tools/build_dataset.py && python3 engine/scoring.py && python3 tools/run_robustness.py && python3 tools/build_html.py",
+ "tests": {
+  "T01": "RÉUSSI",
+  "T02": "RÉUSSI",
+  "T03": "RÉUSSI",
+  "T04": "RÉUSSI",
+  "T05": "AVERTISSEMENT",
+  "T06": "AVERTISSEMENT",
+  "T07": "AVERTISSEMENT",
+  "T08": "RÉUSSI",
+  "T09": "RÉUSSI",
+  "T10": "RÉUSSI",
+  "T11": "INFORMATIF",
+  "T12": "RÉUSSI"
+ }
+}

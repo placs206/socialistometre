@@ -28,6 +28,12 @@ OECD = [  # (fichier, dataflow)
     ("oecd_pmr_wbg.csv", "OECD.ECO.GCRD,DSD_PMR@DF_PMR_WBG,1.4"),
     ("oecd_min2ave.csv", "OECD.ELS.SAE,DSD_EARNINGS@MIN2AVE,1.0"),
 ]
+# Ajouts V1.1 (prélèvements obligatoires, coin fiscal sur le travail)
+OECD_V11 = [  # (fichier, dataflow, filtre sur les lignes conservées ou None)
+    ("oecd_rev_global.csv", "OECD.CTP.TPS,DSD_REV_COMP_GLOBAL@DF_RSGLOBAL,1.0",
+     lambda r: r["SECTOR"] == "S13" and r["UNIT_MEASURE"] == "PT_B1GQ" and r["STANDARD_REVENUE"] in ("_T", "T_1100", "T_2000", "T_3000")),
+    ("oecd_tw_comp.csv", "OECD.CTP.TPS,DSD_TAX_WAGES_COMP@DF_TW_COMP,1.0", None),
+]
 FH_URL = "https://freedomhouse.org/sites/default/files/2024-02/All_data_FIW_2013-2024.xlsx"
 
 
@@ -53,8 +59,32 @@ def save(manifest, name, url, status, data, date, note=""):
     print(f"OK {name} ({len(data)} o)")
 
 
+def ajout_v11(date):
+    """Ajoute les fichiers V1.1 sans retélécharger les autres ; fusionne dans MANIFEST.json.
+    Les lignes non utilisées de Global Revenue Statistics (28 Mo) sont écartées ; l'empreinte du fichier complet reçu est conservée."""
+    import csv, io
+    mpath = os.path.join(RAW, "MANIFEST.json")
+    man = json.load(open(mpath, encoding="utf-8"))
+    for fname, df, filt in OECD_V11:
+        u = f"https://sdmx.oecd.org/public/rest/data/{df}/all?startPeriod=2019&dimensionAtObservation=AllDimensions"
+        st, d = fetch(u, OECD_H)
+        note = "OECD SDMX-CSV (startPeriod=2019)"
+        if filt:
+            rows = list(csv.DictReader(io.StringIO(d.decode("utf-8"))))
+            keep = [r for r in rows if filt(r)]
+            buf = io.StringIO(); w = csv.DictWriter(buf, fieldnames=list(rows[0].keys()), lineterminator="\n"); w.writeheader(); w.writerows(keep)
+            note += f" ; fichier complet reçu : {len(d)} octets, SHA-256 {hashlib.sha256(d).hexdigest()} ; conservé : {len(keep)}/{len(rows)} lignes (S13, % du PIB, codes _T, T_1100, T_2000, T_3000)"
+            d = buf.getvalue().encode("utf-8")
+        save(man["fichiers"], fname, u, st, d, date, note)
+    man["genere_le"] = man["genere_le"]
+    json.dump(man, open(mpath, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+
+
 def main():
     date = time.strftime("%Y-%m-%d")
+    if "--ajout-v1.1" in sys.argv:
+        ajout_v11(sys.argv[sys.argv.index("--date") + 1] if "--date" in sys.argv else date)
+        return
     if "--date" in sys.argv:
         date = sys.argv[sys.argv.index("--date") + 1]
     os.makedirs(RAW, exist_ok=True)

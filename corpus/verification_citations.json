@@ -1,8 +1,8 @@
 {
  "source_sha256_texte": "e28658f9a0739e69778403dd6f731e402c4b9d97c0895d33c68c02550b1cdf53",
  "edition": "Milton Friedman, Capitalisme et liberté, trad. A. M. Charno, Leduc.s, 2010 (éd. orig. Capitalism and Freedom, Univ. of Chicago Press, 1962)",
- "total": 30,
- "verifiees": 30,
+ "total": 34,
+ "verifiees": 34,
  "echecs": 0,
  "detail": [
   {
@@ -183,6 +183,30 @@
    "principe": "P17",
    "page": 126,
    "citation": "les taux de change flottent librement",
+   "verifiee": true
+  },
+  {
+   "principe": "P18",
+   "page": 35,
+   "citation": "les dépenses gouvernementales aux États-Unis",
+   "verifiee": true
+  },
+  {
+   "principe": "P18",
+   "page": 35,
+   "citation": "représentaient 26 % du revenu national",
+   "verifiee": true
+  },
+  {
+   "principe": "P19",
+   "page": 283,
+   "citation": "une taxe ou cotisation spéciale qui frappe les salaires",
+   "verifiee": true
+  },
+  {
+   "principe": "P20",
+   "page": 215,
+   "citation": "un impôt fortement progressif sur le revenu constitue un obstacle sérieux à l'utilisation efficace de nos ressources",
    "verifiee": true
   }
  ]

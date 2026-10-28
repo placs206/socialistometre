@@ -114,9 +114,9 @@ footer{padding:16px;color:var(--mut);font-size:12.5px;text-align:center}
 <section id="s-poids">
 <div class="card">
 <h2>Pondérations interactives</h2>
-<div class="warn">Les pondérations officielles de la méthodologie V1.0 sont fixes : 45 / 20 / 20 / 15. Toute autre valeur ci-dessous est un <b>scénario d'exploration</b>, non une nouvelle version de l'indice ; les scores et rangs de tous les onglets sont recalculés immédiatement.</div>
+<div class="warn">Les pondérations officielles de la méthodologie V1.x sont fixes : 45 / 20 / 20 / 15. Toute autre valeur ci-dessous est un <b>scénario d'exploration</b>, non une nouvelle version de l'indice ; les scores et rangs de tous les onglets sont recalculés immédiatement.</div>
 <div id="sliders"></div>
-<div class="row"><button class="b" id="wreset">Revenir aux pondérations V1.0 (45/20/20/15)</button><button class="b" id="weq">Poids égaux (25 % chacune)</button></div>
+<div class="row"><button class="b" id="wreset">Revenir aux pondérations officielles (45/20/20/15)</button><button class="b" id="weq">Poids égaux (25 % chacune)</button></div>
 <div id="wsum" class="mini" style="margin-top:8px"></div>
 </div>
 </section>
@@ -259,7 +259,7 @@ function renderTable(){
   Array.prototype.forEach.call(t.querySelectorAll("a[data-f]"),function(a){a.onclick=function(e){e.preventDefault();openFiche(a.getAttribute("data-f"));};});
 }
 function renderWNotice(){
-  $("wnotice").innerHTML = weightsModified()? "<div class='warn'>⚠ Pondérations modifiées ("+DIMS.map(function(d){return d+" "+Math.round(W[d]*100)+" %";}).join(" · ")+") : scénario d'exploration, différent de la méthodologie V1.0. Les rangs affichés sont recalculés.</div>" : "";
+  $("wnotice").innerHTML = weightsModified()? "<div class='warn'>⚠ Pondérations modifiées ("+DIMS.map(function(d){return d+" "+Math.round(W[d]*100)+" %";}).join(" · ")+") : scénario d'exploration, différent de la méthodologie officielle. Les rangs affichés sont recalculés.</div>" : "";
 }
 function renderClassement(){ renderWNotice(); renderSwarm(); renderTable(); }
 
@@ -356,7 +356,7 @@ function buildSliders(){
   var c=$("sliders"); c.innerHTML="";
   DIMS.forEach(function(d){
     var r=document.createElement("div"); r.className="sl";
-    r.innerHTML="<label for='w"+d+"'><b>"+d+"</b> · "+esc(DN[d])+" <span class='mini'>(V1.0 : "+Math.round(W0[d]*100)+" %)</span></label><input type='range' id='w"+d+"' min='0' max='100' step='1' value='"+Math.round(W[d]*100)+"'><span id='wv"+d+"' class='n'>"+Math.round(W[d]*100)+" %</span>";
+    r.innerHTML="<label for='w"+d+"'><b>"+d+"</b> · "+esc(DN[d])+" <span class='mini'>(officiel : "+Math.round(W0[d]*100)+" %)</span></label><input type='range' id='w"+d+"' min='0' max='100' step='1' value='"+Math.round(W[d]*100)+"'><span id='wv"+d+"' class='n'>"+Math.round(W[d]*100)+" %</span>";
     c.appendChild(r);
     r.querySelector("input").oninput=function(e){ setRawWeight(d, +e.target.value); };
   });
@@ -383,7 +383,7 @@ function renderMeth(){
   DATA.indicateurs.forEach(function(i){ h+="<tr><td>"+i.id+"</td><td>"+i.dim+"</td><td>"+esc(i.nom)+" <span class='mini'>["+esc(i.unite)+"]</span><div class='mini'><b>Lien avec Friedman :</b> "+esc(i.lien)+"</div><div class='mini'><b>Limites :</b> "+esc(i.limites)+"</div>"+(i.chevauchement?"<div class='mini'><b>Chevauchement :</b> "+esc(i.chevauchement)+"</div>":"")+"</td><td>"+(i.orientation>0?"+1 (élevé = libéral)":"−1 (élevé = socialisant)")+"</td><td>"+esc(i.principes.join(", "))+"</td><td><a href='"+esc(i.url)+"' target='_blank' rel='noopener'>"+esc(i.source)+"</a> <span class='pill'>"+esc(i.source_type)+"</span></td></tr>"; });
   h+="</tbody></table></div>";
   h+="<h3>Candidats exclus</h3><ul>"+DATA.exclus.map(function(e){return "<li><b>"+esc(e.candidat)+"</b> ("+esc(e.principe||"—")+") : "+esc(e.raison)+"</li>";}).join("")+"</ul>";
-  h+="<h3>Limites principales</h3><ul><li>Les dimensions B et C ne comptent que 4 et 3 indicateurs admissibles (cible 5–10 non atteinte) : aucun indicateur n'a été ajouté sans justification suffisante dans le corpus.</li><li>La couverture OCDE (A2, A3, B2, B4, C1) est limitée : la composition des dimensions B et C diffère d'un pays à l'autre ; comparer les scores en regardant la couverture et la fiabilité.</li><li>B1 (cotisations sociales en % des recettes) est un proxy imparfait : il avantage les pays qui financent la protection sociale par l'impôt général.</li><li>Les indicateurs D (Freedom House, WGI) sont fortement corrélés entre eux ; la dimension D est peu discriminante entre eux et corrélée à A (voir tests).</li><li>Freedom House est une ONG (qualité de source pondérée 0,8) ; WGI sont des indicateurs agrégés de perception.</li><li>Corrélation n'est pas causalité. Le texte de <em>Free to Choose</em> n'étant pas accessible, il n'est pas utilisé.</li></ul>";
+  h+="<h3>Limites principales</h3><ul><li>La dimension C ne compte que 3 indicateurs admissibles (cible 5–10 non atteinte) ; B en compte 6 dont 3 de prélèvements (B5, B6, B7) fortement liés entre eux. Aucun indicateur n'a été ajouté sans justification suffisante dans le corpus.</li><li>La couverture OCDE (A2, A3, B2, B4, B7, C1) est limitée : la composition des dimensions B et C diffère d'un pays à l'autre ; comparer les scores en regardant la couverture et la fiabilité.</li><li>Les prélèvements (B5, B6, B7) mesurent le financement de l'État sans distinguer impôts, taxes et cotisations (décision V1.1) ; ils ne disent rien de l'usage des fonds ni des déficits.</li><li>Les indicateurs D (Freedom House, WGI) sont fortement corrélés entre eux ; la dimension D est peu discriminante entre eux et corrélée à A (voir tests).</li><li>Freedom House est une ONG (qualité de source pondérée 0,8) ; WGI sont des indicateurs agrégés de perception.</li><li>Corrélation n'est pas causalité. Le texte de <em>Free to Choose</em> n'étant pas accessible, il n'est pas utilisé.</li></ul>";
   h+="<h3>Tests de robustesse et de validation</h3><div class='tablewrap'><table><thead><tr><th>Test</th><th>Résultat</th><th>Détail</th></tr></thead><tbody>"+DATA.tests.map(function(t){return "<tr><td><b>"+esc(t.id)+"</b> "+esc(t.nom)+(t.critique?" <span class='pill'>critique</span>":"")+"</td><td>"+esc(t.statut)+"</td><td class='mini'>"+esc(t.detail)+"</td></tr>";}).join("")+"</tbody></table></div>";
   h+="<h3>Audit</h3><p>Ce fichier contient l'ensemble des données de l'édition (valeurs brutes, normalisées, années, statuts, sources et URL). L'onglet « Fiche pays » liste chaque observation. Le dépôt GitHub contient les données brutes, le moteur de calcul Python et les tests permettant de reproduire cette édition.</p>";
   $("meth").innerHTML=h;

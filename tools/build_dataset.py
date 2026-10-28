@@ -153,7 +153,7 @@ IND_BY_ID = {i["id"]: i for i in IND["indicateurs"]}
 for alt in IND["alternatives_sensibilite"]:
     IND_BY_ID[alt["id"]] = alt
 RANGES = {"A1": (0, 100), "A1alt": (0, 100), "A2": (0, 6), "A3": (0, 6), "A4": (-2.6, 2.6), "A5": (-2.6, 2.6), "A6": (0, 4),
-          "B1": (0, 100), "B2": (0, 100), "B3": (0, 100), "B4": (0, 2), "C1": (0, 6), "C2": (0, 100), "C2alt": (0, 100),
+          "B5": (0, 100), "B6": (0, 100), "B7": (0, 100), "B2": (0, 100), "B3": (0, 100), "B4": (0, 2), "C1": (0, 6), "C2": (0, 100), "C2alt": (0, 100),
           "C3": (0, 100), "D1": (-2.6, 2.6), "D2": (-4, 40), "D3": (0, 16), "D4": (0, 12)}
 UNITE = {i["id"]: i["unite"] for i in IND["indicateurs"]}
 UNITE["A1alt"] = "%"; UNITE["C2alt"] = "% des inscrits"
@@ -185,7 +185,7 @@ def load_wb(code):
     return recs, rev
 
 
-WBMAP = {"A1": "TM.TAX.MRCH.SM.AR.ZS", "A1alt": "TM.TAX.MRCH.WM.AR.ZS", "B1": "GC.REV.SOCL.ZS", "C2": "SE.PRM.PRIV.ZS",
+WBMAP = {"A1": "TM.TAX.MRCH.SM.AR.ZS", "A1alt": "TM.TAX.MRCH.WM.AR.ZS", "C2": "SE.PRM.PRIV.ZS",
          "C2alt": "SE.SEC.PRIV.ZS", "C3": "NE.CON.GOVT.ZS", "A4": "GOV_WGI_RL.EST", "A5": "GOV_WGI_RQ.EST", "D1": "GOV_WGI_VA.EST"}
 for ind_id, code in WBMAP.items():
     recs, rev = load_wb(code)
@@ -272,6 +272,40 @@ for a, (y, v) in mw.items():
         vv = v / 100.0 if v > 2 else v  # l'unité source est un pourcentage du salaire (PT_WG_A_SAL_FT)
         add("B4", a, vv, y, IND_BY_ID["B4"]["source"], IND_BY_ID["B4"]["url"], "oecd_min2ave.csv",
             "valeur en % du salaire médian divisée par 100 (ratio)")
+
+# OCDE (V1.1) : prélèvements obligatoires totaux et sur le travail (% PIB), dernière année de la fenêtre
+rev = {}
+for r in read_csv("oecd_rev_global.csv"):
+    if r["OBS_VALUE"] != "" and r["SECTOR"] == "S13" and r["UNIT_MEASURE"] == "PT_B1GQ":
+        y = int(r["TIME_PERIOD"])
+        if Y_MIN <= y <= Y_MAX:
+            rev.setdefault(r["REF_AREA"], {}).setdefault(r["STANDARD_REVENUE"], {})[y] = float(r["OBS_VALUE"])
+REV_URL = IND_BY_ID["B5"]["url"]
+for a, d in sorted(rev.items()):
+    if a in ("A9", "SO", "F", "OECD_REP") or not oecd_known(a, "B5"):
+        continue
+    if "_T" in d:
+        y = max(d["_T"]); add("B5", a, d["_T"][y], y, IND_BY_ID["B5"]["source"], REV_URL, "oecd_rev_global.csv", f"total des recettes (code _T), % du PIB, secteur S13 ; dernière année de la fenêtre {Y_MIN}-{Y_MAX} ; repris tel quel")
+    comps = ("T_1100", "T_2000", "T_3000")
+    if all(c in d for c in comps):
+        ys = set.intersection(*[set(d[c]) for c in comps])
+        if ys:
+            y = max(ys); add("B6", a, sum(d[c][y] for c in comps), y, IND_BY_ID["B6"]["source"], REV_URL, "oecd_rev_global.csv", "somme des codes 1100 (impôt sur le revenu), 2000 (cotisations sociales), 3000 (taxes sur les salaires), % du PIB, même année")
+        else:
+            anomalie("avertissement", "B6_ANNEES_DISJOINTES", "composantes publiées pour des années différentes : B6 non calculé", a, "B6")
+    elif any(c in d for c in comps):
+        anomalie("info", "B6_INCOMPLET", "composantes manquantes (" + ", ".join(c for c in comps if c not in d) + ") : B6 non calculé, aucune valeur supposée nulle", a, "B6")
+
+# OCDE (V1.1) : coin fiscal moyen (célibataire sans enfant, 100 % du salaire moyen)
+tw = {}
+for r in read_csv("oecd_tw_comp.csv"):
+    if (r["MEASURE"] == "AV_TW" and r["HOUSEHOLD_TYPE"] == "S_C0" and r["INCOME_PRINCIPAL"] == "AW100" and r["UNIT_MEASURE"] == "PT_COS_LB" and r["OBS_VALUE"] != ""):
+        y = int(r["TIME_PERIOD"])
+        if Y_MIN <= y <= Y_MAX and (r["REF_AREA"] not in tw or y > tw[r["REF_AREA"]][0]):
+            tw[r["REF_AREA"]] = (y, float(r["OBS_VALUE"]))
+for a, (y, v) in sorted(tw.items()):
+    if a != "OECD_REP" and oecd_known(a, "B7"):
+        add("B7", a, v, y, IND_BY_ID["B7"]["source"], IND_BY_ID["B7"]["url"], "oecd_tw_comp.csv", "coin fiscal moyen AV_TW (S_C0, AW100, % du coût du travail) repris tel quel")
 
 # Freedom House
 FH_SRC = "Freedom House – Freedom in the World 2024"

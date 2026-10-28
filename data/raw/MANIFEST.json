@@ -1,0 +1,133 @@
+{
+ "genere_le": "2026-10-28",
+ "fichiers": {
+  "wb_countries.json": {
+   "url": "https://api.worldbank.org/v2/country?format=json&per_page=400",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 113954,
+   "sha256": "c9acf3932785191a649cbc04c3056af4cf64a236e5c3b49d49be25ddb0440bce",
+   "note": "Métadonnées pays WB (région, revenu, ISO3)"
+  },
+  "wb_TM.TAX.MRCH.SM.AR.ZS.json": {
+   "url": "https://api.worldbank.org/v2/country/all/indicator/TM.TAX.MRCH.SM.AR.ZS?date=2014:2025&source=2",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 838685,
+   "sha256": "70d4959d3712fe4b49737310d98bfc8627e41b693899f68fc4cca95b839fd61e",
+   "note": "WB source 2; 1 page(s) API concaténée(s)"
+  },
+  "wb_TM.TAX.MRCH.WM.AR.ZS.json": {
+   "url": "https://api.worldbank.org/v2/country/all/indicator/TM.TAX.MRCH.WM.AR.ZS?date=2014:2025&source=2",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 844911,
+   "sha256": "5850da4b87ed1af6710cbc78a78ff222635ab916cc6b76cae7151f71a3fc11a4",
+   "note": "WB source 2; 1 page(s) API concaténée(s)"
+  },
+  "wb_GC.REV.SOCL.ZS.json": {
+   "url": "https://api.worldbank.org/v2/country/all/indicator/GC.REV.SOCL.ZS?date=2014:2025&source=2",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 782194,
+   "sha256": "ade890ad8a3b0a1ac88651a42ffdc23e7ba6dbca8dd775208ed93f61173bd53c",
+   "note": "WB source 2; 1 page(s) API concaténée(s)"
+  },
+  "wb_SE.PRM.PRIV.ZS.json": {
+   "url": "https://api.worldbank.org/v2/country/all/indicator/SE.PRM.PRIV.ZS?date=2014:2025&source=2",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 853337,
+   "sha256": "26ea105ae1344a9d138ddd935a3e00594ec8f816c654c187ddb25e76760d28a9",
+   "note": "WB source 2; 1 page(s) API concaténée(s)"
+  },
+  "wb_SE.SEC.PRIV.ZS.json": {
+   "url": "https://api.worldbank.org/v2/country/all/indicator/SE.SEC.PRIV.ZS?date=2014:2025&source=2",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 863977,
+   "sha256": "2e77055eab1bfe958713fc2966e9dffafef8bb71294908a30b1124b88767a101",
+   "note": "WB source 2; 1 page(s) API concaténée(s)"
+  },
+  "wb_NE.CON.GOVT.ZS.json": {
+   "url": "https://api.worldbank.org/v2/country/all/indicator/NE.CON.GOVT.ZS?date=2014:2025&source=2",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 875392,
+   "sha256": "caf22fb09b5ae6f2539295655ad7b121263533a8eeab6f5a3c29ec8b13e32838",
+   "note": "WB source 2; 1 page(s) API concaténée(s)"
+  },
+  "wb_GOV_WGI_VA.EST.json": {
+   "url": "https://api.worldbank.org/v2/country/all/indicator/GOV_WGI_VA.EST?date=2014:2025&source=3",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 716553,
+   "sha256": "a7faa62f15311f1686256c4e6d66c467950016139623c6bc4a1b9d05b7961350",
+   "note": "WB source 3; 1 page(s) API concaténée(s)"
+  },
+  "wb_GOV_WGI_RL.EST.json": {
+   "url": "https://api.worldbank.org/v2/country/all/indicator/GOV_WGI_RL.EST?date=2014:2025&source=3",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 683233,
+   "sha256": "d4fea1582dabcf76dd9f0131ebd80cc3328208255768c367a3c25ca8ee2c816e",
+   "note": "WB source 3; 1 page(s) API concaténée(s)"
+  },
+  "wb_GOV_WGI_RQ.EST.json": {
+   "url": "https://api.worldbank.org/v2/country/all/indicator/GOV_WGI_RQ.EST?date=2014:2025&source=3",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 701228,
+   "sha256": "08cdfd26402e25bb8501ff1ff9e474e310ef8aeaab68d11c9900e6c546015238",
+   "note": "WB source 3; 1 page(s) API concaténée(s)"
+  },
+  "oecd_cit.csv": {
+   "url": "https://sdmx.oecd.org/public/rest/data/OECD.CTP.TPS,DSD_TAX_CIT@DF_CIT,2.0/all?startPeriod=2014&dimensionAtObservation=AllDimensions",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 618704,
+   "sha256": "1e4cc0b7314341cc62f5758b02c08f8035170ad49bb1343bfdbaa1c30afe628c",
+   "note": "OECD SDMX-CSV (startPeriod=2014)"
+  },
+  "oecd_pit_top.csv": {
+   "url": "https://sdmx.oecd.org/public/rest/data/OECD.CTP.TPS,DSD_TAX_PIT@DF_PIT_TOP_EARN_THRESH,1.0/all?startPeriod=2014&dimensionAtObservation=AllDimensions",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 336702,
+   "sha256": "3b37150a15f91351be21d78622560041a6fc89452cf0cd3b8d86a18b3cc6d048",
+   "note": "OECD SDMX-CSV (startPeriod=2014)"
+  },
+  "oecd_pmr.csv": {
+   "url": "https://sdmx.oecd.org/public/rest/data/OECD.ECO.GCRD,DSD_PMR@DF_PMR,1.4/all?startPeriod=2014&dimensionAtObservation=AllDimensions",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 447896,
+   "sha256": "4427e9710dd51755338f1d9a668f03b2a0f42b3c798e42d6b2f9e3914ed8e55a",
+   "note": "OECD SDMX-CSV (startPeriod=2014)"
+  },
+  "oecd_pmr_wbg.csv": {
+   "url": "https://sdmx.oecd.org/public/rest/data/OECD.ECO.GCRD,DSD_PMR@DF_PMR_WBG,1.4/all?startPeriod=2014&dimensionAtObservation=AllDimensions",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 81019,
+   "sha256": "ba89c88681a4b91e39e206b9302ad3f5345cbb7b851ae2ee0f7caa2bf06bb67b",
+   "note": "OECD SDMX-CSV (startPeriod=2014)"
+  },
+  "oecd_min2ave.csv": {
+   "url": "https://sdmx.oecd.org/public/rest/data/OECD.ELS.SAE,DSD_EARNINGS@MIN2AVE,1.0/all?startPeriod=2014&dimensionAtObservation=AllDimensions",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 87958,
+   "sha256": "41577ed6aff20718da3ab2610c28247b5ebd37ecd4384abf7d2f96e2640650cb",
+   "note": "OECD SDMX-CSV (startPeriod=2014)"
+  },
+  "freedomhouse_fiw_2013-2024.xlsx": {
+   "url": "https://freedomhouse.org/sites/default/files/2024-02/All_data_FIW_2013-2024.xlsx",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 457464,
+   "sha256": "69030b4738ca1b282ab38551dbe4da8abbf2b9250b679bd9dc5da3e31f9b6981",
+   "note": "Freedom House, Freedom in the World 2013-2024 (ONG ; édition 2024 = année civile 2023)"
+  }
+ }
+}

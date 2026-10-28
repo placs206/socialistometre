@@ -30,9 +30,9 @@
    "nom": "Données brutes : empreintes SHA-256 du manifeste et relecture indépendante d'un échantillon (120 obs.)",
    "statut": "RÉUSSI",
    "critique": true,
-   "detail": "18 fichiers bruts : 0 empreinte(s) divergente(s) ; échantillon de 114 observations relu dans les fichiers bruts : 0 écart(s) ; 6 observation(s) Freedom House non rapprochables par nom exact (non vérifiées ici : [('SVK', 'D3'), ('SYR', 'A6'), ('RUS', 'D4'), ('FSM', 'A6'), ('KGZ', 'D4'), ('SVK', 'D2')])",
+   "detail": "19 fichiers bruts : 0 empreinte(s) divergente(s) ; échantillon de 114 observations relu dans les fichiers bruts : 0 écart(s) ; 6 observation(s) Freedom House non rapprochables par nom exact (non vérifiées ici : [('SVK', 'D3'), ('SYR', 'A6'), ('RUS', 'D4'), ('FSM', 'A6'), ('KGZ', 'D4'), ('SVK', 'D2')])",
    "mesures": {
-    "fichiers": 18,
+    "fichiers": 19,
     "divergences": 0,
     "echantillon": 114,
     "ecarts": 0
@@ -649,7 +649,7 @@
   {
    "id": "T08",
    "nom": "Stabilité des rangs et des scores (600 rééchantillonnages : 80 % des indicateurs + poids perturbés)",
-   "statut": "RÉUSSI",
+   "statut": "AVERTISSEMENT",
    "critique": false,
    "detail": "largeur médiane de l'intervalle de rang P5-P95 : 64.0 places ; P90 : 110 places ; intervalles enregistrés pour 222 entités (affichés dans l'interface)",
    "mesures": {
@@ -883,16 +883,196 @@
    "nom": "Reproductibilité d'une édition : reconstruction complète depuis data/raw (jeu de données + scores) et comparaison d'empreintes",
    "statut": "RÉUSSI",
    "critique": true,
-   "detail": "5 fichiers recalculés ; divergences : aucune ; empreinte du jeu de données 7a4334e20d5bc7fa…",
+   "detail": "5 fichiers recalculés ; divergences : aucune ; empreinte du jeu de données 1412b37d4d7e0cab…",
    "mesures": {
     "empreintes": {
      "data/processed/pays.csv": "75ddf7199989710db50a68a1276413232c4558306d653854ece7147fcf8ebd80",
      "data/processed/observations.csv": "725df6b6579c80943a5ae0ca348ba0eae79b8549cc0c5d7e0b9996e4457921c3",
-     "data/processed/indicateurs_alt.csv": "2c66f5b4876e029d6debe8316f62a0557bb8ba7aceff4cc0da2d0922389c90d3",
-     "data/processed/anomalies.csv": "d8360c4105e5926690ffd05860414b1d43d44a4069ec2af4dc75e24270adabd7",
-     "data/processed/scores.json": "c706106af12ddd5f27b66d7d4d2fed47c00e2d05ca6f025eb833b310552a2a1b"
+     "data/processed/indicateurs_alt.csv": "46af9193d4e59865fa63be8bd8d58910a6d80ad2225d01c202a431be3d7dba81",
+     "data/processed/anomalies.csv": "8ab790e882111c91aa87a0fc332a130050c7506559d2560a268731ca07914825",
+     "data/processed/scores.json": "582c4fc092a7d51a5f99c6e4b80b2107644201f32999a980e1b802b256c6a604"
     },
-    "empreinte_jeu_de_donnees": "7a4334e20d5bc7fab8e6559f99e61fdaa178d30fc61f86c46c8be0cbd2a16627"
+    "empreinte_jeu_de_donnees": "1412b37d4d7e0cab5c2bfd032443b946657696c2d746798a03646d671f3ac1a6"
+   }
+  },
+  {
+   "id": "T13",
+   "nom": "Robustesse du scénario recommandé (non approuvé) : retrait d'un indicateur à la fois et méthodes de normalisation",
+   "statut": "RÉUSSI",
+   "critique": false,
+   "detail": "162 scores ; Spearman minimal au retrait d'un indicateur 0.9779 (A6) ; rang / z-score vs min-max : 0.9653 / 0.9731 (méthode officielle T06 : voir plus haut)",
+   "mesures": {
+    "retrait": {
+     "A1": {
+      "spearman": 0.9906,
+      "n_perdus": 106
+     },
+     "A2": {
+      "spearman": 0.9982,
+      "n_perdus": 1
+     },
+     "A3": {
+      "spearman": 0.9987,
+      "n_perdus": 1
+     },
+     "A4": {
+      "spearman": 0.9866,
+      "n_perdus": 106
+     },
+     "A6": {
+      "spearman": 0.9779,
+      "n_perdus": 107
+     },
+     "B2": {
+      "spearman": 0.9997,
+      "n_perdus": 0
+     },
+     "B3": {
+      "spearman": 0.987,
+      "n_perdus": 10
+     },
+     "B4": {
+      "spearman": 0.9995,
+      "n_perdus": 0
+     },
+     "B6": {
+      "spearman": 0.9872,
+      "n_perdus": 10
+     },
+     "B7": {
+      "spearman": 0.999,
+      "n_perdus": 0
+     },
+     "C1": {
+      "spearman": 0.9976,
+      "n_perdus": 1
+     },
+     "C3": {
+      "spearman": 0.9832,
+      "n_perdus": 66
+     },
+     "D1": {
+      "spearman": 0.9992,
+      "n_perdus": 0
+     },
+     "D2": {
+      "spearman": 0.9995,
+      "n_perdus": 0
+     },
+     "D3": {
+      "spearman": 0.9994,
+      "n_perdus": 0
+     },
+     "D4": {
+      "spearman": 0.9993,
+      "n_perdus": 0
+     },
+     "B5n": {
+      "spearman": 0.9859,
+      "n_perdus": 10
+     },
+     "C4": {
+      "spearman": 0.9869,
+      "n_perdus": 67
+     }
+    },
+    "normalisation": {
+     "rang": 0.9653,
+     "zscore": 0.9731
+    }
+   }
+  },
+  {
+   "id": "T14",
+   "nom": "Comparaison de périodes : méthode officielle appliquée aux données de la fenêtre 2016-2020 (FH 2021, PMR 2018) vs édition 2023",
+   "statut": "INFORMATIF",
+   "critique": false,
+   "detail": "222 entités communes ; Spearman 0.9705 ; variation absolue moyenne 2.44 pts ; plus fortes variations : Haut-Karabagh -29.2, Bande de Gaza -20.0, Yémen -15.7, Cuba +14.8, Sao Tomé-et-Principe +12.3, Territoires palestiniens -11.9 (mêlent évolutions réelles, révisions et changements de couverture)",
+   "mesures": {
+    "spearman": 0.9704782801591032,
+    "variation_moyenne": 2.4394162069044505,
+    "plus_fortes": [
+     [
+      "X-NKR",
+      -29.2
+     ],
+     [
+      "X-GAZ",
+      -19.97
+     ],
+     [
+      "YEM",
+      -15.73
+     ],
+     [
+      "CUB",
+      14.76
+     ],
+     [
+      "STP",
+      12.26
+     ],
+     [
+      "PSE",
+      -11.95
+     ],
+     [
+      "PNG",
+      11.41
+     ],
+     [
+      "TWN",
+      -10.25
+     ],
+     [
+      "NIC",
+      -9.96
+     ],
+     [
+      "TJK",
+      9.58
+     ],
+     [
+      "AFG",
+      -9.37
+     ],
+     [
+      "FJI",
+      9.01
+     ],
+     [
+      "ZWE",
+      -8.53
+     ],
+     [
+      "VCT",
+      8.44
+     ],
+     [
+      "ABW",
+      8.21
+     ],
+     [
+      "COM",
+      7.8
+     ],
+     [
+      "UKR",
+      -7.77
+     ],
+     [
+      "MWI",
+      7.43
+     ],
+     [
+      "THA",
+      6.66
+     ],
+     [
+      "GUY",
+      6.51
+     ]
+    ]
    }
   }
  ],

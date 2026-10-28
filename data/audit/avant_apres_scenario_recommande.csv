@@ -1,0 +1,223 @@
+iso3,pays,ancien_score,nouveau_score,variation,ancien_rang,nouveau_rang,variation_rang,dimension_responsable,indicateur_responsable,explication
+IRL,Irlande,76.33,82.42,6.08,3,1,2,C,A5,A 90.3→91.4 ; B 49.4→50.7 ; C 58.0→84.4 ; D 94.9→95.0 ; contribution de A5 : 6.3 → 0.0 pts
+CHE,Suisse,75.11,81.7,6.58,5,2,3,C,A5,A 88.6→89.6 ; B 47.1→51.4 ; C 59.4→85.9 ; D 92.9→93.0 ; contribution de A5 : 6.3 → 0.0 pts
+EST,Estonie,72.06,78.0,5.94,10,3,7,C,A5,A 87.8→89.8 ; B 41.3→44.2 ; C 51.7→74.0 ; D 93.0→93.1 ; contribution de A5 : 5.9 → 0.0 pts
+USA,États-Unis,70.68,77.69,7.01,13,4,9,C,C4,A 83.7→84.8 ; B 43.9→50.9 ; C 59.3→84.6 ; D 82.4→82.8 ; contribution de C4 : 0.0 → 6.2 pts
+CYP,Chypre,71.67,77.47,5.8,12,5,7,C,C4,A 72.9→74.4 ; C 57.3→77.1 ; D 87.1→87.3 ; contribution de C4 : 0.0 → 7.0 pts
+NZL,Nouvelle-Zélande,71.85,76.86,5.01,11,6,5,C,A5,A 91.7→92.5 ; B 35.5→33.8 ; C 45.6→70.5 ; contribution de A5 : 6.6 → 0.0 pts
+CHL,Chili,77.71,76.56,-1.15,1,7,-6,B,C2,A 83.3→86.6 ; B 49.1→41.4 ; C 83.5→77.8 ; D 91.4→91.5 ; contribution de C2 : 6.7 → 0.0 pts
+LTU,Lituanie,69.13,75.71,6.58,20,8,12,C,C4,A 83.1→85.0 ; B 38.6→42.0 ; C 53.8→78.9 ; D 88.5→88.6 ; contribution de C4 : 0.0 → 5.8 pts
+AUS,Australie,74.44,75.7,1.26,6,9,-3,C,A5,A 89.9→90.5 ; B 34.6→34.0 ; C 66.5→71.9 ; D 91.8→92.0 ; contribution de A5 : 6.5 → 0.0 pts
+NLD,Pays-Bas,68.63,75.31,6.68,21,10,11,C,A5,A 91.1→92.9 ; B 25.0→28.4 ; C 42.0→67.9 ; D 95.1→95.2 ; contribution de A5 : 6.2 → 0.0 pts
+GBR,Royaume-Uni,73.98,75.2,1.22,8,11,-3,A,A5,A 91.1→92.9 ; B 28.8→29.9 ; C 70.6→71.4 ; D 87.3→87.4 ; contribution de A5 : 6.1 → 0.0 pts
+DNK,Danemark,70.59,74.58,3.99,14,12,2,C,A5,A 92.9→94.0 ; B 15.5→20.6 ; C 56.0→68.3 ; contribution de A5 : 6.5 → 0.0 pts
+NOR,Norvège,69.82,74.35,4.53,19,13,6,C,A5,A 88.9→90.2 ; C 49.2→68.8 ; D 96.0→96.1 ; contribution de A5 : 6.2 → 0.0 pts
+LVA,Lettonie,67.68,74.25,6.57,28,14,14,C,C4,A 82.6→85.2 ; B 38.9→40.4 ; C 47.8→73.1 ; D 87.9→88.1 ; contribution de C4 : 0.0 → 5.4 pts
+CZE,Tchéquie,67.42,74.18,6.76,30,15,15,C,C4,A 80.9→82.5 ; B 37.7→41.4 ; C 49.4→75.7 ; D 90.7→90.9 ; contribution de C4 : 0.0 → 5.7 pts
+MUS,Maurice,75.67,74.04,-1.62,4,16,-12,B,C2,A 77.1→79.8 ; B 70.0→60.2 ; C 74.0→69.5 ; D 81.1→81.4 ; contribution de C2 : 7.8 → 0.0 pts
+ISL,Islande,67.5,73.28,5.78,29,17,12,C,A5,A 85.8→87.6 ; B 33.1→34.5 ; C 43.3→66.7 ; D 90.8→91.0 ; contribution de A5 : 5.8 → 0.0 pts
+SWE,Suède,67.4,73.26,5.86,31,18,13,C,A5,A 90.8→92.4 ; B 13.5→20.9 ; C 47.4→65.7 ; contribution de A5 : 6.2 → 0.0 pts
+FIN,Finlande,66.76,73.21,6.46,37,19,18,C,A5,A 92.9→94.3 ; B 12.9→17.8 ; C 39.8→64.0 ; contribution de A5 : 6.4 → 0.0 pts
+SGP,Singapour,70.27,73.18,2.91,16,20,-4,C,A5,A 86.7→84.7 ; B 78.5→74.6 ; C 47.2→69.3 ; D 40.8→42.0 ; contribution de A5 : 10.4 → 0.0 pts
+JPN,Japon,64.87,72.59,7.71,48,21,27,C,C4,A 82.1→83.1 ; B 25.6→30.2 ; C 45.5→77.2 ; contribution de C4 : 0.0 → 6.4 pts
+SVK,Slovaquie,66.03,72.39,6.35,42,22,20,C,C4,A 79.1→82.5 ; B 32.9→35.5 ; C 52.5→73.9 ; D 89.0→89.2 ; contribution de C4 : 0.0 → 5.4 pts
+ROU,Roumanie,59.73,72.12,12.39,83,23,60,A,C4,A 66.9→68.9 ; dimension B retirée (2 indicateur(s)) ; C 49.2→72.9 ; D 80.5→80.7 ; contribution de C4 : 0.0 → 6.1 pts
+LUX,Luxembourg,66.78,71.84,5.06,36,24,12,C,A5,A 83.9→83.7 ; B 20.0→23.2 ; C 54.3→76.9 ; D 94.3→94.4 ; contribution de A5 : 7.6 → 0.0 pts
+MLT,Malte,70.18,70.94,0.76,17,25,-8,A,C2,A 78.8→82.4 ; B 28.2→29.2 ; C 80.3→75.0 ; D 86.7→86.9 ; contribution de C2 : 5.6 → 0.0 pts
+CAN,Canada,66.18,70.86,4.68,40,26,14,C,A5,A 83.4→83.7 ; B 29.6→32.4 ; C 44.1→63.9 ; D 92.7→92.7 ; contribution de A5 : 6.1 → 0.0 pts
+ESP,Espagne,67.15,70.81,3.66,33,27,6,A,C4,A 81.4→85.1 ; B 20.6→25.4 ; C 67.6→72.6 ; D 85.9→86.1 ; contribution de C4 : 0.0 → 5.2 pts
+ARM,Arménie,60.26,70.42,10.16,78,28,50,B,C4,A 65.2→67.7 ; dimension B retirée (1 indicateur(s)) ; C 58.9→84.8 ; D 58.5→59.4 ; contribution de C4 : 0.0 → 6.8 pts
+HKG,R.A.S. chinoise de Hong Kong,68.15,70.37,2.22,24,29,-5,C,A5,A 81.7→81.0 ; B 75.8→71.1 ; C 56.3→72.3 ; D 33.1→34.9 ; contribution de A5 : 9.4 → 0.0 pts
+PER,Pérou,67.84,70.3,2.46,26,30,-4,C,C4,A 72.2→75.8 ; B 55.7→46.9 ; C 71.6→84.0 ; D 65.9→66.7 ; contribution de C4 : 0.0 → 5.9 pts
+PRT,Portugal,65.27,70.25,4.98,46,31,15,C,C4,A 80.6→83.9 ; B 16.8→17.3 ; C 57.9→74.9 ; D 93.6→93.6 ; contribution de C4 : 0.0 → 5.0 pts
+DEU,Allemagne,62.54,69.78,7.23,60,32,28,C,A5,A 83.8→85.1 ; B 12.0→19.6 ; C 45.1→70.8 ; D 89.4→89.5 ; contribution de A5 : 5.8 → 0.0 pts
+ALB,Albanie,58.69,69.53,10.85,88,33,55,B,B3,A 62.3→65.7 ; dimension B retirée (1 indicateur(s)) ; C 49.9→79.4 ; D 67.2→67.9 ; contribution de B3 : 10.6 → 0.0 pts
+PAN,Panama,61.76,69.45,7.69,68,34,34,C,C4,A 60.5→63.8 ; B 61.5→64.8 ; C 48.8→76.3 ; D 83.3→83.6 ; contribution de C4 : 0.0 → 7.5 pts
+TWN,Taïwan,69.88,69.37,-0.52,18,35,-17,C,C1,C 79.8→77.6 ; D 95.6→95.7 ; contribution de C1 : 20.0 → 10.0 pts
+LCA,Sainte-Lucie,56.56,69.12,12.56,100,36,64,A,A6,A 67.4→71.9 ; B 55.0→48.7 ; dimension C retirée (0 indicateur(s)) ; D 88.0→88.1 ; contribution de A6 : 11.2 → 18.8 pts
+MKD,Macédoine du Nord,59.68,68.97,9.29,84,37,47,B,B3,A 65.1→68.2 ; dimension B retirée (1 indicateur(s)) ; C 33.7→72.2 ; D 66.1→66.8 ; contribution de B3 : 13.7 → 0.0 pts
+SVN,Slovénie,62.29,68.85,6.56,61,38,23,C,A5,A 77.8→80.5 ; B 19.0→23.1 ; C 49.6→72.1 ; D 90.5→90.6 ; contribution de A5 : 4.8 → 0.0 pts
+DOM,République dominicaine,64.99,68.75,3.76,47,39,8,C,C4,A 62.9→66.9 ; B 67.2→59.4 ; C 61.0→78.1 ; D 73.6→74.3 ; contribution de C4 : 0.0 → 7.4 pts
+POL,Pologne,62.82,68.63,5.8,57,40,17,C,C4,A 77.7→80.5 ; B 34.7→37.4 ; C 47.2→67.0 ; D 76.5→76.9 ; contribution de C4 : 0.0 → 4.9 pts
+MDA,Moldavie,61.21,68.57,7.36,70,41,29,B,B3,A 64.9→68.0 ; dimension B retirée (1 indicateur(s)) ; C 48.4→71.5 ; D 65.7→66.5 ; contribution de B3 : 12.5 → 0.0 pts
+BEL,Belgique,68.4,68.51,0.11,22,42,-20,C,C2,A 81.3→82.6 ; B 13.3→18.1 ; C 76.2→69.2 ; D 92.6→92.7 ; contribution de C2 : 6.7 → 0.0 pts
+CRI,Costa Rica,63.31,68.01,4.7,55,43,12,C,C4,A 68.0→69.6 ; B 38.8→39.6 ; C 57.4→76.5 ; D 89.7→89.8 ; contribution de C4 : 0.0 → 5.0 pts
+URY,Uruguay,62.86,67.95,5.09,56,44,12,C,C4,A 70.1→72.8 ; B 43.0→40.3 ; C 44.6→66.7 ; contribution de C4 : 0.0 → 7.5 pts
+GEO,Géorgie,63.33,67.79,4.45,54,45,9,C,A5,A 73.7→75.9 ; B 61.1→53.5 ; C 48.8→72.9 ; D 54.6→55.6 ; contribution de A5 : 7.5 → 0.0 pts
+BRB,Barbade,60.66,67.64,6.98,76,46,30,A,A6,A 65.3→67.5 ; B 62.2→50.4 ; dimension C retirée (1 indicateur(s)) ; D 91.0→91.1 ; contribution de A6 : 11.2 → 18.8 pts
+HRV,Croatie,62.66,67.6,4.94,59,47,12,C,A5,A 76.6→80.1 ; B 37.0→32.7 ; C 41.9→62.8 ; D 82.8→83.1 ; contribution de A5 : 4.4 → 0.0 pts
+AUT,Autriche,61.66,67.53,5.86,69,48,21,C,A5,A 82.5→83.9 ; B 6.7→14.5 ; C 48.7→66.9 ; D 89.7→89.9 ; contribution de A5 : 5.7 → 0.0 pts
+PRY,Paraguay,62.27,67.07,4.8,62,49,13,C,C4,A 54.8→57.2 ; B 80.1→77.8 ; C 60.0→80.3 ; D 63.9→64.7 ; contribution de C4 : 0.0 → 8.1 pts
+MNE,Monténégro,54.99,66.96,11.97,112,50,62,C,B3,A 63.4→66.0 ; dimension B retirée (1 indicateur(s)) ; C 28.1→67.4 ; D 68.4→69.2 ; contribution de B3 : 10.6 → 0.0 pts
+BGR,Bulgarie,62.14,66.73,4.59,63,51,12,C,C4,A 68.0→70.0 ; B 49.7→45.0 ; C 50.0→72.8 ; D 77.4→77.9 ; contribution de C4 : 0.0 → 4.7 pts
+GRC,Grèce,61.12,66.67,5.55,71,52,19,C,C4,A 73.4→76.2 ; B 26.6→27.8 ; C 50.7→70.8 ; D 84.4→84.6 ; contribution de C4 : 0.0 → 4.9 pts
+SRB,Serbie,54.06,66.29,12.24,119,53,66,C,B3,A 65.5→70.0 ; dimension B retirée (1 indicateur(s)) ; C 29.5→66.2 ; D 54.0→55.3 ; contribution de B3 : 10.6 → 0.0 pts
+GHA,Ghana,68.35,66.16,-2.19,23,54,-31,B,C4,A 50.9→52.2 ; dimension B retirée (2 indicateur(s)) ; C 78.3→87.9 ; D 78.6→78.9 ; contribution de C4 : 0.0 → 9.5 pts
+ISR,Israël,64.22,65.98,1.76,51,55,-4,C,A5,A 74.4→75.1 ; B 40.6→38.4 ; C 57.6→66.8 ; D 73.9→74.2 ; contribution de A5 : 5.3 → 0.0 pts
+FRA,France,60.85,65.24,4.38,73,56,17,C,A5,A 81.8→83.6 ; B 7.3→10.3 ; C 49.3→64.0 ; D 84.9→85.0 ; contribution de A5 : 5.4 → 0.0 pts
+KOR,Corée du Sud,60.18,65.1,4.92,80,57,23,C,A5,A 68.8→68.8 ; B 33.7→33.9 ; C 50.7→74.9 ; D 82.2→82.6 ; contribution de A5 : 5.2 → 0.0 pts
+MNG,Mongolie,58.41,65.07,6.66,89,58,31,C,C4,A 61.9→66.1 ; B 49.1→42.6 ; C 42.9→73.2 ; D 81.0→81.2 ; contribution de C4 : 0.0 → 7.1 pts
+STP,Sao Tomé-et-Principe,63.71,65.06,1.34,52,59,-7,A,C3,A 49.6→55.5 ; C 81.7→73.6 ; D 82.0→82.2 ; contribution de C3 : 20.4 → 10.2 pts
+ITA,Italie,58.82,65.04,6.22,87,60,27,C,C4,A 73.4→75.3 ; B 8.5→12.6 ; C 53.7→76.2 ; D 89.1→89.3 ; contribution de C4 : 0.0 → 5.2 pts
+BHS,Bahamas,68.01,64.48,-3.52,25,61,-36,C,A6,A 50.6→51.8 ; B 88.6→75.3 ; dimension C retirée (1 indicateur(s)) ; D 88.0→88.1 ; contribution de A6 : 11.2 → 18.8 pts
+HUN,Hongrie,62.04,64.13,2.09,65,62,3,A,A5,A 71.0→74.1 ; B 47.0→45.9 ; C 58.5→62.4 ; D 60.0→60.9 ; contribution de A5 : 4.2 → 0.0 pts
+LKA,Sri Lanka,55.82,64.02,8.2,105,63,42,C,C4,A 52.1→55.6 ; C 51.8→84.0 ; D 55.4→56.4 ; contribution de C4 : 0.0 → 6.9 pts
+IDN,Indonésie,66.09,63.88,-2.21,41,64,-23,C,B5,A 55.7→55.6 ; B 73.5→69.3 ; C 88.7→81.6 ; D 57.2→57.8 ; contribution de B5 : 6.2 → 0.0 pts
+VUT,Vanuatu,60.86,63.23,2.37,72,65,7,B,B6,A 54.0→58.1 ; dimension B retirée (2 indicateur(s)) ; C 30.9→60.4 ; D 81.9→82.3 ; contribution de B6 : 10.0 → 0.0 pts
+COL,Colombie,60.72,63.15,2.43,75,66,9,C,C4,A 62.4→64.1 ; B 49.3→43.8 ; C 65.0→78.4 ; D 65.3→65.8 ; contribution de C4 : 0.0 → 5.2 pts
+BEN,Bénin,47.33,63.12,15.78,153,67,86,C,C4,A 50.4→52.4 ; dimension B retirée (1 indicateur(s)) ; C 69.9→86.1 ; D 63.5→64.7 ; contribution de C4 : 0.0 → 10.4 pts
+ZAF,Afrique du Sud,57.98,62.54,4.55,92,68,24,C,C4,A 61.8→64.4 ; B 42.2→36.2 ; C 45.2→67.8 ; D 84.6→85.0 ; contribution de C4 : 0.0 → 5.1 pts
+FJI,Fidji,55.68,62.51,6.84,107,69,38,C,C4,A 60.3→64.3 ; B 70.1→57.9 ; C 20.7→57.4 ; D 69.2→70.0 ; contribution de C4 : 0.0 → 7.3 pts
+BLZ,Belize,67.25,62.39,-4.86,32,70,-38,C,C2,A 48.6→51.4 ; B 82.7→71.4 ; dimension C retirée (1 indicateur(s)) ; D 82.9→83.3 ; contribution de C2 : 10.0 → 0.0 pts
+BTN,Bhoutan,62.11,62.19,0.08,64,71,-7,B,B6,A 63.7→69.0 ; dimension B retirée (2 indicateur(s)) ; C 25.8→49.6 ; D 57.9→58.4 ; contribution de B6 : 10.0 → 0.0 pts
+MYS,Malaisie,60.33,62.17,1.85,77,72,5,C,B5,A 62.8→62.9 ; B 71.2→67.1 ; C 51.2→63.5 ; D 50.6→51.6 ; contribution de B5 : 6.2 → 0.0 pts
+NAM,Namibie,57.29,61.94,4.65,96,73,23,C,C4,A 62.3→65.8 ; B 46.2→46.7 ; C 40.7→55.4 ; D 79.0→79.5 ; contribution de C4 : 0.0 → 7.0 pts
+GTM,Guatemala,54.77,61.82,7.05,114,74,40,C,C4,A 52.5→55.7 ; B 67.0→61.5 ; C 52.1→84.5 ; D 49.0→50.3 ; contribution de C4 : 0.0 → 8.7 pts
+SLV,Salvador,57.42,61.71,4.29,95,75,20,B,B6,A 61.1→66.5 ; dimension B retirée (2 indicateur(s)) ; C 39.0→55.2 ; D 54.8→55.8 ; contribution de B6 : 8.0 → 0.0 pts
+SYC,Seychelles,59.91,61.38,1.46,82,76,6,B,A5,A 72.6→77.2 ; B 48.1→33.7 ; C 29.8→41.1 ; D 77.6→77.9 ; contribution de A5 : 6.6 → 0.0 pts
+PHL,Philippines,54.35,60.56,6.22,116,77,39,C,C4,A 55.8→57.2 ; B 58.3→55.0 ; C 43.8→74.5 ; D 58.8→59.6 ; contribution de C4 : 0.0 → 7.9 pts
+CPV,Cap-Vert,54.27,60.4,6.13,117,78,39,C,C4,A 52.6→52.9 ; B 66.6→58.9 ; C 20.0→57.7 ; D 88.5→88.6 ; contribution de C4 : 0.0 → 7.7 pts
+ATG,Antigua-et-Barbuda,63.41,60.28,-3.12,53,79,-26,B,A5,A 58.8→57.6 ; B 61.3→51.2 ; D 80.2→80.6 ; contribution de A5 : 8.8 → 0.0 pts
+MEX,Mexique,55.56,60.02,4.46,109,80,29,C,C4,A 56.9→58.9 ; C 53.5→70.8 ; D 61.9→62.6 ; contribution de C4 : 0.0 → 4.7 pts
+WSM,Samoa,59.19,59.55,0.36,86,81,5,C,C3,A 57.7→61.5 ; B 51.8→35.7 ; dimension C retirée (1 indicateur(s)) ; D 85.0→85.5 ; contribution de C3 : 6.2 → 0.0 pts
+LBN,Liban,60.72,59.37,-1.35,74,82,-8,C,C2,A 46.9→51.7 ; C 100.0→82.6 ; D 49.7→51.3 ; contribution de C2 : 12.5 → 0.0 pts
+BWA,Botswana,52.48,59.34,6.86,125,83,42,B,C4,A 62.3→63.6 ; dimension B retirée (1 indicateur(s)) ; C 11.6→40.8 ; D 70.8→71.4 ; contribution de C4 : 0.0 → 8.8 pts
+THA,Thaïlande,58.17,59.14,0.97,90,84,6,C,B5,A 59.8→61.3 ; B 70.2→61.9 ; C 61.7→70.3 ; D 32.6→34.2 ; contribution de B5 : 5.3 → 0.0 pts
+PNG,Papouasie-Nouvelle-Guinée,57.1,59.01,1.91,99,85,14,A,B5,A 51.7→57.0 ; B 60.6→55.7 ; D 68.5→69.5 ; contribution de B5 : 7.1 → 0.0 pts
+BIH,Bosnie-Herzégovine,51.69,58.36,6.68,128,86,42,B,B3,A 55.3→59.5 ; dimension B retirée (1 indicateur(s)) ; C 26.7→59.9 ; D 51.5→52.8 ; contribution de B3 : 13.7 → 0.0 pts
+IND,Inde,52.84,58.17,5.32,122,87,35,A,C2,A 48.6→49.0 ; dimension B retirée (1 indicateur(s)) ; C 87.8→76.0 ; D 61.3→61.7 ; contribution de C2 : 9.1 → 0.0 pts
+ECU,Équateur,55.8,57.91,2.11,106,88,18,B,B5,A 45.3→47.7 ; dimension B retirée (0 indicateur(s)) ; C 60.6→72.9 ; D 68.0→68.7 ; contribution de B5 : 13.1 → 0.0 pts
+TTO,Trinité-et-Tobago,50.52,57.61,7.09,136,89,47,A,A6,A 55.0→57.6 ; B 48.0→37.6 ; dimension C retirée (1 indicateur(s)) ; D 83.8→84.2 ; contribution de A6 : 8.4 → 14.1 pts
+HND,Honduras,49.89,57.17,7.28,142,90,52,C,C4,A 52.6→57.8 ; B 50.2→42.8 ; C 44.7→76.2 ; D 48.2→49.2 ; contribution de C4 : 0.0 → 8.5 pts
+ARG,Argentine,57.15,57.02,-0.13,98,91,7,B,C4,A 55.2→58.1 ; B 36.5→23.9 ; C 62.6→67.6 ; D 83.4→83.7 ; contribution de C4 : 0.0 → 4.4 pts
+MWI,Malawi,60.1,56.67,-3.44,81,92,-11,B,B5,A 46.4→49.8 ; dimension B retirée (2 indicateur(s)) ; C 51.5→63.4 ; D 67.6→68.3 ; contribution de B5 : 9.7 → 0.0 pts
+SLE,Sierra Leone,49.61,56.35,6.74,143,93,50,B,B5,A 41.5→45.3 ; dimension B retirée (1 indicateur(s)) ; C 55.6→81.9 ; D 54.5→55.4 ; contribution de B5 : 9.5 → 0.0 pts
+JAM,Jamaïque,50.91,56.17,5.26,134,94,40,A,A5,A 56.6→57.8 ; B 45.5→32.5 ; dimension C retirée (1 indicateur(s)) ; D 82.3→82.7 ; contribution de A5 : 5.9 → 0.0 pts
+SLB,Îles Salomon,55.94,56.06,0.12,104,95,9,B,B6,A 48.6→55.4 ; dimension B retirée (2 indicateur(s)) ; C 33.3→43.6 ; D 74.0→74.7 ; contribution de B6 : 9.0 → 0.0 pts
+NPL,Népal,52.65,56.01,3.35,124,96,28,C,C4,A 39.5→40.3 ; C 75.0→86.0 ; D 62.3→63.0 ; contribution de C4 : 0.0 → 9.0 pts
+KAZ,Kazakhstan,49.47,54.94,5.47,145,97,48,C,C4,A 55.3→56.9 ; B 65.6→55.2 ; C 41.4→74.1 ; D 21.2→23.2 ; contribution de C4 : 0.0 → 6.6 pts
+OMN,Oman,51.59,54.78,3.19,129,98,31,B,B3,A 63.8→65.2 ; dimension B retirée (1 indicateur(s)) ; C 41.0→50.6 ; D 27.3→29.2 ; contribution de B3 : 10.6 → 0.0 pts
+CIV,Côte d’Ivoire,52.96,54.67,1.71,121,99,22,C,C4,A 42.0→40.5 ; B 67.1→62.8 ; C 64.3→79.6 ; D 51.9→53.1 ; contribution de C4 : 0.0 → 7.0 pts
+SEN,Sénégal,53.23,54.64,1.41,120,100,20,C,C4,A 49.6→51.5 ; B 55.4→47.5 ; C 50.3→60.5 ; D 65.2→65.9 ; contribution de C4 : 0.0 → 5.7 pts
+MDV,Maldives,46.66,54.19,7.53,155,101,54,B,C4,A 48.8→50.9 ; dimension B retirée (1 indicateur(s)) ; C 32.1→70.0 ; D 41.9→43.0 ; contribution de C4 : 0.0 → 10.1 pts
+TLS,Timor oriental,54.26,54.06,-0.2,118,102,16,B,B6,A 53.0→59.5 ; dimension B retirée (2 indicateur(s)) ; C 12.1→26.8 ; D 73.7→74.1 ; contribution de B6 : 10.0 → 0.0 pts
+LSO,Lesotho,47.69,53.92,6.23,152,103,49,B,C4,A 52.9→57.3 ; dimension B retirée (2 indicateur(s)) ; C 3.7→37.9 ; D 64.6→65.2 ; contribution de C4 : 0.0 → 9.5 pts
+KGZ,Kirghizstan,47.2,53.51,6.31,154,104,50,B,B5,A 50.5→53.7 ; dimension B retirée (0 indicateur(s)) ; C 33.7→64.9 ; D 35.6→37.7 ; contribution de B5 : 12.4 → 0.0 pts
+ZMB,Zambie,42.83,53.29,10.46,171,105,66,A,C4,A 42.3→42.7 ; dimension B retirée (1 indicateur(s)) ; C 73.8→76.9 ; D 52.6→53.5 ; contribution de C4 : 0.0 → 10.0 pts
+MDG,Madagascar,57.43,52.72,-4.71,94,106,-12,B,B6,A 40.8→43.2 ; dimension B retirée (2 indicateur(s)) ; C 53.2→68.8 ; D 58.9→59.8 ; contribution de B6 : 9.8 → 0.0 pts
+GMB,Gambie,51.23,52.58,1.35,130,107,23,C,C4,A 39.3→39.9 ; C 77.5→80.8 ; D 52.1→53.1 ; contribution de C4 : 0.0 → 9.2 pts
+MAR,Maroc,49.9,52.41,2.51,141,108,33,C,C4,A 59.1→61.1 ; B 35.9→31.7 ; C 52.0→63.1 ; D 38.4→39.9 ; contribution de C4 : 0.0 → 4.5 pts
+BRA,Brésil,50.36,52.28,1.92,138,109,29,C,C4,A 50.9→52.3 ; B 27.1→18.9 ; C 55.3→69.4 ; D 73.3→73.9 ; contribution de C4 : 0.0 → 5.3 pts
+BHR,Bahreïn,65.29,51.68,-13.61,45,110,-65,B,B3,A 64.0→62.6 ; dimension B retirée (1 indicateur(s)) ; C 73.9→55.7 ; D 11.5→13.7 ; contribution de B3 : 20.0 → 0.0 pts
+VNM,Viêt Nam,45.92,51.22,5.3,157,111,46,C,A5,A 49.3→51.2 ; B 61.1→59.9 ; C 46.0→68.0 ; D 15.4→17.4 ; contribution de A5 : 4.9 → 0.0 pts
+TZA,Tanzanie,42.21,51.17,8.96,173,112,61,C,C4,A 40.5→41.1 ; C 49.3→82.5 ; D 38.1→39.7 ; contribution de C4 : 0.0 → 9.2 pts
+ARE,Émirats arabes unis,67.73,51.1,-16.63,27,113,-86,B,B3,A 59.7→55.8 ; dimension B retirée (1 indicateur(s)) ; C 89.0→62.1 ; D 20.5→22.5 ; contribution de B3 : 20.0 → 0.0 pts
+BOL,Bolivie,48.86,50.96,2.1,148,114,34,B,B6,A 38.0→41.6 ; dimension B retirée (2 indicateur(s)) ; C 39.0→58.3 ; D 68.7→69.5 ; contribution de B6 : 8.0 → 0.0 pts
+KEN,Kenya,51.79,50.94,-0.86,127,115,12,B,B5,A 37.8→37.0 ; B 59.7→55.2 ; C 72.9→74.1 ; D 55.2→56.2 ; contribution de B5 : 5.6 → 0.0 pts
+UKR,Ukraine,40.41,50.76,10.34,179,116,63,C,C4,A 55.5→59.5 ; B 36.0→39.4 ; C 0.7→39.2 ; D 54.0→55.1 ; contribution de C4 : 0.0 → 7.8 pts
+QAT,Qatar,61.95,50.45,-11.49,66,117,-51,B,B3,A 59.4→56.7 ; dimension B retirée (1 indicateur(s)) ; C 87.7→53.3 ; D 26.2→28.1 ; contribution de B3 : 13.7 → 0.0 pts
+HTI,Haïti,41.23,50.22,8.98,176,118,58,A,C4,A 33.2→37.3 ; dimension B retirée (1 indicateur(s)) ; C 100.0→90.1 ; D 34.1→35.7 ; contribution de C4 : 0.0 → 10.0 pts
+NER,Niger,52.23,49.99,-2.24,126,119,7,B,B6,A 40.9→42.8 ; dimension B retirée (2 indicateur(s)) ; C 41.8→72.9 ; D 39.1→41.0 ; contribution de B6 : 9.9 → 0.0 pts
+PAK,Pakistan,49.6,49.63,0.03,144,120,24,B,B5,A 39.0→41.0 ; dimension B retirée (1 indicateur(s)) ; C 77.1→76.4 ; D 38.2→39.7 ; contribution de B5 : 10.0 → 0.0 pts
+MRT,Mauritanie,45.75,49.37,3.62,159,121,38,C,C4,A 37.1→38.4 ; B 68.5→63.7 ; C 45.0→63.8 ; D 42.4→43.8 ; contribution de C4 : 0.0 → 6.6 pts
+BGD,Bangladesh,61.89,48.93,-12.96,67,122,-55,B,B6,A 36.5→38.1 ; dimension B retirée (2 indicateur(s)) ; C 100.0→81.6 ; D 36.4→37.8 ; contribution de B6 : 10.0 → 0.0 pts
+TGO,Togo,47.93,48.85,0.92,151,123,28,B,C4,A 40.3→40.0 ; dimension B retirée (1 indicateur(s)) ; C 70.7→72.9 ; D 42.1→43.5 ; contribution de C4 : 0.0 → 9.0 pts
+COM,Comores,49.25,48.55,-0.69,146,124,22,C,C3,A 34.0→37.4 ; C 89.4→78.0 ; D 41.5→42.9 ; contribution de C3 : 22.3 → 11.2 pts
+KWT,Koweït,51.17,47.76,-3.41,131,125,6,B,B3,A 53.7→53.0 ; dimension B retirée (1 indicateur(s)) ; C 53.7→42.2 ; D 38.0→39.5 ; contribution de B3 : 10.6 → 0.0 pts
+MOZ,Mozambique,39.27,47.54,8.28,181,126,55,C,C4,A 42.3→44.5 ; C 30.2→57.2 ; D 42.2→43.7 ; contribution de C4 : 0.0 → 7.0 pts
+CHN,Chine,44.92,46.62,1.7,162,127,35,C,B5,A 53.2→54.3 ; B 54.3→52.5 ; C 43.5→50.5 ; D 9.5→10.7 ; contribution de B5 : 4.5 → 0.0 pts
+UGA,Ouganda,58.02,46.49,-11.53,91,128,-37,B,B5,A 36.3→35.1 ; dimension B retirée (2 indicateur(s)) ; C 88.3→78.3 ; D 36.5→38.2 ; contribution de B5 : 9.3 → 0.0 pts
+EGY,Égypte,43.96,45.51,1.55,169,129,40,C,B5,A 36.9→36.2 ; B 68.5→65.5 ; C 57.1→68.0 ; D 14.8→16.8 ; contribution de B5 : 5.8 → 0.0 pts
+BFA,Burkina Faso,44.05,45.2,1.14,168,130,38,C,C4,A 35.2→33.5 ; B 61.8→56.9 ; C 51.8→64.6 ; D 36.6→38.7 ; contribution de C4 : 0.0 → 8.5 pts
+NIC,Nicaragua,42.66,44.99,2.33,172,131,41,B,C4,A 40.9→44.2 ; dimension B retirée (2 indicateur(s)) ; C 53.0→68.0 ; D 14.6→16.7 ; contribution de C4 : 0.0 → 7.6 pts
+GIN,Guinée,54.47,44.96,-9.52,115,132,-17,B,B5,A 35.0→36.6 ; dimension B retirée (0 indicateur(s)) ; C 72.2→70.8 ; D 33.7→35.6 ; contribution de B5 : 19.2 → 0.0 pts
+TUR,Turquie,41.24,44.64,3.39,175,133,42,C,C4,A 40.3→39.0 ; B 41.5→40.0 ; C 50.3→70.7 ; D 31.7→33.1 ; contribution de C4 : 0.0 → 4.8 pts
+NGA,Nigeria,44.63,44.29,-0.34,166,134,32,C,C2,A 31.5→31.1 ; dimension C retirée (1 indicateur(s)) ; D 50.4→51.6 ; contribution de C2 : 9.2 → 0.0 pts
+SWZ,Eswatini,38.72,44.08,5.36,184,135,49,C,B5n,A 44.3→46.3 ; B 53.3→54.8 ; C 26.9→46.2 ; D 18.3→20.5 ; contribution de B5n : 0.0 → 5.3 pts
+KHM,Cambodge,45.89,43.92,-1.97,158,136,22,B,B5,A 31.7→29.7 ; dimension B retirée (0 indicateur(s)) ; C 54.7→88.7 ; D 24.7→26.7 ; contribution de B5 : 17.0 → 0.0 pts
+MLI,Mali,49.04,42.58,-6.46,147,137,10,B,C4,A 31.5→30.2 ; dimension B retirée (2 indicateur(s)) ; C 73.0→76.6 ; D 32.5→34.4 ; contribution de C4 : 0.0 → 9.7 pts
+COD,Congo-Kinshasa,37.32,42.5,5.18,187,138,49,C,B5,A 26.5→27.3 ; C 40.0→62.6 ; D 26.4→28.4 ; contribution de B5 : 6.7 → 0.0 pts
+RWA,Rwanda,48.56,42.04,-6.51,150,139,11,B,B6,A 48.4→46.4 ; dimension B retirée (2 indicateur(s)) ; C 35.2→45.4 ; D 22.8→24.6 ; contribution de B6 : 8.5 → 0.0 pts
+UZB,Ouzbékistan,38.39,41.8,3.41,186,140,46,B,B3,A 41.6→43.2 ; dimension B retirée (1 indicateur(s)) ; C 33.1→55.9 ; D 16.6→18.8 ; contribution de B3 : 10.6 → 0.0 pts
+AZE,Azerbaïdjan,40.39,41.47,1.08,180,141,39,C,A5,A 42.4→39.9 ; B 63.1→56.9 ; C 36.1→51.6 ; D 9.9→12.1 ; contribution de A5 : 5.6 → 0.0 pts
+SDN,Soudan,34.53,41.31,6.78,190,142,48,A,C4,A 39.7→47.3 ; C 38.7→48.5 ; D 13.4→14.0 ; contribution de C4 : 0.0 → 4.9 pts
+GNB,Guinée-Bissau,39.13,39.68,0.54,182,143,39,A,C4,A 25.9→26.4 ; D 48.4→49.7 ; contribution de C4 : 0.0 → 7.7 pts
+DZA,Algérie,34.86,39.43,4.58,189,144,45,C,A5,A 39.9→42.2 ; C 28.0→39.8 ; D 29.0→30.7 ; contribution de A5 : 4.6 → 0.0 pts
+RUS,Russie,31.93,39.27,7.35,196,145,51,C,C4,A 39.9→42.6 ; C 27.5→49.3 ; D 13.9→15.9 ; contribution de C4 : 0.0 → 5.5 pts
+SAU,Arabie saoudite,39.13,39.11,-0.02,183,146,37,B,B3,A 52.8→50.1 ; dimension B retirée (1 indicateur(s)) ; C 34.1→36.3 ; D 7.5→9.7 ; contribution de B3 : 7.5 → 0.0 pts
+GAB,Gabon,45.25,39.09,-6.16,161,147,14,C,C2,A 22.4→18.2 ; B 66.5→65.1 ; C 90.3→68.8 ; D 25.3→27.4 ; contribution de C2 : 10.0 → 0.0 pts
+TJK,Tadjikistan,44.13,38.54,-5.59,167,148,19,C,C3,A 38.9→41.0 ; C 84.1→55.4 ; D 6.5→8.7 ; contribution de C3 : 21.0 → 10.5 pts
+CMR,Cameroun,38.51,36.73,-1.78,185,149,36,A,C4,A 21.2→16.9 ; B 61.8→56.1 ; C 67.6→72.7 ; D 20.6→22.5 ; contribution de C4 : 0.0 → 6.4 pts
+BLR,Biélorussie,29.26,35.8,6.54,202,150,52,C,C4,A 37.4→41.2 ; C 28.1→44.0 ; D 6.4→8.6 ; contribution de C4 : 0.0 → 4.0 pts
+AGO,Angola,32.28,35.45,3.17,194,151,43,B,C4,A 30.6→30.0 ; dimension B retirée (1 indicateur(s)) ; C 47.5→49.6 ; D 31.2→32.9 ; contribution de C4 : 0.0 → 4.9 pts
+TCD,Tchad,44.87,33.73,-11.14,163,152,11,B,B5,A 18.8→15.5 ; dimension B retirée (0 indicateur(s)) ; C 64.4→80.7 ; D 23.6→25.8 ; contribution de B5 : 20.0 → 0.0 pts
+LBY,Libye,22.15,32.6,10.45,209,153,56,C,C4,A 33.7→40.7 ; C 0.0→24.4 ; D 17.1→19.3 ; contribution de C4 : 0.0 → 6.1 pts
+ETH,Éthiopie,30.1,32.37,2.27,200,154,46,C,C4,A 22.0→18.3 ; C 53.4→69.4 ; D 23.3→25.0 ; contribution de C4 : 0.0 → 4.9 pts
+COG,Congo-Brazzaville,40.81,32.21,-8.6,177,155,22,B,B5,A 25.6→25.7 ; dimension B retirée (1 indicateur(s)) ; C 74.6→53.6 ; D 21.0→23.1 ; contribution de B5 : 10.0 → 0.0 pts
+SYR,Syrie,26.35,31.41,5.06,205,156,49,C,C4,A 19.9→22.5 ; C 55.1→69.1 ; D 7.4→8.0 ; contribution de C4 : 0.0 → 4.8 pts
+ZWE,Zimbabwe,29.01,30.26,1.24,203,157,46,C,C4,A 18.5→16.5 ; C 51.9→60.2 ; D 29.9→31.6 ; contribution de C4 : 0.0 → 5.2 pts
+IRN,Iran,27.68,29.38,1.7,204,158,46,C,C4,A 22.7→23.3 ; C 52.9→56.9 ; D 9.1→11.1 ; contribution de C4 : 0.0 → 4.6 pts
+CUB,Cuba,37.17,29.05,-8.12,188,159,29,B,B6,A 33.6→36.6 ; dimension B retirée (2 indicateur(s)) ; C 21.7→22.8 ; D 12.5→14.7 ; contribution de B6 : 8.5 → 0.0 pts
+BDI,Burundi,23.61,28.74,5.12,207,160,47,C,C4,A 28.5→27.4 ; C 18.0→39.6 ; D 16.3→18.3 ; contribution de C4 : 0.0 → 5.7 pts
+CAF,République centrafricaine,31.25,27.54,-3.7,197,161,36,A,C3,A 9.6→5.0 ; C 93.1→87.0 ; D 13.7→15.9 ; contribution de C3 : 23.3 → 11.6 pts
+GNQ,Guinée équatoriale,33.19,18.17,-15.02,192,162,30,B,B5,A 17.3→15.2 ; dimension B retirée (2 indicateur(s)) ; C 22.3→31.7 ; D 6.7→9.0 ; contribution de B5 : 10.0 → 0.0 pts
+ABW,Aruba,54.82,,,113,,,,,dimension A retirée (2 indicateur(s)) ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; dimension D retirée (1 indicateur(s)) ; score global retiré (couverture insuffisante)
+AFG,Afghanistan,20.43,,,211,,,,,dimension A retirée (2 indicateur(s)) ; C 31.0→36.3 ; D 9.0→11.3 ; score global retiré (couverture insuffisante)
+AND,Andorre,65.78,,,44,,,,,dimension A retirée (2 indicateur(s)) ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (0 indicateur(s)) ; D 84.9→85.0 ; score global retiré (couverture insuffisante)
+ASM,Samoa américaines,67.07,,,34,,,,,dimension A retirée (1 indicateur(s)) ; dimension D retirée (1 indicateur(s)) ; score global retiré (couverture insuffisante)
+BMU,Bermudes,66.43,,,38,,,,,dimension A retirée (2 indicateur(s)) ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; score global retiré (couverture insuffisante)
+BRN,Brunei,56.19,,,103,,,,,A 70.3→70.9 ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; D 27.8→29.6 ; score global retiré (couverture insuffisante)
+CYM,Îles Caïmans,70.53,,,15,,,,,dimension A retirée (2 indicateur(s)) ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; dimension D retirée (1 indicateur(s)) ; score global retiré (couverture insuffisante)
+DJI,Djibouti,33.46,,,191,,,,,dimension A retirée (2 indicateur(s)) ; dimension B retirée (1 indicateur(s)) ; C 42.5→53.5 ; D 24.6→26.6 ; score global retiré (couverture insuffisante)
+DMA,Dominique,62.72,,,58,,,,,A 65.5→69.6 ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (0 indicateur(s)) ; D 84.1→84.3 ; score global retiré (couverture insuffisante)
+ERI,Érythrée,6.54,,,218,,,,,dimension A retirée (2 indicateur(s)) ; D 3.3→5.5 ; score global retiré (couverture insuffisante)
+FSM,Micronésie,55.04,,,111,,,,,dimension A retirée (2 indicateur(s)) ; dimension C retirée (0 indicateur(s)) ; D 87.5→87.7 ; score global retiré (couverture insuffisante)
+GRD,Grenade,40.76,,,178,,,,,A 55.0→56.2 ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (0 indicateur(s)) ; D 84.0→84.2 ; score global retiré (couverture insuffisante)
+GRL,Groenland,50.97,,,133,,,,,dimension A retirée (1 indicateur(s)) ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; dimension D retirée (1 indicateur(s)) ; score global retiré (couverture insuffisante)
+GUM,Guam,66.02,,,43,,,,,dimension A retirée (1 indicateur(s)) ; dimension D retirée (1 indicateur(s)) ; score global retiré (couverture insuffisante)
+GUY,Guyana,55.44,,,110,,,,,A 45.6→48.7 ; dimension B retirée (2 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; D 77.9→78.5 ; score global retiré (couverture insuffisante)
+IRQ,Irak,32.57,,,193,,,,,dimension A retirée (2 indicateur(s)) ; C 53.0→49.3 ; D 34.7→36.1 ; score global retiré (couverture insuffisante)
+JOR,Jordanie,51.07,,,132,,,,,A 58.1→58.9 ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; D 29.0→30.6 ; score global retiré (couverture insuffisante)
+KIR,Kiribati,55.59,,,108,,,,,dimension A retirée (2 indicateur(s)) ; dimension B retirée (2 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; D 90.9→91.0 ; score global retiré (couverture insuffisante)
+KNA,Saint-Christophe-et-Niévès,49.91,,,140,,,,,A 61.0→61.5 ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (0 indicateur(s)) ; D 87.2→87.4 ; score global retiré (couverture insuffisante)
+LAO,Laos,44.79,,,165,,,,,A 46.4→50.2 ; dimension B retirée (0 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; D 10.2→12.4 ; score global retiré (couverture insuffisante)
+LBR,Liberia,49.99,,,139,,,,,A 35.4→36.7 ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; D 65.0→65.6 ; score global retiré (couverture insuffisante)
+LIE,Liechtenstein,66.32,,,39,,,,,dimension A retirée (2 indicateur(s)) ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (0 indicateur(s)) ; D 89.8→90.2 ; score global retiré (couverture insuffisante)
+MAC,R.A.S. chinoise de Macao,72.54,,,9,,,,,dimension A retirée (2 indicateur(s)) ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; dimension D retirée (1 indicateur(s)) ; score global retiré (couverture insuffisante)
+MCO,Monaco,64.75,,,49,,,,,dimension A retirée (2 indicateur(s)) ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (0 indicateur(s)) ; D 82.8→83.7 ; score global retiré (couverture insuffisante)
+MHL,Îles Marshall,50.48,,,137,,,,,dimension A retirée (2 indicateur(s)) ; dimension B retirée (2 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; D 88.1→88.2 ; score global retiré (couverture insuffisante)
+MMR,Myanmar (Birmanie),31.02,,,198,,,,,A 37.7→43.4 ; D 11.1→13.4 ; score global retiré (couverture insuffisante)
+NCL,Nouvelle-Calédonie,67.03,,,35,,,,,dimension A retirée (1 indicateur(s)) ; dimension D retirée (1 indicateur(s)) ; score global retiré (couverture insuffisante)
+NRU,Nauru,57.22,,,97,,,,,A 45.9→48.3 ; dimension B retirée (2 indicateur(s)) ; D 74.5→74.8 ; score global retiré (couverture insuffisante)
+PLW,Palaos,60.18,,,79,,,,,A 68.5→71.9 ; dimension C retirée (1 indicateur(s)) ; D 88.6→88.8 ; score global retiré (couverture insuffisante)
+PRI,Porto Rico,64.6,,,50,,,,,dimension A retirée (1 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; dimension D retirée (1 indicateur(s)) ; score global retiré (couverture insuffisante)
+PRK,Corée du Nord,14.63,,,216,,,,,dimension A retirée (2 indicateur(s)) ; D 2.2→4.5 ; score global retiré (couverture insuffisante)
+PSE,Territoires palestiniens,44.83,,,164,,,,,dimension A retirée (1 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; dimension D retirée (1 indicateur(s)) ; score global retiré (couverture insuffisante)
+PYF,Polynésie française,50.64,,,135,,,,,dimension A retirée (2 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; dimension D retirée (1 indicateur(s)) ; score global retiré (couverture insuffisante)
+SMR,Saint-Marin,73.99,,,7,,,,,dimension A retirée (2 indicateur(s)) ; dimension B retirée (1 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; D 91.5→91.6 ; score global retiré (couverture insuffisante)
+SOM,Somalie,32.09,,,195,,,,,dimension A retirée (2 indicateur(s)) ; C 98.8→90.6 ; D 17.1→19.2 ; score global retiré (couverture insuffisante)
+SSD,Soudan du Sud,7.45,,,217,,,,,dimension A retirée (2 indicateur(s)) ; D 11.1→11.6 ; score global retiré (couverture insuffisante)
+SUR,Suriname,57.6,,,93,,,,,A 45.2→48.6 ; dimension C retirée (1 indicateur(s)) ; D 81.4→81.7 ; score global retiré (couverture insuffisante)
+TKM,Turkménistan,30.74,,,199,,,,,dimension A retirée (2 indicateur(s)) ; C 76.0→49.9 ; D 1.8→4.1 ; score global retiré (couverture insuffisante)
+TON,Tonga,56.2,,,102,,,,,A 59.0→63.7 ; dimension C retirée (1 indicateur(s)) ; D 81.0→81.5 ; score global retiré (couverture insuffisante)
+TUN,Tunisie,41.96,,,174,,,,,dimension A retirée (2 indicateur(s)) ; B 37.4→42.8 ; C 33.3→53.1 ; D 52.0→53.3 ; score global retiré (couverture insuffisante)
+TUV,Tuvalu,59.57,,,85,,,,,dimension A retirée (2 indicateur(s)) ; dimension C retirée (0 indicateur(s)) ; D 90.9→91.0 ; score global retiré (couverture insuffisante)
+VCT,Saint-Vincent-et-les Grenadines,56.41,,,101,,,,,A 65.9→70.5 ; dimension B retirée (1 indicateur(s)) ; D 86.8→87.1 ; score global retiré (couverture insuffisante)
+VEN,Venezuela,21.58,,,210,,,,,A 19.1→21.2 ; dimension C retirée (1 indicateur(s)) ; D 18.3→20.5 ; score global retiré (couverture insuffisante)
+VIR,Îles Vierges des États-Unis,46.13,,,156,,,,,dimension A retirée (1 indicateur(s)) ; dimension C retirée (1 indicateur(s)) ; score global retiré (couverture insuffisante)
+X-ABK,Abkhazie,29.93,,,201,,,,,dimension A retirée (1 indicateur(s)) ; D 44.7→46.5 ; score global retiré (couverture insuffisante)
+X-CRM,Crimée,19.44,,,213,,,,,dimension A retirée (1 indicateur(s)) ; D 2.8→4.3 ; score global retiré (couverture insuffisante)
+X-DON,Donbass oriental,0.52,,,221,,,,,dimension A retirée (1 indicateur(s)) ; D 2.1→4.4 ; score global retiré (couverture insuffisante)
+X-ESH,Sahara occidental,20.31,,,212,,,,,dimension A retirée (1 indicateur(s)) ; D 6.2→7.0 ; score global retiré (couverture insuffisante)
+X-GAZ,Bande de Gaza,2.88,,,220,,,,,dimension A retirée (1 indicateur(s)) ; D 11.5→14.3 ; score global retiré (couverture insuffisante)
+X-KAI,Cachemire indien,43.96,,,170,,,,,dimension A retirée (1 indicateur(s)) ; D 25.8→28.4 ; score global retiré (couverture insuffisante)
+X-KAP,Cachemire pakistanais,45.28,,,160,,,,,dimension A retirée (1 indicateur(s)) ; D 31.1→33.5 ; score global retiré (couverture insuffisante)
+X-NCY,Chypre du Nord,76.81,,,2,,,,,dimension A retirée (1 indicateur(s)) ; D 82.2→83.2 ; score global retiré (couverture insuffisante)
+X-NKR,Haut-Karabagh,0.0,,,222,,,,,dimension A retirée (1 indicateur(s)) ; D 0.0→0.8 ; score global retiré (couverture insuffisante)
+X-OSS,Ossétie du Sud,3.58,,,219,,,,,dimension A retirée (1 indicateur(s)) ; D 14.3→17.1 ; score global retiré (couverture insuffisante)
+X-SML,Somaliland,48.68,,,149,,,,,dimension A retirée (1 indicateur(s)) ; D 44.7→46.5 ; score global retiré (couverture insuffisante)
+X-TIB,Tibet,18.75,,,214,,,,,dimension A retirée (1 indicateur(s)) ; D 0.0→1.5 ; score global retiré (couverture insuffisante)
+X-TRN,Transnistrie,22.57,,,208,,,,,dimension A retirée (1 indicateur(s)) ; D 15.3→17.9 ; score global retiré (couverture insuffisante)
+X-WBK,Cisjordanie,25.49,,,206,,,,,dimension A retirée (1 indicateur(s)) ; D 26.9→29.7 ; score global retiré (couverture insuffisante)
+XKX,Kosovo,52.78,,,123,,,,,dimension A retirée (2 indicateur(s)) ; C 76.5→74.1 ; D 63.0→63.7 ; score global retiré (couverture insuffisante)
+YEM,Yémen,17.91,,,215,,,,,dimension A retirée (2 indicateur(s)) ; D 14.2→16.4 ; score global retiré (couverture insuffisante)

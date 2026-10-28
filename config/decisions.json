@@ -1,0 +1,667 @@
+{
+ "version": "registre 1.0 (audit du 2026-10-28)",
+ "mode_emploi": "Pour chaque décision : statut ∈ {proposée, approuvée, rejetée} ; option_retenue = identifiant d'une option. Seules les décisions « approuvée » modifient la méthode officielle (engine/scoring.py → decisions_overrides). Approbation : python3 tools/approve.py DEC-xx option [--commentaire \"…\"] , ou export de configuration depuis l'interface HTML puis python3 tools/approve.py --import fichier.json.",
+ "decisions": [
+  {
+   "id": "DEC-01",
+   "titre": "Nombre minimal d'indicateurs pour calculer une dimension",
+   "categorie": 8,
+   "categorie_libelle": "Modification d'une règle (données manquantes)",
+   "nature": "choix de mesure",
+   "indicateurs": [
+    "toutes dimensions"
+   ],
+   "pays_concernes": "40 pays dont la dimension B repose sur 1 indicateur, 44 pour C, 15 pour A, 10 pour D (90 scores globaux sur 222 utilisent au moins une dimension à 1 indicateur)",
+   "fait_observe": "Une dimension est aujourd'hui calculée dès qu'1 seul indicateur est disponible. Exemples : Chypre du Nord, 2e mondiale (76,8), a une dimension A réduite à A6 (Freedom House G2 = 3/4 → 75) ; les Îles Caïmans ont B = 100 sur le seul taux d'IS (0 %).",
+   "regle_actuelle": "min_indicateurs = 1 pour A, B, C et D.",
+   "probleme": "Sur les pays disposant de tous les indicateurs d'une dimension, le score calculé avec un seul indicateur s'écarte du score complet de 9,4 points en médiane pour A (P90 19,2), 12,0 pour B (P90 33,0), 24,6 pour C (P90 45,3) et 7,1 pour D (P90 17,2). Une dimension à un indicateur n'est donc pas comparable à une dimension complète, mais elle pèse autant dans le score global.",
+   "proposition": "Exiger au moins 3 indicateurs pour A et B, et 2 pour C et D. Critère : erreur médiane ≤ 5 points par rapport à la dimension complète (A, k=3 : 3,5 ; B, k=3 : 4,8 ; D, k=2 : 4,7). Pour C, aucun seuil ne l'atteint avec les données actuelles (k=2 : 12,3) : on retient 2, faute de mieux. Une dimension non calculée reste signalée dans la fiche du pays.",
+   "justification_quantitative": "data/audit/diagnostic.json → erreur_sous_ensembles (tous les sous-ensembles de k indicateurs, pays complets).",
+   "options": [
+    {
+     "id": "statu_quo",
+     "libelle": "Garder 1 indicateur minimum partout (V1.1)",
+     "patch": {}
+    },
+    {
+     "id": "A3_B3_C2_D2",
+     "libelle": "A ≥ 3, B ≥ 3, C ≥ 2, D ≥ 2 (critère erreur médiane ≤ 5 pts)",
+     "patch": {
+      "regles": {
+       "min_indicateurs": {
+        "A": 3,
+        "B": 3,
+        "C": 2,
+        "D": 2
+       }
+      }
+     }
+    },
+    {
+     "id": "2_partout",
+     "libelle": "2 indicateurs minimum partout",
+     "patch": {
+      "regles": {
+       "min_indicateurs": {
+        "A": 2,
+        "B": 2,
+        "C": 2,
+        "D": 2
+       }
+      }
+     }
+    }
+   ],
+   "option_recommandee": "A3_B3_C2_D2",
+   "statut": "proposée",
+   "option_retenue": null,
+   "decision_utilisateur": null,
+   "date_proposition": "2026-10-28",
+   "date_decision": null,
+   "version_methode": "1.1",
+   "empreinte_configuration": null,
+   "commentaire_utilisateur": ""
+  },
+  {
+   "id": "DEC-02",
+   "titre": "Nombre minimal de dimensions pour un score global",
+   "categorie": 8,
+   "categorie_libelle": "Modification d'une règle (données manquantes)",
+   "nature": "choix de mesure",
+   "indicateurs": [
+    "score global"
+   ],
+   "pays_concernes": "64 entités ont aujourd'hui un score global calculé sur 2 ou 3 dimensions seulement",
+   "fait_observe": "Le score global est calculé dès que A et une autre dimension sont disponibles, avec poids renormalisés (ex. Chypre du Nord : 45/60 × 75 + 15/60 × 82,2 = 76,8).",
+   "regle_actuelle": "min_dimensions = 2, dimension A exigée.",
+   "probleme": "Sur les 158 pays complets, le score recalculé avec A + 1 seule autre dimension s'écarte du score complet de 5,4 points en médiane (P90 15,3 ; max 28,4) ; avec 3 dimensions : 3,7 (P90 9,1). Un score à 2 dimensions n'est pas comparable à un score complet tout en étant classé au même rang.",
+   "proposition": "Exiger 3 dimensions valides, dont A. Les entités sans score global restent affichées avec leurs scores de dimension.",
+   "justification_quantitative": "Calcul : pour chaque pays complet, score sur tous les sous-ensembles de dimensions contenant A, comparé au score complet (voir rapport d'audit).",
+   "options": [
+    {
+     "id": "statu_quo",
+     "libelle": "2 dimensions dont A (V1.1)",
+     "patch": {}
+    },
+    {
+     "id": "3_dimensions",
+     "libelle": "3 dimensions dont A",
+     "patch": {
+      "regles": {
+       "min_dimensions": 3
+      }
+     }
+    },
+    {
+     "id": "4_dimensions",
+     "libelle": "Les 4 dimensions",
+     "patch": {
+      "regles": {
+       "min_dimensions": 4
+      }
+     }
+    }
+   ],
+   "option_recommandee": "3_dimensions",
+   "statut": "proposée",
+   "option_retenue": null,
+   "decision_utilisateur": null,
+   "date_proposition": "2026-10-28",
+   "date_decision": null,
+   "version_methode": "1.1",
+   "empreinte_configuration": null,
+   "commentaire_utilisateur": ""
+  },
+  {
+   "id": "DEC-03",
+   "titre": "C2 (part du privé dans le primaire) : proxy faible (niveau 3)",
+   "categorie": 6,
+   "categorie_libelle": "Modification d'une interprétation",
+   "nature": "choix normatif",
+   "indicateurs": [
+    "C2"
+   ],
+   "pays_concernes": "173 pays ; effets les plus forts : Liechtenstein, Andorre, Libéria, Micronésie, Éthiopie, Sainte-Lucie",
+   "fait_observe": "C2 mesure la part des élèves du primaire inscrits dans le privé (Banque mondiale, SE.PRM.PRIV.ZS). Valeurs extrêmes : Macao 96,7 %, Émirats 82,6 %, Belize 81,1 %, Libéria 49,6 % (→ 100) ; Liechtenstein 3,0 % (→ 3,8), qui fixe à lui seul la dimension C du pays.",
+   "regle_actuelle": "C2 inclus, orientation +1 (plus de privé = plus libéral), bornes P5–P95.",
+   "probleme": "Friedman distingue financement et fourniture (P07, P08 : bons scolaires). C2 mesure la fourniture, pas le libre choix ni le financement. Une forte part du privé peut refléter une offre publique défaillante (Libéria, Haïti) ou une population d'expatriés (Émirats, Macao). Sa corrélation avec la capacité fiscale V-Dem est quasi nulle (ρ = −0,18). Selon ta règle, un indicateur de niveau 3 ne compte pas sans ton approbation explicite.",
+   "proposition": "Classer C2 au niveau 3 et le retirer du score principal (il reste affiché et testé en sensibilité).",
+   "justification_quantitative": "diagnostic.json → capacite_fiscale.C2 ; simulation DEC-03.",
+   "options": [
+    {
+     "id": "garder",
+     "libelle": "Garder C2 (V1.1)",
+     "patch": {}
+    },
+    {
+     "id": "retirer",
+     "libelle": "Retirer C2 du score principal",
+     "patch": {
+      "indicateurs": {
+       "C2": {
+        "inclus": false
+       }
+      }
+     }
+    },
+    {
+     "id": "demi_poids",
+     "libelle": "Garder C2 avec un poids interne de 0,5",
+     "patch": {
+      "indicateurs": {
+       "C2": {
+        "poids_interne": 0.5
+       }
+      }
+     }
+    }
+   ],
+   "option_recommandee": "retirer",
+   "statut": "proposée",
+   "option_retenue": null,
+   "decision_utilisateur": null,
+   "date_proposition": "2026-10-28",
+   "date_decision": null,
+   "version_methode": "1.1",
+   "empreinte_configuration": null,
+   "commentaire_utilisateur": ""
+  },
+  {
+   "id": "DEC-04",
+   "titre": "A5 (qualité de la réglementation, WGI) : proxy faible (niveau 3)",
+   "categorie": 6,
+   "categorie_libelle": "Modification d'une interprétation",
+   "nature": "choix normatif",
+   "indicateurs": [
+    "A5"
+   ],
+   "pays_concernes": "205 pays ; effet maximal environ 7 points (Micronésie, Tuvalu, Samoa américaines, Îles Marshall, Caïmans, Bermudes)",
+   "fait_observe": "A5 = Banque mondiale WGI « Regulatory Quality », un composite de perceptions. Le dictionnaire V1.1 le qualifie déjà de « PROXY FAIBLE », avec un risque de circularité.",
+   "regle_actuelle": "A5 inclus dans A, poids égal.",
+   "probleme": "La définition de l'indicateur (« politiques et réglementations saines favorisant le secteur privé ») contient déjà le jugement qu'on cherche à mesurer. ρ = 0,88 avec A4 (même famille WGI). Indicateur de niveau 3 selon ta grille.",
+   "proposition": "Retirer A5 du score principal. Les mesures directes de la réglementation (A2, A3 de l'OCDE) restent.",
+   "justification_quantitative": "diagnostic.json → correlations A4~A5 ; simulation DEC-04.",
+   "options": [
+    {
+     "id": "garder",
+     "libelle": "Garder A5 (V1.1)",
+     "patch": {}
+    },
+    {
+     "id": "retirer",
+     "libelle": "Retirer A5",
+     "patch": {
+      "indicateurs": {
+       "A5": {
+        "inclus": false
+       }
+      }
+     }
+    }
+   ],
+   "option_recommandee": "retirer",
+   "statut": "proposée",
+   "option_retenue": null,
+   "decision_utilisateur": null,
+   "date_proposition": "2026-10-28",
+   "date_decision": null,
+   "version_methode": "1.1",
+   "empreinte_configuration": null,
+   "commentaire_utilisateur": ""
+  },
+  {
+   "id": "DEC-05",
+   "titre": "Double comptage arithmétique B5 ⊃ B6",
+   "categorie": 3,
+   "categorie_libelle": "Correction d'une définition",
+   "nature": "choix de mesure",
+   "indicateurs": [
+    "B5",
+    "B6",
+    "B5n"
+   ],
+   "pays_concernes": "115 pays disposant de B5 et B6 ; effets les plus forts : Tchad, Laos, Guinée, Cambodge, Pakistan, Congo",
+   "fait_observe": "B5 = total des prélèvements (code OCDE _T) ; B6 = impôt sur le revenu des personnes + cotisations + taxes sur les salaires (1100 + 2000 + 3000). B6 est une partie de B5 (ex. France 2022 : B5 = 46,1 % du PIB, dont B6 = 26,8 %). ρ(B5, B6) = 0,89.",
+   "regle_actuelle": "B5 et B6 inclus tous deux, poids égal.",
+   "probleme": "Les prélèvements sur le travail sont comptés deux fois (dans B5 et dans B6), et une troisième fois sous forme de taux dans B7.",
+   "proposition": "Remplacer B5 par B5n = B5 − B6 (prélèvements hors travail), calculé pour la même année. B5n + B6 = B5 : tous les prélèvements restent comptés, sans distinction de nature (ta règle V1.1), mais chacun une seule fois.",
+   "justification_quantitative": "Identité comptable OCDE : _T ⊃ 1100 + 2000 + 3000 ; simulation DEC-05.",
+   "options": [
+    {
+     "id": "garder",
+     "libelle": "Garder B5 et B6 (V1.1)",
+     "patch": {}
+    },
+    {
+     "id": "B5n",
+     "libelle": "Remplacer B5 par B5n = B5 − B6",
+     "patch": {
+      "indicateurs": {
+       "B5": {
+        "inclus": false
+       }
+      },
+      "ajouter": [
+       "B5n"
+      ]
+     }
+    },
+    {
+     "id": "demi_poids",
+     "libelle": "Garder B5 et B6, poids interne 0,5 chacun",
+     "patch": {
+      "indicateurs": {
+       "B5": {
+        "poids_interne": 0.5
+       },
+       "B6": {
+        "poids_interne": 0.5
+       }
+      }
+     }
+    }
+   ],
+   "option_recommandee": "B5n",
+   "statut": "proposée",
+   "option_retenue": null,
+   "decision_utilisateur": null,
+   "date_proposition": "2026-10-28",
+   "date_decision": null,
+   "version_methode": "1.1",
+   "empreinte_configuration": null,
+   "commentaire_utilisateur": ""
+  },
+  {
+   "id": "DEC-06",
+   "titre": "Borne basse de D2 (droits politiques Freedom House)",
+   "categorie": 3,
+   "categorie_libelle": "Correction d'une définition",
+   "nature": "choix de mesure",
+   "indicateurs": [
+    "D2"
+   ],
+   "pays_concernes": "9 entités avec un score négatif : Chine (−2), Soudan, Soudan du Sud, Syrie (−3), Crimée, Donbass, Sahara occidental, Haut-Karabagh, Tibet",
+   "fait_observe": "L'échelle Freedom House des droits politiques va de −4 à 40 (question supplémentaire B). La méthodologie V1.1 annonce des « bornes fixes = échelles naturelles », mais le code utilise 0–40.",
+   "regle_actuelle": "D2 : bornes fixes 0–40 ; les valeurs négatives sont ramenées à 0.",
+   "probleme": "L'implémentation ne suit pas la règle écrite. Les entités à −3 et à 0 reçoivent le même score.",
+   "proposition": "Bornes −4–40. Impact inférieur à 1 point.",
+   "justification_quantitative": "Valeurs brutes négatives dans observations.csv (D2).",
+   "options": [
+    {
+     "id": "garder",
+     "libelle": "Bornes 0–40 (V1.1)",
+     "patch": {}
+    },
+    {
+     "id": "echelle_naturelle",
+     "libelle": "Bornes −4–40 (échelle naturelle)",
+     "patch": {
+      "indicateurs": {
+       "D2": {
+        "bornes": {
+         "regle": "fixe",
+         "bas": -4,
+         "haut": 40
+        }
+       }
+      }
+     }
+    }
+   ],
+   "option_recommandee": "echelle_naturelle",
+   "statut": "proposée",
+   "option_retenue": null,
+   "decision_utilisateur": null,
+   "date_proposition": "2026-10-28",
+   "date_decision": null,
+   "version_methode": "1.1",
+   "empreinte_configuration": null,
+   "commentaire_utilisateur": ""
+  },
+  {
+   "id": "DEC-07",
+   "titre": "Ajout d'une mesure directe de la propriété publique (C4, V-Dem)",
+   "categorie": 7,
+   "categorie_libelle": "Ajout ou remplacement d'une source",
+   "nature": "choix de mesure",
+   "indicateurs": [
+    "C4",
+    "C1",
+    "C3"
+   ],
+   "pays_concernes": "176 pays couverts par V-Dem (pas les petits territoires)",
+   "fait_observe": "Hors OCDE, la dimension C ne mesure que les dépenses (C3) et la fourniture scolaire (C2) : aucune mesure de la propriété publique (C1 n'existe que pour 56 pays). V-Dem v2clstown (« l'État possède-t-il ou contrôle-t-il directement les secteurs importants de l'économie ? », échelle 0–4) couvre 176 pays du référentiel. Valeurs 2023 : Corée du Nord 0,24 ; Cuba 0,95 ; Venezuela 1,03 ; Chine 1,35 ; Danemark 2,91 ; États-Unis 3,74.",
+   "regle_actuelle": "C = moyenne de C1, C2, C3.",
+   "probleme": "Ton brief demande de distinguer propriété, financement et fourniture, et de privilégier les mesures directes. Hors OCDE, la propriété publique n'est pas mesurée.",
+   "proposition": "Ajouter C4 = v2clstown_osp, bornes fixes 0–4 (échelle d'origine), orientation +1. Principes : P15 (coordination par l'échange volontaire plutôt que par la coercition centralisée, chap. 1, p. 55-56) et P07. Niveau de preuve 2 (notation d'experts).",
+   "justification_quantitative": "data/raw/vdem_extrait.csv (V-Dem, paquet vdemdata 16.0, SHA-256 du fichier source dans MANIFEST) ; simulation DEC-07.",
+   "options": [
+    {
+     "id": "ne_pas_ajouter",
+     "libelle": "Ne pas ajouter (V1.1)",
+     "patch": {}
+    },
+    {
+     "id": "ajouter",
+     "libelle": "Ajouter C4 à la dimension C",
+     "patch": {
+      "ajouter": [
+       "C4"
+      ]
+     }
+    }
+   ],
+   "option_recommandee": "ajouter",
+   "statut": "proposée",
+   "option_retenue": null,
+   "decision_utilisateur": null,
+   "date_proposition": "2026-10-28",
+   "date_decision": null,
+   "version_methode": "1.1",
+   "empreinte_configuration": null,
+   "commentaire_utilisateur": ""
+  },
+  {
+   "id": "DEC-08",
+   "titre": "Figer les bornes percentiles de l'édition",
+   "categorie": 8,
+   "categorie_libelle": "Modification d'une règle de normalisation",
+   "nature": "choix de mesure",
+   "indicateurs": [
+    "A1",
+    "B3",
+    "B5",
+    "B6",
+    "B7",
+    "C2",
+    "C3",
+    "B5n"
+   ],
+   "pays_concernes": "tous (impact nul sur l'édition 2023)",
+   "fait_observe": "Les bornes P5–P95 sont recalculées sur l'échantillon à chaque calcul. Ajouter, retirer ou corriger un pays modifie donc les scores de tous les autres.",
+   "regle_actuelle": "Bornes percentiles recalculées dynamiquement.",
+   "probleme": "Une correction ponctuelle (un pays, une donnée) se propage silencieusement à tous les autres pays.",
+   "proposition": "Inscrire dans la configuration les valeurs des bornes P5–P95 de l'édition 2023, qui deviennent des bornes fixes, recalculées seulement lors d'une nouvelle édition versionnée. Impact nul aujourd'hui. Si B5n est adopté (DEC-05), ses bornes sont figées de la même façon.",
+   "justification_quantitative": "Bornes actuelles : scores.json → normalisation.parametres.",
+   "options": [
+    {
+     "id": "dynamique",
+     "libelle": "Bornes recalculées (V1.1)",
+     "patch": {}
+    },
+    {
+     "id": "figer",
+     "libelle": "Bornes figées aux valeurs 2023",
+     "patch": {
+      "indicateurs": {
+       "A1": {
+        "bornes": {
+         "regle": "fixe",
+         "bas": 1.0985,
+         "haut": 18.493,
+         "origine": "P5-P95 édition 2023 figés"
+        }
+       },
+       "B3": {
+        "bornes": {
+         "regle": "fixe",
+         "bas": 0.0,
+         "haut": 31.875,
+         "origine": "P5-P95 édition 2023 figés"
+        }
+       },
+       "B5": {
+        "bornes": {
+         "regle": "fixe",
+         "bas": 9.9924,
+         "haut": 41.66,
+         "origine": "P5-P95 édition 2023 figés"
+        }
+       },
+       "B6": {
+        "bornes": {
+         "regle": "fixe",
+         "bas": 1.2383000000000002,
+         "haut": 24.3147,
+         "origine": "P5-P95 édition 2023 figés"
+        }
+       },
+       "B7": {
+        "bornes": {
+         "regle": "fixe",
+         "bas": 18.0556251,
+         "haut": 47.31943055,
+         "origine": "P5-P95 édition 2023 figés"
+        }
+       },
+       "C2": {
+        "bornes": {
+         "regle": "fixe",
+         "bas": 1.157014,
+         "haut": 49.3212978,
+         "origine": "P5-P95 édition 2023 figés"
+        }
+       },
+       "C3": {
+        "bornes": {
+         "regle": "fixe",
+         "bas": 6.5634368,
+         "haut": 32.29545039999997,
+         "origine": "P5-P95 édition 2023 figés"
+        }
+       },
+       "B5n": {
+        "bornes": {
+         "regle": "fixe",
+         "bas": 7.0913,
+         "haut": 21.8832,
+         "origine": "P5-P95 édition 2023 figés (s'applique si B5n est adopté, DEC-05)"
+        }
+       }
+      }
+     }
+    }
+   ],
+   "option_recommandee": "figer",
+   "statut": "proposée",
+   "option_retenue": null,
+   "decision_utilisateur": null,
+   "date_proposition": "2026-10-28",
+   "date_decision": null,
+   "version_methode": "1.1",
+   "empreinte_configuration": null,
+   "commentaire_utilisateur": ""
+  },
+  {
+   "id": "DEC-09",
+   "titre": "Prélèvements et dépenses faibles dus à une faible capacité fiscale",
+   "categorie": 6,
+   "categorie_libelle": "Modification d'une interprétation",
+   "nature": "choix normatif",
+   "indicateurs": [
+    "B5",
+    "B6",
+    "C3"
+   ],
+   "pays_concernes": "pays à faible revenu : B5 normalisé moyen 91,1 (revenu faible) contre 32,5 (revenu élevé)",
+   "fait_observe": "Le niveau des prélèvements est fortement corrélé à la capacité fiscale de l'État mesurée par V-Dem (ρ = 0,64 pour B5, 0,65 pour B6) et à l'état de droit (ρ = 0,66). Bangladesh : prélèvements de 7,5 % du PIB → B5 = 100.",
+   "regle_actuelle": "Lecture littérale de P18 (le poids de l'État est la part du revenu national qu'il absorbe) : moins de prélèvements = plus libéral.",
+   "probleme": "Un prélèvement faible peut traduire une incapacité à lever l'impôt plutôt qu'un choix de liberté économique. La coercition passe alors par d'autres canaux (réglementation, propriété publique), mal mesurés hors OCDE. C'est un choix d'interprétation qui t'appartient : Friedman définit bien le poids de l'État par la part absorbée (P18).",
+   "proposition": "Garder la lecture littérale (fidèle à P18), sans correction du score, mais afficher l'ambiguïté dans la fiche des pays à faible capacité fiscale. DEC-01 et DEC-07 réduisent déjà le biais en exigant plusieurs indicateurs et en mesurant directement la propriété publique.",
+   "justification_quantitative": "diagnostic.json → biais_revenu, capacite_fiscale.",
+   "options": [
+    {
+     "id": "lecture_litterale",
+     "libelle": "Lecture littérale P18 + avertissement (aucun changement de score)",
+     "patch": {}
+    },
+    {
+     "id": "exclure_B5_B6",
+     "libelle": "Retirer B5 et B6 (ne garder que les taux B2, B3, B4, B7)",
+     "patch": {
+      "indicateurs": {
+       "B5": {
+        "inclus": false
+       },
+       "B6": {
+        "inclus": false
+       }
+      }
+     }
+    }
+   ],
+   "option_recommandee": "lecture_litterale",
+   "statut": "proposée",
+   "option_retenue": null,
+   "decision_utilisateur": null,
+   "date_proposition": "2026-10-28",
+   "date_decision": null,
+   "version_methode": "1.1",
+   "empreinte_configuration": null,
+   "commentaire_utilisateur": ""
+  },
+  {
+   "id": "DEC-10",
+   "titre": "Cotisations obligatoires versées à des organismes privés (ex. Chili)",
+   "categorie": 7,
+   "categorie_libelle": "Remplacement d'une source",
+   "nature": "fait observé / choix de mesure",
+   "indicateurs": [
+    "B6",
+    "B7"
+   ],
+   "pays_concernes": "Chili (B7 = 7,1 % ; B6 = 3,5 % du PIB), et potentiellement d'autres pays à épargne retraite obligatoire gérée par le privé",
+   "fait_observe": "L'OCDE ne compte pas comme impôts les versements obligatoires à des fonds de pension privés (« non-tax compulsory payments »). Au Chili, le coin fiscal publié est de 7,1 %, soit le plus bas de l'OCDE.",
+   "regle_actuelle": "B6 et B7 repris tels que publiés par l'OCDE.",
+   "probleme": "Friedman critique l'achat obligatoire d'une rente (P09, chap. 11, p. 283). Une cotisation obligatoire à un fonds privé reste une contrainte. Les séries OCDE de ces versements n'ont pas été trouvées dans les flux SDMX accessibles (DF_TW_COMP ne les contient pas).",
+   "proposition": "Ne rien changer tant qu'une source institutionnelle n'est pas collectée (aucune valeur n'est estimée). Signaler la limite dans la fiche du Chili.",
+   "justification_quantitative": "data/raw/oecd_tw_comp.csv : mesures disponibles NIAT, GEBT, AV_TW… ; aucune mesure NTCP.",
+   "options": [
+    {
+     "id": "signaler",
+     "libelle": "Ne rien changer, signaler la limite",
+     "patch": {}
+    }
+   ],
+   "option_recommandee": "signaler",
+   "statut": "proposée",
+   "option_retenue": null,
+   "decision_utilisateur": null,
+   "date_proposition": "2026-10-28",
+   "date_decision": null,
+   "version_methode": "1.1",
+   "empreinte_configuration": null,
+   "commentaire_utilisateur": ""
+  },
+  {
+   "id": "DEC-11",
+   "titre": "A6 (propriété, Freedom House) et dimension D : même source",
+   "categorie": 6,
+   "categorie_libelle": "Modification d'une interprétation",
+   "nature": "choix normatif",
+   "indicateurs": [
+    "A6",
+    "D1",
+    "D2",
+    "D3",
+    "D4"
+   ],
+   "pays_concernes": "210 entités",
+   "fait_observe": "A6 (Freedom House G2) est corrélé à D1–D4 entre 0,85 et 0,90. A4 (état de droit WGI) l'est à 0,87 avec D1.",
+   "regle_actuelle": "A6 et A4 dans A ; D1–D4 dans D.",
+   "probleme": "Ton brief interdit d'assimiler automatiquement liberté économique et liberté politique. Avec A4 et A6, une part de la liberté politique entre aussi dans A.",
+   "proposition": "Garder A4 et A6 : la protection de la propriété et l'exécution des contrats sont centrales chez Friedman (P01, P15) et se distinguent conceptuellement des droits politiques. Documenter la corrélation et la montrer dans la dispersion A × D.",
+   "justification_quantitative": "diagnostic.json → paires_fortes.",
+   "options": [
+    {
+     "id": "garder",
+     "libelle": "Garder A4 et A6 (V1.1), documenter",
+     "patch": {}
+    },
+    {
+     "id": "retirer_A6",
+     "libelle": "Retirer A6",
+     "patch": {
+      "indicateurs": {
+       "A6": {
+        "inclus": false
+       }
+      }
+     }
+    }
+   ],
+   "option_recommandee": "garder",
+   "statut": "proposée",
+   "option_retenue": null,
+   "decision_utilisateur": null,
+   "date_proposition": "2026-10-28",
+   "date_decision": null,
+   "version_methode": "1.1",
+   "empreinte_configuration": null,
+   "commentaire_utilisateur": ""
+  },
+  {
+   "id": "DEC-12",
+   "titre": "Bornes théoriques 0–6 des indicateurs PMR (A2, A3, C1)",
+   "categorie": 8,
+   "categorie_libelle": "Modification d'une règle de normalisation",
+   "nature": "choix de mesure",
+   "indicateurs": [
+    "A2",
+    "A3",
+    "C1"
+   ],
+   "pays_concernes": "56 pays couverts par l'OCDE",
+   "fait_observe": "Valeurs PMR observées : A2 de 0,49 à 3,77 ; A3 de 0,00 à 3,89 ; C1 de 0,08 à 2,45, sur une échelle théorique de 0 à 6. Scores normalisés : A2 de 37 à 92, A3 de 35 à 100, C1 de 59 à 99.",
+   "regle_actuelle": "Bornes fixes 0–6 (échelle théorique).",
+   "probleme": "Ces bornes compressent les écarts entre pays. Mais des bornes observées (percentiles) feraient paraître très libéral un pays seulement parce qu'il est moins réglementé que les autres, ce contre quoi ton brief met en garde (§13).",
+   "proposition": "Garder l'échelle théorique (score absolu), documenter la compression.",
+   "justification_quantitative": "scores.json → normalisation.parametres ; valeurs brutes PMR.",
+   "options": [
+    {
+     "id": "theorique",
+     "libelle": "Échelle théorique 0–6 (V1.1)",
+     "patch": {}
+    },
+    {
+     "id": "percentiles",
+     "libelle": "Percentiles P5–P95 observés",
+     "patch": {
+      "indicateurs": {
+       "A2": {
+        "bornes": {
+         "regle": "percentile",
+         "p_bas": 5,
+         "p_haut": 95
+        }
+       },
+       "A3": {
+        "bornes": {
+         "regle": "percentile",
+         "p_bas": 5,
+         "p_haut": 95
+        }
+       },
+       "C1": {
+        "bornes": {
+         "regle": "percentile",
+         "p_bas": 5,
+         "p_haut": 95
+        }
+       }
+      }
+     }
+    }
+   ],
+   "option_recommandee": "theorique",
+   "statut": "proposée",
+   "option_retenue": null,
+   "decision_utilisateur": null,
+   "date_proposition": "2026-10-28",
+   "date_decision": null,
+   "version_methode": "1.1",
+   "empreinte_configuration": null,
+   "commentaire_utilisateur": ""
+  }
+ ]
+}

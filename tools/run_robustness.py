@@ -309,7 +309,10 @@ def t08():
     largeur = sorted(v["rang_p95"] - v["rang_p5"] for v in inter.values())
     json.dump({"graine": SEED + 1, "tirages": n, "methode": "80 % des indicateurs retenus au hasard + poids Dirichlet(40·w)", "intervalles": inter},
               open(os.path.join(ROOT, "data/processed/stabilite.json"), "w", encoding="utf-8"), ensure_ascii=False, sort_keys=True, indent=1)
-    record("T08", "Stabilité des rangs et des scores (600 rééchantillonnages : 80 % des indicateurs + poids perturbés)", "RÉUSSI",
+    # Critère (audit 2026-10-28) : auparavant ce test était toujours « RÉUSSI ». Avertissement si la largeur médiane de
+    # l'intervalle de rang P5-P95 dépasse 10 % du nombre d'entités classées : le rang n'est alors pas précis à ±5 % près.
+    statut08 = "RÉUSSI" if statistics.median(largeur) <= 0.10 * len(ranked) else "AVERTISSEMENT"
+    record("T08", "Stabilité des rangs et des scores (600 rééchantillonnages : 80 % des indicateurs + poids perturbés)", statut08,
            f"largeur médiane de l'intervalle de rang P5-P95 : {statistics.median(largeur)} places ; P90 : {largeur[int(0.9*len(largeur))]} places ; "
            f"intervalles enregistrés pour {len(inter)} entités (affichés dans l'interface)", False,
            {"largeur_mediane": statistics.median(largeur), "largeur_p90": largeur[int(0.9 * len(largeur))], "n_entites": len(inter)})
@@ -407,8 +410,59 @@ def t12():
            {"empreintes": apres, "empreinte_jeu_de_donnees": S.dataset_hash()})
 
 
+# ------------------------------------------------------------------ T13 robustesse du scénario recommandé (audit 2026-10-28)
+def t13():
+    reco = S.scenario_recommande(data)
+    ov = S.decisions_overrides(data, reco)
+    res, _, _ = S.compute(data, overrides=ov)
+    d2 = S.apply_overrides(data, ov)
+    defs2 = S.indicator_defs(d2); ind2 = {k: v["dim"] for k, v in defs2.items()}; rules = S.rules_of(d2)
+    g_r = {k: r["global"] for k, r in res.items() if r["global"] is not None}
+    rk = list(g_r)
+    out = {}
+    for k in defs2:
+        g = {}
+        for c in rk:
+            rr = S.score_country({i: v for i, v in res[c]["norm"].items() if i in defs2}, ind2, W0, set(defs2) - {k}, rules["min_dimensions"],
+                                 rules["exiger_dimension_A"], None, rules["min_indicateurs"])
+            if rr["global"] is not None:
+                g[c] = rr["global"]
+        com = [c for c in rk if c in g]
+        out[k] = {"spearman": round(S.spearman([g_r[c] for c in com], [g[c] for c in com]), 4), "n_perdus": len(rk) - len(com)}
+    pire = min(v["spearman"] for v in out.values())
+    meth = {}
+    for m in ("rang", "zscore"):
+        r2, _, _ = S.compute(data, m, overrides=ov)
+        g2 = {k: r["global"] for k, r in r2.items() if r["global"] is not None}
+        com = [c for c in rk if c in g2]
+        meth[m] = round(S.spearman([g_r[c] for c in com], [g2[c] for c in com]), 4)
+    record("T13", "Robustesse du scénario recommandé (non approuvé) : retrait d'un indicateur à la fois et méthodes de normalisation",
+           "RÉUSSI" if pire >= 0.97 and min(meth.values()) >= 0.93 else "AVERTISSEMENT",
+           f"{len(rk)} scores ; Spearman minimal au retrait d'un indicateur {pire:.4f} ({min(out, key=lambda x: out[x]['spearman'])}) ; "
+           f"rang / z-score vs min-max : {meth['rang']:.4f} / {meth['zscore']:.4f} (méthode officielle T06 : voir plus haut)", False, {"retrait": out, "normalisation": meth})
+
+
+# ------------------------------------------------------------------ T14 comparaison de périodes (méthode officielle appliquée aux données 2020)
+def t14():
+    import tempfile
+    tmp = tempfile.mkdtemp()
+    env = dict(os.environ, SOCIO_OUT=tmp, SOCIO_FENETRE="2016,2020", SOCIO_FH_EDITION="2021", SOCIO_PMR_ANNEE="2018")
+    subprocess.run([sys.executable, os.path.join(ROOT, "tools", "build_dataset.py")], check=True, capture_output=True, env=env)
+    d20 = S.load(tmp)
+    r20, _, _ = S.compute(d20)
+    g20 = {k: r["global"] for k, r in r20.items() if r["global"] is not None}
+    com = [c for c in ranked if c in g20]
+    rho = S.spearman([g0[c] for c in com], [g20[c] for c in com])
+    diffs = sorted(((g0[c] - g20[c], c) for c in com), key=lambda t: -abs(t[0]))
+    mad = sum(abs(d) for d, _ in diffs) / len(diffs)
+    record("T14", "Comparaison de périodes : méthode officielle appliquée aux données de la fenêtre 2016-2020 (FH 2021, PMR 2018) vs édition 2023",
+           "INFORMATIF", f"{len(com)} entités communes ; Spearman {rho:.4f} ; variation absolue moyenne {mad:.2f} pts ; plus fortes variations : "
+           + ", ".join(f"{data['pays'][c]['nom_fr']} {d:+.1f}" for d, c in diffs[:6]) + " (mêlent évolutions réelles, révisions et changements de couverture)", False,
+           {"spearman": rho, "variation_moyenne": mad, "plus_fortes": [(c, round(d, 2)) for d, c in diffs[:20]]})
+
+
 def main():
-    for f in (t01, t02, t03, t04, t05, t06, t07, t08, t09, t10, t11, t12):
+    for f in (t01, t02, t03, t04, t05, t06, t07, t08, t09, t10, t11, t12, t13, t14):
         try:
             f()
         except Exception as e:  # noqa

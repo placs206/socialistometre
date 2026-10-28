@@ -144,6 +144,16 @@
    "octets": 2669654,
    "sha256": "158e6f4defadbf9e82df7df2ff5d16ef05774351637ef0e369ef32f2e0bfa07a",
    "note": "OECD SDMX-CSV (startPeriod=2019)"
+  },
+  "vdem_extrait.csv": {
+   "url": "https://raw.githubusercontent.com/vdeminstitute/vdemdata/master/data/vdem.RData",
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "octets": 112309,
+   "sha256": "c96716b45f6f9d6da76ba0876f368ba7595a4e5f92e8bb131817d8b5a13625b7",
+   "sha256_fichier_source_complet": "39b412d39a061c18f20c98e4ad4d6355b05a0441df31be4ee9aec420dc3d95ea",
+   "version_source": "vdemdata 16.0 (V-Dem Country-Year Full+Others)",
+   "note": "Extrait (colonnes country_name, country_text_id, year, v2clstown, v2clstown_osp, v2clstown_codelow, v2clstown_codehigh, v2stfisccap, v2stfisccap_osp ; années ≥ 2015) du fichier vdem.RData ; candidat C4 et diagnostic de capacité fiscale (audit 2026-10-28)"
   }
  }
 }

@@ -4,6 +4,8 @@ import json, os, re, sys, unittest
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HTML = os.path.join(ROOT, "dist", "socialistometre.html")
 SC = json.load(open(os.path.join(ROOT, "data/processed/scores.json"), encoding="utf-8"))["pays"]
+sys.path.insert(0, os.path.join(ROOT, "engine"))
+import scoring as S  # noqa: E402
 from playwright.sync_api import sync_playwright
 
 class T(unittest.TestCase):
@@ -69,9 +71,55 @@ class T(unittest.TestCase):
     def test_07_mobile_sans_debordement(self):
         p = self.page(375, 800); p.wait_for_selector("#swarm circle")
         self.assertLessEqual(p.evaluate("document.documentElement.scrollWidth"), 380)
-        for t in ["fiche", "dispersion", "poids"]:
+        for t in ["fiche", "dispersion", "poids", "arbitrage"]:
             p.click(f"nav button[data-t={t}]")
             self.assertLessEqual(p.evaluate("document.documentElement.scrollWidth"), 380, t)
         self.assertEqual(self.errs, [])
+    def _parite(self, p, ref):
+        res = p.evaluate("()=>__socialistometre.P.map(function(x){return [x.id,x.g,x.r,x.dims,x.contrib];})")
+        maxd = 0
+        for iso, g, r, dims, con in res:
+            R = ref[iso]
+            self.assertEqual(g is None, R["global"] is None, iso); self.assertEqual(r, R["rang"], iso)
+            if g is not None: maxd = max(maxd, abs(g - R["global"]))
+            for d in "ABCD":
+                self.assertEqual(dims[d] is None, R["dims"][d] is None, (iso, d))
+                if dims[d] is not None: maxd = max(maxd, abs(dims[d] - R["dims"][d]))
+            self.assertEqual(set(con), set(R["contributions"]), iso)
+            for k, v in R["contributions"].items(): maxd = max(maxd, abs(con[k] - v))
+        self.assertLess(maxd, 1e-9)
+    def test_08_moteur_js_identique_au_moteur_python_officiel_et_scenarios(self):
+        data = S.load(); p = self.page()
+        self._parite(p, S.compute(data)[0])
+        p.evaluate("()=>__socialistometre.setScenario('recommande')")
+        self._parite(p, S.compute(data, overrides=S.decisions_overrides(data, S.scenario_recommande(data)))[0])
+        for d in data["decisions"]["decisions"]:
+            for o in d["options"]:
+                ch = {d["id"]: o["id"]}
+                p.evaluate("(c)=>__socialistometre.setScenario('perso', c)", ch)
+                self._parite(p, S.compute(data, overrides=S.decisions_overrides(data, ch))[0])
+        self.assertEqual(self.errs, [])
+    def test_09_arbitrage_simulation_export_import(self):
+        p = self.page(); p.click("nav button[data-t=arbitrage]")
+        self.assertIn("DEC-01", p.inner_text("#arb")); self.assertIn("Avec la méthode affichée, le score de France est de", p.inner_text("#arb")); self.assertIn("La différence vient principalement", p.text_content("#arb"))
+        p.click("#arb details:nth-of-type(3) summary"); p.check("input[data-d='DEC-03'][data-o='retirer']")
+        self.assertEqual(p.evaluate("()=>__socialistometre.state.scen"), "perso")
+        self.assertIn("simulation temporaire", p.inner_text("#scenbanner"))
+        self.assertIn("Simulation avant / après", p.inner_text("#arb"))
+        exp = p.evaluate("()=>__socialistometre.exportConfig()")
+        self.assertEqual(exp["format"], "socialistometre-arbitrages"); self.assertEqual(exp["decisions"]["DEC-03"]["option"], "retirer")
+        p.evaluate("()=>__socialistometre.setScenario('officiel')")
+        p.evaluate("(e)=>__socialistometre.importConfig(e)", exp)
+        self.assertEqual(p.evaluate("()=>__socialistometre.state.perso"), {"DEC-03": "retirer"})
+        p.evaluate("()=>__socialistometre.setScenario('officiel')")
+        g = p.evaluate("()=>__socialistometre.P.filter(function(x){return x.id==='FRA'})[0].g")
+        self.assertAlmostEqual(g, SC["FRA"]["global"], places=6)   # le score officiel n'a pas été modifié par la simulation
+        self.assertEqual(self.errs, [])
+    def test_10_fiche_complete(self):
+        p = self.page(); p.evaluate("()=>__socialistometre.openFiche('X-NCY')"); t = p.inner_text("#fiche")
+        for s_ in ("Couverture", "Fiabilité", "Contribution", "Anomalies détectées", "Décisions approuvées", "Sensibilité", "Du score à chaque valeur statistique", "L = "):
+            self.assertIn(s_, t)
+        p.evaluate("()=>__socialistometre.setScenario('recommande')"); p.evaluate("()=>__socialistometre.openFiche('FRA')")
+        self.assertIn("Méthode officielle :", p.inner_text("#fiche")); self.assertEqual(self.errs, [])
 if __name__ == "__main__":
     unittest.main(verbosity=2)

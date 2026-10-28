@@ -16,6 +16,9 @@ info,B6_INCOMPLET,TCD,B6,"composantes manquantes (T_2000) : B6 non calculé, auc
 info,B6_INCOMPLET,TGO,B6,"composantes manquantes (T_2000) : B6 non calculé, aucune valeur supposée nulle"
 info,CODE_OCDE_HORS_REFERENTIEL,TKL,B5,Code OCDE TKL non rattaché à une entité du référentiel
 info,CODE_OCDE_HORS_REFERENTIEL,EU22OECD,B7,Code OCDE EU22OECD non rattaché à une entité du référentiel
+info,VDEM_NON_RAPPROCHE,PSE,C4,V-Dem « Palestine/West Bank » ≠ agrégat Banque mondiale « Cisjordanie et Gaza » (PSE) : non rapproché
+info,VDEM_NON_RAPPROCHE,PSG,C4,V-Dem « Palestine/Gaza » sans équivalent exact dans le référentiel : non rapproché
+info,VDEM_NON_RAPPROCHE,ZZB,C4,Zanzibar : sans équivalent dans le référentiel
 avertissement,VALEUR_EXTREME,BLZ,C2,valeur 81.11879 (5.8 MAD de la médiane 11.117)
 avertissement,VALEUR_EXTREME,LBN,C2,valeur 73.445312 (5.1 MAD de la médiane 11.117)
 avertissement,VALEUR_EXTREME,MAC,C2,valeur 96.687271 (7.0 MAD de la médiane 11.117)

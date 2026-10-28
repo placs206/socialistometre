@@ -47,6 +47,10 @@ a{color:var(--acc)}
 .cite{border-left:3px solid var(--line);padding-left:8px;margin:4px 0;color:var(--mut);font-size:13px}
 details{margin:6px 0}summary{cursor:pointer}
 footer{padding:16px;color:var(--mut);font-size:12.5px;text-align:center}
+.ok{color:#2e7d32}.ko{color:var(--s)}.banner{background:#e8f0fb;border:1px solid #b9cdea;color:#173a66;border-radius:6px;padding:8px 10px;font-size:13px;margin:8px 0}
+@media (prefers-color-scheme:dark){.banner{background:#16263b;border-color:#2f4a6e;color:#cfe0f7}}
+.opt{border:1px solid var(--line);border-radius:6px;padding:6px 8px;margin:4px 0}.opt.cur{border-color:var(--acc)}
+.tag{display:inline-block;font-size:11.5px;padding:0 6px;border-radius:9px;margin-left:4px;border:1px solid var(--line)}.tag.app{background:#2e7d32;color:#fff;border-color:#2e7d32}.tag.sim{background:#a35a00;color:#fff;border-color:#a35a00}.tag.pro{color:var(--mut)}
 @media (max-width:600px){main{padding:8px}.sl{grid-template-columns:1fr 56px}.sl label{grid-column:1/3}}
 </style>
 </head>
@@ -54,8 +58,12 @@ footer{padding:16px;color:var(--mut);font-size:12.5px;text-align:center}
 <header>
 <h1>Socialistomètre <span class="sub">— indice mondial continu, 0 = pôle socialisant · 100 = pôle libéral</span></h1>
 <div class="sub">Indice contemporain construit à partir de <em>Capitalisme et liberté</em> de Milton Friedman, avec des choix méthodologiques explicites. Ce n'est pas un indice publié par Friedman. <span id="hdrmeta"></span></div>
+<div class="row" style="margin-top:6px"><label class="sub">Méthode affichée :
+<select id="scen" aria-label="Méthode affichée"><option value="officiel">Méthode officielle (décisions approuvées seulement)</option><option value="recommande">Scénario recommandé par l'audit (non approuvé)</option><option value="perso">Mon scénario (simulation)</option></select></label>
+<span id="scenmeta" class="sub"></span></div>
 </header>
 <nav id="nav"></nav>
+<div id="scenbanner" style="padding:0 16px;max-width:1280px;margin:0 auto"></div>
 <main>
 
 <section id="s-classement" class="on">
@@ -69,7 +77,7 @@ footer{padding:16px;color:var(--mut);font-size:12.5px;text-align:center}
 </div>
 <div id="wnotice"></div>
 <svg id="swarm" width="100%" height="230" role="img" aria-label="Positions des pays sur l'axe 0 à 100"></svg>
-<div class="mini">Chaque point est une entité ; les points creux ont un score partiel (moins de 4 dimensions). Cliquer sur un point ouvre la fiche. Un score n'a de sens qu'avec sa fiabilité : voir le tableau.</div>
+<div class="mini">Chaque point est une entité ; les points creux ont un score partiel (moins de 4 dimensions). Cliquer sur un point ouvre la fiche. Un score n'a de sens qu'avec sa couverture et sa fiabilité : voir le tableau.</div>
 </div>
 <div class="card">
 <div class="row"><h2 style="margin:0">Classement</h2><span class="mini" id="cnt"></span></div>
@@ -93,6 +101,10 @@ footer{padding:16px;color:var(--mut);font-size:12.5px;text-align:center}
 </div>
 </section>
 
+<section id="s-arbitrage">
+<div class="card" id="arb"></div>
+</section>
+
 <section id="s-dispersion">
 <div class="card">
 <h2>Graphique de dispersion</h2>
@@ -114,7 +126,7 @@ footer{padding:16px;color:var(--mut);font-size:12.5px;text-align:center}
 <section id="s-poids">
 <div class="card">
 <h2>Pondérations interactives</h2>
-<div class="warn">Les pondérations officielles de la méthodologie V1.x sont fixes : 45 / 20 / 20 / 15. Toute autre valeur ci-dessous est un <b>scénario d'exploration</b>, non une nouvelle version de l'indice ; les scores et rangs de tous les onglets sont recalculés immédiatement.</div>
+<div class="warn">Les pondérations officielles sont fixes : 45 / 20 / 20 / 15. Toute autre valeur ci-dessous est un <b>scénario d'exploration temporaire</b>, pas une nouvelle version de l'indice. Les scores et rangs de tous les onglets sont recalculés immédiatement.</div>
 <div id="sliders"></div>
 <div class="row"><button class="b" id="wreset">Revenir aux pondérations officielles (45/20/20/15)</button><button class="b" id="weq">Poids égaux (25 % chacune)</button></div>
 <div id="wsum" class="mini" style="margin-top:8px"></div>
@@ -137,112 +149,155 @@ var DIMS = ["A","B","C","D"];
 var DN = {}; DATA.dimensions.forEach(function(d){DN[d.id]=d.nom;});
 var W0 = {}; DATA.dimensions.forEach(function(d){W0[d.id]=d.poids;});
 var W = Object.assign({}, W0);
-var IND = {}; DATA.indicateurs.forEach(function(i){IND[i.id]=i;});
+var INDALL = {}; DATA.indicateurs.forEach(function(i){INDALL[i.id]=i;});
+var DEC = {}; DATA.decisions.forEach(function(d){DEC[d.id]=d;});
 var P = DATA.pays;
 var BYID = {}; P.forEach(function(p){BYID[p.id]=p;});
 var COL = {A:"var(--A)",B:"var(--B)",C:"var(--C)",D:"var(--D)",G:"var(--acc)"};
-var state = {sel:null, cmp:[], sortKey:"rang", sortDir:1, zmin:0, zmax:100, q:"", onlyComplet:false, tab:"classement"};
+var state = {sel:null, cmp:[], sortKey:"rang", sortDir:1, zmin:0, zmax:100, q:"", onlyComplet:false, tab:"classement", scen:"officiel", perso:{}, arbPays:null};
+var CUR = null;   /* configuration effective courante */
+var OFF = null;   /* résultats de la méthode officielle (référence) */
 
 function $(id){return document.getElementById(id);}
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
 function f1(x){return x==null?"—":(Math.round(x*10)/10).toFixed(1).replace(".",",");}
 function fn(x,d){if(x==null)return "—";var s=Number(x).toFixed(d==null?2:d);return s.replace(".",",");}
+function sgn(x){return (x>0?"+":"")+f1(x);}
 function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");}
 function weightsModified(){return DIMS.some(function(d){return Math.abs(W[d]-W0[d])>1e-9;});}
+function clone(o){return JSON.parse(JSON.stringify(o));}
 
-/* ---- Calcul (miroir de engine/scoring.py : moyenne pondérée sur les dimensions disponibles, A exigée, >= 2 dimensions) ---- */
-function globalScore(dims, w){
-  if(dims.A==null) return null;
-  var num=0, den=0, n=0;
-  DIMS.forEach(function(d){ if(dims[d]!=null && w[d]>0){ num+=w[d]*dims[d]; den+=w[d]; } if(dims[d]!=null) n++; });
-  if(n<2 || den<=0) return null;
-  return num/den;
+/* =====================================================================
+   Moteur de calcul (miroir exact de engine/scoring.py) : normalisation
+   depuis les valeurs brutes, règles de couverture, poids internes,
+   contributions, rangs. Testé contre Python (tests/test_html.py).
+   ===================================================================== */
+function deepMerge(a,b){ var o=clone(a||{}); Object.keys(b||{}).forEach(function(k){ var v=b[k];
+  if(v && typeof v==="object" && !Array.isArray(v) && o[k] && typeof o[k]==="object" && !Array.isArray(o[k])) o[k]=deepMerge(o[k],v);
+  else if(k==="ajouter" && Array.isArray(v)){ var s={}; (o[k]||[]).concat(v).forEach(function(x){s[x]=1;}); o[k]=Object.keys(s).sort(); }
+  else o[k]=clone(v); }); return o; }
+function optionPatch(d,oid){ for(var i=0;i<d.options.length;i++) if(d.options[i].id===oid) return d.options[i].patch||{}; return {}; }
+function overridesFor(choix){ /* choix : {DEC: option} ; null = méthode officielle */
+  var ov={}; DATA.decisions.forEach(function(d){ var opt=null;
+    if(choix && Object.prototype.hasOwnProperty.call(choix,d.id)) opt=choix[d.id];
+    else if(d.statut==="approuvée") opt=d.option_retenue;
+    if(opt) ov=deepMerge(ov, optionPatch(d,opt)); }); return ov; }
+function recoChoices(){ var c={}; DATA.decisions.forEach(function(d){ if(d.statut!=="approuvée"&&d.statut!=="rejetée"&&d.option_recommandee) c[d.id]=d.option_recommandee; }); return c; }
+function configFrom(ov){
+  var rules=deepMerge(DATA.regles_base, ov.regles||{});
+  var defs={}; DATA.indicateurs.forEach(function(i){ if(!i.candidat) defs[i.id]=clone(i); });
+  (ov.ajouter||[]).forEach(function(a){ if(INDALL[a]) defs[a]=clone(INDALL[a]); });
+  Object.keys(ov.indicateurs||{}).forEach(function(k){ if(defs[k]) Object.assign(defs[k], clone(ov.indicateurs[k])); });
+  Object.keys(defs).forEach(function(k){ if(defs[k].inclus===false) delete defs[k]; });
+  var w=Object.assign({},W0); if(ov.poids_dimensions) Object.keys(ov.poids_dimensions).forEach(function(d){w[d]=ov.poids_dimensions[d];});
+  return {rules:rules, defs:defs, w:w, ov:ov};
 }
-function compRank(items){ /* items: [{id,v}] -> rang de compétition (1 = score le plus élevé) */
-  var s = items.slice().sort(function(a,b){return b.v-a.v;});
-  var r = {}, last=null, rk=0;
-  s.forEach(function(it,i){ if(last===null || it.v!==last){rk=i+1; last=it.v;} r[it.id]=rk; });
-  return r;
-}
-function recompute(){
-  var items=[], itemsC=[];
-  P.forEach(function(p){
-    p.g = globalScore(p.dims, W);
-    if(p.g!=null){ items.push({id:p.id,v:Math.round(p.g*1e6)/1e6}); if(p.couv==="complet") itemsC.push({id:p.id,v:Math.round(p.g*1e6)/1e6}); }
+function pct(sorted,p){ var n=sorted.length; if(n===1) return sorted[0]; var k=(n-1)*p/100, lo=Math.floor(k), hi=Math.min(lo+1,n-1); return sorted[lo]+(sorted[hi]-sorted[lo])*(k-lo); }
+function compute(cfg, Wd){
+  var defs=cfg.defs, rules=cfg.rules, w=Wd||cfg.w, ids=Object.keys(defs).sort(), params={}, normv={};
+  ids.forEach(function(k){
+    var vals=[]; P.forEach(function(p){ var o=p.raw[k]; if(o) vals.push(o[0]); });
+    if(!vals.length) return;
+    var b=defs[k].bornes, lo, hi;
+    if(b.regle==="fixe"){ lo=+b.bas; hi=+b.haut; } else { var sv=vals.slice().sort(function(a,c){return a-c;}); lo=pct(sv,b.p_bas); hi=pct(sv,b.p_haut); }
+    params[k]={bas:lo,haut:hi,orientation:defs[k].orientation,regle:b.regle};
+    P.forEach(function(p){ var o=p.raw[k]; if(!o) return; var t=Math.min(1,Math.max(0,(o[0]-lo)/(hi-lo))); (normv[p.id]=normv[p.id]||{})[k]= defs[k].orientation>0?100*t:100*(1-t); });
   });
-  var r = compRank(items), rc = compRank(itemsC);
-  P.forEach(function(p){ p.r = p.g==null?null:r[p.id]; p.rc = (p.g==null||p.couv!=="complet")?null:rc[p.id]; });
+  var res={};
+  P.forEach(function(p){
+    var nv=normv[p.id]||{}, sums={}, wts={}, cnt={}, used={};
+    DIMS.forEach(function(d){sums[d]=0;wts[d]=0;cnt[d]=0;used[d]=[];});
+    Object.keys(nv).forEach(function(k){ var iw=defs[k].poids_interne==null?1:+defs[k].poids_interne; if(iw<=0) return; var d=defs[k].dim; sums[d]+=iw*nv[k]; wts[d]+=iw; cnt[d]++; used[d].push(k); });
+    var dims={}, insuff=[];
+    DIMS.forEach(function(d){ var mi=(rules.min_indicateurs&&rules.min_indicateurs[d])||1; dims[d]=(cnt[d]&&cnt[d]>=mi)?sums[d]/wts[d]:null; if(cnt[d]&&dims[d]==null) insuff.push(d); });
+    var avail=DIMS.filter(function(d){return dims[d]!=null && (w[d]||0)>0;});
+    var g=null, contrib={};
+    if(avail.length>=rules.min_dimensions && (!rules.exiger_dimension_A || dims.A!=null)){
+      var ws=0; avail.forEach(function(d){ws+=w[d];});
+      if(ws>0){ g=0; avail.forEach(function(d){ g+=w[d]*dims[d]; }); g/=ws;
+        avail.forEach(function(d){ used[d].forEach(function(k){ var iw=defs[k].poids_interne==null?1:+defs[k].poids_interne; contrib[k]=w[d]/ws*iw/wts[d]*nv[k]; }); }); }
+    }
+    var nd=DIMS.filter(function(d){return dims[d]!=null;}).length;
+    res[p.id]={dims:dims, n:cnt, g:g, contrib:contrib, norm:nv, insuff:insuff, avail:avail, couv: nd===4?"complet":(g!=null?"partiel":(nd>=1?"insuffisant":"aucune donnée"))};
+  });
+  var items=[], itemsC=[];
+  P.forEach(function(p){ var r=res[p.id]; if(r.g!=null){ items.push({id:p.id,v:Math.round(r.g*1e9)/1e9}); if(r.couv==="complet") itemsC.push({id:p.id,v:Math.round(r.g*1e9)/1e9}); } });
+  var rk=compRank(items), rc=compRank(itemsC);
+  P.forEach(function(p){ var r=res[p.id]; r.r=r.g==null?null:rk[p.id]; r.rc=(r.g==null||r.couv!=="complet")?null:rc[p.id]; });
+  return {res:res, params:params, cfg:cfg};
+}
+function compRank(items){ var s=items.slice().sort(function(a,b){ return (b.v-a.v) || (a.id<b.id?-1:1); }); var r={}, last=null, rk=0;
+  s.forEach(function(it,i){ if(last===null || it.v!==last){rk=i+1; last=it.v;} r[it.id]=rk; }); return r; }
+
+function currentChoices(){ return state.scen==="officiel"?null:(state.scen==="recommande"?recoChoices():state.perso); }
+function recompute(){
+  var wv=weightsModified()?W:null;
+  OFF = compute(configFrom(overridesFor(null)), wv);
+  CUR = state.scen==="officiel" ? OFF : compute(configFrom(overridesFor(currentChoices())), wv);
+  P.forEach(function(p){ var r=CUR.res[p.id]; p.g=r.g; p.r=r.r; p.rc=r.rc; p.dims=r.dims; p.n_dim=r.n; p.couv=r.couv; p.contrib=r.contrib; p.nrm=r.norm; p.insuff=r.insuff; p.avail=r.avail; });
+}
+function isOfficial(){ return state.scen==="officiel" && !weightsModified(); }
+function decStatusLabel(d, opt){
+  if(d.statut==="approuvée" && d.option_retenue===opt) return "<span class='tag app'>approuvée · officielle</span>";
+  if(d.statut==="rejetée") return "<span class='tag pro'>rejetée</span>";
+  var ch=currentChoices(); if(ch && ch[d.id]===opt && state.scen==="perso") return "<span class='tag sim'>simulation temporaire</span>";
+  return opt===d.option_recommandee?"<span class='tag pro'>proposée par l'audit, non approuvée</span>":"";
 }
 
 /* ---- Tooltip ---- */
 var tip = $("tip");
 function showTip(e,html){ tip.innerHTML=html; tip.style.display="block"; var x=e.clientX+12,y=e.clientY+12; if(x+270>window.innerWidth) x=e.clientX-270; if(y+60>window.innerHeight) y=e.clientY-50; tip.style.left=Math.max(4,x)+"px"; tip.style.top=Math.max(4,y)+"px"; }
 function hideTip(){ tip.style.display="none"; }
-
-/* ---- SVG helpers ---- */
 var NS="http://www.w3.org/2000/svg";
 function el(tag,attrs,parent){ var e=document.createElementNS(NS,tag); for(var k in attrs) e.setAttribute(k,attrs[k]); if(parent) parent.appendChild(e); return e; }
 function svgW(svg){ var w=svg.getBoundingClientRect().width; return w>50?w:600; }
 
 /* ---- Navigation ---- */
-var TABS=[["classement","Classement"],["comparer","Comparer"],["fiche","Fiche pays"],["dispersion","Dispersion"],["distribution","Distribution"],["poids","Pondérations"],["methode","Méthodologie & tests"]];
-function buildNav(){
-  var nav=$("nav");
-  TABS.forEach(function(t){ var b=document.createElement("button"); b.textContent=t[1]; b.setAttribute("data-t",t[0]); b.onclick=function(){go(t[0]);}; nav.appendChild(b); });
-}
-function go(t){
-  state.tab=t;
+var TABS=[["classement","Classement"],["comparer","Comparer"],["fiche","Fiche pays"],["arbitrage","Arbitrages"],["dispersion","Dispersion"],["distribution","Distribution"],["poids","Pondérations"],["methode","Méthodologie & tests"]];
+function buildNav(){ var nav=$("nav"); TABS.forEach(function(t){ var b=document.createElement("button"); b.textContent=t[1]; b.setAttribute("data-t",t[0]); b.onclick=function(){go(t[0]);}; nav.appendChild(b); }); }
+function go(t){ state.tab=t;
   Array.prototype.forEach.call(document.querySelectorAll("section"),function(s){s.classList.toggle("on", s.id==="s-"+t);});
   Array.prototype.forEach.call($("nav").children,function(b){b.classList.toggle("on", b.getAttribute("data-t")===t);});
-  render();
-}
+  render(); }
 function openFiche(id){ state.sel=id; $("fsel").value=id; go("fiche"); }
 
-/* ---- Classement : curseur + tableau ---- */
-function visibleCountries(){
-  var q=norm(state.q);
-  return P.filter(function(p){ return (!q || norm(p.nom).indexOf(q)>=0 || norm(p.nom_en).indexOf(q)>=0 || p.id.toLowerCase()===q); });
+function renderBanner(){
+  var h="";
+  if(state.scen==="recommande") h="<div class='warn'>⚠ <b>Scénario recommandé par l'audit — non approuvé.</b> Les options proposées pour chaque décision du registre sont appliquées ici. Ce n'est pas la méthode officielle tant que tu ne les as pas approuvées (onglet « Arbitrages »).</div>";
+  else if(state.scen==="perso") h="<div class='warn'>⚠ <b>Mon scénario : simulation temporaire.</b> Elle est conservée seulement dans cette page, et perdue à la fermeture sauf si tu l'exportes depuis l'onglet « Arbitrages ».</div>";
+  $("scenbanner").innerHTML=h;
+  var n=P.filter(function(p){return p.g!=null;}).length;
+  $("scenmeta").textContent=n+" entités avec un score global dans la méthode affichée.";
 }
+
+/* ---- Classement ---- */
+function visibleCountries(){ var q=norm(state.q); return P.filter(function(p){ return (!q || norm(p.nom).indexOf(q)>=0 || norm(p.nom_en).indexOf(q)>=0 || p.id.toLowerCase()===q); }); }
 function renderSwarm(){
   var svg=$("swarm"); while(svg.firstChild) svg.removeChild(svg.firstChild);
-  var W_=svgW(svg), H=230, m=24, r=4.2;
-  var lo=state.zmin, hi=state.zmax; if(hi<=lo){hi=lo+1;}
+  var W_=svgW(svg), H=230, m=24, r=4.2, lo=state.zmin, hi=state.zmax; if(hi<=lo){hi=lo+1;}
   var X=function(v){return m+(v-lo)/(hi-lo)*(W_-2*m);};
   el("line",{x1:m,x2:W_-m,y1:H-26,y2:H-26,"class":"ax"},svg);
-  var step = (hi-lo)>60?10:((hi-lo)>25?5:((hi-lo)>10?2:1));
+  var step=(hi-lo)>60?10:((hi-lo)>25?5:((hi-lo)>10?2:1));
   for(var v=Math.ceil(lo/step)*step; v<=hi; v+=step){ el("line",{x1:X(v),x2:X(v),y1:H-30,y2:H-22,"class":"ax"},svg); var t=el("text",{x:X(v),y:H-8,"text-anchor":"middle","class":"mut"},svg); t.textContent=v; }
   var t0=el("text",{x:m,y:12,"class":"mut"},svg); t0.textContent="◀ pôle socialisant";
   var t1=el("text",{x:W_-m,y:12,"text-anchor":"end","class":"mut"},svg); t1.textContent="pôle libéral ▶";
   var q=norm(state.q), hasQ=q.length>0;
   var pts=P.filter(function(p){return p.g!=null && p.g>=lo && p.g<=hi && (!state.onlyComplet || p.couv==="complet");}).sort(function(a,b){return a.g-b.g;});
-  var rows=[]; /* empilement : dernier x occupé par rangée */
-  var maxRows=Math.floor((H-60)/(2*r+0.6));
+  var rows=[], maxRows=Math.floor((H-60)/(2*r+0.6));
+  pts.forEach(function(p){ var x=X(p.g), row=0; while(row<maxRows && rows[row]!==undefined && x-rows[row]<2*r+0.5) row++; if(row>=maxRows) row=maxRows-1; rows[row]=x; p._x=x; p._row=row; });
   pts.forEach(function(p){
-    var x=X(p.g), row=0;
-    while(row<maxRows && rows[row]!==undefined && x-rows[row]<2*r+0.5) row++;
-    if(row>=maxRows) row=maxRows-1;
-    rows[row]=x; p._x=x; p._row=row;
-  });
-  pts.forEach(function(p){
-    var y=H-36-p._row*(2*r+0.6);
-    var match = hasQ && (norm(p.nom).indexOf(q)>=0||norm(p.nom_en).indexOf(q)>=0);
-    var sel = (state.cmp.indexOf(p.id)>=0)||state.sel===p.id;
+    var y=H-36-p._row*(2*r+0.6), match=hasQ && (norm(p.nom).indexOf(q)>=0||norm(p.nom_en).indexOf(q)>=0), sel=(state.cmp.indexOf(p.id)>=0)||state.sel===p.id;
     var c=el("circle",{cx:p._x,cy:y,r:(match||sel)?r+2.2:r,fill:p.couv==="complet"?"var(--acc)":"var(--card)",stroke:match?"var(--s)":"var(--acc)","stroke-width":match?2.5:1.2,opacity:(hasQ&&!match)?0.25:1,style:"cursor:pointer"},svg);
-    c.addEventListener("mousemove",function(e){showTip(e,"<b>"+esc(p.nom)+"</b><br>Score : "+f1(p.g)+" · rang "+(p.r)+"<br>Fiabilité : "+f1(p.fiab.fiabilite)+" ("+esc(p.fiab.niveau)+")<br>Couverture : "+esc(p.couv));});
-    c.addEventListener("mouseleave",hideTip);
-    c.addEventListener("click",function(){openFiche(p.id);});
+    c.addEventListener("mousemove",function(e){showTip(e,"<b>"+esc(p.nom)+"</b><br>Score : "+f1(p.g)+" · rang "+(p.r)+"<br>Couverture : "+esc(p.couv)+" · "+nInd(p)+" indicateurs<br>Fiabilité (officielle) : "+f1(p.fiab.fiabilite));});
+    c.addEventListener("mouseleave",hideTip); c.addEventListener("click",function(){openFiche(p.id);});
   });
 }
-var COLS=[["r","Rang","n"],["nom","Pays / territoire",""],["g","Score","n"],["A","A","n"],["B","B","n"],["C","C","n"],["D","D","n"],["fiab","Fiabilité","n"],["couv","Couverture",""]];
+function nInd(p){ var n=0; DIMS.forEach(function(d){n+=p.n_dim[d];}); return n+"/"+Object.keys(CUR.cfg.defs).length; }
+var COLS=[["r","Rang","n"],["nom","Pays / territoire",""],["g","Score","n"],["A","A","n"],["B","B","n"],["C","C","n"],["D","D","n"],["ni","Indic.","n"],["fiab","Fiabilité","n"],["couv","Couverture",""]];
 function sortVal(p,k){
-  if(k==="r"||k==="rang") return p.r==null?1e9:p.r;
-  if(k==="nom") return norm(p.nom);
-  if(k==="g") return p.g==null?-1e9:-p.g;
-  if(DIMS.indexOf(k)>=0) return p.dims[k]==null?1e9:-p.dims[k];
-  if(k==="fiab") return -p.fiab.fiabilite;
-  if(k==="couv") return p.couv;
-  return 0;
-}
+  if(k==="r"||k==="rang") return p.r==null?1e9:p.r; if(k==="nom") return norm(p.nom); if(k==="g") return p.g==null?-1e9:-p.g;
+  if(DIMS.indexOf(k)>=0) return p.dims[k]==null?1e9:-p.dims[k]; if(k==="fiab") return -p.fiab.fiabilite; if(k==="couv") return p.couv;
+  if(k==="ni"){ var n=0; DIMS.forEach(function(d){n+=p.n_dim[d];}); return -n; } return 0; }
 function renderTable(){
   var list=visibleCountries().filter(function(p){return !state.onlyComplet||p.couv==="complet";});
   var k=state.sortKey==="rang"?"r":state.sortKey;
@@ -251,178 +306,261 @@ function renderTable(){
   var h="<thead><tr>"+COLS.map(function(c){var arrow=(c[0]===k)?(state.sortDir>0?" ▲":" ▼"):""; return "<th class='"+c[2]+"' data-k='"+c[0]+"'>"+c[1]+arrow+"</th>";}).join("")+"</tr></thead><tbody>";
   list.forEach(function(p){
     h+="<tr"+(state.cmp.indexOf(p.id)>=0?" class='sel'":"")+"><td class='n'>"+(p.r==null?"—":p.r)+"</td><td><a href='#' data-f='"+p.id+"'>"+esc(p.nom)+"</a>"+(p.type==="territoire"?" <span class='pill'>territoire</span>":"")+"</td><td class='n'><b>"+f1(p.g)+"</b></td>"+
-    DIMS.map(function(d){return "<td class='n'>"+f1(p.dims[d])+"</td>";}).join("")+
-    "<td class='n' title='"+esc(p.fiab.niveau)+"'>"+f1(p.fiab.fiabilite)+"</td><td>"+esc(p.couv)+(p.g==null?" (pas de score global)":"")+"</td></tr>";
+    DIMS.map(function(d){return "<td class='n'>"+f1(p.dims[d])+(p.dims[d]!=null?"<span class='mini'> ("+p.n_dim[d]+")</span>":"")+"</td>";}).join("")+
+    "<td class='n'>"+nInd(p)+"</td><td class='n' title='"+esc(p.fiab.niveau)+"'>"+f1(p.fiab.fiabilite)+"</td><td>"+esc(p.couv)+(p.g==null?" (pas de score global)":"")+"</td></tr>";
   });
   var t=$("tbl"); t.innerHTML=h+"</tbody>";
   Array.prototype.forEach.call(t.querySelectorAll("th"),function(th){th.onclick=function(){var kk=th.getAttribute("data-k"); if(state.sortKey===kk||(kk==="r"&&state.sortKey==="rang")) state.sortDir*=-1; else {state.sortKey=kk;state.sortDir=1;} renderTable();};});
   Array.prototype.forEach.call(t.querySelectorAll("a[data-f]"),function(a){a.onclick=function(e){e.preventDefault();openFiche(a.getAttribute("data-f"));};});
 }
-function renderWNotice(){
-  $("wnotice").innerHTML = weightsModified()? "<div class='warn'>⚠ Pondérations modifiées ("+DIMS.map(function(d){return d+" "+Math.round(W[d]*100)+" %";}).join(" · ")+") : scénario d'exploration, différent de la méthodologie officielle. Les rangs affichés sont recalculés.</div>" : "";
-}
+function renderWNotice(){ $("wnotice").innerHTML = weightsModified()? "<div class='warn'>⚠ Pondérations modifiées ("+DIMS.map(function(d){return d+" "+Math.round(W[d]*100)+" %";}).join(" · ")+") : scénario d'exploration, différent de la méthodologie officielle. Les rangs affichés sont recalculés.</div>" : ""; }
 function renderClassement(){ renderWNotice(); renderSwarm(); renderTable(); }
-
-/* ---- Barres de dimensions ---- */
 function bar(v,color){ return "<div class='bar' title='"+f1(v)+"'><i style='width:"+(v==null?0:Math.max(0,Math.min(100,v)))+"%;background:"+color+"'></i></div>"; }
+var COLS_={A:"var(--A)",B:"var(--B)",C:"var(--C)",D:"var(--D)"};
 
 /* ---- Comparer ---- */
 function renderCompare(){
   var chips=$("chips"); chips.innerHTML="";
   state.cmp.forEach(function(id){ var s=document.createElement("span"); s.className="chip"; s.innerHTML=esc(BYID[id].nom)+" <button aria-label='Retirer'>×</button>"; s.querySelector("button").onclick=function(){state.cmp=state.cmp.filter(function(x){return x!==id;});renderCompare();}; chips.appendChild(s); });
-  var c=$("cmp");
-  if(state.cmp.length<2){ c.innerHTML="<p class='mini'>Ajoutez au moins deux pays ou territoires.</p>"; return; }
-  var L=state.cmp.map(function(id){return BYID[id];});
+  var c=$("cmp"); if(state.cmp.length<2){ c.innerHTML="<p class='mini'>Ajoutez au moins deux pays ou territoires.</p>"; return; }
+  var L=state.cmp.map(function(id){return BYID[id];}), defs=CUR.cfg.defs;
   var h="<div class='tablewrap'><table><thead><tr><th>Mesure</th>"+L.map(function(p){return "<th class='n'><a href='#' data-f='"+p.id+"'>"+esc(p.nom)+"</a></th>";}).join("")+"</tr></thead><tbody>";
   h+="<tr><td><b>Score global</b></td>"+L.map(function(p){return "<td class='n'><b>"+f1(p.g)+"</b> <span class='mini'>(rang "+(p.r==null?"—":p.r)+")</span></td>";}).join("")+"</tr>";
   DIMS.forEach(function(d){ h+="<tr><td>"+d+" · "+esc(DN[d])+"</td>"+L.map(function(p){return "<td class='n'>"+f1(p.dims[d])+bar(p.dims[d],COLS_[d])+"<span class='mini'>"+p.n_dim[d]+" ind.</span></td>";}).join("")+"</tr>"; });
-  h+="<tr><td>Fiabilité</td>"+L.map(function(p){return "<td class='n'>"+f1(p.fiab.fiabilite)+" <span class='mini'>"+esc(p.fiab.niveau)+"</span></td>";}).join("")+"</tr>";
-  h+="<tr><td>Couverture</td>"+L.map(function(p){return "<td class='n'>"+esc(p.couv)+" · "+p.fiab.n_indicateurs+"/"+p.fiab.n_indicateurs_total+"</td>";}).join("")+"</tr>";
-  DATA.indicateurs.forEach(function(i){ h+="<tr><td class='mini'>"+i.id+" · "+esc(i.nom)+"</td>"+L.map(function(p){var o=p.ind[i.id]; return "<td class='n mini'>"+(o?fn(o[0])+" "+esc(i.unite)+" <br>→ "+f1(o[1])+" ("+o[2]+")":"—")+"</td>";}).join("")+"</tr>"; });
-  c.innerHTML=h+"</tbody></table></div><p class='mini'>— : indicateur non disponible pour cette entité (non remplacé, non estimé). Valeur brute → valeur normalisée (0–100) entre parenthèses l'année.</p>";
+  h+="<tr><td>Fiabilité (officielle)</td>"+L.map(function(p){return "<td class='n'>"+f1(p.fiab.fiabilite)+" <span class='mini'>"+esc(p.fiab.niveau)+"</span></td>";}).join("")+"</tr>";
+  h+="<tr><td>Couverture</td>"+L.map(function(p){return "<td class='n'>"+esc(p.couv)+" · "+nInd(p)+"</td>";}).join("")+"</tr>";
+  Object.keys(defs).sort().forEach(function(k){ var i=defs[k]; h+="<tr><td class='mini'>"+k+" · "+esc(i.nom)+"</td>"+L.map(function(p){var o=p.raw[k]; return "<td class='n mini'>"+(o?fn(o[0])+" "+esc(i.unite)+" <br>→ "+f1(p.nrm[k])+" ("+o[1]+")"+(p.contrib[k]!=null?"<br>contribution "+fn(p.contrib[k],1)+" pt":""):"—")+"</td>";}).join("")+"</tr>"; });
+  c.innerHTML=h+"</tbody></table></div><p class='mini'>— : indicateur non disponible (non remplacé, non estimé). Valeur brute → valeur normalisée 0–100 (année) ; contribution = points apportés au score global.</p>";
   Array.prototype.forEach.call(c.querySelectorAll("a[data-f]"),function(a){a.onclick=function(e){e.preventDefault();openFiche(a.getAttribute("data-f"));};});
 }
-var COLS_={A:"var(--A)",B:"var(--B)",C:"var(--C)",D:"var(--D)"};
 
 /* ---- Fiche ---- */
+function formula(k){ var pr=CUR.params[k]; if(!pr) return "—"; var o=pr.orientation>0;
+  return (o?"100 × (x − L)/(U − L)":"100 × (U − x)/(U − L)")+", bornée à [0 ; 100] ; L = "+fn(pr.bas,4)+", U = "+fn(pr.haut,4)+" ("+(pr.regle==="fixe"?(CUR.cfg.defs[k].bornes.origine?esc(CUR.cfg.defs[k].bornes.origine):"bornes fixes"):"P"+CUR.cfg.defs[k].bornes.p_bas+"–P"+CUR.cfg.defs[k].bornes.p_haut+" mondiaux")+")"; }
+function explainDiff(p, a, b){ /* a, b : résultats {res} de deux méthodes pour le pays p */
+  var ra=a.res[p.id], rb=b.res[p.id], ks={}; Object.keys(ra.contrib).concat(Object.keys(rb.contrib)).forEach(function(k){ks[k]=1;});
+  var best=null; Object.keys(ks).forEach(function(k){ var d=(rb.contrib[k]||0)-(ra.contrib[k]||0); if(!best||Math.abs(d)>Math.abs(best.d)) best={k:k,d:d}; });
+  return best; }
 function renderFiche(){
-  var p=BYID[state.sel]; var c=$("fiche");
-  if(!p){c.innerHTML="";return;}
-  var h="<h3 style='margin-top:10px'>"+esc(p.nom)+" <span class='mini'>("+esc(p.nom_en)+" · "+esc(p.id)+")</span></h3>";
+  var p=BYID[state.sel], c=$("fiche"); if(!p){c.innerHTML="";return;}
+  var defs=CUR.cfg.defs, h="<h3 style='margin-top:10px'>"+esc(p.nom)+" <span class='mini'>("+esc(p.nom_en)+" · "+esc(p.id)+")</span></h3>";
   h+="<div class='mini'>"+esc(p.type)+" · "+esc(p.region)+" · "+esc(p.revenu)+(p.statut_pol?" · Statut : "+esc(p.statut_pol):"")+"</div>";
-  h+="<div class='row' style='margin:10px 0'><div style='font-size:34px;font-weight:700'>"+(p.g==null?"Score global indisponible":f1(p.g))+"</div>"+(p.g!=null?"<div>rang <b>"+p.r+"</b> / "+P.filter(function(x){return x.g!=null;}).length+(p.rc?" · rang parmi les scores complets : <b>"+p.rc+"</b>":"")+"</div>":"")+"</div>";
-  if(p.stab && !weightsModified()) h+="<div class='mini'>Stabilité (600 rééchantillonnages) : rang plausible "+p.stab.rang_p5+" – "+p.stab.rang_p95+" ; score "+f1(p.stab.score_p5)+" – "+f1(p.stab.score_p95)+".</div>";
-  h+="<div class='warn'>Fiabilité des données : <b>"+f1(p.fiab.fiabilite)+" / 100 ("+esc(p.fiab.niveau)+")</b> — couverture "+Math.round(p.fiab.couverture*100)+" % ("+p.fiab.n_indicateurs+"/"+p.fiab.n_indicateurs_total+" indicateurs), qualité des sources "+Math.round(p.fiab.qualite_source*100)+" %, fraîcheur "+Math.round(p.fiab.anciennete*100)+" %, comparabilité "+Math.round(p.fiab.comparabilite*100)+" %. Statut de couverture : <b>"+esc(p.couv)+"</b>."+(p.absentes.length?" Dimensions absentes : "+p.absentes.join(", ")+".":"")+"</div>";
-  if(p.avert.length) h+="<details><summary>Avertissements et limites ("+p.avert.length+")</summary><ul>"+p.avert.map(function(a){return "<li>"+esc(a)+"</li>";}).join("")+"</ul></details>";
-  h+="<h3>Décomposition par dimension</h3><div class='tablewrap'><table><thead><tr><th>Dimension</th><th class='n'>Poids</th><th class='n'>Score</th><th>Indicateurs</th><th></th></tr></thead><tbody>";
-  var wsum=0; DIMS.forEach(function(d){if(p.dims[d]!=null)wsum+=W[d];});
-  DIMS.forEach(function(d){ h+="<tr><td>"+d+" · "+esc(DN[d])+"</td><td class='n'>"+Math.round(W[d]*100)+" %"+(p.dims[d]!=null&&wsum>0&&p.g!=null?" <span class='mini'>(effectif "+Math.round(W[d]/wsum*100)+" %)</span>":"")+"</td><td class='n'><b>"+f1(p.dims[d])+"</b></td><td class='n'>"+p.n_dim[d]+" / "+DATA.indicateurs.filter(function(i){return i.dim===d;}).length+"</td><td style='min-width:120px'>"+bar(p.dims[d],COLS_[d])+"</td></tr>"; });
+  var nsc=P.filter(function(x){return x.g!=null;}).length;
+  h+="<div class='row' style='margin:10px 0'><div style='font-size:34px;font-weight:700'>"+(p.g==null?"Score global indisponible":f1(p.g))+"</div>"+(p.g!=null?"<div>rang <b>"+p.r+"</b> / "+nsc+(p.rc?" · rang parmi les scores complets : <b>"+p.rc+"</b>":"")+"</div>":"")+"</div>";
+  if(!isOfficial()){ var o=OFF.res[p.id]; var b=explainDiff(p,OFF,CUR);
+    h+="<div class='banner'>Méthode officielle : <b>"+(o.g==null?"pas de score global":f1(o.g)+" (rang "+o.r+")")+"</b> · méthode affichée : <b>"+(p.g==null?"pas de score global":f1(p.g)+" (rang "+p.r+")")+"</b>."+
+      (o.g!=null&&p.g!=null&&b?" La différence vient principalement de l'indicateur <b>"+esc(b.k)+"</b>, dont la contribution passe de "+fn(o.contrib[b.k]||0,1)+" à "+fn(p.contrib[b.k]||0,1)+" point(s).":"")+"</div>"; }
+  /* 3-4 : couverture, fiabilité */
+  h+="<div class='warn'>Couverture : <b>"+esc(p.couv)+"</b> · "+nInd(p)+" indicateurs disponibles"+(p.insuff.length?" · dimension(s) non calculée(s) faute d'indicateurs suffisants : <b>"+p.insuff.join(", ")+"</b> (minimum "+p.insuff.map(function(d){return d+" ≥ "+CUR.cfg.rules.min_indicateurs[d];}).join(", ")+")":"")+
+     ".<br>Fiabilité des données (méthode officielle) : <b>"+f1(p.fiab.fiabilite)+" / 100 ("+esc(p.fiab.niveau)+")</b> — couverture "+Math.round(p.fiab.couverture*100)+" %, qualité des sources "+Math.round(p.fiab.qualite_source*100)+" %, fraîcheur "+Math.round(p.fiab.anciennete*100)+" %, comparabilité "+Math.round(p.fiab.comparabilite*100)+" %.</div>";
+  /* 13 : sensibilité */
+  if(p.stab || p.sens!=null) h+="<div class='mini'>"+(p.stab?"Stabilité (600 rééchantillonnages, méthode officielle) : rang plausible "+p.stab.rang_p5+" – "+p.stab.rang_p95+" ; score "+f1(p.stab.score_p5)+" – "+f1(p.stab.score_p95)+". ":"")+
+     (p.sens!=null?"Sensibilité aux choix méthodologiques du registre : le score varie de <b>"+f1(p.sens)+" points</b> selon les options testées"+(p.sens>10?" — <b>pays méthodologiquement sensible</b>":"")+" (étendue entre scénarios, pas un intervalle de confiance).":"")+"</div>";
+  if(p.avert.length) h+="<details><summary>Avertissements de la méthode officielle ("+p.avert.length+")</summary><ul>"+p.avert.map(function(a){return "<li>"+esc(a)+"</li>";}).join("")+"</ul></details>";
+  /* 2, 11 : dimensions et contributions */
+  h+="<h3>Décomposition par dimension</h3><div class='tablewrap'><table><thead><tr><th>Dimension</th><th class='n'>Poids</th><th class='n'>Score</th><th class='n'>Contribution au global</th><th class='n'>Indicateurs</th><th></th></tr></thead><tbody>";
+  var wsum=0; DIMS.forEach(function(d){if(p.dims[d]!=null&&p.g!=null)wsum+=W[d];});
+  DIMS.forEach(function(d){ var cd=0; Object.keys(p.contrib).forEach(function(k){ if(defs[k].dim===d) cd+=p.contrib[k]; });
+    h+="<tr><td>"+d+" · "+esc(DN[d])+"</td><td class='n'>"+Math.round(W[d]*100)+" %"+(p.dims[d]!=null&&wsum>0?" <span class='mini'>(effectif "+Math.round(W[d]/wsum*100)+" %)</span>":"")+"</td><td class='n'><b>"+f1(p.dims[d])+"</b></td><td class='n'>"+(p.g!=null&&p.dims[d]!=null?fn(cd,1)+" pt":"—")+"</td><td class='n'>"+p.n_dim[d]+" / "+Object.keys(defs).filter(function(k){return defs[k].dim===d;}).length+"</td><td style='min-width:120px'>"+bar(p.dims[d],COLS_[d])+"</td></tr>"; });
+  var ds=DIMS.filter(function(d){return p.dims[d]!=null;}).map(function(d){return p.dims[d];});
+  h+="</tbody></table></div>"+(ds.length>=2?"<div class='mini'>Écart entre la dimension la plus haute et la plus basse : <b>"+f1(Math.max.apply(null,ds)-Math.min.apply(null,ds))+" points</b>"+(Math.max.apply(null,ds)-Math.min.apply(null,ds)>50?" : la moyenne pondérée masque des profils opposés (effet de compensation).":".")+(p.g!=null?" Somme des contributions = "+fn(Object.keys(p.contrib).reduce(function(s,k){return s+p.contrib[k];},0),3)+" = score global.":"")+"</div>":"");
+  /* 7-8 */
+  var ks=Object.keys(p.contrib); if(ks.length){ ks.sort(function(a,b){return p.nrm[b]-p.nrm[a];});
+    var fav=ks.slice(0,3), def=ks.slice(-3).reverse();
+    h+="<div class='grid2'><div><h3>Indicateurs les plus favorables (vers 100)</h3><ul>"+fav.map(function(k){return "<li><b>"+k+"</b> "+esc(defs[k].nom.slice(0,70))+" : score "+f1(p.nrm[k])+", contribution "+fn(p.contrib[k],1)+" pt</li>";}).join("")+"</ul></div>"+
+       "<div><h3>Indicateurs les plus défavorables (vers 0)</h3><ul>"+def.map(function(k){return "<li><b>"+k+"</b> "+esc(defs[k].nom.slice(0,70))+" : score "+f1(p.nrm[k])+", contribution "+fn(p.contrib[k],1)+" pt</li>";}).join("")+"</ul></div></div>"; }
+  /* 5, 6, 9, 10 */
+  h+="<h3>Du score à chaque valeur statistique</h3><div class='tablewrap'><table><thead><tr><th>Id</th><th>Indicateur</th><th class='n'>Brut</th><th class='n'>Année</th><th>Transformation</th><th class='n'>Score 0–100</th><th class='n'>Poids effectif</th><th class='n'>Contribution</th><th>Source</th></tr></thead><tbody>";
+  var wsg=0; p.avail&&p.avail.forEach(function(d){wsg+=W[d];});
+  Object.keys(defs).sort().forEach(function(k){ var i=defs[k], o=p.raw[k];
+    h+="<tr><td>"+k+(i.niveau_preuve?" <span class='pill' title='niveau de preuve'>N"+i.niveau_preuve+"</span>":"")+"</td><td>"+esc(i.nom)+"<div class='mini'>"+(i.orientation>0?"valeur élevée → pôle libéral":"valeur élevée → pôle socialisant")+"</div></td>";
+    if(o){ var we=null; if(p.contrib[k]!=null){ var wd=0; Object.keys(p.nrm).forEach(function(x){ if(defs[x]&&defs[x].dim===i.dim) wd+=(defs[x].poids_interne==null?1:+defs[x].poids_interne); }); we=W[i.dim]/wsg*(i.poids_interne==null?1:+i.poids_interne)/wd; }
+      h+="<td class='n'>"+fn(o[0])+" "+esc(i.unite)+"</td><td class='n'>"+o[1]+(o[2]!=="valide"?" <span class='mini'>("+esc(o[2])+")</span>":"")+"</td><td class='mini'>"+formula(k)+"</td><td class='n'><b>"+f1(p.nrm[k])+"</b></td><td class='n'>"+(we==null?"—":fn(we*100,1)+" %")+"</td><td class='n'>"+(p.contrib[k]==null?"<span class='mini'>non compté"+(p.insuff.indexOf(i.dim)>=0?" (dimension non calculée)":"")+"</span>":fn(p.contrib[k],2))+"</td><td><a href='"+esc(i.url)+"' target='_blank' rel='noopener'>"+esc(i.source)+"</a>"+(o[4]?"<div class='mini'>"+esc(o[4])+"</div>":"")+"</td>"; }
+    else h+="<td class='n' colspan='6'><span class='mini'>donnée non disponible (non estimée, non substituée)</span></td><td><a href='"+esc(i.url)+"' target='_blank' rel='noopener'>"+esc(i.source)+"</a></td>";
+    h+="</tr>"; });
   h+="</tbody></table></div>";
-  h+="<h3>Indicateurs : valeurs brutes, normalisées, années et sources</h3><div class='tablewrap'><table><thead><tr><th>Id</th><th>Indicateur</th><th class='n'>Brut</th><th class='n'>Norm. 0–100</th><th class='n'>Année</th><th>Validation</th><th>Source</th></tr></thead><tbody>";
-  DATA.indicateurs.forEach(function(i){
-    var o=p.ind[i.id];
-    h+="<tr><td>"+i.id+"</td><td>"+esc(i.nom)+"<div class='mini'>sens : "+(i.orientation>0?"valeur élevée → pôle libéral":"valeur élevée → pôle socialisant")+"</div></td>";
-    if(o) h+="<td class='n'>"+fn(o[0])+" "+esc(i.unite)+"</td><td class='n'><b>"+f1(o[1])+"</b></td><td class='n'>"+o[2]+"</td><td>"+esc(o[3])+(o[5]?"<div class='mini'>"+esc(o[5])+"</div>":"")+"</td><td><a href='"+esc(i.url)+"' target='_blank' rel='noopener'>"+esc(i.source)+"</a><div class='mini'>révision source : "+esc(o[4]||"n.d.")+" · collecte : "+esc(DATA.meta.collecte)+"</div></td>";
-    else h+="<td class='n' colspan='4'><span class='mini'>donnée non disponible (non estimée, non substituée)</span></td><td><a href='"+esc(i.url)+"' target='_blank' rel='noopener'>"+esc(i.source)+"</a></td>";
-    h+="</tr>";
-  });
-  h+="</tbody></table></div>";
+  /* candidats hors calcul */
+  var cand=Object.keys(p.raw).filter(function(k){return !defs[k];});
+  if(cand.length) h+="<details><summary>Observations non comptées dans la méthode affichée ("+cand.length+")</summary><ul>"+cand.map(function(k){var i=INDALL[k];return "<li><b>"+k+"</b> "+esc(i?i.nom:"")+" : "+fn(p.raw[k][0])+" "+esc(i?i.unite:"")+" ("+p.raw[k][1]+")</li>";}).join("")+"</ul></details>";
+  /* 12 : anomalies */
+  h+="<h3>Anomalies détectées par l'audit ("+p.anom.length+")</h3>"+(p.anom.length?"<ul>"+p.anom.map(function(a){return "<li><b>"+esc(a.categorie)+"</b> — "+esc(a.cause)+" <span class='mini'>Correction proposée : "+esc(a.correction)+(a.effet&&a.effet!=="—"?" ; effet : "+esc(a.effet):"")+" ; certitude : "+esc(a.certitude)+".</span></li>";}).join("")+"</ul>":"<p class='mini'>Aucune.</p>");
+  /* 14 : décisions */
+  var app=DATA.decisions.filter(function(d){return d.statut==="approuvée";});
+  h+="<h3>Décisions approuvées par l'utilisateur</h3>"+(app.length?"<ul>"+app.map(function(d){return "<li>"+esc(d.id)+" "+esc(d.titre)+" → "+esc(d.option_retenue)+"</li>";}).join("")+"</ul>":"<p class='mini'>Aucune pour l'instant : la méthode officielle est la V"+esc(DATA.meta.version)+" sans modification. Les décisions en attente sont dans l'onglet « Arbitrages ».</p>");
   c.innerHTML=h;
+}
+
+/* ---- Arbitrages ---- */
+function renderArb(){
+  var c=$("arb"), h="<h2>Arbitrages méthodologiques</h2>";
+  h+="<p>Chaque décision ci-dessous est un <b>choix de mesure ou un choix normatif</b> que l'audit a identifié. Aucune n'est appliquée au score officiel tant que tu ne l'as pas approuvée. Sélectionner une option crée <b>« Mon scénario »</b>, une simulation temporaire recalculée immédiatement. Pour rendre un choix officiel : exporte tes arbitrages, puis applique-les dans le dépôt avec <code>python3 tools/approve.py --import fichier.json</code>. Ce fichier HTML local ne peut pas modifier durablement la méthode.</p>";
+  h+="<div class='row'><button class='b' id='arb_reco'>Charger les options recommandées dans « Mon scénario »</button><button class='b' id='arb_off'>Repartir de la méthode officielle</button><button class='b' id='arb_exp'>Exporter mes arbitrages (JSON)</button><label class='b' style='cursor:pointer'>Importer… <input type='file' id='arb_imp' accept='application/json,.json' style='display:none'></label><span id='arb_msg' class='mini'></span></div>";
+  var ap=state.arbPays||"FRA";
+  h+="<div class='row' style='margin-top:8px'><label>Pays pour les exemples chiffrés : <select id='arb_pays'>"+P.slice().sort(function(a,b){return norm(a.nom)<norm(b.nom)?-1:1;}).map(function(p){return "<option value='"+p.id+"'"+(p.id===ap?" selected":"")+">"+esc(p.nom)+"</option>";}).join("")+"</select></label></div>";
+  var base=OFF, pr=BYID[ap];
+  DATA.decisions.forEach(function(d){
+    var sim=DATA.simulations[d.id]||{}, ch=state.scen==="perso"?state.perso[d.id]:(state.scen==="recommande"?recoChoices()[d.id]:null);
+    h+="<details class='opt' "+(d.id==="DEC-01"?"open":"")+"><summary><b>"+esc(d.id)+"</b> · "+esc(d.titre)+" <span class='pill'>catégorie "+d.categorie+" : "+esc(d.categorie_libelle)+"</span> <span class='pill'>"+esc(d.nature)+"</span> "+(d.statut==="approuvée"?"<span class='tag app'>approuvée</span>":"<span class='tag pro'>"+esc(d.statut)+"</span>")+"</summary>";
+    h+="<p><b>Fait observé.</b> "+esc(d.fait_observe)+"</p><p><b>Règle actuelle.</b> "+esc(d.regle_actuelle)+"</p><p><b>Problème.</b> "+esc(d.probleme)+"</p><p><b>Proposition de l'audit.</b> "+esc(d.proposition)+"</p><p class='mini'>Justification : "+esc(d.justification_quantitative)+"</p>";
+    d.options.forEach(function(o){
+      var s=sim[o.id]||{};
+      var r=compute(configFrom(overridesFor(Object.assign({}, currentChoices()||{}, (function(){var x={};x[d.id]=o.id;return x;})()))), weightsModified()?W:null).res[ap];
+      var rb=CUR.res[ap];
+      var ex="";
+      if(pr){ if(rb.g==null&&r.g==null) ex=esc(pr.nom)+" : pas de score global, ni avec la méthode affichée ni avec cette option.";
+        else if(r.g==null) ex="Avec la méthode affichée, le score de "+esc(pr.nom)+" est de "+f1(rb.g)+". Avec cette option, il n'aurait plus de score global (couverture insuffisante).";
+        else if(rb.g==null) ex="Avec cette option, "+esc(pr.nom)+" obtiendrait un score global de "+f1(r.g)+" (rang "+r.r+") ; il n'en a pas avec la méthode affichée.";
+        else { var best=null, ks={}; Object.keys(rb.contrib).concat(Object.keys(r.contrib)).forEach(function(k){ks[k]=1;}); Object.keys(ks).forEach(function(k){var dd=(r.contrib[k]||0)-(rb.contrib[k]||0); if(!best||Math.abs(dd)>Math.abs(best.d)) best={k:k,d:dd};});
+          ex="Avec la méthode affichée, le score de "+esc(pr.nom)+" est de "+f1(rb.g)+" (rang "+rb.r+"). Avec cette option, il serait de "+f1(r.g)+" (rang "+r.r+")."+(Math.abs(r.g-rb.g)>0.05&&best?" La différence vient principalement de l'indicateur "+esc(best.k)+", dont la contribution passe de "+fn(rb.contrib[best.k]||0,1)+" à "+fn(r.contrib[best.k]||0,1)+" point(s).":(r.r!==rb.r?" Le score du pays ne change pas ; son rang varie parce que d'autres pays changent de score ou sortent du classement.":" Aucune différence.")); } }
+      h+="<div class='opt"+(ch===o.id?" cur":"")+"'><label><input type='radio' name='r_"+d.id+"' data-d='"+d.id+"' data-o='"+o.id+"'"+(ch===o.id||(!ch&&((d.statut==="approuvée"&&d.option_retenue===o.id)||(d.statut!=="approuvée"&&o.id===d.options[0].id)))?" checked":"")+"> <b>"+esc(o.libelle)+"</b></label>"+(o.id===d.option_recommandee?" <span class='pill'>recommandée</span>":"")+decStatusLabel(d,o.id)+
+         (s.n_global_apres!=null?"<div class='mini'>Seule par rapport à la méthode officielle : "+s.n_global_apres+" scores globaux (avant "+s.n_global_avant+") · Spearman des rangs "+fn(s.spearman_rangs_communs,3)+" · variation moyenne "+fn(s.variation_absolue_moyenne,1)+" pt, max "+fn(s.variation_absolue_max,1)+" pt"+(s.plus_fortes_variations&&s.plus_fortes_variations.length&&s.variation_absolue_max>0?" · plus fortes variations : "+s.plus_fortes_variations.slice(0,4).map(function(x){return esc(x.pays)+" "+sgn(x.variation);}).join(", "):"")+(s.n_global_retires?" · "+s.n_global_retires+" entité(s) perdent leur score global":"")+"</div>":"")+
+         "<div class='mini'>"+ex+"</div></div>";
+    });
+    h+="</details>";
+  });
+  /* simulation avant / après */
+  if(state.scen!=="officiel"){
+    var rows=P.map(function(p){ var a=OFF.res[p.id], b=CUR.res[p.id]; return {p:p,a:a,b:b,d:(a.g!=null&&b.g!=null)?b.g-a.g:null}; });
+    var mv=rows.filter(function(x){return x.d!=null;}).sort(function(x,y){return Math.abs(y.d)-Math.abs(x.d);}).slice(0,25);
+    var lost=rows.filter(function(x){return x.a.g!=null&&x.b.g==null;});
+    h+="<h3>Simulation avant / après : méthode officielle → méthode affichée</h3><p class='mini'>"+lost.length+" entité(s) perdent leur score global"+(lost.length?" : "+lost.slice(0,40).map(function(x){return esc(x.p.nom);}).join(", ")+(lost.length>40?"…":""):"")+".</p>";
+    h+="<div class='tablewrap'><table><thead><tr><th>Pays</th><th class='n'>Ancien score</th><th class='n'>Nouveau</th><th class='n'>Variation</th><th class='n'>Ancien rang</th><th class='n'>Nouveau</th><th>Dimension responsable</th><th>Indicateur responsable</th></tr></thead><tbody>";
+    mv.forEach(function(x){ var dd={}; DIMS.forEach(function(d){dd[d]=0;}); var di={};
+      Object.keys(x.a.contrib).forEach(function(k){ var i=INDALL[k]; dd[i.dim]-=x.a.contrib[k]; di[k]=(di[k]||0)-x.a.contrib[k]; });
+      Object.keys(x.b.contrib).forEach(function(k){ var i=INDALL[k]; dd[i.dim]+=x.b.contrib[k]; di[k]=(di[k]||0)+x.b.contrib[k]; });
+      var bd=DIMS.reduce(function(m,d){return Math.abs(dd[d])>Math.abs(dd[m])?d:m;},"A"), bi=Object.keys(di).reduce(function(m,k){return (m==null||Math.abs(di[k])>Math.abs(di[m]))?k:m;},null);
+      h+="<tr><td><a href='#' data-f='"+x.p.id+"'>"+esc(x.p.nom)+"</a></td><td class='n'>"+f1(x.a.g)+"</td><td class='n'>"+f1(x.b.g)+"</td><td class='n'><b>"+sgn(x.d)+"</b></td><td class='n'>"+x.a.r+"</td><td class='n'>"+x.b.r+"</td><td>"+bd+" ("+sgn(dd[bd])+" pt)</td><td>"+esc(bi)+" ("+sgn(di[bi])+" pt)</td></tr>"; });
+    h+="</tbody></table></div>";
+  }
+  c.innerHTML=h;
+  Array.prototype.forEach.call(c.querySelectorAll("input[type=radio]"),function(r){ r.onchange=function(){ if(state.scen!=="perso"){ state.perso = state.scen==="recommande"?recoChoices():{}; }
+      state.perso[r.getAttribute("data-d")]=r.getAttribute("data-o"); state.scen="perso"; $("scen").value="perso"; recompute(); renderBanner(); renderArb(); }; });
+  Array.prototype.forEach.call(c.querySelectorAll("a[data-f]"),function(a){a.onclick=function(e){e.preventDefault();openFiche(a.getAttribute("data-f"));};});
+  $("arb_pays").onchange=function(e){ state.arbPays=e.target.value; renderArb(); };
+  $("arb_reco").onclick=function(){ state.perso=recoChoices(); state.scen="perso"; $("scen").value="perso"; recompute(); renderBanner(); renderArb(); };
+  $("arb_off").onclick=function(){ state.perso={}; state.scen="officiel"; $("scen").value="officiel"; recompute(); renderBanner(); renderArb(); };
+  $("arb_exp").onclick=exportConfig;
+  $("arb_imp").onchange=function(e){ var f=e.target.files[0]; if(!f) return; var rd=new FileReader(); rd.onload=function(){ try{ importConfig(JSON.parse(rd.result)); }catch(err){ $("arb_msg").textContent="Import impossible : "+err.message; } }; rd.readAsText(f); };
+}
+function exportConfig(){
+  var ch=currentChoices()||{}, out={format:"socialistometre-arbitrages", version_format:1, version_methode:DATA.meta.version, empreinte_donnees:DATA.meta.hash,
+    date_export:new Date().toISOString().slice(0,10), mode:state.scen,
+    avertissement:"Fichier d'arbitrages exporté depuis l'explorateur. Il ne modifie rien par lui-même : appliquer avec python3 tools/approve.py --import <fichier>. Les décisions marquées « approuver » deviennent officielles ; les autres restent des propositions.",
+    poids_dimensions_simulation: weightsModified()?W:null, decisions:{}};
+  DATA.decisions.forEach(function(d){ var o=ch[d.id]; if(o) out.decisions[d.id]={option:o, action:"approuver", libelle:(d.options.filter(function(x){return x.id===o;})[0]||{}).libelle, commentaire:""}; });
+  var blob=new Blob([JSON.stringify(out,null,1)],{type:"application/json"}), a=document.createElement("a");
+  a.href=URL.createObjectURL(blob); a.download="arbitrages_socialistometre_"+out.date_export+".json"; document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href); a.remove();},500);
+  $("arb_msg").textContent="Fichier exporté ("+Object.keys(out.decisions).length+" décision(s)). Rien n'est encore officiel.";
+  return out;
+}
+function importConfig(obj){
+  if(!obj || obj.format!=="socialistometre-arbitrages") throw new Error("format inconnu");
+  var ch={}, n=0; Object.keys(obj.decisions||{}).forEach(function(id){ var d=DEC[id], o=obj.decisions[id].option; if(d && d.options.some(function(x){return x.id===o;})){ ch[id]=o; n++; } });
+  state.perso=ch; state.scen="perso"; $("scen").value="perso"; recompute(); renderBanner(); renderArb();
+  $("arb_msg").textContent=n+" décision(s) importée(s) dans « Mon scénario » (simulation, non officielle)."+(obj.empreinte_donnees&&obj.empreinte_donnees!==DATA.meta.hash?" ⚠ Le fichier a été produit avec un autre jeu de données.":"");
 }
 
 /* ---- Dispersion ---- */
 function dimVal(p,k){ return k==="G"?p.g:p.dims[k]; }
-function renderScatter(){
-  var kx=$("sx").value, ky=$("sy").value, svg=$("scat"); while(svg.firstChild) svg.removeChild(svg.firstChild);
-  var w=svgW(svg), h=460, m={l:46,r:16,t:14,b:42};
-  var X=function(v){return m.l+v/100*(w-m.l-m.r);}, Y=function(v){return h-m.b-v/100*(h-m.t-m.b);};
-  for(var v=0;v<=100;v+=20){ el("line",{x1:X(v),x2:X(v),y1:Y(0),y2:Y(100),"class":"ax",opacity:.5},svg); el("line",{x1:X(0),x2:X(100),y1:Y(v),y2:Y(v),"class":"ax",opacity:.5},svg); var a=el("text",{x:X(v),y:h-m.b+14,"text-anchor":"middle","class":"mut"},svg);a.textContent=v; var b=el("text",{x:m.l-6,y:Y(v)+4,"text-anchor":"end","class":"mut"},svg);b.textContent=v; }
-  var lx=el("text",{x:(w+m.l)/2,y:h-6,"text-anchor":"middle"},svg); lx.textContent=LBL[kx]+" (0 = socialisant · 100 = libéral)";
-  var ly=el("text",{x:12,y:h/2,"text-anchor":"middle",transform:"rotate(-90 12 "+h/2+")"},svg); ly.textContent=LBL[ky];
-  var pts=P.filter(function(p){return dimVal(p,kx)!=null&&dimVal(p,ky)!=null;});
-  var xs=pts.map(function(p){return dimVal(p,kx);}), ys=pts.map(function(p){return dimVal(p,ky);});
-  pts.forEach(function(p){
-    var c=el("circle",{cx:X(dimVal(p,kx)),cy:Y(dimVal(p,ky)),r:(state.cmp.indexOf(p.id)>=0||state.sel===p.id)?6:3.6,fill:p.couv==="complet"?"var(--acc)":"var(--card)",stroke:"var(--acc)","stroke-width":1.1,opacity:.8,style:"cursor:pointer"},svg);
-    c.addEventListener("mousemove",function(e){showTip(e,"<b>"+esc(p.nom)+"</b><br>"+LBL[kx]+" : "+f1(dimVal(p,kx))+"<br>"+LBL[ky]+" : "+f1(dimVal(p,ky)));});
-    c.addEventListener("mouseleave",hideTip); c.addEventListener("click",function(){openFiche(p.id);});
-  });
-  var rho = pts.length>3 ? spearman(xs,ys) : null;
-  $("scatinfo").textContent=pts.length+" entités ayant les deux valeurs · corrélation de rang de Spearman : "+(rho==null?"—":fn(rho,3))+" · une corrélation n'est pas une causalité. Points pleins : score complet ; creux : partiel.";
-}
 var LBL={A:"A · Libéralisme économique",B:"B · Redistribution et protection sociale",C:"C · Place de l'État",D:"D · Libertés individuelles et politiques",G:"Score global"};
 function ranks(a){ var idx=a.map(function(v,i){return [v,i];}).sort(function(x,y){return x[0]-y[0];}); var r=new Array(a.length); var i=0; while(i<idx.length){ var j=i; while(j+1<idx.length&&idx[j+1][0]===idx[i][0]) j++; var avg=(i+j)/2+1; for(var k=i;k<=j;k++) r[idx[k][1]]=avg; i=j+1; } return r; }
 function spearman(x,y){ var a=ranks(x),b=ranks(y),n=a.length,ma=0,mb=0,i; for(i=0;i<n;i++){ma+=a[i];mb+=b[i];} ma/=n;mb/=n; var sab=0,saa=0,sbb=0; for(i=0;i<n;i++){sab+=(a[i]-ma)*(b[i]-mb);saa+=(a[i]-ma)*(a[i]-ma);sbb+=(b[i]-mb)*(b[i]-mb);} return sab/Math.sqrt(saa*sbb); }
+function renderScatter(){
+  var kx=$("sx").value, ky=$("sy").value, svg=$("scat"); while(svg.firstChild) svg.removeChild(svg.firstChild);
+  var w=svgW(svg), h=460, m={l:46,r:16,t:14,b:42}, X=function(v){return m.l+v/100*(w-m.l-m.r);}, Y=function(v){return h-m.b-v/100*(h-m.t-m.b);};
+  for(var v=0;v<=100;v+=20){ el("line",{x1:X(v),x2:X(v),y1:Y(0),y2:Y(100),"class":"ax",opacity:.5},svg); el("line",{x1:X(0),x2:X(100),y1:Y(v),y2:Y(v),"class":"ax",opacity:.5},svg); var a=el("text",{x:X(v),y:h-m.b+14,"text-anchor":"middle","class":"mut"},svg);a.textContent=v; var b=el("text",{x:m.l-6,y:Y(v)+4,"text-anchor":"end","class":"mut"},svg);b.textContent=v; }
+  var lx=el("text",{x:(w+m.l)/2,y:h-6,"text-anchor":"middle"},svg); lx.textContent=LBL[kx]+" (0 = socialisant · 100 = libéral)";
+  var ly=el("text",{x:12,y:h/2,"text-anchor":"middle",transform:"rotate(-90 12 "+h/2+")"},svg); ly.textContent=LBL[ky];
+  var pts=P.filter(function(p){return dimVal(p,kx)!=null&&dimVal(p,ky)!=null;}), xs=pts.map(function(p){return dimVal(p,kx);}), ys=pts.map(function(p){return dimVal(p,ky);});
+  pts.forEach(function(p){ var c=el("circle",{cx:X(dimVal(p,kx)),cy:Y(dimVal(p,ky)),r:(state.cmp.indexOf(p.id)>=0||state.sel===p.id)?6:3.6,fill:p.couv==="complet"?"var(--acc)":"var(--card)",stroke:"var(--acc)","stroke-width":1.1,opacity:.8,style:"cursor:pointer"},svg);
+    c.addEventListener("mousemove",function(e){showTip(e,"<b>"+esc(p.nom)+"</b><br>"+LBL[kx]+" : "+f1(dimVal(p,kx))+"<br>"+LBL[ky]+" : "+f1(dimVal(p,ky)));}); c.addEventListener("mouseleave",hideTip); c.addEventListener("click",function(){openFiche(p.id);}); });
+  var rho=pts.length>3?spearman(xs,ys):null;
+  $("scatinfo").textContent=pts.length+" entités ayant les deux valeurs · corrélation de rang de Spearman : "+(rho==null?"—":fn(rho,3))+" · une corrélation n'est pas une causalité. Points pleins : score complet ; creux : partiel.";
+}
 
 /* ---- Distribution ---- */
 function renderHist(){
   var k=$("dsel").value, svg=$("hist"); while(svg.firstChild) svg.removeChild(svg.firstChild);
-  var w=svgW(svg), h=320, m={l:40,r:12,t:12,b:36}, nb=20;
-  var vals=P.map(function(p){return dimVal(p,k);}).filter(function(v){return v!=null;});
-  var bins=[]; for(var i=0;i<nb;i++) bins.push(0);
-  vals.forEach(function(v){ var b=Math.min(nb-1,Math.floor(v/100*nb)); bins[b]++; });
-  var mx=Math.max.apply(null,bins.concat([1]));
-  var bw=(w-m.l-m.r)/nb;
+  var w=svgW(svg), h=320, m={l:40,r:12,t:12,b:36}, nb=20, vals=P.map(function(p){return dimVal(p,k);}).filter(function(v){return v!=null;});
+  var bins=[]; for(var i=0;i<nb;i++) bins.push(0); vals.forEach(function(v){ var b=Math.min(nb-1,Math.floor(v/100*nb)); bins[b]++; });
+  var mx=Math.max.apply(null,bins.concat([1])), bw=(w-m.l-m.r)/nb;
   for(var t=0;t<=mx;t+=Math.max(1,Math.ceil(mx/5))){ var y=h-m.b-t/mx*(h-m.t-m.b); el("line",{x1:m.l,x2:w-m.r,y1:y,y2:y,"class":"ax",opacity:.5},svg); var tx=el("text",{x:m.l-5,y:y+4,"text-anchor":"end","class":"mut"},svg); tx.textContent=t; }
   bins.forEach(function(c,i){ var bh=c/mx*(h-m.t-m.b); var r=el("rect",{x:m.l+i*bw+1,y:h-m.b-bh,width:Math.max(1,bw-2),height:bh,fill:COL[k]||"var(--acc)",opacity:.85},svg);
     r.addEventListener("mousemove",function(e){showTip(e,(i*5)+"–"+((i+1)*5)+" : "+c+" entité(s)");}); r.addEventListener("mouseleave",hideTip); });
   for(var v=0;v<=100;v+=10){ var a=el("text",{x:m.l+v/100*(w-m.l-m.r),y:h-m.b+15,"text-anchor":"middle","class":"mut"},svg); a.textContent=v; }
-  var s=vals.slice().sort(function(a,b){return a-b;}); var q=function(p){var i=(s.length-1)*p, lo=Math.floor(i), hi=Math.ceil(i); return s[lo]+(s[hi]-s[lo])*(i-lo);};
-  var mean=vals.reduce(function(a,b){return a+b;},0)/vals.length;
+  if(!vals.length){ $("histinfo").textContent="Aucune valeur."; return; }
+  var s=vals.slice().sort(function(a,b){return a-b;}), q=function(p){var i=(s.length-1)*p, lo=Math.floor(i), hi=Math.ceil(i); return s[lo]+(s[hi]-s[lo])*(i-lo);}, mean=vals.reduce(function(a,b){return a+b;},0)/vals.length;
   $("histinfo").textContent=LBL[k]+" : n="+vals.length+" · moyenne "+f1(mean)+" · médiane "+f1(q(.5))+" · quartiles "+f1(q(.25))+" – "+f1(q(.75))+" · min "+f1(s[0])+" · max "+f1(s[s.length-1])+" (barres de 5 points).";
 }
 
 /* ---- Pondérations ---- */
-function buildSliders(){
-  var c=$("sliders"); c.innerHTML="";
-  DIMS.forEach(function(d){
-    var r=document.createElement("div"); r.className="sl";
+function buildSliders(){ var c=$("sliders"); c.innerHTML="";
+  DIMS.forEach(function(d){ var r=document.createElement("div"); r.className="sl";
     r.innerHTML="<label for='w"+d+"'><b>"+d+"</b> · "+esc(DN[d])+" <span class='mini'>(officiel : "+Math.round(W0[d]*100)+" %)</span></label><input type='range' id='w"+d+"' min='0' max='100' step='1' value='"+Math.round(W[d]*100)+"'><span id='wv"+d+"' class='n'>"+Math.round(W[d]*100)+" %</span>";
-    c.appendChild(r);
-    r.querySelector("input").oninput=function(e){ setRawWeight(d, +e.target.value); };
-  });
-  updateWSum();
-}
+    c.appendChild(r); r.querySelector("input").oninput=function(e){ setRawWeight(d, +e.target.value); }; });
+  updateWSum(); }
 var RAW={};
-function setRawWeight(d,v){ RAW[d]=v; var tot=0; DIMS.forEach(function(x){ if(RAW[x]==null) RAW[x]=Math.round(W[x]*100); tot+=RAW[x]; });
-  if(tot<=0){ tot=1; }
-  DIMS.forEach(function(x){ W[x]=RAW[x]/tot; $("wv"+x).textContent=RAW[x]+" %"; });
-  updateWSum(); recompute(); render(); }
+function setRawWeight(d,v){ RAW[d]=v; var tot=0; DIMS.forEach(function(x){ if(RAW[x]==null) RAW[x]=Math.round(W[x]*100); tot+=RAW[x]; }); if(tot<=0){ tot=1; }
+  DIMS.forEach(function(x){ W[x]=RAW[x]/tot; $("wv"+x).textContent=RAW[x]+" %"; }); updateWSum(); recompute(); render(); }
 function updateWSum(){ var tot=0; DIMS.forEach(function(x){tot+=(RAW[x]==null?Math.round(W[x]*100):RAW[x]);}); $("wsum").textContent="Somme saisie : "+tot+" %. Les poids sont normalisés pour totaliser 100 % ; poids effectifs : "+DIMS.map(function(d){return d+" "+fn(W[d]*100,1)+" %";}).join(" · ")+". Pour un pays sans une dimension, les poids restants sont renormalisés (avertissement de comparabilité dans sa fiche)."; }
 function setWeights(obj){ DIMS.forEach(function(d){RAW[d]=Math.round(obj[d]*100);W[d]=obj[d];}); buildSliders(); recompute(); render(); }
 
 /* ---- Méthodologie ---- */
 function renderMeth(){
-  var M=DATA.meta, h="";
-  h+="<h2>Méthodologie V"+esc(M.version)+"</h2>";
-  h+="<p>Indice contemporain, construit à partir du seul ouvrage <em>Capitalisme et liberté</em> de Milton Friedman (traduction Leduc.s 2010, pagination imprimée). <b>Il n'est pas attribué à Friedman</b> : les choix de mesure sont ceux de ce projet. 0 = pôle socialisant, 100 = pôle libéral ; aucun pays n'est étiqueté politiquement, le score continu est le résultat.</p>";
-  h+="<h3>Formules</h3><ul><li>Normalisation (principale, « minmax ») : <code>t = clip((x − bas)/(haut − bas), 0, 1)</code> ; score = 100·t si l'indicateur est orienté +1, 100·(1−t) s'il est orienté −1. Bornes fixes pour les échelles naturelles, percentiles P5–P95 mondiaux pour A1, B1, B3, C2, C3.</li><li>Score de dimension = moyenne simple des indicateurs disponibles (poids égaux).</li><li>Score global = moyenne pondérée des dimensions disponibles (45/20/20/15), poids renormalisés sur les dimensions disponibles.</li><li>Règle V1 : "+esc(M.regle)+"</li><li>Fiabilité = 100·(0,4·couverture + 0,2·qualité des sources + 0,2·fraîcheur + 0,2·comparabilité). Elle est présentée séparément du score.</li><li>Année de référence "+esc(M.annee)+", fenêtre 2019–2023 : dernière valeur non nulle, année réelle conservée.</li></ul>";
+  var M=DATA.meta, h="", defs=OFF.cfg.defs, R=OFF.cfg.rules;
+  h+="<h2>Méthodologie V"+esc(M.version)+" (méthode officielle)</h2>";
+  h+="<p>Indice contemporain construit à partir du seul ouvrage <em>Capitalisme et liberté</em> de Milton Friedman (traduction Leduc.s 2010, pagination imprimée). <b>Il n'est pas attribué à Friedman</b> : les choix de mesure sont ceux de ce projet. 0 = pôle socialisant, 100 = pôle libéral ; aucun pays n'est étiqueté politiquement, le score continu est le résultat.</p>";
+  var pcts=Object.keys(defs).filter(function(k){return defs[k].bornes.regle==="percentile";}).sort();
+  h+="<h3>Formules</h3><ul><li>Normalisation : <code>t = clip((x − L)/(U − L), 0, 1)</code> ; score = 100·t si l'indicateur est orienté +1, 100·(1−t) s'il est orienté −1. Bornes fixes (échelles naturelles ou théoriques) sauf pour "+pcts.join(", ")+" : percentiles P5–P95 de la distribution mondiale de l'édition. Ces bornes dépendent donc de l'échantillon : ajouter un pays peut les modifier (voir DEC-08).</li><li>Score de dimension = moyenne des indicateurs disponibles, pondérée par les poids internes (tous égaux à 1 dans la méthode officielle). Minimum d'indicateurs requis : "+DIMS.map(function(d){return d+" ≥ "+R.min_indicateurs[d];}).join(", ")+".</li><li>Score global = moyenne pondérée des dimensions disponibles (45/20/20/15), poids renormalisés ; au moins "+R.min_dimensions+" dimensions, "+(R.exiger_dimension_A?"dont A":"A non exigée")+".</li><li>Contribution d'un indicateur = (w<sub>d</sub>/Σw<sub>d</sub>) × (w<sub>i</sub>/Σw<sub>i</sub>) × score<sub>i</sub> ; la somme des contributions est égale au score global.</li><li>Fiabilité = 100·(0,4·couverture + 0,2·qualité des sources + 0,2·fraîcheur + 0,2·comparabilité), présentée à part du score.</li><li>Année de référence "+esc(M.annee)+", fenêtre 2019–2023 : dernière valeur disponible, année réelle conservée.</li></ul>";
   h+="<p class='mini'>Jeu de données : empreinte SHA-256 <code>"+esc(M.hash)+"</code> · collecte : "+esc(M.collecte)+" · "+M.n+" entités, "+M.n_score+" avec score global.</p>";
+  h+="<h3>Seuils et bornes appliqués (méthode officielle)</h3><div class='tablewrap'><table><thead><tr><th>Id</th><th>Règle</th><th class='n'>L</th><th class='n'>U</th><th>Sens</th><th class='n'>Valeurs à 0</th><th class='n'>Valeurs à 100</th></tr></thead><tbody>"+Object.keys(defs).sort().map(function(k){var pr=OFF.params[k], s=DATA.diagnostic.saturation[k]||{}; return "<tr><td>"+k+"</td><td>"+esc(defs[k].bornes.regle==="fixe"?"fixe":"P"+defs[k].bornes.p_bas+"–P"+defs[k].bornes.p_haut)+"</td><td class='n'>"+fn(pr.bas,4)+"</td><td class='n'>"+fn(pr.haut,4)+"</td><td>"+(pr.orientation>0?"+1":"−1")+"</td><td class='n'>"+(s.a_0==null?"—":s.a_0+"/"+s.n)+"</td><td class='n'>"+(s.a_100==null?"—":s.a_100+"/"+s.n)+"</td></tr>";}).join("")+"</tbody></table></div><p class='mini'>Une borne de normalisation n'est pas un seuil théorique de libéralisme : Friedman ne fixe aucun seuil chiffré.</p>";
   h+="<h3>Principes de Friedman retenus (citations vérifiées automatiquement, page imprimée)</h3>";
   DATA.principes.forEach(function(p){ h+="<details><summary><b>"+esc(p.id)+"</b> · "+esc(p.nom)+"</summary><p>"+esc(p.resume)+"</p>"+p.refs.map(function(r){return "<div class='cite'>« "+esc(r.citation)+" » — chap. "+r.chap+", p. "+r.page+"</div>";}).join("")+"</details>"; });
-  h+="<h3>Dictionnaire des indicateurs admis ("+DATA.indicateurs.length+")</h3><div class='tablewrap'><table><thead><tr><th>Id</th><th>Dim.</th><th>Indicateur</th><th>Sens</th><th>Principes</th><th>Source</th></tr></thead><tbody>";
-  DATA.indicateurs.forEach(function(i){ h+="<tr><td>"+i.id+"</td><td>"+i.dim+"</td><td>"+esc(i.nom)+" <span class='mini'>["+esc(i.unite)+"]</span><div class='mini'><b>Lien avec Friedman :</b> "+esc(i.lien)+"</div><div class='mini'><b>Limites :</b> "+esc(i.limites)+"</div>"+(i.chevauchement?"<div class='mini'><b>Chevauchement :</b> "+esc(i.chevauchement)+"</div>":"")+"</td><td>"+(i.orientation>0?"+1 (élevé = libéral)":"−1 (élevé = socialisant)")+"</td><td>"+esc(i.principes.join(", "))+"</td><td><a href='"+esc(i.url)+"' target='_blank' rel='noopener'>"+esc(i.source)+"</a> <span class='pill'>"+esc(i.source_type)+"</span></td></tr>"; });
-  h+="</tbody></table></div>";
+  var row=function(i){ return "<tr><td>"+i.id+"</td><td>"+i.dim+"</td><td>"+(i.niveau_preuve?"N"+i.niveau_preuve:"—")+"</td><td>"+esc(i.nom)+" <span class='mini'>["+esc(i.unite)+"]</span><div class='mini'><b>Définition :</b> "+esc(i.definition_operationnelle||"")+"</div><div class='mini'><b>Lien avec Friedman :</b> "+esc(i.lien)+"</div><div class='mini'><b>Limites :</b> "+esc(i.limites)+"</div>"+(i.chevauchement?"<div class='mini'><b>Chevauchement :</b> "+esc(i.chevauchement)+"</div>":"")+"</td><td>"+(i.orientation>0?"+1 (élevé = libéral)":"−1 (élevé = socialisant)")+"</td><td>"+esc((i.principes||[]).join(", "))+"</td><td><a href='"+esc(i.url)+"' target='_blank' rel='noopener'>"+esc(i.source)+"</a> <span class='pill'>"+esc(i.source_type)+"</span></td></tr>"; };
+  var thead="<div class='tablewrap'><table><thead><tr><th>Id</th><th>Dim.</th><th>Niveau</th><th>Indicateur</th><th>Sens</th><th>Principes</th><th>Source</th></tr></thead><tbody>";
+  h+="<h3>Indicateurs retenus ("+DATA.indicateurs.filter(function(i){return !i.candidat;}).length+")</h3><p class='mini'>Niveau de preuve : N1 mesure directe · N2 proxy validé · N3 proxy faible. Selon la règle de l'utilisateur, un indicateur N3 ne doit pas compter sans son approbation explicite : voir DEC-03 (C2) et DEC-04 (A5).</p>"+thead+DATA.indicateurs.filter(function(i){return !i.candidat;}).map(row).join("")+"</tbody></table></div>";
+  h+="<h3>Indicateurs candidats (hors score officiel)</h3>"+thead+DATA.indicateurs.filter(function(i){return i.candidat;}).map(row).join("")+"</tbody></table></div>";
   h+="<h3>Candidats exclus</h3><ul>"+DATA.exclus.map(function(e){return "<li><b>"+esc(e.candidat)+"</b> ("+esc(e.principe||"—")+") : "+esc(e.raison)+"</li>";}).join("")+"</ul>";
-  h+="<h3>Limites principales</h3><ul><li>La dimension C ne compte que 3 indicateurs admissibles (cible 5–10 non atteinte) ; B en compte 6 dont 3 de prélèvements (B5, B6, B7) fortement liés entre eux. Aucun indicateur n'a été ajouté sans justification suffisante dans le corpus.</li><li>La couverture OCDE (A2, A3, B2, B4, B7, C1) est limitée : la composition des dimensions B et C diffère d'un pays à l'autre ; comparer les scores en regardant la couverture et la fiabilité.</li><li>Les prélèvements (B5, B6, B7) mesurent le financement de l'État sans distinguer impôts, taxes et cotisations (décision V1.1) ; ils ne disent rien de l'usage des fonds ni des déficits.</li><li>Les indicateurs D (Freedom House, WGI) sont fortement corrélés entre eux ; la dimension D est peu discriminante entre eux et corrélée à A (voir tests).</li><li>Freedom House est une ONG (qualité de source pondérée 0,8) ; WGI sont des indicateurs agrégés de perception.</li><li>Corrélation n'est pas causalité. Le texte de <em>Free to Choose</em> n'étant pas accessible, il n'est pas utilisé.</li></ul>";
+  var E=DATA.diagnostic.erreur_sous_ensembles;
+  h+="<h3>Diagnostic de l'audit</h3><p>Erreur commise sur un score de dimension calculé avec <i>k</i> indicateurs au lieu de tous (pays disposant de tous les indicateurs de la dimension) :</p><div class='tablewrap'><table><thead><tr><th>Dimension</th><th class='n'>Pays complets</th>"+[1,2,3,4,5].map(function(k){return "<th class='n'>k = "+k+" (médiane / P90)</th>";}).join("")+"</tr></thead><tbody>"+Object.keys(E).map(function(d){return "<tr><td>"+d+"</td><td class='n'>"+E[d].n_pays_complets+"</td>"+[1,2,3,4,5].map(function(k){var x=E[d].par_k[String(k)];return "<td class='n'>"+(x?fn(x.mediane,1)+" / "+fn(x.p90,1):"—")+"</td>";}).join("")+"</tr>";}).join("")+"</tbody></table></div>";
+  var A=DATA.anomalies_resume; h+="<p>Anomalies détectées : <b>"+A.n+"</b> sur "+A.n_pays+" entités — "+Object.keys(A.par_categorie).map(function(k){return esc(k)+" : "+A.par_categorie[k];}).join(" · ")+". Le détail par pays figure dans les fiches, et l'ensemble dans <code>ANOMALIES.csv</code> du dépôt.</p>";
+  h+="<h3>Limites principales</h3><ul><li>La couverture OCDE (A2, A3, B2, B4, B7, C1) est limitée : la composition des dimensions diffère d'un pays à l'autre (voir DEC-01, DEC-02).</li><li>Les prélèvements (B5, B6, B7) mesurent le financement de l'État ; un prélèvement faible peut refléter une faible capacité fiscale (DEC-09).</li><li>Les indicateurs D (Freedom House, WGI) sont fortement corrélés entre eux et avec A4/A6 (DEC-11).</li><li>Freedom House est une ONG ; WGI et V-Dem sont des agrégations de perceptions ou d'avis d'experts.</li><li>Corrélation n'est pas causalité. Le texte de <em>Free to Choose</em> n'étant pas accessible, il n'est pas utilisé.</li></ul>";
   h+="<h3>Tests de robustesse et de validation</h3><div class='tablewrap'><table><thead><tr><th>Test</th><th>Résultat</th><th>Détail</th></tr></thead><tbody>"+DATA.tests.map(function(t){return "<tr><td><b>"+esc(t.id)+"</b> "+esc(t.nom)+(t.critique?" <span class='pill'>critique</span>":"")+"</td><td>"+esc(t.statut)+"</td><td class='mini'>"+esc(t.detail)+"</td></tr>";}).join("")+"</tbody></table></div>";
-  h+="<h3>Audit</h3><p>Ce fichier contient l'ensemble des données de l'édition (valeurs brutes, normalisées, années, statuts, sources et URL). L'onglet « Fiche pays » liste chaque observation. Le dépôt GitHub contient les données brutes, le moteur de calcul Python et les tests permettant de reproduire cette édition.</p>";
+  h+="<h3>Audit</h3><p>Ce fichier contient toutes les valeurs brutes (indicateurs retenus et candidats), les règles de calcul et le registre des décisions. Les scores sont recalculés dans le navigateur à partir de ces valeurs, avec le même algorithme que le moteur Python du dépôt (parité vérifiée par les tests automatisés).</p>";
   $("meth").innerHTML=h;
 }
 
 /* ---- Rendu ---- */
 function render(){
-  if(state.tab==="classement") renderClassement();
-  else if(state.tab==="comparer") renderCompare();
-  else if(state.tab==="fiche") renderFiche();
-  else if(state.tab==="dispersion") renderScatter();
-  else if(state.tab==="distribution") renderHist();
+  renderBanner();
+  if(state.tab==="classement") renderClassement(); else if(state.tab==="comparer") renderCompare(); else if(state.tab==="fiche") renderFiche();
+  else if(state.tab==="arbitrage") renderArb(); else if(state.tab==="dispersion") renderScatter(); else if(state.tab==="distribution") renderHist(); else if(state.tab==="methode") renderMeth();
 }
-
-/* ---- Initialisation ---- */
 function init(){
   $("hdrmeta").textContent="Édition V"+DATA.meta.version+" · données "+DATA.meta.annee+" · "+DATA.meta.n+" entités.";
   $("foot").textContent="Socialistomètre V"+DATA.meta.version+" · empreinte du jeu de données "+DATA.meta.hash.slice(0,16)+"… · fichier autonome, aucune connexion requise (les liens de sources s'ouvrent avec Internet).";
   buildNav(); recompute();
   var fs=$("fsel"); P.forEach(function(p){var o=document.createElement("option");o.value=p.id;o.textContent=p.nom;fs.appendChild(o);});
-  var fra=BYID.FRA?"FRA":P[0].id; state.sel=fra; fs.value=fra; fs.onchange=function(){state.sel=fs.value;renderFiche();};
+  var fra=BYID.FRA?"FRA":P[0].id; state.sel=fra; state.arbPays=fra; fs.value=fra; fs.onchange=function(){state.sel=fs.value;renderFiche();};
   var dl=$("dl"); P.forEach(function(p){var o=document.createElement("option");o.value=p.nom;dl.appendChild(o);});
   ["sx","sy"].forEach(function(id,i){var s=$(id);["G","A","B","C","D"].forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=LBL[k];s.appendChild(o);}); s.value=i===0?"A":"D"; s.onchange=renderScatter;});
   var ds=$("dsel"); ["G","A","B","C","D"].forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=LBL[k];ds.appendChild(o);}); ds.onchange=renderHist;
   $("q").oninput=function(e){state.q=e.target.value;renderClassement();};
   $("onlycomplet").onchange=function(e){state.onlyComplet=e.target.checked;renderClassement();};
   function zoom(){var a=+$("zmin").value,b=+$("zmax").value; if(isNaN(a)||isNaN(b))return; state.zmin=Math.max(0,Math.min(99,a)); state.zmax=Math.max(state.zmin+1,Math.min(100,b)); renderSwarm();}
-  $("zmin").onchange=zoom; $("zmax").onchange=zoom;
-  $("zreset").onclick=function(){$("zmin").value=0;$("zmax").value=100;zoom();};
+  $("zmin").onchange=zoom; $("zmax").onchange=zoom; $("zreset").onclick=function(){$("zmin").value=0;$("zmax").value=100;zoom();};
   $("cadd").onclick=function(){var v=norm($("cq").value); var p=P.filter(function(x){return norm(x.nom)===v;})[0]||P.filter(function(x){return norm(x.nom).indexOf(v)>=0&&v;})[0]; if(p&&state.cmp.indexOf(p.id)<0){state.cmp.push(p.id);} $("cq").value=""; renderCompare();};
   $("cq").onkeydown=function(e){if(e.key==="Enter")$("cadd").onclick();};
   $("cclear").onclick=function(){state.cmp=[];renderCompare();};
   $("wreset").onclick=function(){setWeights(W0);}; $("weq").onclick=function(){setWeights({A:.25,B:.25,C:.25,D:.25});};
-  buildSliders(); renderMeth();
+  $("scen").onchange=function(e){ state.scen=e.target.value; recompute(); render(); };
+  buildSliders();
   window.addEventListener("resize",function(){render();});
-  /* présélection de comparaison */
   ["FRA","DEU","USA","CHE"].forEach(function(i){if(BYID[i]) state.cmp.push(i);});
   go("classement");
-  window.__socialistometre={recompute:recompute,P:P,W:W,state:state,setWeights:setWeights,globalScore:globalScore,go:go,render:render,openFiche:openFiche};
+  window.__socialistometre={recompute:recompute,P:P,W:W,state:state,setWeights:setWeights,go:go,render:render,openFiche:openFiche,
+    setScenario:function(s,choix){ state.scen=s; if(choix) state.perso=choix; $("scen").value=s; recompute(); render(); },
+    compute:compute, configFrom:configFrom, overridesFor:overridesFor, recoChoices:recoChoices, exportConfig:exportConfig, importConfig:importConfig};
 }
 init();
 })();

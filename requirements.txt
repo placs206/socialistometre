@@ -2,3 +2,4 @@ numpy
 openpyxl
 babel
 playwright
+pyreadr

@@ -16,13 +16,18 @@ from babel import Locale
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RAW = os.path.join(ROOT, "data", "raw")
-OUT = os.path.join(ROOT, "data", "processed")
+OUT = os.environ.get("SOCIO_OUT") or os.path.join(ROOT, "data", "processed")   # SOCIO_OUT : test de période (T14) uniquement
 CFG = os.path.join(ROOT, "config")
 
 MANIFEST = json.load(open(os.path.join(RAW, "MANIFEST.json"), encoding="utf-8"))
 COLLECT_DATE = MANIFEST["genere_le"]
 DIM = json.load(open(os.path.join(CFG, "dimensions.json"), encoding="utf-8"))
 Y_MIN, Y_MAX = DIM["fenetre_annees"]
+# Variables d'environnement réservées au test de période (tools/run_robustness.py, T14) ; sans elles : édition officielle.
+if os.environ.get("SOCIO_FENETRE"):
+    Y_MIN, Y_MAX = (int(x) for x in os.environ["SOCIO_FENETRE"].split(","))
+FH_EDITION = int(os.environ.get("SOCIO_FH_EDITION", "2024"))
+PMR_ANNEE = os.environ.get("SOCIO_PMR_ANNEE", "2023")
 IND = json.load(open(os.path.join(CFG, "indicateurs.json"), encoding="utf-8"))
 
 anomalies = []
@@ -102,7 +107,7 @@ for c in wb_raw:
 wbk = openpyxl.load_workbook(os.path.join(RAW, "freedomhouse_fiw_2013-2024.xlsx"), read_only=True, data_only=True)
 rows = list(wbk["FIW13-24"].iter_rows(values_only=True))
 hdr = rows[1]
-fh_rows = [dict(zip(hdr, r)) for r in rows[2:] if r[0] and r[3] == 2024]
+fh_rows = [dict(zip(hdr, r)) for r in rows[2:] if r[0] and r[3] == FH_EDITION]
 wb_by_name = {norm(p["nom_en"]): k for k, p in pays.items()}
 fh_by_iso = {}
 for d in fh_rows:
@@ -153,10 +158,10 @@ IND_BY_ID = {i["id"]: i for i in IND["indicateurs"]}
 for alt in IND["alternatives_sensibilite"]:
     IND_BY_ID[alt["id"]] = alt
 RANGES = {"A1": (0, 100), "A1alt": (0, 100), "A2": (0, 6), "A3": (0, 6), "A4": (-2.6, 2.6), "A5": (-2.6, 2.6), "A6": (0, 4),
-          "B5": (0, 100), "B6": (0, 100), "B7": (0, 100), "B2": (0, 100), "B3": (0, 100), "B4": (0, 2), "C1": (0, 6), "C2": (0, 100), "C2alt": (0, 100),
-          "C3": (0, 100), "D1": (-2.6, 2.6), "D2": (-4, 40), "D3": (0, 16), "D4": (0, 12)}
+          "B5": (0, 100), "B5n": (0, 100), "B6": (0, 100), "B7": (0, 100), "B2": (0, 100), "B3": (0, 100), "B4": (0, 2), "C1": (0, 6), "C2": (0, 100), "C2alt": (0, 100),
+          "C3": (0, 100), "C4": (0, 4), "D1": (-2.6, 2.6), "D2": (-4, 40), "D3": (0, 16), "D4": (0, 12)}
 UNITE = {i["id"]: i["unite"] for i in IND["indicateurs"]}
-UNITE["A1alt"] = "%"; UNITE["C2alt"] = "% des inscrits"
+UNITE["A1alt"] = "%"; UNITE["C2alt"] = "% des inscrits"; UNITE["B5n"] = "% du PIB"; UNITE["C4"] = "échelle 0-4"
 
 
 def add(ind_id, iso3, val, year, source, url, fichier, transfo, revision="", limites="", alt=False):
@@ -215,7 +220,7 @@ pmr_wbg = read_csv("oecd_pmr_wbg.csv")
 pm = {}  # (area, measure) -> (valeur, source_fichier)
 for fname, rows_ in (("oecd_pmr.csv", pmr_main), ("oecd_pmr_wbg.csv", pmr_wbg)):
     for r in rows_:
-        if r["TIME_PERIOD"] == "2023" and r["OBS_VALUE"] != "":
+        if r["TIME_PERIOD"] == PMR_ANNEE and r["OBS_VALUE"] != "":
             k = (r["REF_AREA"], r["MEASURE"])
             v = float(r["OBS_VALUE"])
             if k in pm and abs(pm[k][0] - v) > 1e-6:
@@ -229,13 +234,13 @@ for a in areas:
         continue
     lim = "Source OCDE-Banque mondiale pour les économies non membres : méthodologie PMR commune" if pm.get((a, "PMR"), (0, ""))[1] == "oecd_pmr_wbg.csv" else ""
     if all((a, m) in pm for m in PROFS):
-        add("A2", a, sum(pm[(a, m)][0] for m in PROFS) / 5, 2023, IND_BY_ID["A2"]["source"], PMR_URL, "oecd_pmr.csv / oecd_pmr_wbg.csv",
+        add("A2", a, sum(pm[(a, m)][0] for m in PROFS) / 5, int(PMR_ANNEE), IND_BY_ID["A2"]["source"], PMR_URL, "oecd_pmr.csv / oecd_pmr_wbg.csv",
             "moyenne arithmétique des 5 sous-indices professionnels (LAWYERS, ACCOUNTANTS, ARCHITECTS, ENGINEERS, ESTATEAGENTS)", limites=lim)
     elif any((a, m) in pm for m in PROFS):
         anomalie("avertissement", "A2_INCOMPLET", "sous-indices professionnels incomplets : A2 non calculé", a, "A2")
     for ind_id, meas in (("A3", "PRICE"), ("C1", "PUBLIC_OWNER")):
         if (a, meas) in pm:
-            add(ind_id, a, pm[(a, meas)][0], 2023, IND_BY_ID[ind_id]["source"], PMR_URL, pm[(a, meas)][1], f"sous-indice PMR {meas} repris tel quel", limites=lim)
+            add(ind_id, a, pm[(a, meas)][0], int(PMR_ANNEE), IND_BY_ID[ind_id]["source"], PMR_URL, pm[(a, meas)][1], f"sous-indice PMR {meas} repris tel quel", limites=lim)
 
 # OCDE : IS combiné
 cit = {}
@@ -291,6 +296,10 @@ for a, d in sorted(rev.items()):
         ys = set.intersection(*[set(d[c]) for c in comps])
         if ys:
             y = max(ys); add("B6", a, sum(d[c][y] for c in comps), y, IND_BY_ID["B6"]["source"], REV_URL, "oecd_rev_global.csv", "somme des codes 1100 (impôt sur le revenu), 2000 (cotisations sociales), 3000 (taxes sur les salaires), % du PIB, même année")
+            # Candidat d'audit (décision DEC-05) : prélèvements hors revenus des personnes et travail = total − (1100+2000+3000), même année
+            if "_T" in d and y in d["_T"]:
+                add("B5n", a, d["_T"][y] - sum(d[c][y] for c in comps), y, IND_BY_ID["B5"]["source"], REV_URL, "oecd_rev_global.csv",
+                    "code _T moins (1100 + 2000 + 3000), % du PIB, même année que B6 ; supprime l'inclusion arithmétique de B6 dans B5", alt=True)
         else:
             anomalie("avertissement", "B6_ANNEES_DISJOINTES", "composantes publiées pour des années différentes : B6 non calculé", a, "B6")
     elif any(c in d for c in comps):
@@ -307,6 +316,35 @@ for a, (y, v) in sorted(tw.items()):
     if a != "OECD_REP" and oecd_known(a, "B7"):
         add("B7", a, v, y, IND_BY_ID["B7"]["source"], IND_BY_ID["B7"]["url"], "oecd_tw_comp.csv", "coin fiscal moyen AV_TW (S_C0, AW100, % du coût du travail) repris tel quel")
 
+# V-Dem (candidat d'audit C4, décision DEC-07) : propriété publique de l'économie, échelle d'origine 0-4 (v2clstown_osp)
+VDEM_P = os.path.join(RAW, "vdem_extrait.csv")
+if os.path.exists(VDEM_P):
+    VDEM_SPECIAL = {"SML": "X-SML"}          # Somaliland
+    VDEM_SKIP = {"PSE": "V-Dem « Palestine/West Bank » ≠ agrégat Banque mondiale « Cisjordanie et Gaza » (PSE) : non rapproché",
+                 "PSG": "V-Dem « Palestine/Gaza » sans équivalent exact dans le référentiel : non rapproché",
+                 "ZZB": "Zanzibar : sans équivalent dans le référentiel"}
+    vd = {}
+    for r in csv.DictReader(open(VDEM_P, encoding="utf-8")):
+        if r["v2clstown_osp"] in ("", "NA"):
+            continue
+        y = int(float(r["year"]))
+        if Y_MIN <= y <= Y_MAX:
+            c = r["country_text_id"]
+            if c in VDEM_SKIP:
+                continue
+            iso3 = VDEM_SPECIAL.get(c, c)
+            if iso3 not in pays:
+                anomalie("info", "VDEM_HORS_REFERENTIEL", f"Code V-Dem {c} ({r['country_name']}) non rattaché", c, "C4"); continue
+            if iso3 not in vd or y > vd[iso3][0]:
+                vd[iso3] = (y, float(r["v2clstown_osp"]))
+    for c, why in VDEM_SKIP.items():
+        anomalie("info", "VDEM_NON_RAPPROCHE", why, c, "C4")
+    VDEM_URL = "https://www.v-dem.net/data/the-v-dem-dataset/"
+    for iso3, (y, v) in sorted(vd.items()):
+        add("C4", iso3, v, y, "V-Dem Institute – V-Dem Country-Year Full+Others (vdemdata 16.0), v2clstown", VDEM_URL, "vdem_extrait.csv",
+            "variable v2clstown_osp (estimation du modèle de mesure ramenée à l'échelle d'origine 0-4) ; dernière année de la fenêtre ; reprise telle quelle",
+            limites="Notation d'experts agrégée par modèle de mesure (V-Dem) ; incertitude publiée (codelow/codehigh)", alt=True)
+
 # Freedom House
 FH_SRC = "Freedom House – Freedom in the World 2024"
 FH_URL = "https://freedomhouse.org/report/freedom-world"
@@ -314,11 +352,11 @@ for iso3, d in fh_by_iso.items():
     lim = "Notation d'experts d'une ONG ; édition 2024 = événements de l'année civile 2023"
     for ind_id, col in (("A6", "G2"), ("D3", "D"), ("D4", "E")):
         if d.get(col) is not None:
-            add(ind_id, iso3, float(d[col]), 2023, IND_BY_ID[ind_id]["source"], FH_URL, "freedomhouse_fiw_2013-2024.xlsx", f"colonne {col} reprise telle quelle", limites=lim)
+            add(ind_id, iso3, float(d[col]), FH_EDITION - 1, IND_BY_ID[ind_id]["source"], FH_URL, "freedomhouse_fiw_2013-2024.xlsx", f"colonne {col} reprise telle quelle", limites=lim)
     if d.get("PR") is not None:
-        add("D2", iso3, float(d["PR"]), 2023, IND_BY_ID["D2"]["source"], FH_URL, "freedomhouse_fiw_2013-2024.xlsx", "colonne PR (A+B+C) reprise telle quelle", limites=lim)
+        add("D2", iso3, float(d["PR"]), FH_EDITION - 1, IND_BY_ID["D2"]["source"], FH_URL, "freedomhouse_fiw_2013-2024.xlsx", "colonne PR (A+B+C) reprise telle quelle", limites=lim)
     elif all(d.get(k) is not None for k in "ABC"):
-        add("D2", iso3, float(d["A"] + d["B"] + d["C"]), 2023, IND_BY_ID["D2"]["source"], FH_URL, "freedomhouse_fiw_2013-2024.xlsx", "A+B+C", limites=lim)
+        add("D2", iso3, float(d["A"] + d["B"] + d["C"]), FH_EDITION - 1, IND_BY_ID["D2"]["source"], FH_URL, "freedomhouse_fiw_2013-2024.xlsx", "A+B+C", limites=lim)
 
 # ------------------------------------------------------------------ contrôles de cohérence
 seen = set()

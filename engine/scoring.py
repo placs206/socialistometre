@@ -1,0 +1,287 @@
+#!/usr/bin/env python3
+"""Moteur de normalisation et de calcul du Socialistomètre (méthodologie V1.0).
+
+Lecture seule de data/processed/ et config/ ; écrit data/processed/scores.json (déterministe : aucune date, aucun aléa).
+
+Conventions
+-----------
+* Tous les indicateurs sont orientés sur 0 (pôle socialisant) → 100 (pôle libéral) selon `orientation` (+1 : valeur brute haute = libéral ;
+  -1 : valeur brute haute = socialisant).
+* Normalisation principale « minmax » : transformation linéaire bornée [0,100] avec bornes fixes (échelles naturelles) ou percentiles P5-P95 de la
+  distribution mondiale de l'indicateur (valeurs hors bornes ramenées aux bornes).
+* Score de dimension = moyenne simple des indicateurs disponibles de la dimension (poids égaux).
+* Score global = Σ w_d·S_d / Σ w_d sur les dimensions disponibles. Il n'est calculé que si la dimension A (poids 45 %) est disponible
+  ET si au moins 2 dimensions sont disponibles ; sinon les scores de dimension restent affichés, sans score global ni rang.
+"""
+import csv, hashlib, json, math, os, sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROC = os.path.join(ROOT, "data", "processed")
+CFG = os.path.join(ROOT, "config")
+DIMS = ["A", "B", "C", "D"]
+
+
+# ----------------------------------------------------------------------------- chargement
+def _csv(path):
+    with open(path, encoding="utf-8", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def load():
+    cfg_dim = json.load(open(os.path.join(CFG, "dimensions.json"), encoding="utf-8"))
+    cfg_ind = json.load(open(os.path.join(CFG, "indicateurs.json"), encoding="utf-8"))
+    pays = {p["iso3"]: p for p in _csv(os.path.join(PROC, "pays.csv"))}
+    obs, alt = {}, {}
+    for r in _csv(os.path.join(PROC, "observations.csv")):
+        r["valeur_brute"] = float(r["valeur_brute"]); r["annee"] = int(r["annee"])
+        obs.setdefault(r["iso3"], {})[r["indicateur"]] = r
+    for r in _csv(os.path.join(PROC, "indicateurs_alt.csv")):
+        r["valeur_brute"] = float(r["valeur_brute"]); r["annee"] = int(r["annee"])
+        alt.setdefault(r["iso3"], {})[r["indicateur"]] = r
+    return {"dim": cfg_dim, "ind": cfg_ind, "pays": pays, "obs": obs, "alt": alt}
+
+
+def dataset_hash():
+    """Empreinte SHA-256 du jeu de données et de la configuration de l'édition."""
+    h = hashlib.sha256()
+    for rel in ("data/processed/pays.csv", "data/processed/observations.csv", "data/processed/indicateurs_alt.csv",
+                "data/raw/MANIFEST.json", "config/dimensions.json", "config/indicateurs.json"):
+        h.update(rel.encode())
+        h.update(hashlib.sha256(open(os.path.join(ROOT, rel), "rb").read()).digest())
+    return h.hexdigest()
+
+
+# ----------------------------------------------------------------------------- statistiques
+def percentile(sorted_vals, p):
+    """Percentile par interpolation linéaire (identique à numpy.percentile par défaut)."""
+    n = len(sorted_vals)
+    if n == 1:
+        return sorted_vals[0]
+    k = (n - 1) * p / 100.0
+    lo = int(math.floor(k)); hi = min(lo + 1, n - 1)
+    return sorted_vals[lo] + (sorted_vals[hi] - sorted_vals[lo]) * (k - lo)
+
+
+def phi(z):
+    return 0.5 * (1.0 + math.erf(z / math.sqrt(2.0)))
+
+
+def spearman(x, y):
+    def ranks(v):
+        idx = sorted(range(len(v)), key=lambda i: v[i]); r = [0.0] * len(v); i = 0
+        while i < len(idx):
+            j = i
+            while j + 1 < len(idx) and v[idx[j + 1]] == v[idx[i]]:
+                j += 1
+            for k in range(i, j + 1):
+                r[idx[k]] = (i + j) / 2.0 + 1
+            i = j + 1
+        return r
+    rx, ry = ranks(x), ranks(y); n = len(x)
+    mx, my = sum(rx) / n, sum(ry) / n
+    num = sum((a - mx) * (b - my) for a, b in zip(rx, ry))
+    den = math.sqrt(sum((a - mx) ** 2 for a in rx) * sum((b - my) ** 2 for b in ry))
+    return num / den if den else float("nan")
+
+
+# ----------------------------------------------------------------------------- normalisation
+def indicator_defs(data, with_alt=False):
+    defs = {i["id"]: i for i in data["ind"]["indicateurs"]}
+    if with_alt:
+        for a in data["ind"]["alternatives_sensibilite"]:
+            defs[a["id"]] = a
+    return defs
+
+
+def bounds_for(defn, values):
+    b = defn["bornes"]
+    if b["regle"] == "fixe":
+        return float(b["bas"]), float(b["haut"])
+    sv = sorted(values)
+    return percentile(sv, b["p_bas"]), percentile(sv, b["p_haut"])
+
+
+def normalize(data, method="minmax", source="obs", defs=None):
+    """Retourne (norm, params) : norm[iso3][ind] ∈ [0,100] ; params[ind] décrit la transformation."""
+    obs = data[source]
+    defs = defs or indicator_defs(data)
+    by_ind = {}
+    for iso3, d in obs.items():
+        for k, r in d.items():
+            by_ind.setdefault(k, []).append(r["valeur_brute"])
+    params, norm = {}, {}
+    for k, vals in by_ind.items():
+        if k not in defs:
+            continue
+        o = defs[k]["orientation"]
+        sv = sorted(vals)
+        if method == "minmax":
+            lo, hi = bounds_for(defs[k], vals)
+            params[k] = {"methode": "minmax", "bas": lo, "haut": hi, "orientation": o}
+            f = lambda x, lo=lo, hi=hi, o=o: (lambda t: (100 * t if o > 0 else 100 * (1 - t)))(min(1.0, max(0.0, (x - lo) / (hi - lo))))
+        elif method == "rang":
+            n = len(sv)
+            params[k] = {"methode": "rang", "n": n, "orientation": o}
+            import bisect
+            def f(x, sv=sv, n=n, o=o):
+                less = bisect.bisect_left(sv, x); leq = bisect.bisect_right(sv, x)
+                r = 100.0 * (less + 0.5 * (leq - less)) / n
+                return r if o > 0 else 100.0 - r
+        elif method == "zscore":
+            lo, hi = percentile(sv, 1), percentile(sv, 99)
+            w = [min(hi, max(lo, v)) for v in vals]
+            mu = sum(w) / len(w); sd = math.sqrt(sum((v - mu) ** 2 for v in w) / (len(w) - 1))
+            params[k] = {"methode": "zscore", "moyenne": mu, "ecart_type": sd, "winsor": [lo, hi], "orientation": o}
+            def f(x, mu=mu, sd=sd, lo=lo, hi=hi, o=o):
+                z = (min(hi, max(lo, x)) - mu) / sd
+                return 100.0 * phi(z if o > 0 else -z)
+        else:
+            raise ValueError(method)
+        for iso3, d in obs.items():
+            if k in d:
+                norm.setdefault(iso3, {})[k] = f(d[k]["valeur_brute"])
+    return norm, params
+
+
+# ----------------------------------------------------------------------------- scores
+def dim_weights(data):
+    return {d["id"]: d["poids"] for d in data["dim"]["dimensions"]}
+
+
+def score_country(nv, ind_dim, weights, included=None, min_dims=2, require_a=True):
+    """nv : {ind: valeur normalisée} ; ind_dim : {ind: dim}. Retourne dimensions, global, dimensions disponibles."""
+    sums, cnt = {d: 0.0 for d in DIMS}, {d: 0 for d in DIMS}
+    for k, v in nv.items():
+        if k not in ind_dim or (included is not None and k not in included):
+            continue
+        d = ind_dim[k]
+        sums[d] += v; cnt[d] += 1
+    dims = {d: (sums[d] / cnt[d] if cnt[d] else None) for d in DIMS}
+    avail = [d for d in DIMS if dims[d] is not None and weights.get(d, 0) > 0]
+    g = None
+    if len(avail) >= min_dims and (not require_a or dims["A"] is not None):
+        wsum = sum(weights[d] for d in avail)
+        g = sum(weights[d] * dims[d] for d in avail) / wsum if wsum > 0 else None
+    return {"dims": dims, "n": cnt, "disponibles": avail, "global": g}
+
+
+def competition_rank(scores):
+    """scores : {iso3: valeur} → rangs 1 = score le plus libéral (100), ex æquo au même rang."""
+    items = sorted(((v, k) for k, v in scores.items() if v is not None), key=lambda t: (-round(t[0], 9), t[1]))
+    ranks, prev, rk = {}, None, 0
+    for i, (v, k) in enumerate(items, 1):
+        if prev is None or round(v, 9) != prev:
+            rk = i; prev = round(v, 9)
+        ranks[k] = rk
+    return ranks
+
+
+def reliability(data, iso3, defs, ind_dim, weights):
+    cfg = data["dim"]["fiabilite"]; qual = data["dim"]["qualite_source"]
+    obs = data["obs"].get(iso3, {})
+    total = {d: sum(1 for k in defs if ind_dim[k] == d) for d in DIMS}
+    avail = {d: sum(1 for k in obs if k in defs and ind_dim[k] == d) for d in DIMS}
+    wt = sum(weights.values())
+    C = sum(weights[d] * (avail[d] / total[d]) for d in DIMS if total[d]) / wt
+    ks = [k for k in obs if k in defs]
+    if ks:
+        Q = sum(qual[defs[k]["source_type"]] for k in ks) / len(ks)
+        ref = data["dim"]["annee_cible"]
+        F = sum(max(0.0, 1 - (ref - obs[k]["annee"]) / 10.0) for k in ks) / len(ks)
+        nres = sum(1 for k in ks if obs[k]["statut_validation"] != "valide")
+        conteste = 1 if data["pays"][iso3]["statut_politique"] != "État souverain" and data["pays"][iso3]["type"] != "territoire" else 0
+        conteste = 1 if any(w in data["pays"][iso3]["statut_politique"].lower() for w in ("contest", "séparatiste", "annex", "non reconnu", "autoproclam")) else 0
+        K = max(0.0, 1 - 0.10 * nres - 0.10 * conteste)
+    else:
+        Q = F = K = 0.0
+    p = cfg["poids"]
+    R = 100 * (p["couverture"] * C + p["qualite_source"] * Q + p["anciennete"] * F + p["comparabilite"] * K)
+    n = cfg["niveaux"]
+    niveau = "élevée" if R >= n["elevee"] else "moyenne" if R >= n["moyenne"] else "faible" if R >= n["faible"] else "très faible"
+    return {"fiabilite": R, "niveau": niveau, "couverture": C, "qualite_source": Q, "anciennete": F, "comparabilite": K,
+            "n_indicateurs": len(ks), "n_indicateurs_total": len(defs)}
+
+
+def compute(data, method="minmax", weights=None, included=None, min_dims=2, require_a=True):
+    defs = indicator_defs(data)
+    ind_dim = {k: v["dim"] for k, v in defs.items()}
+    weights = weights or dim_weights(data)
+    norm, params = normalize(data, method, "obs", defs)
+    res = {}
+    for iso3 in data["pays"]:
+        nv = norm.get(iso3, {})
+        res[iso3] = score_country(nv, ind_dim, weights, included, min_dims, require_a)
+        res[iso3]["norm"] = nv
+    ranks = competition_rank({k: v["global"] for k, v in res.items()})
+    for k in res:
+        res[k]["rang"] = ranks.get(k)
+    return res, params, norm
+
+
+def statut_couverture(r):
+    n = sum(1 for d in DIMS if r["dims"][d] is not None)
+    if n == 4:
+        return "complet"
+    if r["global"] is not None:
+        return "partiel"
+    return "insuffisant" if n >= 1 else "aucune donnée"
+
+
+def build_output(data):
+    defs = indicator_defs(data)
+    ind_dim = {k: v["dim"] for k, v in defs.items()}
+    weights = dim_weights(data)
+    res, params, norm = compute(data)
+    n_ranked = sum(1 for r in res.values() if r["global"] is not None)
+    rang_complets = competition_rank({k: r["global"] for k, r in res.items() if statut_couverture(r) == "complet"})
+    out = {"version_methodologie": data["dim"]["version_methodologie"], "annee_cible": data["dim"]["annee_cible"],
+           "poids_dimensions": weights, "empreinte_jeu_de_donnees": dataset_hash(), "n_entites": len(res), "n_avec_score_global": n_ranked,
+           "normalisation": {"methode": "minmax", "parametres": params}, "pays": {}}
+    for iso3, p in sorted(data["pays"].items()):
+        r = res[iso3]; rel = reliability(data, iso3, defs, ind_dim, weights)
+        obs = data["obs"].get(iso3, {})
+        statut = statut_couverture(r)
+        absentes = [d for d in DIMS if r["dims"][d] is None]
+        warn = []
+        if statut == "partiel":
+            warn.append(f"Score partiel : dimension(s) absente(s) {', '.join(absentes)} ; poids des dimensions disponibles renormalisés. Non directement comparable à un score complet.")
+        if statut == "insuffisant":
+            warn.append("Score global non calculé (règle V1 : dimension A disponible et au moins 2 dimensions). Les scores de dimension disponibles restent affichés.")
+        if statut == "aucune donnée":
+            warn.append("Aucune observation disponible pour les indicateurs de la V1.")
+        for d in DIMS:
+            if r["dims"][d] is not None:
+                tot = sum(1 for k in defs if ind_dim[k] == d)
+                if r["n"][d] < tot:
+                    warn.append(f"Dimension {d} calculée sur {r['n'][d]}/{tot} indicateurs.")
+        if p["statut_politique"] != "État souverain":
+            warn.append("Statut : " + p["statut_politique"] + ".")
+        reserves = [k for k, o in obs.items() if o["statut_validation"] != "valide"]
+        if reserves:
+            warn.append("Valeur(s) signalée(s) (extrême ou ancienne) : " + ", ".join(sorted(reserves)) + ".")
+        out["pays"][iso3] = {
+            "nom": p["nom_fr"], "nom_en": p["nom_en"], "iso2": p["iso2"], "region": p["region"], "groupe_revenu": p["groupe_revenu"],
+            "type": p["type"], "statut_politique": p["statut_politique"],
+            "global": None if r["global"] is None else round(r["global"], 6), "rang": r["rang"], "rang_complets": rang_complets.get(iso3),
+            "dimensions": {d: (None if r["dims"][d] is None else round(r["dims"][d], 6)) for d in DIMS},
+            "n_par_dimension": r["n"], "statut_couverture": statut, "dimensions_absentes": absentes,
+            "fiabilite": {k: (round(v, 6) if isinstance(v, float) else v) for k, v in rel.items()},
+            "indicateurs": {k: {"brut": o["valeur_brute"], "norm": round(norm[iso3][k], 6), "annee": o["annee"], "statut": o["statut_validation"],
+                                "source": o["source"], "url": o["url_source"], "transformation": o["transformation"],
+                                "limites": o["limites_comparabilite"], "collecte": o["date_collecte"], "revision": o["date_revision"]}
+                            for k, o in sorted(obs.items())},
+            "avertissements": warn}
+    return out
+
+
+def main():
+    data = load()
+    out = build_output(data)
+    dst = os.path.join(PROC, "scores.json")
+    with open(dst, "w", encoding="utf-8") as f:
+        json.dump(out, f, ensure_ascii=False, indent=1, sort_keys=True)
+    print(f"{out['n_entites']} entités ; {out['n_avec_score_global']} avec score global ; empreinte {out['empreinte_jeu_de_donnees'][:16]}…")
+
+
+if __name__ == "__main__":
+    main()

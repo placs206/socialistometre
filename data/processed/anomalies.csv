@@ -1,0 +1,11 @@
+niveau,code,iso3,indicateur,detail
+info,CHEVAUCHEMENT_TERRITOIRES,CHI,,"La Banque mondiale agrège Jersey et Guernesey (CHI) ; l'OCDE les publie séparément (JEY, GGY). Aucune variable commune dans l'indice."
+avertissement,VALEUR_EXTREME,BLZ,C2,valeur 81.11879 (5.8 MAD de la médiane 11.117)
+avertissement,VALEUR_EXTREME,LBN,C2,valeur 73.445312 (5.1 MAD de la médiane 11.117)
+avertissement,VALEUR_EXTREME,MAC,C2,valeur 96.687271 (7.0 MAD de la médiane 11.117)
+avertissement,VALEUR_EXTREME,ARE,C2,valeur 82.550247 (5.9 MAD de la médiane 11.117)
+avertissement,VALEUR_EXTREME,KIR,C3,valeur 64.286718 (7.6 MAD de la médiane 16.7)
+avertissement,VALEUR_EXTREME,MHL,C3,valeur 57.159508 (6.5 MAD de la médiane 16.7)
+avertissement,VALEUR_EXTREME,TLS,C3,valeur 52.920774 (5.8 MAD de la médiane 16.7)
+avertissement,VALEUR_EXTREME,COL,B4,valeur 0.913386 (5.5 MAD de la médiane 0.51)
+avertissement,VALEUR_EXTREME,CRI,B4,valeur 0.902987 (5.4 MAD de la médiane 0.51)

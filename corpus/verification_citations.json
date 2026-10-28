@@ -1,0 +1,189 @@
+{
+ "source_sha256_texte": "e28658f9a0739e69778403dd6f731e402c4b9d97c0895d33c68c02550b1cdf53",
+ "edition": "Milton Friedman, Capitalisme et liberté, trad. A. M. Charno, Leduc.s, 2010 (éd. orig. Capitalism and Freedom, Univ. of Chicago Press, 1962)",
+ "total": 30,
+ "verifiees": 30,
+ "echecs": 0,
+ "detail": [
+  {
+   "principe": "P01",
+   "page": 84,
+   "citation": "veillerait à l'application des contrats",
+   "verifiee": true
+  },
+  {
+   "principe": "P01",
+   "page": 84,
+   "citation": "des fonctions nettement limitées",
+   "verifiee": true
+  },
+  {
+   "principe": "P02",
+   "page": 85,
+   "citation": "Les taxes sur les importations et les restrictions aux exportations",
+   "verifiee": true
+  },
+  {
+   "principe": "P02",
+   "page": 125,
+   "citation": "Si les tarifs sont mauvais, les quotas et les autres interventions directes sont pires.",
+   "verifiee": true
+  },
+  {
+   "principe": "P03",
+   "page": 85,
+   "citation": "Le contrôle des loyers",
+   "verifiee": true
+  },
+  {
+   "principe": "P03",
+   "page": 85,
+   "citation": "Les taux minimaux légaux des salaires",
+   "verifiee": true
+  },
+  {
+   "principe": "P03",
+   "page": 297,
+   "citation": "des lois sur le salaire minimum",
+   "verifiee": true
+  },
+  {
+   "principe": "P04",
+   "page": 222,
+   "citation": "les principes libéraux ne justifient pas la patente",
+   "verifiee": true
+  },
+  {
+   "principe": "P04",
+   "page": 225,
+   "citation": "Le système des patentes réintroduit donc fréquemment les traits essentiels",
+   "verifiee": true
+  },
+  {
+   "principe": "P05",
+   "page": 207,
+   "citation": "limitations arbitraires de la capacité qu'ont les individus",
+   "verifiee": true
+  },
+  {
+   "principe": "P06",
+   "page": 85,
+   "citation": "La réglementation détaillée des industries",
+   "verifiee": true
+  },
+  {
+   "principe": "P07",
+   "page": 156,
+   "citation": "est beaucoup plus difficile à justifier",
+   "verifiee": true
+  },
+  {
+   "principe": "P07",
+   "page": 156,
+   "citation": "peut se justifier par les « effets de voisinage» de l'enseignement",
+   "verifiee": true
+  },
+  {
+   "principe": "P08",
+   "page": 157,
+   "citation": "Le rôle des pouvoirs publics se limiterait à s'assurer",
+   "verifiee": true
+  },
+  {
+   "principe": "P08",
+   "page": 162,
+   "citation": "Il permettrait à la concurrence de prendre son essor.",
+   "verifiee": true
+  },
+  {
+   "principe": "P09",
+   "page": 85,
+   "citation": "qui forcent en fait les gens",
+   "verifiee": true
+  },
+  {
+   "principe": "P09",
+   "page": 283,
+   "citation": "il y a donc prise de dispositions obligatoires en vue de la vieillesse",
+   "verifiee": true
+  },
+  {
+   "principe": "P10",
+   "page": 270,
+   "citation": "difficile de trouver une quelconque justification à un impôt progressif",
+   "verifiee": true
+  },
+  {
+   "principe": "P10",
+   "page": 270,
+   "citation": "un impôt à taux uniforme",
+   "verifiee": true
+  },
+  {
+   "principe": "P11",
+   "page": 270,
+   "citation": "l'abolition de l'impôt sur les revenus des sociétés",
+   "verifiee": true
+  },
+  {
+   "principe": "P12",
+   "page": 297,
+   "citation": "l'impôt négatif sur le revenu",
+   "verifiee": true
+  },
+  {
+   "principe": "P12",
+   "page": 298,
+   "citation": "Il rend explicite la charge supportée par la société.",
+   "verifiee": true
+  },
+  {
+   "principe": "P13",
+   "page": 62,
+   "citation": "La liberté de défendre des causes impopulaires",
+   "verifiee": true
+  },
+  {
+   "principe": "P13",
+   "page": 85,
+   "citation": "violation de la liberté de parole",
+   "verifiee": true
+  },
+  {
+   "principe": "P13",
+   "page": 60,
+   "citation": "tenir des réunions publiques, de publier des brochures",
+   "verifiee": true
+  },
+  {
+   "principe": "P14",
+   "page": 51,
+   "citation": "est donc complexe et nullement unilatérale",
+   "verifiee": true
+  },
+  {
+   "principe": "P15",
+   "page": 56,
+   "citation": "la coopération est strictement individuelle et volontaire",
+   "verifiee": true
+  },
+  {
+   "principe": "P15",
+   "page": 55,
+   "citation": "la coopération volontaire des individus",
+   "verifiee": true
+  },
+  {
+   "principe": "P16",
+   "page": 109,
+   "citation": "une règle législative enjoignant à l'autorité monétaire",
+   "verifiee": true
+  },
+  {
+   "principe": "P17",
+   "page": 126,
+   "citation": "les taux de change flottent librement",
+   "verifiee": true
+  }
+ ]
+}

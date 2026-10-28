@@ -1,0 +1,23 @@
+{
+  "corpus_autorise": [
+    {
+      "id": "CL",
+      "titre": "Capitalisme et liberté",
+      "titre_original": "Capitalism and Freedom",
+      "auteur": "Milton Friedman",
+      "edition_originale": "University of Chicago Press, 1962",
+      "edition_utilisee": "Traduction française d'A. M. Charno, Leduc.s Éditions, Paris, 2010 (ISBN 978-2-84899-369-0), reprise de la traduction Robert Laffont, 1971",
+      "acces": "Texte extrait du PDF fourni dans le projet Claude « Socalistomètre » ; pagination imprimée de l'édition Leduc.s 2010",
+      "statut_verification": "VÉRIFIÉ : citations contrôlées automatiquement contre le texte, page par page (tools/verify_citations.py)",
+      "limites": "Édition française traduite : les citations sont celles de la traduction, non du texte anglais original. Le texte intégral n'est pas versionné (droit d'auteur)."
+    }
+  ],
+  "ouvrages_non_utilises": [
+    {
+      "id": "FTC",
+      "titre": "Free to Choose (avec Rose Friedman, 1980)",
+      "statut": "NON VÉRIFIÉ — EXCLU du corpus de la V1",
+      "raison": "Le texte de l'ouvrage n'a pas pu être consulté : seules les émissions télévisées de 1980 sont référencées sur archive.org, en accès restreint. Aucun principe n'est donc attribué à cet ouvrage dans la V1."
+    }
+  ]
+}

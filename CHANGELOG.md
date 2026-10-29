@@ -1,5 +1,12 @@
 # Journal des modifications
 
+## V1.2 — 2026-10-29 (méthodologie 1.2) — changement méthodologique arbitré par l'utilisateur
+- 11 décisions du registre approuvées par questionnaire : DEC-01 (A ≥ 3, B ≥ 3, C ≥ 2, D ≥ 2 indicateurs), DEC-02 (3 dimensions dont A), DEC-03 (C2 conservé, approbation explicite d'un indicateur de niveau 3), DEC-04 (A5 retiré), DEC-05 (B5 remplacé par B5n = B5 − B6), DEC-06 (D2 sur −4–40), DEC-07 (C4 V-Dem ajouté), DEC-08 (bornes figées), DEC-09 (lecture littérale de P18 + avertissement), DEC-11 (A4/A6 conservés), DEC-12 (échelle PMR 0–6).
+- DEC-10 (retraites, Chili) reste ouvert : principe énoncé par l'utilisateur à formaliser (échelle répartition publique < cotisations obligatoires privées < aucune obligation).
+- Effet : 222 → 171 scores globaux ; Spearman des rangs communs 0,935 (`docs/COMPARAISON_V1.1_V1.2.md`). T08 : largeur médiane de l'intervalle de rang 64 → 34 places ; T06 : Spearman minimal 0,960 → 0,973.
+- Édition archivée : `editions/v1.2` (V1.0 et V1.1 inchangées).
+- Outils : moteur et tests de robustesse alignés sur les décisions approuvées (T01 indépendant, règles de couverture dans T05-T09) ; `tools/approve.py` n'incrémente la version que si la méthode officielle change.
+
 ## Audit du 2026-10-28 (méthodologie 1.1 inchangée : aucun score officiel modifié)
 - Audit complet : `AUDIT_REPORT.md`. Implémentation exacte (recalcul indépendant, 0 écart) ; 0 erreur factuelle ; 319 anomalies sur 160 entités, dues à des règles méthodologiques (couverture, proxys faibles, double comptage, asymétrie de couverture).
 - Corrections de code (sans effet sur le score officiel) : moteur JS de l'explorateur aligné sur Python (une dimension de poids nul était comptée dans le minimum de dimensions ; arrondi des rangs 10⁻⁶ → 10⁻⁹) ; recalcul complet depuis les valeurs brutes dans le navigateur ; texte de méthodologie périmé (B1) ; test T08 sans critère (toujours « RÉUSSI ») ; code mort dans la fiabilité.

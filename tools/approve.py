@@ -54,6 +54,7 @@ def main():
     else:
         ap.print_help(); return
     data0 = S.load()
+    import copy as _c; data0["decisions"] = _c.deepcopy(data0["decisions"])
     before, _, _ = S.compute(data0)
     old_v = dims["version_methodologie"]
     today = datetime.date.today().isoformat()
@@ -70,7 +71,8 @@ def main():
         if opt not in [o["id"] for o in d["options"]]:
             sys.exit(f"{did} : option inconnue {opt}")
         d.update({"statut": "approuvée", "option_retenue": opt, "decision_utilisateur": "approuvée", "date_decision": today, "commentaire_utilisateur": com})
-        changed = changed or bool(S.option_patch(d, opt))
+    data_tmp = dict(data0); data_tmp["decisions"] = reg
+    changed = S.decisions_overrides(data0) != S.decisions_overrides(data_tmp)   # la méthode officielle change-t-elle ?
     new_v = old_v
     if changed:
         maj, mi = old_v.split(".")[:2]; new_v = f"{maj}.{int(mi) + 1}"

@@ -1,8 +1,8 @@
 # Socialistomètre
 
-Indice mondial continu du pôle socialisant (0) au pôle libéral (100), inspiré exclusivement de *Capitalisme et liberté* de Milton Friedman. **V1.1** — données 2023, 237 entités (222 avec score global).
+Indice mondial continu du pôle socialisant (0) au pôle libéral (100), inspiré exclusivement de *Capitalisme et liberté* de Milton Friedman. **V1.2** — données 2023, 237 entités (171 avec score global ; méthode arbitrée le 2026-10-29, voir `CHANGELOG.md`).
 
-- Explorateur autonome (hors ligne) : `dist/socialistometre.html` (ou `editions/v1.1/`)
+- Explorateur autonome (hors ligne) : `dist/socialistometre.html` (ou `editions/v1.2/`)
 - Méthodologie : `docs/METHODOLOGIE.md` · Rapport de validation : `docs/RAPPORT_V1.md` · Robustesse : `docs/ROBUSTESSE.md`
 - Journal : `CHANGELOG.md` · Comparaison V1.0→V1.1 : `docs/COMPARAISON_V1.0_V1.1.md`
 - **Audit du 2026-10-28** : `AUDIT_REPORT.md` · registre des décisions à arbitrer : `DECISION_REGISTER.csv` (source : `config/decisions.json`) · `ANOMALIES.csv` · `INDICATOR_DICTIONARY.csv` · `DATA_QUALITY_REPORT.csv` · `THEORETICAL_REFERENCES.md`

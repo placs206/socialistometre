@@ -1,4 +1,4 @@
-# Méthodologie V1.1
+# Méthodologie V1.2
 
 Indice mondial continu, 0 (pôle socialisant) → 100 (pôle libéral), construit **exclusivement** à partir de *Capitalisme et liberté* (M. Friedman, trad. Leduc.s 2010). Il ne s'agit pas d'un indice publié par Friedman : chaque indicateur est justifié par un principe vérifié dans le texte, puis mesuré par une source institutionnelle.
 
@@ -76,8 +76,8 @@ Détails (lien avec le texte, limites, chevauchements) : `config/indicateurs.jso
 ## Calcul
 1. Observation : dernière valeur non nulle dans la fenêtre 2019–2023 (année réelle conservée, aucune imputation).
 2. Normalisation « minmax » : `t = clip((x−bas)/(haut−bas),0,1)` ; score = 100·t (sens +1) ou 100·(1−t) (sens −1). Bornes fixes pour échelles naturelles ; P5–P95 mondiaux pour A1, B3, B5, B6, B7, C2, C3.
-3. Dimension = moyenne des indicateurs disponibles, pondérée par les poids internes (tous à 1 dans la méthode officielle) ; une dimension n'est calculée que si elle dispose d'au moins A : 1, B : 1, C : 1, D : 1 indicateur(s).
-4. Global = Σ poids·dimension / Σ poids sur les dimensions disponibles. **Règle** : dimension A exigée et ≥ 2 dimensions, sinon pas de score global (les scores de dimension restent affichés). Contribution d'un indicateur = (w_d/Σw_d)·(w_i/Σw_i)·score_i ; Σ contributions = score global.
+3. Dimension = moyenne des indicateurs disponibles, pondérée par les poids internes (tous à 1 dans la méthode officielle) ; une dimension n'est calculée que si elle dispose d'au moins A : 3, B : 3, C : 2, D : 2 indicateur(s).
+4. Global = Σ poids·dimension / Σ poids sur les dimensions disponibles. **Règle** : dimension A exigée et ≥ 3 dimensions, sinon pas de score global (les scores de dimension restent affichés). Contribution d'un indicateur = (w_d/Σw_d)·(w_i/Σw_i)·score_i ; Σ contributions = score global.
 5. Fiabilité = 100·(0,4·couverture + 0,2·qualité source + 0,2·fraîcheur + 0,2·comparabilité), affichée séparément.
 6. Statuts : complet (4 dimensions), partiel (score global, <4 dimensions), insuffisant (pas de score global), aucune donnée.
 
@@ -86,18 +86,18 @@ La méthode officielle = configuration de base + décisions au statut « approuv
 
 | Id | Décision | Catégorie | Nature | Option recommandée | Statut |
 |---|---|---|---|---|---|
-| DEC-01 | Nombre minimal d'indicateurs pour calculer une dimension | 8 (Modification d'une règle (données manquantes)) | choix de mesure | A3_B3_C2_D2 | proposée |
-| DEC-02 | Nombre minimal de dimensions pour un score global | 8 (Modification d'une règle (données manquantes)) | choix de mesure | 3_dimensions | proposée |
-| DEC-03 | C2 (part du privé dans le primaire) : proxy faible (niveau 3) | 6 (Modification d'une interprétation) | choix normatif | retirer | proposée |
-| DEC-04 | A5 (qualité de la réglementation, WGI) : proxy faible (niveau 3) | 6 (Modification d'une interprétation) | choix normatif | retirer | proposée |
-| DEC-05 | Double comptage arithmétique B5 ⊃ B6 | 3 (Correction d'une définition) | choix de mesure | B5n | proposée |
-| DEC-06 | Borne basse de D2 (droits politiques Freedom House) | 3 (Correction d'une définition) | choix de mesure | echelle_naturelle | proposée |
-| DEC-07 | Ajout d'une mesure directe de la propriété publique (C4, V-Dem) | 7 (Ajout ou remplacement d'une source) | choix de mesure | ajouter | proposée |
-| DEC-08 | Figer les bornes percentiles de l'édition | 8 (Modification d'une règle de normalisation) | choix de mesure | figer | proposée |
-| DEC-09 | Prélèvements et dépenses faibles dus à une faible capacité fiscale | 6 (Modification d'une interprétation) | choix normatif | lecture_litterale | proposée |
+| DEC-01 | Nombre minimal d'indicateurs pour calculer une dimension | 8 (Modification d'une règle (données manquantes)) | choix de mesure | A3_B3_C2_D2 | approuvée → A3_B3_C2_D2 |
+| DEC-02 | Nombre minimal de dimensions pour un score global | 8 (Modification d'une règle (données manquantes)) | choix de mesure | 3_dimensions | approuvée → 3_dimensions |
+| DEC-03 | C2 (part du privé dans le primaire) : proxy faible (niveau 3) | 6 (Modification d'une interprétation) | choix normatif | retirer | approuvée → garder |
+| DEC-04 | A5 (qualité de la réglementation, WGI) : proxy faible (niveau 3) | 6 (Modification d'une interprétation) | choix normatif | retirer | approuvée → retirer |
+| DEC-05 | Double comptage arithmétique B5 ⊃ B6 | 3 (Correction d'une définition) | choix de mesure | B5n | approuvée → B5n |
+| DEC-06 | Borne basse de D2 (droits politiques Freedom House) | 3 (Correction d'une définition) | choix de mesure | echelle_naturelle | approuvée → echelle_naturelle |
+| DEC-07 | Ajout d'une mesure directe de la propriété publique (C4, V-Dem) | 7 (Ajout ou remplacement d'une source) | choix de mesure | ajouter | approuvée → ajouter |
+| DEC-08 | Figer les bornes percentiles de l'édition | 8 (Modification d'une règle de normalisation) | choix de mesure | figer | approuvée → figer |
+| DEC-09 | Prélèvements et dépenses faibles dus à une faible capacité fiscale | 6 (Modification d'une interprétation) | choix normatif | lecture_litterale | approuvée → lecture_litterale |
 | DEC-10 | Cotisations obligatoires versées à des organismes privés (ex. Chili) | 7 (Remplacement d'une source) | fait observé / choix de mesure | signaler | proposée |
-| DEC-11 | A6 (propriété, Freedom House) et dimension D : même source | 6 (Modification d'une interprétation) | choix normatif | garder | proposée |
-| DEC-12 | Bornes théoriques 0–6 des indicateurs PMR (A2, A3, C1) | 8 (Modification d'une règle de normalisation) | choix de mesure | theorique | proposée |
+| DEC-11 | A6 (propriété, Freedom House) et dimension D : même source | 6 (Modification d'une interprétation) | choix normatif | garder | approuvée → garder |
+| DEC-12 | Bornes théoriques 0–6 des indicateurs PMR (A2, A3, C1) | 8 (Modification d'une règle de normalisation) | choix de mesure | theorique | approuvée → theorique |
 
 ## Validation d'une observation
 `valide` ; `valide_avec_reserve` (valeur extrême > 5 MAD ou année < 2021) ; valeurs hors plage rejetées et journalisées (`data/processed/anomalies.csv`).
@@ -113,8 +113,8 @@ Toute modification d'indicateur, de pondération ou de normalisation = nouvelle 
 | T03 | Données brutes : empreintes SHA-256 du manifeste et relecture indépendante d'un échantillon (120 obs.) | oui | RÉUSSI |
 | T04 | Données brutes et normalisées : plage [0,100], monotonie et sens d'orientation de chaque indicateur | oui | RÉUSSI |
 | T05 | Analyse de sensibilité aux pondérations (±10 points par dimension, poids égaux, 2 000 tirages Dirichlet) | non | AVERTISSEMENT |
-| T06 | Recalcul en retirant un indicateur à la fois (un recalcul par indicateur) | non | AVERTISSEMENT |
-| T07 | Comparaison de plusieurs méthodes de normalisation (rang, z-score logistique, percentiles partout, P10-P90) | non | AVERTISSEMENT |
+| T06 | Recalcul en retirant un indicateur à la fois (un recalcul par indicateur) | non | RÉUSSI |
+| T07 | Comparaison de plusieurs méthodes de normalisation (rang, z-score logistique, percentiles partout, P10-P90) | non | RÉUSSI |
 | T08 | Stabilité des rangs et des scores (600 rééchantillonnages : 80 % des indicateurs + poids perturbés) | non | AVERTISSEMENT |
 | T09 | Comportement en présence de données manquantes (masquage aléatoire de 1/3 des indicateurs ; règle « dimension A exigée » ; avertissements) | oui | RÉUSSI |
 | T10 | Variantes d'indicateurs (tarif pondéré ; scolarisation privée secondaire) et redondances intra-dimension | non | RÉUSSI |

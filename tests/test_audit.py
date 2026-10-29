@@ -108,16 +108,18 @@ class Reel(unittest.TestCase):
 
     def test_valeurs_brutes_conservees(self):
         obs = {(r["iso3"], r["indicateur"]): float(r["valeur_brute"]) for r in csv.DictReader(open(os.path.join(ROOT, "data/processed/observations.csv"), encoding="utf-8"))}
+        alt = {(r["iso3"], r["indicateur"]): float(r["valeur_brute"]) for r in csv.DictReader(open(os.path.join(ROOT, "data/processed/indicateurs_alt.csv"), encoding="utf-8"))}
         n = 0
         for iso, p in self.sc["pays"].items():
             for k, v in p["indicateurs"].items():
-                self.assertEqual(v["brut"], obs[(iso, k)]); n += 1
-        self.assertEqual(n, len(obs))
+                self.assertEqual(v["brut"], obs.get((iso, k), alt.get((iso, k)))); n += 1
+        self.assertGreaterEqual(n, len(obs))
 
     def test_sens_des_indicateurs(self):
         for k, pr in self.params.items():
             o = pr["orientation"]
-            vals = sorted((self.data["obs"][c][k]["valeur_brute"], self.norm[c][k]) for c in self.norm if k in self.norm[c])
+            eff = S.apply_overrides(self.data, S.decisions_overrides(self.data))
+            vals = sorted((eff["obs"][c][k]["valeur_brute"], self.norm[c][k]) for c in self.norm if k in self.norm[c])
             for (x1, s1), (x2, s2) in zip(vals, vals[1:]):
                 if o > 0: self.assertLessEqual(s1, s2 + 1e-12, k)
                 else: self.assertGreaterEqual(s1, s2 - 1e-12, k)
@@ -207,19 +209,23 @@ class Approbation(unittest.TestCase):
         tmp = tempfile.mkdtemp()
         for sub in ("config", "data", "engine", "tools", "corpus", "docs"):
             shutil.copytree(os.path.join(ROOT, sub), os.path.join(tmp, sub), ignore=shutil.ignore_patterns("__pycache__"))
-        r = subprocess.run([sys.executable, os.path.join(tmp, "tools/approve.py"), "DEC-06", "echelle_naturelle", "--commentaire", "test"], capture_output=True, text=True)
+        v0 = json.load(open(os.path.join(ROOT, "config/dimensions.json"), encoding="utf-8"))["version_methodologie"]
+        reg0 = json.load(open(os.path.join(ROOT, "config/decisions.json"), encoding="utf-8"))
+        cur = [x for x in reg0["decisions"] if x["id"] == "DEC-06"][0]
+        opt = "garder" if cur.get("option_retenue") == "echelle_naturelle" else "echelle_naturelle"
+        r = subprocess.run([sys.executable, os.path.join(tmp, "tools/approve.py"), "DEC-06", opt, "--commentaire", "test"], capture_output=True, text=True)
         self.assertEqual(r.returncode, 0, r.stderr)
         reg = json.load(open(os.path.join(tmp, "config/decisions.json"), encoding="utf-8"))
         d = [x for x in reg["decisions"] if x["id"] == "DEC-06"][0]
-        self.assertEqual((d["statut"], d["option_retenue"]), ("approuvée", "echelle_naturelle"))
+        self.assertEqual((d["statut"], d["option_retenue"]), ("approuvée", opt))
         self.assertTrue(d["empreinte_configuration"])
         v = json.load(open(os.path.join(tmp, "config/dimensions.json"), encoding="utf-8"))["version_methodologie"]
-        self.assertNotEqual(v, json.load(open(os.path.join(ROOT, "config/dimensions.json"), encoding="utf-8"))["version_methodologie"])
-        self.assertTrue(os.path.exists(os.path.join(tmp, "docs", f"COMPARAISON_V1.1_V{v}.md")))
+        self.assertNotEqual(v, v0)
+        self.assertTrue(os.path.exists(os.path.join(tmp, "docs", f"COMPARAISON_V{v0}_V{v}.md")))
         code = ("import sys; sys.path.insert(0, %r); import scoring as S; d = S.load(); r,_,_ = S.compute(d); "
                 "print(r['CHN']['norm']['D2'])") % os.path.join(tmp, "engine")
         out = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True).stdout.strip()
-        self.assertAlmostEqual(float(out), 100 * 2 / 44)   # D2 Chine = −2 sur l'échelle −4–40
+        self.assertAlmostEqual(float(out), 100 * 2 / 44 if opt == "echelle_naturelle" else 0.0)   # D2 Chine = −2 : échelle −4–40 ou 0–40
         shutil.rmtree(tmp)
 
 

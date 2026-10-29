@@ -2,20 +2,20 @@
  "biais_revenu": {
   "A": {
    "Revenu faible": {
-    "moyenne": 28.3,
-    "n": 25
+    "moyenne": 33.5,
+    "n": 19
    },
    "Revenu intermédiaire inférieur": {
-    "moyenne": 42.2,
-    "n": 47
+    "moyenne": 44.1,
+    "n": 43
    },
    "Revenu intermédiaire supérieur": {
-    "moyenne": 53.3,
-    "n": 59
+    "moyenne": 56.7,
+    "n": 53
    },
    "Revenu élevé": {
-    "moyenne": 73.5,
-    "n": 76
+    "moyenne": 76.0,
+    "n": 61
    }
   },
   "A1": {
@@ -90,24 +90,6 @@
     "n": 76
    }
   },
-  "A5": {
-   "Revenu faible": {
-    "moyenne": 27.7,
-    "n": 25
-   },
-   "Revenu intermédiaire inférieur": {
-    "moyenne": 35.9,
-    "n": 47
-   },
-   "Revenu intermédiaire supérieur": {
-    "moyenne": 44.9,
-    "n": 59
-   },
-   "Revenu élevé": {
-    "moyenne": 68.2,
-    "n": 74
-   }
-  },
   "A6": {
    "Revenu faible": {
     "moyenne": 30.0,
@@ -128,20 +110,20 @@
   },
   "B": {
    "Revenu faible": {
-    "moyenne": 77.3,
-    "n": 11
+    "moyenne": 62.0,
+    "n": 2
    },
    "Revenu intermédiaire inférieur": {
-    "moyenne": 58.9,
-    "n": 37
+    "moyenne": 53.4,
+    "n": 13
    },
    "Revenu intermédiaire supérieur": {
-    "moyenne": 56.6,
-    "n": 48
+    "moyenne": 52.3,
+    "n": 30
    },
    "Revenu élevé": {
-    "moyenne": 45.4,
-    "n": 73
+    "moyenne": 36.2,
+    "n": 47
    }
   },
   "B2": {
@@ -198,22 +180,22 @@
     "n": 30
    }
   },
-  "B5": {
+  "B5n": {
    "Revenu faible": {
-    "moyenne": 91.1,
-    "n": 10
+    "moyenne": 80.2,
+    "n": 8
    },
    "Revenu intermédiaire inférieur": {
-    "moyenne": 77.9,
-    "n": 30
+    "moyenne": 59.3,
+    "n": 23
    },
    "Revenu intermédiaire supérieur": {
-    "moyenne": 68.8,
-    "n": 38
+    "moyenne": 51.9,
+    "n": 34
    },
    "Revenu élevé": {
-    "moyenne": 32.5,
-    "n": 50
+    "moyenne": 36.4,
+    "n": 49
    }
   },
   "B6": {
@@ -254,20 +236,20 @@
   },
   "C": {
    "Revenu faible": {
-    "moyenne": 57.7,
+    "moyenne": 58.7,
     "n": 21
    },
    "Revenu intermédiaire inférieur": {
-    "moyenne": 54.7,
-    "n": 45
+    "moyenne": 57.4,
+    "n": 44
    },
    "Revenu intermédiaire supérieur": {
-    "moyenne": 44.8,
-    "n": 58
+    "moyenne": 51.9,
+    "n": 53
    },
    "Revenu élevé": {
-    "moyenne": 49.9,
-    "n": 76
+    "moyenne": 58.9,
+    "n": 62
    }
   },
   "C1": {
@@ -324,22 +306,40 @@
     "n": 65
    }
   },
-  "D": {
+  "C4": {
    "Revenu faible": {
-    "moyenne": 29.5,
+    "moyenne": 55.3,
     "n": 25
    },
    "Revenu intermédiaire inférieur": {
-    "moyenne": 44.7,
-    "n": 47
+    "moyenne": 61.1,
+    "n": 45
    },
    "Revenu intermédiaire supérieur": {
-    "moyenne": 56.2,
+    "moyenne": 64.6,
+    "n": 49
+   },
+   "Revenu élevé": {
+    "moyenne": 70.7,
+    "n": 55
+   }
+  },
+  "D": {
+   "Revenu faible": {
+    "moyenne": 31.1,
+    "n": 25
+   },
+   "Revenu intermédiaire inférieur": {
+    "moyenne": 46.4,
+    "n": 46
+   },
+   "Revenu intermédiaire supérieur": {
+    "moyenne": 57.2,
     "n": 59
    },
    "Revenu élevé": {
-    "moyenne": 76.2,
-    "n": 74
+    "moyenne": 78.2,
+    "n": 65
    }
   },
   "D1": {
@@ -362,19 +362,19 @@
   },
   "D2": {
    "Revenu faible": {
-    "moyenne": 21.8,
+    "moyenne": 28.1,
     "n": 25
    },
    "Revenu intermédiaire inférieur": {
-    "moyenne": 41.2,
+    "moyenne": 46.5,
     "n": 46
    },
    "Revenu intermédiaire supérieur": {
-    "moyenne": 56.5,
+    "moyenne": 60.4,
     "n": 59
    },
    "Revenu élevé": {
-    "moyenne": 79.7,
+    "moyenne": 81.6,
     "n": 65
    }
   },
@@ -416,20 +416,20 @@
   },
   "G": {
    "Revenu faible": {
-    "moyenne": 37.0,
-    "n": 25
+    "moyenne": 41.0,
+    "n": 19
    },
    "Revenu intermédiaire inférieur": {
-    "moyenne": 47.7,
-    "n": 47
+    "moyenne": 48.3,
+    "n": 42
    },
    "Revenu intermédiaire supérieur": {
-    "moyenne": 52.2,
-    "n": 59
+    "moyenne": 54.3,
+    "n": 50
    },
    "Revenu élevé": {
-    "moyenne": 63.7,
-    "n": 76
+    "moyenne": 65.5,
+    "n": 59
    }
   }
  },
@@ -464,68 +464,68 @@
   }
  },
  "compensation": {
-  "n_ecart_sup_50": 84,
-  "n_ecart_sup_70": 34,
+  "n_ecart_sup_50": 37,
+  "n_ecart_sup_70": 10,
   "plus_forts": [
    [
-    "HTI",
-    94.1
-   ],
-   [
-    "GNQ",
-    93.0
-   ],
-   [
-    "SOM",
-    91.4
-   ],
-   [
-    "KIR",
-    90.9
-   ],
-   [
-    "LAO",
-    88.7
-   ],
-   [
-    "BHR",
-    88.5
-   ],
-   [
-    "KNA",
-    87.2
-   ],
-   [
-    "LIE",
-    86.0
-   ],
-   [
     "CAF",
-    83.5
+    82.0
    ],
    [
     "FIN",
-    83.2
-   ],
-   [
-    "AUT",
-    83.1
-   ],
-   [
-    "SWE",
-    82.4
-   ],
-   [
-    "TCD",
-    81.2
-   ],
-   [
-    "DNK",
-    81.1
+    78.3
    ],
    [
     "ITA",
-    80.6
+    76.7
+   ],
+   [
+    "PRT",
+    76.4
+   ],
+   [
+    "DNK",
+    76.0
+   ],
+   [
+    "AUT",
+    75.4
+   ],
+   [
+    "SWE",
+    74.9
+   ],
+   [
+    "FRA",
+    74.7
+   ],
+   [
+    "BEL",
+    74.6
+   ],
+   [
+    "LUX",
+    71.2
+   ],
+   [
+    "DEU",
+    69.9
+   ],
+   [
+    "PLW",
+    68.5
+   ],
+   [
+    "NOR",
+    68.1
+   ],
+   [
+    "SVN",
+    67.5
+   ],
+   [
+    "NLD",
+    66.8
    ]
   ]
  },
@@ -542,10 +542,6 @@
    "n": 180,
    "spearman": 0.475
   },
-  "A1~A5": {
-   "n": 179,
-   "spearman": 0.621
-  },
   "A1~A6": {
    "n": 175,
    "spearman": 0.419
@@ -561,10 +557,6 @@
   "A1~B4": {
    "n": 32,
    "spearman": 0.162
-  },
-  "A1~B5": {
-   "n": 123,
-   "spearman": -0.62
   },
   "A1~B5n": {
    "n": 110,
@@ -600,7 +592,7 @@
   },
   "A1~D2": {
    "n": 175,
-   "spearman": 0.363
+   "spearman": 0.362
   },
   "A1~D3": {
    "n": 175,
@@ -618,10 +610,6 @@
    "n": 55,
    "spearman": 0.505
   },
-  "A2~A5": {
-   "n": 55,
-   "spearman": 0.57
-  },
   "A2~A6": {
    "n": 56,
    "spearman": 0.477
@@ -637,10 +625,6 @@
   "A2~B4": {
    "n": 33,
    "spearman": 0.003
-  },
-  "A2~B5": {
-   "n": 52,
-   "spearman": -0.274
   },
   "A2~B5n": {
    "n": 51,
@@ -690,10 +674,6 @@
    "n": 55,
    "spearman": 0.643
   },
-  "A3~A5": {
-   "n": 55,
-   "spearman": 0.669
-  },
   "A3~A6": {
    "n": 56,
    "spearman": 0.677
@@ -709,10 +689,6 @@
   "A3~B4": {
    "n": 33,
    "spearman": 0.29
-  },
-  "A3~B5": {
-   "n": 52,
-   "spearman": -0.499
   },
   "A3~B5n": {
    "n": 51,
@@ -758,10 +734,6 @@
    "n": 56,
    "spearman": 0.6
   },
-  "A4~A5": {
-   "n": 205,
-   "spearman": 0.883
-  },
   "A4~A6": {
    "n": 195,
    "spearman": 0.836
@@ -777,10 +749,6 @@
   "A4~B4": {
    "n": 33,
    "spearman": 0.28
-  },
-  "A4~B5": {
-   "n": 128,
-   "spearman": -0.665
   },
   "A4~B5n": {
    "n": 114,
@@ -816,7 +784,7 @@
   },
   "A4~D2": {
    "n": 195,
-   "spearman": 0.809
+   "spearman": 0.81
   },
   "A4~D3": {
    "n": 195,
@@ -825,70 +793,6 @@
   "A4~D4": {
    "n": 195,
    "spearman": 0.764
-  },
-  "A5~A6": {
-   "n": 195,
-   "spearman": 0.749
-  },
-  "A5~B2": {
-   "n": 38,
-   "spearman": -0.343
-  },
-  "A5~B3": {
-   "n": 135,
-   "spearman": 0.289
-  },
-  "A5~B4": {
-   "n": 33,
-   "spearman": 0.289
-  },
-  "A5~B5": {
-   "n": 128,
-   "spearman": -0.661
-  },
-  "A5~B5n": {
-   "n": 114,
-   "spearman": -0.367
-  },
-  "A5~B6": {
-   "n": 114,
-   "spearman": -0.623
-  },
-  "A5~B7": {
-   "n": 38,
-   "spearman": 0.015
-  },
-  "A5~C1": {
-   "n": 55,
-   "spearman": 0.597
-  },
-  "A5~C2": {
-   "n": 169,
-   "spearman": -0.073
-  },
-  "A5~C3": {
-   "n": 175,
-   "spearman": -0.297
-  },
-  "A5~C4": {
-   "n": 174,
-   "spearman": 0.487
-  },
-  "A5~D1": {
-   "n": 203,
-   "spearman": 0.737
-  },
-  "A5~D2": {
-   "n": 195,
-   "spearman": 0.667
-  },
-  "A5~D3": {
-   "n": 195,
-   "spearman": 0.572
-  },
-  "A5~D4": {
-   "n": 195,
-   "spearman": 0.618
   },
   "A6~B2": {
    "n": 38,
@@ -901,10 +805,6 @@
   "A6~B4": {
    "n": 33,
    "spearman": 0.293
-  },
-  "A6~B5": {
-   "n": 128,
-   "spearman": -0.683
   },
   "A6~B5n": {
    "n": 114,
@@ -958,10 +858,6 @@
    "n": 30,
    "spearman": 0.061
   },
-  "B2~B5": {
-   "n": 38,
-   "spearman": 0.527
-  },
   "B2~B5n": {
    "n": 38,
    "spearman": 0.189
@@ -1010,10 +906,6 @@
    "n": 33,
    "spearman": 0.489
   },
-  "B3~B5": {
-   "n": 101,
-   "spearman": -0.162
-  },
   "B3~B5n": {
    "n": 93,
    "spearman": -0.121
@@ -1057,10 +949,6 @@
   "B3~D4": {
    "n": 130,
    "spearman": -0.054
-  },
-  "B4~B5": {
-   "n": 32,
-   "spearman": -0.144
   },
   "B4~B5n": {
    "n": 32,
@@ -1106,53 +994,49 @@
    "n": 33,
    "spearman": 0.337
   },
+  "B5n~B5n": {
+   "n": 115,
+   "spearman": 1.0
+  },
+  "B5n~B6": {
+   "n": 115,
+   "spearman": 0.437
+  },
+  "B5n~B7": {
+   "n": 38,
+   "spearman": 0.076
+  },
+  "B5n~C1": {
+   "n": 51,
+   "spearman": -0.212
+  },
+  "B5n~C2": {
+   "n": 102,
+   "spearman": -0.058
+  },
+  "B5n~C3": {
+   "n": 105,
+   "spearman": 0.43
+  },
   "B5n~C4": {
    "n": 106,
    "spearman": -0.14
   },
-  "B5~B5n": {
-   "n": 115,
-   "spearman": 0.757
+  "B5n~D1": {
+   "n": 114,
+   "spearman": -0.506
   },
-  "B5~B6": {
-   "n": 115,
-   "spearman": 0.89
+  "B5n~D2": {
+   "n": 114,
+   "spearman": -0.464
   },
-  "B5~B7": {
-   "n": 38,
-   "spearman": 0.705
+  "B5n~D3": {
+   "n": 114,
+   "spearman": -0.437
   },
-  "B5~C1": {
-   "n": 52,
-   "spearman": -0.491
-  },
-  "B5~C2": {
-   "n": 115,
-   "spearman": 0.169
-  },
-  "B5~C3": {
-   "n": 117,
-   "spearman": 0.575
-  },
-  "B5~C4": {
-   "n": 119,
-   "spearman": -0.372
-  },
-  "B5~D1": {
-   "n": 128,
-   "spearman": -0.739
-  },
-  "B5~D2": {
-   "n": 128,
-   "spearman": -0.694
-  },
-  "B5~D3": {
-   "n": 128,
-   "spearman": -0.573
-  },
-  "B5~D4": {
-   "n": 128,
-   "spearman": -0.675
+  "B5n~D4": {
+   "n": 114,
+   "spearman": -0.493
   },
   "B6~B5n": {
    "n": 115,
@@ -1314,6 +1198,30 @@
    "n": 167,
    "spearman": -0.369
   },
+  "C4~B5n": {
+   "n": 106,
+   "spearman": -0.14
+  },
+  "C4~C4": {
+   "n": 176,
+   "spearman": 1.0
+  },
+  "C4~D1": {
+   "n": 174,
+   "spearman": 0.636
+  },
+  "C4~D2": {
+   "n": 176,
+   "spearman": 0.614
+  },
+  "C4~D3": {
+   "n": 176,
+   "spearman": 0.612
+  },
+  "C4~D4": {
+   "n": 176,
+   "spearman": 0.63
+  },
   "D1~B5n": {
    "n": 114,
    "spearman": -0.506
@@ -1340,7 +1248,7 @@
   },
   "D2~C4": {
    "n": 176,
-   "spearman": 0.615
+   "spearman": 0.614
   },
   "D2~D3": {
    "n": 210,
@@ -1373,971 +1281,758 @@
  },
  "couverture": {
   "dimension_a_1_indicateur": {
-   "A": 15,
-   "B": 40,
-   "C": 44,
-   "D": 10
+   "A": 0,
+   "B": 28,
+   "C": 2,
+   "D": 0
   },
-  "exemples_A_1_indicateur": [
-   "NCL",
-   "X-ABK",
-   "X-CRM",
-   "X-DON",
-   "X-ESH",
-   "X-GAZ",
-   "X-KAI",
-   "X-KAP",
-   "X-NCY",
-   "X-NKR",
-   "X-OSS",
-   "X-SML",
-   "X-TIB",
-   "X-TRN",
-   "X-WBK"
-  ],
-  "n_global_avec_dimension_a_1_indicateur": 90,
+  "exemples_A_1_indicateur": [],
+  "n_global_avec_dimension_a_1_indicateur": 30,
   "n_indicateurs_par_dimension": {
-   "A": 6,
+   "A": 5,
    "B": 6,
-   "C": 3,
+   "C": 4,
    "D": 4
   },
-  "n_score_global": 222,
+  "n_score_global": 171,
   "repartition_nA": {
    "0": 0,
-   "1": 15,
-   "2": 7,
-   "3": 24,
-   "4": 121,
-   "5": 1,
-   "6": 54
+   "1": 0,
+   "2": 0,
+   "3": 116,
+   "4": 1,
+   "5": 54,
+   "6": 0
   }
  },
- "decisions_appliquees": [],
+ "decisions_appliquees": [
+  "DEC-01",
+  "DEC-02",
+  "DEC-03",
+  "DEC-04",
+  "DEC-05",
+  "DEC-06",
+  "DEC-07",
+  "DEC-08",
+  "DEC-09",
+  "DEC-11",
+  "DEC-12"
+ ],
  "dominance": {
-  "n_delta_sup_10": 28,
-  "n_delta_sup_5": 107,
-  "n_score_perdu_si_retrait": 18,
+  "n_delta_sup_10": 1,
+  "n_delta_sup_5": 6,
+  "n_score_perdu_si_retrait": 116,
   "par_pays": {
-   "ABW": {
-    "delta": 5.96,
-    "indicateur": "B3"
-   },
-   "AFG": {
-    "delta": -3.01,
-    "indicateur": "C3"
-   },
    "AGO": {
-    "delta": 2.68,
-    "indicateur": "B3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "ALB": {
-    "delta": -5.69,
-    "indicateur": "C3"
-   },
-   "AND": {
-    "delta": 14.21,
-    "indicateur": "C2"
+    "delta": null,
+    "indicateur": "A1"
    },
    "ARE": {
-    "delta": -8.07,
-    "indicateur": "B3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "ARG": {
-    "delta": 3.65,
+    "delta": 8.06,
     "indicateur": "B3"
    },
    "ARM": {
-    "delta": 5.47,
-    "indicateur": "C2"
-   },
-   "ASM": {
-    "delta": null,
-    "indicateur": "D1"
-   },
-   "ATG": {
-    "delta": 4.96,
-    "indicateur": "B3"
-   },
-   "AUS": {
-    "delta": -2.76,
-    "indicateur": "C1"
-   },
-   "AUT": {
-    "delta": -4.14,
-    "indicateur": "C1"
-   },
-   "AZE": {
-    "delta": -7.15,
-    "indicateur": "C3"
-   },
-   "BDI": {
-    "delta": -3.97,
-    "indicateur": "C3"
-   },
-   "BEL": {
-    "delta": 4.15,
-    "indicateur": "C3"
-   },
-   "BEN": {
-    "delta": 10.36,
-    "indicateur": "B3"
-   },
-   "BFA": {
-    "delta": 4.81,
-    "indicateur": "B3"
-   },
-   "BGD": {
-    "delta": -9.53,
-    "indicateur": "C3"
-   },
-   "BGR": {
-    "delta": 4.78,
-    "indicateur": "C2"
-   },
-   "BHR": {
-    "delta": -8.68,
-    "indicateur": "B3"
-   },
-   "BHS": {
-    "delta": 7.59,
-    "indicateur": "A1"
-   },
-   "BIH": {
-    "delta": 4.9,
-    "indicateur": "C2"
-   },
-   "BLR": {
-    "delta": 7.02,
-    "indicateur": "C2"
-   },
-   "BLZ": {
-    "delta": -3.96,
-    "indicateur": "A6"
-   },
-   "BMU": {
-    "delta": 11.34,
-    "indicateur": "A1"
-   },
-   "BOL": {
-    "delta": 4.2,
-    "indicateur": "C2"
-   },
-   "BRA": {
-    "delta": -2.77,
-    "indicateur": "B6"
-   },
-   "BRB": {
-    "delta": 8.66,
-    "indicateur": "C2"
-   },
-   "BRN": {
-    "delta": -4.65,
-    "indicateur": "C2"
-   },
-   "BTN": {
-    "delta": 4.13,
-    "indicateur": "C2"
-   },
-   "BWA": {
-    "delta": 5.32,
-    "indicateur": "B3"
-   },
-   "CAF": {
-    "delta": -20.62,
-    "indicateur": "C3"
-   },
-   "CAN": {
-    "delta": 3.27,
-    "indicateur": "C2"
-   },
-   "CHE": {
     "delta": 5.03,
     "indicateur": "C2"
    },
-   "CHL": {
-    "delta": -2.04,
-    "indicateur": "B7"
+   "ATG": {
+    "delta": null,
+    "indicateur": "A1"
    },
-   "CHN": {
-    "delta": 3.27,
-    "indicateur": "B3"
-   },
-   "CIV": {
-    "delta": -5.05,
+   "AUS": {
+    "delta": 1.77,
     "indicateur": "C3"
    },
-   "CMR": {
-    "delta": 6.18,
-    "indicateur": "B3"
-   },
-   "COD": {
-    "delta": 6.13,
-    "indicateur": "B3"
-   },
-   "COG": {
-    "delta": -8.78,
-    "indicateur": "B5"
-   },
-   "COL": {
-    "delta": 2.73,
+   "AUT": {
+    "delta": 2.82,
     "indicateur": "C2"
    },
-   "COM": {
-    "delta": -13.37,
+   "AZE": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "BDI": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "BEL": {
+    "delta": 2.81,
     "indicateur": "C3"
    },
+   "BEN": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "BFA": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "BGD": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "BGR": {
+    "delta": 3.53,
+    "indicateur": "C2"
+   },
+   "BHR": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "BHS": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "BIH": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "BLR": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "BLZ": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "BOL": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "BRA": {
+    "delta": 7.93,
+    "indicateur": "B3"
+   },
+   "BRB": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "BRN": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "BTN": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "BWA": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "CAF": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "CAN": {
+    "delta": 2.62,
+    "indicateur": "C2"
+   },
+   "CHE": {
+    "delta": 3.84,
+    "indicateur": "C2"
+   },
+   "CHL": {
+    "delta": 2.62,
+    "indicateur": "A4"
+   },
+   "CHN": {
+    "delta": 3.29,
+    "indicateur": "A6"
+   },
+   "CIV": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "CMR": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "COD": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "COG": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "COL": {
+    "delta": 2.87,
+    "indicateur": "A4"
+   },
+   "COM": {
+    "delta": null,
+    "indicateur": "A1"
+   },
    "CPV": {
-    "delta": 4.29,
+    "delta": null,
     "indicateur": "A1"
    },
    "CRI": {
-    "delta": 3.97,
+    "delta": 2.94,
     "indicateur": "C2"
    },
    "CUB": {
-    "delta": 3.88,
-    "indicateur": "C3"
-   },
-   "CYM": {
-    "delta": 10.37,
+    "delta": null,
     "indicateur": "A1"
    },
    "CYP": {
-    "delta": -4.53,
-    "indicateur": "C1"
+    "delta": 3.28,
+    "indicateur": "C2"
    },
    "CZE": {
-    "delta": -4.35,
-    "indicateur": "C1"
+    "delta": 3.49,
+    "indicateur": "C2"
    },
    "DEU": {
-    "delta": -3.97,
-    "indicateur": "C1"
-   },
-   "DJI": {
-    "delta": -3.3,
-    "indicateur": "C3"
-   },
-   "DMA": {
-    "delta": 10.29,
-    "indicateur": "B3"
+    "delta": 3.12,
+    "indicateur": "C2"
    },
    "DNK": {
-    "delta": -3.95,
+    "delta": -2.35,
     "indicateur": "C1"
    },
    "DOM": {
-    "delta": 5.19,
-    "indicateur": "B3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "DZA": {
-    "delta": -6.98,
-    "indicateur": "C3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "ECU": {
-    "delta": -2.42,
-    "indicateur": "B5"
+    "delta": null,
+    "indicateur": "A1"
    },
    "EGY": {
-    "delta": -8.4,
-    "indicateur": "C3"
-   },
-   "ERI": {
-    "delta": 2.86,
-    "indicateur": "A6"
+    "delta": null,
+    "indicateur": "A1"
    },
    "ESP": {
-    "delta": -2.24,
-    "indicateur": "C1"
+    "delta": 1.92,
+    "indicateur": "A4"
    },
    "EST": {
-    "delta": -4.4,
-    "indicateur": "C1"
+    "delta": 3.06,
+    "indicateur": "C2"
    },
    "ETH": {
-    "delta": -11.65,
-    "indicateur": "C3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "FIN": {
-    "delta": -5.28,
-    "indicateur": "C1"
+    "delta": 3.14,
+    "indicateur": "C2"
    },
    "FJI": {
-    "delta": 4.14,
-    "indicateur": "C2"
+    "delta": null,
+    "indicateur": "A1"
    },
    "FRA": {
-    "delta": -3.77,
+    "delta": -2.11,
     "indicateur": "C1"
-   },
-   "FSM": {
-    "delta": 11.8,
-    "indicateur": "C2"
    },
    "GAB": {
-    "delta": 6.07,
-    "indicateur": "B3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "GBR": {
-    "delta": 2.52,
-    "indicateur": "C3"
+    "delta": 1.98,
+    "indicateur": "A4"
    },
    "GEO": {
-    "delta": 5.9,
-    "indicateur": "C2"
+    "delta": null,
+    "indicateur": "A1"
    },
    "GHA": {
-    "delta": 4.34,
-    "indicateur": "C2"
+    "delta": null,
+    "indicateur": "A1"
    },
    "GIN": {
-    "delta": -10.42,
-    "indicateur": "B5"
+    "delta": null,
+    "indicateur": "A1"
    },
    "GMB": {
-    "delta": -2.66,
-    "indicateur": "C3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "GNB": {
-    "delta": -7.61,
-    "indicateur": "C3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "GNQ": {
-    "delta": 2.73,
-    "indicateur": "C3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "GRC": {
-    "delta": -3.87,
-    "indicateur": "C1"
-   },
-   "GRD": {
-    "delta": 8.95,
+    "delta": 2.9,
     "indicateur": "C2"
-   },
-   "GRL": {
-    "delta": 12.74,
-    "indicateur": "C3"
    },
    "GTM": {
-    "delta": -5.94,
-    "indicateur": "C3"
-   },
-   "GUM": {
     "delta": null,
-    "indicateur": "D1"
+    "indicateur": "A1"
    },
    "GUY": {
-    "delta": 8.69,
-    "indicateur": "C2"
+    "delta": null,
+    "indicateur": "A1"
    },
    "HKG": {
-    "delta": -3.5,
-    "indicateur": "C3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "HND": {
-    "delta": -6.65,
+    "delta": null,
     "indicateur": "A1"
    },
    "HRV": {
-    "delta": 4.17,
+    "delta": 3.13,
     "indicateur": "C2"
    },
    "HTI": {
-    "delta": -14.69,
-    "indicateur": "C3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "HUN": {
-    "delta": -3.01,
-    "indicateur": "C1"
+    "delta": -2.36,
+    "indicateur": "A1"
    },
    "IDN": {
-    "delta": 4.25,
-    "indicateur": "B3"
+    "delta": -1.94,
+    "indicateur": "A1"
    },
    "IND": {
-    "delta": 7.95,
-    "indicateur": "B3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "IRL": {
-    "delta": 5.8,
+    "delta": 4.22,
     "indicateur": "C2"
    },
    "IRN": {
-    "delta": -5.95,
-    "indicateur": "C3"
-   },
-   "IRQ": {
-    "delta": -6.8,
-    "indicateur": "C3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "ISL": {
-    "delta": -5.45,
+    "delta": -3.11,
     "indicateur": "C1"
    },
    "ISR": {
-    "delta": -2.92,
-    "indicateur": "C1"
+    "delta": -1.76,
+    "indicateur": "B7"
    },
    "ITA": {
-    "delta": 4.34,
+    "delta": 3.3,
     "indicateur": "C2"
    },
    "JAM": {
-    "delta": 7.72,
-    "indicateur": "C2"
+    "delta": null,
+    "indicateur": "A1"
    },
    "JOR": {
-    "delta": -3.62,
-    "indicateur": "C2"
+    "delta": null,
+    "indicateur": "A1"
    },
    "JPN": {
-    "delta": 4.52,
+    "delta": 3.85,
     "indicateur": "C2"
    },
    "KAZ": {
-    "delta": -8.08,
-    "indicateur": "C3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "KEN": {
-    "delta": 5.38,
-    "indicateur": "B3"
+    "delta": -2.71,
+    "indicateur": "A3"
    },
    "KGZ": {
-    "delta": 5.94,
-    "indicateur": "C2"
+    "delta": null,
+    "indicateur": "A1"
    },
    "KHM": {
-    "delta": -9.78,
-    "indicateur": "B5"
-   },
-   "KIR": {
-    "delta": 13.9,
-    "indicateur": "C3"
-   },
-   "KNA": {
-    "delta": 12.48,
-    "indicateur": "B3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "KOR": {
-    "delta": 4.97,
+    "delta": 3.69,
     "indicateur": "C2"
    },
    "KWT": {
-    "delta": -4.74,
-    "indicateur": "C2"
+    "delta": null,
+    "indicateur": "A1"
    },
    "LAO": {
-    "delta": -13.54,
-    "indicateur": "B5"
+    "delta": null,
+    "indicateur": "A1"
    },
    "LBN": {
-    "delta": -5.66,
+    "delta": null,
     "indicateur": "A1"
    },
    "LBR": {
-    "delta": -12.5,
-    "indicateur": "C2"
+    "delta": null,
+    "indicateur": "A1"
    },
    "LBY": {
-    "delta": -8.81,
+    "delta": null,
     "indicateur": "A1"
    },
    "LCA": {
-    "delta": 11.6,
-    "indicateur": "C2"
-   },
-   "LIE": {
-    "delta": 15.64,
-    "indicateur": "C2"
+    "delta": null,
+    "indicateur": "A1"
    },
    "LKA": {
-    "delta": -9.51,
-    "indicateur": "C3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "LSO": {
-    "delta": -4.4,
+    "delta": null,
     "indicateur": "A1"
    },
    "LTU": {
-    "delta": 4.21,
-    "indicateur": "C2"
-   },
-   "LUX": {
-    "delta": -3.49,
-    "indicateur": "C1"
-   },
-   "LVA": {
-    "delta": -4.6,
-    "indicateur": "C1"
-   },
-   "MAC": {
-    "delta": 5.45,
-    "indicateur": "D1"
-   },
-   "MAR": {
-    "delta": 3.59,
-    "indicateur": "B3"
-   },
-   "MCO": {
-    "delta": 10.8,
-    "indicateur": "B3"
-   },
-   "MDA": {
-    "delta": 4.53,
-    "indicateur": "C2"
-   },
-   "MDG": {
-    "delta": -2.43,
-    "indicateur": "C3"
-   },
-   "MDV": {
-    "delta": 5.44,
-    "indicateur": "C2"
-   },
-   "MEX": {
-    "delta": 3.55,
-    "indicateur": "C2"
-   },
-   "MHL": {
-    "delta": 5.94,
-    "indicateur": "A5"
-   },
-   "MKD": {
-    "delta": 6.75,
-    "indicateur": "C2"
-   },
-   "MLI": {
-    "delta": 1.27,
-    "indicateur": "B5"
-   },
-   "MLT": {
-    "delta": 2.82,
-    "indicateur": "B3"
-   },
-   "MMR": {
-    "delta": -12.88,
-    "indicateur": "A1"
-   },
-   "MNE": {
-    "delta": -5.6,
-    "indicateur": "C3"
-   },
-   "MNG": {
-    "delta": -6.41,
-    "indicateur": "C3"
-   },
-   "MOZ": {
-    "delta": 7.12,
-    "indicateur": "C2"
-   },
-   "MRT": {
-    "delta": 4.7,
-    "indicateur": "B3"
-   },
-   "MUS": {
-    "delta": -3.43,
-    "indicateur": "A1"
-   },
-   "MWI": {
-    "delta": 2.15,
-    "indicateur": "C3"
-   },
-   "MYS": {
-    "delta": 4.65,
-    "indicateur": "B3"
-   },
-   "NAM": {
-    "delta": 4.62,
-    "indicateur": "B3"
-   },
-   "NCL": {
-    "delta": null,
-    "indicateur": "A4"
-   },
-   "NER": {
-    "delta": -7.11,
-    "indicateur": "C3"
-   },
-   "NGA": {
-    "delta": 6.26,
-    "indicateur": "B3"
-   },
-   "NIC": {
-    "delta": -7.24,
-    "indicateur": "A1"
-   },
-   "NLD": {
-    "delta": -5.6,
-    "indicateur": "C1"
-   },
-   "NOR": {
-    "delta": -4.94,
-    "indicateur": "C1"
-   },
-   "NPL": {
-    "delta": -6.18,
-    "indicateur": "C3"
-   },
-   "NRU": {
-    "delta": 7.56,
-    "indicateur": "B5"
-   },
-   "NZL": {
-    "delta": -4.53,
-    "indicateur": "C1"
-   },
-   "OMN": {
-    "delta": -3.63,
-    "indicateur": "A1"
-   },
-   "PAK": {
-    "delta": 9.09,
-    "indicateur": "B3"
-   },
-   "PAN": {
-    "delta": -5.81,
-    "indicateur": "C3"
-   },
-   "PER": {
-    "delta": 4.83,
-    "indicateur": "B3"
-   },
-   "PHL": {
-    "delta": -5.3,
-    "indicateur": "C3"
-   },
-   "PLW": {
-    "delta": 5.06,
-    "indicateur": "C3"
-   },
-   "PNG": {
-    "delta": 6.84,
-    "indicateur": "B3"
-   },
-   "POL": {
-    "delta": 3.35,
-    "indicateur": "C2"
-   },
-   "PRI": {
-    "delta": 4.48,
-    "indicateur": "C2"
-   },
-   "PRK": {
-    "delta": 2.81,
-    "indicateur": "A5"
-   },
-   "PRT": {
-    "delta": 3.31,
-    "indicateur": "C2"
-   },
-   "PRY": {
-    "delta": -3.86,
-    "indicateur": "C3"
-   },
-   "PSE": {
-    "delta": 4.34,
-    "indicateur": "C3"
-   },
-   "PYF": {
-    "delta": 16.21,
-    "indicateur": "C3"
-   },
-   "QAT": {
-    "delta": 5.16,
-    "indicateur": "A6"
-   },
-   "ROU": {
-    "delta": 4.7,
-    "indicateur": "C2"
-   },
-   "RUS": {
-    "delta": -6.81,
-    "indicateur": "C3"
-   },
-   "RWA": {
-    "delta": -5.23,
-    "indicateur": "C3"
-   },
-   "SAU": {
-    "delta": 4.16,
-    "indicateur": "A6"
-   },
-   "SDN": {
-    "delta": -11.3,
-    "indicateur": "A1"
-   },
-   "SEN": {
-    "delta": 4.96,
-    "indicateur": "B3"
-   },
-   "SGP": {
-    "delta": 8.01,
-    "indicateur": "C2"
-   },
-   "SLB": {
-    "delta": -3.96,
-    "indicateur": "A6"
-   },
-   "SLE": {
-    "delta": -8.88,
-    "indicateur": "C3"
-   },
-   "SLV": {
-    "delta": -4.11,
-    "indicateur": "A1"
-   },
-   "SMR": {
-    "delta": 6.83,
-    "indicateur": "B3"
-   },
-   "SOM": {
-    "delta": -2.25,
-    "indicateur": "A5"
-   },
-   "SRB": {
-    "delta": -5.89,
-    "indicateur": "C3"
-   },
-   "SSD": {
-    "delta": 2.34,
-    "indicateur": "A6"
-   },
-   "STP": {
-    "delta": -6.0,
-    "indicateur": "C3"
-   },
-   "SUR": {
-    "delta": -3.36,
-    "indicateur": "C2"
-   },
-   "SVK": {
-    "delta": -4.18,
-    "indicateur": "C1"
-   },
-   "SVN": {
-    "delta": 4.96,
-    "indicateur": "C2"
-   },
-   "SWE": {
-    "delta": -4.89,
-    "indicateur": "C1"
-   },
-   "SWZ": {
-    "delta": -5.22,
-    "indicateur": "A1"
-   },
-   "SYC": {
-    "delta": -3.4,
-    "indicateur": "A1"
-   },
-   "SYR": {
-    "delta": -11.21,
-    "indicateur": "C3"
-   },
-   "TCD": {
-    "delta": -13.78,
-    "indicateur": "B5"
-   },
-   "TGO": {
-    "delta": -6.27,
-    "indicateur": "B5"
-   },
-   "THA": {
-    "delta": 3.29,
-    "indicateur": "B3"
-   },
-   "TJK": {
-    "delta": -13.31,
-    "indicateur": "C3"
-   },
-   "TKM": {
-    "delta": -15.09,
-    "indicateur": "C3"
-   },
-   "TLS": {
-    "delta": -5.82,
-    "indicateur": "A1"
-   },
-   "TON": {
-    "delta": -3.0,
-    "indicateur": "A6"
-   },
-   "TTO": {
-    "delta": 8.13,
-    "indicateur": "C2"
-   },
-   "TUN": {
     "delta": 3.36,
     "indicateur": "C2"
    },
-   "TUR": {
-    "delta": 3.97,
+   "LUX": {
+    "delta": 2.98,
+    "indicateur": "A2"
+   },
+   "LVA": {
+    "delta": 3.37,
     "indicateur": "C2"
    },
-   "TUV": {
-    "delta": 9.74,
+   "MAR": {
+    "delta": 4.83,
+    "indicateur": "B3"
+   },
+   "MDA": {
+    "delta": 4.28,
+    "indicateur": "C2"
+   },
+   "MDG": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "MDV": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "MEX": {
+    "delta": -3.6,
+    "indicateur": "A1"
+   },
+   "MKD": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "MLI": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "MLT": {
+    "delta": 10.55,
+    "indicateur": "B3"
+   },
+   "MNE": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "MNG": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "MOZ": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "MRT": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "MUS": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "MWI": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "MYS": {
+    "delta": 2.64,
+    "indicateur": "C2"
+   },
+   "NAM": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "NER": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "NGA": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "NIC": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "NLD": {
+    "delta": 3.39,
+    "indicateur": "C2"
+   },
+   "NOR": {
+    "delta": 3.14,
+    "indicateur": "C2"
+   },
+   "NPL": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "NZL": {
+    "delta": 3.42,
+    "indicateur": "C2"
+   },
+   "OMN": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "PAK": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "PAN": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "PER": {
+    "delta": 5.45,
+    "indicateur": "B3"
+   },
+   "PHL": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "PLW": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "PNG": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "POL": {
+    "delta": 2.71,
+    "indicateur": "A4"
+   },
+   "PRT": {
+    "delta": 2.5,
+    "indicateur": "C2"
+   },
+   "PRY": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "QAT": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "ROU": {
+    "delta": 4.42,
+    "indicateur": "C2"
+   },
+   "RUS": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "RWA": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "SAU": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "SDN": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "SEN": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "SGP": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "SLB": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "SLE": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "SLV": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "SRB": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "STP": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "SUR": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "SVK": {
+    "delta": 2.86,
+    "indicateur": "C2"
+   },
+   "SVN": {
+    "delta": 3.61,
+    "indicateur": "C2"
+   },
+   "SWE": {
+    "delta": -2.75,
+    "indicateur": "C1"
+   },
+   "SWZ": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "SYC": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "SYR": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "TCD": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "TGO": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "THA": {
+    "delta": -1.75,
+    "indicateur": "A2"
+   },
+   "TJK": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "TLS": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "TON": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "TTO": {
+    "delta": null,
+    "indicateur": "A1"
+   },
+   "TUR": {
+    "delta": 3.0,
     "indicateur": "C2"
    },
    "TWN": {
-    "delta": -5.09,
+    "delta": null,
     "indicateur": "A6"
    },
    "TZA": {
-    "delta": -10.55,
-    "indicateur": "C3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "UGA": {
-    "delta": -7.58,
-    "indicateur": "C3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "UKR": {
-    "delta": -5.82,
+    "delta": null,
     "indicateur": "A1"
    },
    "URY": {
-    "delta": -4.48,
-    "indicateur": "A6"
+    "delta": null,
+    "indicateur": "A1"
    },
    "USA": {
-    "delta": 4.15,
+    "delta": 3.34,
     "indicateur": "C2"
    },
    "UZB": {
-    "delta": 6.61,
-    "indicateur": "C2"
-   },
-   "VCT": {
-    "delta": 14.75,
-    "indicateur": "B3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "VEN": {
-    "delta": -2.7,
-    "indicateur": "C2"
-   },
-   "VIR": {
     "delta": null,
-    "indicateur": "C3"
+    "indicateur": "A1"
    },
    "VNM": {
-    "delta": -9.05,
-    "indicateur": "C3"
+    "delta": null,
+    "indicateur": "A1"
    },
    "VUT": {
-    "delta": 4.58,
-    "indicateur": "C2"
+    "delta": null,
+    "indicateur": "A1"
    },
    "WSM": {
-    "delta": -4.01,
-    "indicateur": "B6"
-   },
-   "X-ABK": {
     "delta": null,
-    "indicateur": "A6"
-   },
-   "X-CRM": {
-    "delta": null,
-    "indicateur": "A6"
-   },
-   "X-DON": {
-    "delta": null,
-    "indicateur": "A6"
-   },
-   "X-ESH": {
-    "delta": null,
-    "indicateur": "A6"
-   },
-   "X-GAZ": {
-    "delta": null,
-    "indicateur": "A6"
-   },
-   "X-KAI": {
-    "delta": null,
-    "indicateur": "A6"
-   },
-   "X-KAP": {
-    "delta": null,
-    "indicateur": "A6"
-   },
-   "X-NCY": {
-    "delta": null,
-    "indicateur": "A6"
-   },
-   "X-NKR": {
-    "delta": null,
-    "indicateur": "A6"
-   },
-   "X-OSS": {
-    "delta": null,
-    "indicateur": "A6"
-   },
-   "X-SML": {
-    "delta": null,
-    "indicateur": "A6"
-   },
-   "X-TIB": {
-    "delta": null,
-    "indicateur": "A6"
-   },
-   "X-TRN": {
-    "delta": null,
-    "indicateur": "A6"
-   },
-   "X-WBK": {
-    "delta": null,
-    "indicateur": "A6"
-   },
-   "XKX": {
-    "delta": -7.92,
-    "indicateur": "C3"
-   },
-   "YEM": {
-    "delta": 2.98,
-    "indicateur": "A4"
+    "indicateur": "A1"
    },
    "ZAF": {
-    "delta": 3.56,
-    "indicateur": "C2"
-   },
-   "ZMB": {
-    "delta": 9.24,
+    "delta": 5.86,
     "indicateur": "B3"
    },
+   "ZMB": {
+    "delta": null,
+    "indicateur": "A1"
+   },
    "ZWE": {
-    "delta": -6.76,
-    "indicateur": "C3"
+    "delta": null,
+    "indicateur": "A1"
    }
   }
  },
  "erreur_sous_ensembles": {
   "A": {
-   "n_indicateurs": 6,
+   "n_indicateurs": 5,
    "n_pays_complets": 54,
    "par_k": {
     "1": {
-     "max": 33.94,
-     "mediane": 9.39,
-     "p90": 19.24
+     "max": 35.67,
+     "mediane": 9.92,
+     "p90": 20.53
     },
     "2": {
-     "max": 25.13,
-     "mediane": 5.15,
-     "p90": 13.79
+     "max": 22.0,
+     "mediane": 4.93,
+     "p90": 13.63
     },
     "3": {
-     "max": 16.34,
-     "mediane": 3.51,
-     "p90": 8.94
+     "max": 14.67,
+     "mediane": 3.29,
+     "p90": 9.09
     },
     "4": {
-     "max": 12.56,
-     "mediane": 2.58,
-     "p90": 6.89
-    },
-    "5": {
-     "max": 6.79,
-     "mediane": 1.88,
-     "p90": 3.85
+     "max": 8.92,
+     "mediane": 2.48,
+     "p90": 5.13
     }
    }
   },
@@ -2346,45 +2041,50 @@
    "n_pays_complets": 30,
    "par_k": {
     "1": {
-     "max": 54.24,
-     "mediane": 12.0,
-     "p90": 32.95
+     "max": 58.57,
+     "mediane": 12.52,
+     "p90": 33.6
     },
     "2": {
-     "max": 49.27,
-     "mediane": 7.61,
-     "p90": 18.91
+     "max": 53.65,
+     "mediane": 7.35,
+     "p90": 20.32
     },
     "3": {
-     "max": 37.61,
-     "mediane": 4.76,
-     "p90": 14.32
+     "max": 33.07,
+     "mediane": 4.84,
+     "p90": 14.8
     },
     "4": {
-     "max": 24.64,
-     "mediane": 3.81,
-     "p90": 9.45
+     "max": 26.83,
+     "mediane": 3.68,
+     "p90": 10.16
     },
     "5": {
-     "max": 10.85,
-     "mediane": 2.4,
-     "p90": 6.59
+     "max": 11.71,
+     "mediane": 2.5,
+     "p90": 6.72
     }
    }
   },
   "C": {
-   "n_indicateurs": 3,
+   "n_indicateurs": 4,
    "n_pays_complets": 53,
    "par_k": {
     "1": {
-     "max": 58.01,
-     "mediane": 24.57,
-     "p90": 45.28
+     "max": 63.29,
+     "mediane": 21.56,
+     "p90": 46.66
     },
     "2": {
-     "max": 29.0,
-     "mediane": 12.28,
-     "p90": 22.64
+     "max": 36.98,
+     "mediane": 12.01,
+     "p90": 27.18
+    },
+    "3": {
+     "max": 21.1,
+     "mediane": 7.19,
+     "p90": 15.55
     }
    }
   },
@@ -2393,29 +2093,25 @@
    "n_pays_complets": 195,
    "par_k": {
     "1": {
-     "max": 29.12,
-     "mediane": 7.09,
-     "p90": 17.23
+     "max": 28.17,
+     "mediane": 6.82,
+     "p90": 16.78
     },
     "2": {
-     "max": 17.73,
-     "mediane": 4.72,
-     "p90": 9.14
+     "max": 16.54,
+     "mediane": 4.6,
+     "p90": 8.97
     },
     "3": {
-     "max": 9.71,
-     "mediane": 2.36,
-     "p90": 5.74
+     "max": 9.39,
+     "mediane": 2.27,
+     "p90": 5.59
     }
    }
   }
  },
  "methode": "officielle",
  "paires_fortes": {
-  "A4~A5": {
-   "n": 205,
-   "spearman": 0.883
-  },
   "A4~A6": {
    "n": 195,
    "spearman": 0.836
@@ -2426,7 +2122,7 @@
   },
   "A4~D2": {
    "n": 195,
-   "spearman": 0.809
+   "spearman": 0.81
   },
   "A6~D1": {
    "n": 195,
@@ -2444,9 +2140,13 @@
    "n": 210,
    "spearman": 0.871
   },
-  "B5~B6": {
+  "B5n~B5n": {
    "n": 115,
-   "spearman": 0.89
+   "spearman": 1.0
+  },
+  "C4~C4": {
+   "n": 176,
+   "spearman": 1.0
   },
   "D1~D2": {
    "n": 195,
@@ -2482,7 +2182,7 @@
     18.493
    ],
    "n": 180,
-   "regle": "percentile"
+   "regle": "fixe"
   },
   "A2": {
    "a_0": 0,
@@ -2514,16 +2214,6 @@
    "n": 207,
    "regle": "fixe"
   },
-  "A5": {
-   "a_0": 0,
-   "a_100": 0,
-   "bornes": [
-    -2.5,
-    2.5
-   ],
-   "n": 205,
-   "regle": "fixe"
-  },
   "A6": {
    "a_0": 9,
    "a_100": 39,
@@ -2552,7 +2242,7 @@
     31.875
    ],
    "n": 146,
-   "regle": "percentile"
+   "regle": "fixe"
   },
   "B4": {
    "a_0": 3,
@@ -2564,15 +2254,15 @@
    "n": 33,
    "regle": "fixe"
   },
-  "B5": {
-   "a_0": 7,
-   "a_100": 7,
+  "B5n": {
+   "a_0": 6,
+   "a_100": 6,
    "bornes": [
-    9.9924,
-    41.66
+    7.0913,
+    21.8832
    ],
-   "n": 129,
-   "regle": "percentile"
+   "n": 115,
+   "regle": "fixe"
   },
   "B6": {
    "a_0": 6,
@@ -2582,7 +2272,7 @@
     24.3147
    ],
    "n": 115,
-   "regle": "percentile"
+   "regle": "fixe"
   },
   "B7": {
    "a_0": 2,
@@ -2592,7 +2282,7 @@
     47.31943055
    ],
    "n": 38,
-   "regle": "percentile"
+   "regle": "fixe"
   },
   "C1": {
    "a_0": 0,
@@ -2612,7 +2302,7 @@
     49.3212978
    ],
    "n": 173,
-   "regle": "percentile"
+   "regle": "fixe"
   },
   "C3": {
    "a_0": 9,
@@ -2622,7 +2312,17 @@
     32.29545039999997
    ],
    "n": 177,
-   "regle": "percentile"
+   "regle": "fixe"
+  },
+  "C4": {
+   "a_0": 0,
+   "a_100": 0,
+   "bornes": [
+    0.0,
+    4.0
+   ],
+   "n": 176,
+   "regle": "fixe"
   },
   "D1": {
    "a_0": 0,
@@ -2635,10 +2335,10 @@
    "regle": "fixe"
   },
   "D2": {
-   "a_0": 15,
+   "a_0": 0,
    "a_100": 6,
    "bornes": [
-    0.0,
+    -4.0,
     40.0
    ],
    "n": 210,

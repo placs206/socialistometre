@@ -1,1559 +1,1202 @@
 {
  "graine": 20261029,
  "intervalles": {
-  "ABW": {
-   "n_tirages": 589,
-   "rang_p5": 58,
-   "rang_p95": 141,
-   "score_p5": 49.421,
-   "score_p95": 63.867
-  },
-  "AFG": {
-   "n_tirages": 594,
-   "rang_p5": 200,
-   "rang_p95": 213,
-   "score_p5": 15.418,
-   "score_p95": 25.142
-  },
   "AGO": {
-   "n_tirages": 598,
-   "rang_p5": 179,
-   "rang_p95": 198,
-   "score_p5": 28.58,
-   "score_p95": 37.164
+   "n_tirages": 278,
+   "rang_p5": 130,
+   "rang_p95": 158,
+   "score_p5": 32.076,
+   "score_p95": 37.144
   },
   "ALB": {
-   "n_tirages": 598,
-   "rang_p5": 44,
-   "rang_p95": 125,
-   "score_p5": 51.262,
-   "score_p95": 67.649
-  },
-  "AND": {
-   "n_tirages": 594,
-   "rang_p5": 3,
-   "rang_p95": 85,
-   "score_p5": 57.201,
-   "score_p95": 83.824
+   "n_tirages": 278,
+   "rang_p5": 27,
+   "rang_p95": 60,
+   "score_p5": 61.002,
+   "score_p95": 70.268
   },
   "ARE": {
-   "n_tirages": 598,
-   "rang_p5": 3,
-   "rang_p95": 132,
-   "score_p5": 54.225,
-   "score_p95": 76.663
+   "n_tirages": 278,
+   "rang_p5": 55,
+   "rang_p95": 115,
+   "score_p5": 48.553,
+   "score_p95": 60.047
   },
   "ARG": {
-   "n_tirages": 600,
-   "rang_p5": 67,
-   "rang_p95": 128,
-   "score_p5": 50.74,
-   "score_p95": 63.941
+   "n_tirages": 542,
+   "rang_p5": 26,
+   "rang_p95": 102,
+   "score_p5": 51.77,
+   "score_p95": 68.052
   },
   "ARM": {
-   "n_tirages": 600,
-   "rang_p5": 50,
-   "rang_p95": 104,
-   "score_p5": 54.276,
-   "score_p95": 68.386
-  },
-  "ASM": {
-   "n_tirages": 467,
-   "rang_p5": 11,
-   "rang_p95": 86,
-   "score_p5": 60.032,
-   "score_p95": 73.464
+   "n_tirages": 534,
+   "rang_p5": 15,
+   "rang_p95": 61,
+   "score_p5": 60.517,
+   "score_p95": 71.7
   },
   "ATG": {
-   "n_tirages": 598,
-   "rang_p5": 22,
-   "rang_p95": 100,
-   "score_p5": 55.572,
-   "score_p95": 70.915
+   "n_tirages": 161,
+   "rang_p5": 53,
+   "rang_p95": 82,
+   "score_p5": 57.486,
+   "score_p95": 63.838
   },
   "AUS": {
-   "n_tirages": 600,
-   "rang_p5": 3,
-   "rang_p95": 24,
-   "score_p5": 67.59,
-   "score_p95": 81.922
+   "n_tirages": 561,
+   "rang_p5": 4,
+   "rang_p95": 14,
+   "score_p5": 68.606,
+   "score_p95": 82.043
   },
   "AUT": {
-   "n_tirages": 600,
-   "rang_p5": 37,
-   "rang_p95": 122,
-   "score_p5": 52.705,
-   "score_p95": 71.592
+   "n_tirages": 559,
+   "rang_p5": 24,
+   "rang_p95": 71,
+   "score_p5": 55.851,
+   "score_p95": 76.491
   },
   "AZE": {
-   "n_tirages": 598,
-   "rang_p5": 146,
-   "rang_p95": 185,
-   "score_p5": 30.397,
-   "score_p95": 49.501
+   "n_tirages": 294,
+   "rang_p5": 93,
+   "rang_p95": 157,
+   "score_p5": 28.253,
+   "score_p95": 41.947
   },
   "BDI": {
-   "n_tirages": 598,
-   "rang_p5": 194,
-   "rang_p95": 208,
-   "score_p5": 18.927,
-   "score_p95": 28.467
+   "n_tirages": 278,
+   "rang_p5": 141,
+   "rang_p95": 169,
+   "score_p5": 23.021,
+   "score_p95": 29.326
   },
   "BEL": {
-   "n_tirages": 600,
-   "rang_p5": 7,
-   "rang_p95": 85,
-   "score_p5": 59.831,
-   "score_p95": 76.664
+   "n_tirages": 561,
+   "rang_p5": 8,
+   "rang_p95": 42,
+   "score_p5": 62.542,
+   "score_p95": 78.465
   },
   "BEN": {
-   "n_tirages": 598,
-   "rang_p5": 92,
-   "rang_p95": 173,
-   "score_p5": 39.248,
-   "score_p95": 60.324
+   "n_tirages": 278,
+   "rang_p5": 38,
+   "rang_p95": 87,
+   "score_p5": 56.581,
+   "score_p95": 65.495
   },
   "BFA": {
-   "n_tirages": 598,
-   "rang_p5": 135,
-   "rang_p95": 181,
-   "score_p5": 38.048,
-   "score_p95": 50.059
+   "n_tirages": 294,
+   "rang_p5": 91,
+   "rang_p95": 139,
+   "score_p5": 38.136,
+   "score_p95": 49.161
   },
   "BGD": {
-   "n_tirages": 598,
-   "rang_p5": 17,
-   "rang_p95": 139,
-   "score_p5": 47.037,
-   "score_p95": 69.929
+   "n_tirages": 190,
+   "rang_p5": 89,
+   "rang_p95": 130,
+   "score_p5": 44.064,
+   "score_p95": 56.404
   },
   "BGR": {
-   "n_tirages": 600,
-   "rang_p5": 42,
-   "rang_p95": 98,
-   "score_p5": 55.67,
-   "score_p95": 70.355
+   "n_tirages": 552,
+   "rang_p5": 27,
+   "rang_p95": 66,
+   "score_p5": 57.569,
+   "score_p95": 70.854
   },
   "BHR": {
-   "n_tirages": 598,
-   "rang_p5": 10,
-   "rang_p95": 135,
-   "score_p5": 52.045,
-   "score_p95": 72.163
+   "n_tirages": 278,
+   "rang_p5": 64,
+   "rang_p95": 122,
+   "score_p5": 47.276,
+   "score_p95": 59.041
   },
   "BHS": {
-   "n_tirages": 598,
-   "rang_p5": 4,
-   "rang_p95": 106,
-   "score_p5": 55.489,
-   "score_p95": 79.06
+   "n_tirages": 260,
+   "rang_p5": 17,
+   "rang_p95": 69,
+   "score_p5": 60.399,
+   "score_p95": 69.13
   },
   "BIH": {
-   "n_tirages": 598,
-   "rang_p5": 92,
-   "rang_p95": 162,
-   "score_p5": 42.04,
-   "score_p95": 59.443
+   "n_tirages": 278,
+   "rang_p5": 84,
+   "rang_p95": 117,
+   "score_p5": 49.063,
+   "score_p95": 58.722
   },
   "BLR": {
-   "n_tirages": 598,
-   "rang_p5": 182,
-   "rang_p95": 206,
-   "score_p5": 19.304,
-   "score_p95": 39.767
+   "n_tirages": 278,
+   "rang_p5": 134,
+   "rang_p95": 163,
+   "score_p5": 26.773,
+   "score_p95": 37.073
   },
   "BLZ": {
-   "n_tirages": 598,
-   "rang_p5": 8,
-   "rang_p95": 96,
-   "score_p5": 58.891,
-   "score_p95": 74.738
-  },
-  "BMU": {
-   "n_tirages": 587,
-   "rang_p5": 2,
-   "rang_p95": 159,
-   "score_p5": 46.269,
-   "score_p95": 78.237
+   "n_tirages": 260,
+   "rang_p5": 12,
+   "rang_p95": 71,
+   "score_p5": 60.674,
+   "score_p95": 69.796
   },
   "BOL": {
-   "n_tirages": 598,
-   "rang_p5": 115,
-   "rang_p95": 165,
-   "score_p5": 41.117,
-   "score_p95": 56.013
+   "n_tirages": 278,
+   "rang_p5": 101,
+   "rang_p95": 132,
+   "score_p5": 43.952,
+   "score_p95": 52.661
   },
   "BRA": {
-   "n_tirages": 600,
-   "rang_p5": 104,
-   "rang_p95": 162,
-   "score_p5": 43.887,
-   "score_p95": 57.248
+   "n_tirages": 542,
+   "rang_p5": 43,
+   "rang_p95": 122,
+   "score_p5": 45.993,
+   "score_p95": 62.422
   },
   "BRB": {
-   "n_tirages": 598,
-   "rang_p5": 19,
-   "rang_p95": 125,
-   "score_p5": 51.396,
-   "score_p95": 73.421
+   "n_tirages": 262,
+   "rang_p5": 22,
+   "rang_p95": 60,
+   "score_p5": 60.134,
+   "score_p95": 70.811
   },
   "BRN": {
-   "n_tirages": 598,
-   "rang_p5": 32,
-   "rang_p95": 148,
-   "score_p5": 48.772,
-   "score_p95": 66.171
+   "n_tirages": 207,
+   "rang_p5": 39,
+   "rang_p95": 96,
+   "score_p5": 56.011,
+   "score_p95": 64.07
   },
   "BTN": {
-   "n_tirages": 598,
-   "rang_p5": 22,
-   "rang_p95": 111,
-   "score_p5": 52.641,
-   "score_p95": 70.725
+   "n_tirages": 278,
+   "rang_p5": 58,
+   "rang_p95": 104,
+   "score_p5": 52.607,
+   "score_p95": 63.478
   },
   "BWA": {
-   "n_tirages": 598,
-   "rang_p5": 78,
-   "rang_p95": 158,
-   "score_p5": 44.621,
-   "score_p95": 63.079
+   "n_tirages": 278,
+   "rang_p5": 62,
+   "rang_p95": 113,
+   "score_p5": 49.701,
+   "score_p95": 61.834
   },
   "CAF": {
-   "n_tirages": 598,
-   "rang_p5": 172,
-   "rang_p95": 215,
-   "score_p5": 8.907,
-   "score_p95": 41.987
+   "n_tirages": 190,
+   "rang_p5": 142,
+   "rang_p95": 170,
+   "score_p5": 18.538,
+   "score_p95": 41.571
   },
   "CAN": {
-   "n_tirages": 600,
-   "rang_p5": 24,
-   "rang_p95": 72,
-   "score_p5": 58.928,
-   "score_p95": 74.617
+   "n_tirages": 561,
+   "rang_p5": 20,
+   "rang_p95": 43,
+   "score_p5": 60.57,
+   "score_p95": 75.532
   },
   "CHE": {
-   "n_tirages": 600,
-   "rang_p5": 3,
-   "rang_p95": 23,
-   "score_p5": 67.546,
-   "score_p95": 83.106
+   "n_tirages": 559,
+   "rang_p5": 1,
+   "rang_p95": 8,
+   "score_p5": 71.335,
+   "score_p95": 85.146
   },
   "CHL": {
-   "n_tirages": 600,
+   "n_tirages": 561,
    "rang_p5": 1,
-   "rang_p95": 17,
-   "score_p5": 71.488,
-   "score_p95": 83.4
+   "rang_p95": 16,
+   "score_p5": 71.578,
+   "score_p95": 84.721
   },
   "CHN": {
-   "n_tirages": 600,
-   "rang_p5": 129,
-   "rang_p95": 175,
-   "score_p5": 37.344,
-   "score_p95": 51.882
+   "n_tirages": 542,
+   "rang_p5": 52,
+   "rang_p95": 141,
+   "score_p5": 37.332,
+   "score_p95": 50.734
   },
   "CIV": {
-   "n_tirages": 598,
-   "rang_p5": 87,
-   "rang_p95": 144,
-   "score_p5": 45.554,
-   "score_p95": 60.734
+   "n_tirages": 294,
+   "rang_p5": 83,
+   "rang_p95": 119,
+   "score_p5": 46.332,
+   "score_p95": 55.619
   },
   "CMR": {
-   "n_tirages": 598,
-   "rang_p5": 154,
-   "rang_p95": 195,
-   "score_p5": 28.461,
-   "score_p95": 47.822
+   "n_tirages": 294,
+   "rang_p5": 95,
+   "rang_p95": 160,
+   "score_p5": 25.16,
+   "score_p95": 40.611
   },
   "COD": {
-   "n_tirages": 598,
-   "rang_p5": 162,
-   "rang_p95": 193,
-   "score_p5": 29.657,
-   "score_p95": 46.562
+   "n_tirages": 294,
+   "rang_p5": 93,
+   "rang_p95": 155,
+   "score_p5": 30.045,
+   "score_p95": 43.63
   },
   "COG": {
-   "n_tirages": 598,
-   "rang_p5": 143,
-   "rang_p95": 198,
-   "score_p5": 24.894,
-   "score_p95": 49.745
+   "n_tirages": 190,
+   "rang_p5": 145,
+   "rang_p95": 161,
+   "score_p5": 28.915,
+   "score_p95": 37.039
   },
   "COL": {
-   "n_tirages": 600,
-   "rang_p5": 44,
-   "rang_p95": 104,
-   "score_p5": 54.738,
-   "score_p95": 67.112
+   "n_tirages": 561,
+   "rang_p5": 32,
+   "rang_p95": 81,
+   "score_p5": 55.568,
+   "score_p95": 67.074
   },
   "COM": {
-   "n_tirages": 598,
-   "rang_p5": 99,
-   "rang_p95": 180,
-   "score_p5": 34.718,
-   "score_p95": 56.114
+   "n_tirages": 190,
+   "rang_p5": 98,
+   "rang_p95": 131,
+   "score_p5": 43.697,
+   "score_p95": 55.511
   },
   "CPV": {
-   "n_tirages": 598,
-   "rang_p5": 66,
-   "rang_p95": 152,
-   "score_p5": 43.81,
-   "score_p95": 64.117
+   "n_tirages": 294,
+   "rang_p5": 63,
+   "rang_p95": 109,
+   "score_p5": 50.023,
+   "score_p95": 62.192
   },
   "CRI": {
-   "n_tirages": 600,
-   "rang_p5": 37,
-   "rang_p95": 87,
-   "score_p5": 56.929,
-   "score_p95": 70.578
+   "n_tirages": 561,
+   "rang_p5": 27,
+   "rang_p95": 56,
+   "score_p5": 58.879,
+   "score_p95": 70.992
   },
   "CUB": {
-   "n_tirages": 598,
-   "rang_p5": 149,
-   "rang_p95": 198,
-   "score_p5": 29.474,
-   "score_p95": 45.293
-  },
-  "CYM": {
-   "n_tirages": 594,
-   "rang_p5": 1,
-   "rang_p95": 133,
-   "score_p5": 52.306,
-   "score_p95": 82.927
+   "n_tirages": 190,
+   "rang_p5": 151,
+   "rang_p95": 167,
+   "score_p5": 25.902,
+   "score_p95": 31.421
   },
   "CYP": {
-   "n_tirages": 600,
-   "rang_p5": 6,
-   "rang_p95": 36,
-   "score_p5": 65.266,
-   "score_p95": 78.482
+   "n_tirages": 534,
+   "rang_p5": 3,
+   "rang_p95": 25,
+   "score_p5": 69.12,
+   "score_p95": 79.108
   },
   "CZE": {
-   "n_tirages": 600,
-   "rang_p5": 20,
-   "rang_p95": 61,
-   "score_p5": 60.232,
-   "score_p95": 76.157
+   "n_tirages": 561,
+   "rang_p5": 12,
+   "rang_p95": 27,
+   "score_p5": 64.06,
+   "score_p95": 77.483
   },
   "DEU": {
-   "n_tirages": 600,
-   "rang_p5": 35,
-   "rang_p95": 113,
-   "score_p5": 53.704,
-   "score_p95": 72.181
-  },
-  "DJI": {
-   "n_tirages": 594,
-   "rang_p5": 177,
-   "rang_p95": 196,
-   "score_p5": 28.561,
-   "score_p95": 39.667
-  },
-  "DMA": {
-   "n_tirages": 598,
-   "rang_p5": 11,
-   "rang_p95": 124,
-   "score_p5": 52.691,
-   "score_p95": 74.856
-  },
-  "DNK": {
-   "n_tirages": 600,
-   "rang_p5": 7,
-   "rang_p95": 55,
-   "score_p5": 61.922,
-   "score_p95": 80.504
-  },
-  "DOM": {
-   "n_tirages": 598,
-   "rang_p5": 19,
-   "rang_p95": 83,
-   "score_p5": 56.675,
-   "score_p95": 73.333
-  },
-  "DZA": {
-   "n_tirages": 598,
-   "rang_p5": 171,
-   "rang_p95": 195,
-   "score_p5": 26.622,
-   "score_p95": 43.114
-  },
-  "ECU": {
-   "n_tirages": 598,
-   "rang_p5": 81,
-   "rang_p95": 129,
-   "score_p5": 50.073,
-   "score_p95": 60.182
-  },
-  "EGY": {
-   "n_tirages": 598,
-   "rang_p5": 123,
-   "rang_p95": 181,
-   "score_p5": 33.197,
-   "score_p95": 55.519
-  },
-  "ERI": {
-   "n_tirages": 594,
-   "rang_p5": 205,
-   "rang_p95": 218,
-   "score_p5": 3.891,
-   "score_p95": 10.232
-  },
-  "ESP": {
-   "n_tirages": 600,
-   "rang_p5": 18,
-   "rang_p95": 72,
-   "score_p5": 60.503,
-   "score_p95": 74.538
-  },
-  "EST": {
-   "n_tirages": 600,
-   "rang_p5": 6,
-   "rang_p95": 36,
-   "score_p5": 64.594,
-   "score_p95": 80.616
-  },
-  "ETH": {
-   "n_tirages": 598,
-   "rang_p5": 168,
-   "rang_p95": 207,
-   "score_p5": 16.854,
-   "score_p95": 44.43
-  },
-  "FIN": {
-   "n_tirages": 600,
-   "rang_p5": 15,
-   "rang_p95": 91,
-   "score_p5": 56.582,
-   "score_p95": 78.142
-  },
-  "FJI": {
-   "n_tirages": 598,
-   "rang_p5": 73,
-   "rang_p95": 135,
-   "score_p5": 47.528,
-   "score_p95": 64.839
-  },
-  "FRA": {
-   "n_tirages": 600,
-   "rang_p5": 41,
-   "rang_p95": 125,
-   "score_p5": 52.645,
-   "score_p95": 70.017
-  },
-  "FSM": {
-   "n_tirages": 594,
-   "rang_p5": 29,
-   "rang_p95": 155,
-   "score_p5": 44.764,
-   "score_p95": 72.421
-  },
-  "GAB": {
-   "n_tirages": 598,
-   "rang_p5": 107,
-   "rang_p95": 188,
-   "score_p5": 32.331,
-   "score_p95": 54.151
-  },
-  "GBR": {
-   "n_tirages": 600,
-   "rang_p5": 3,
-   "rang_p95": 29,
-   "score_p5": 67.569,
-   "score_p95": 81.173
-  },
-  "GEO": {
-   "n_tirages": 598,
-   "rang_p5": 24,
-   "rang_p95": 95,
-   "score_p5": 56.471,
-   "score_p95": 71.303
-  },
-  "GHA": {
-   "n_tirages": 598,
-   "rang_p5": 8,
-   "rang_p95": 81,
-   "score_p5": 60.347,
-   "score_p95": 75.227
-  },
-  "GIN": {
-   "n_tirages": 598,
-   "rang_p5": 57,
-   "rang_p95": 168,
-   "score_p5": 41.153,
-   "score_p95": 60.766
-  },
-  "GMB": {
-   "n_tirages": 598,
-   "rang_p5": 91,
-   "rang_p95": 163,
-   "score_p5": 43.408,
-   "score_p95": 57.29
-  },
-  "GNB": {
-   "n_tirages": 598,
-   "rang_p5": 163,
-   "rang_p95": 192,
-   "score_p5": 30.141,
-   "score_p95": 43.634
-  },
-  "GNQ": {
-   "n_tirages": 598,
-   "rang_p5": 159,
-   "rang_p95": 206,
-   "score_p5": 22.831,
-   "score_p95": 43.713
-  },
-  "GRC": {
-   "n_tirages": 600,
-   "rang_p5": 47,
-   "rang_p95": 112,
-   "score_p5": 54.279,
-   "score_p95": 69.619
-  },
-  "GRD": {
-   "n_tirages": 598,
-   "rang_p5": 106,
-   "rang_p95": 193,
-   "score_p5": 33.1,
-   "score_p95": 58.3
-  },
-  "GRL": {
-   "n_tirages": 572,
-   "rang_p5": 24,
-   "rang_p95": 176,
-   "score_p5": 41.335,
-   "score_p95": 70.187
-  },
-  "GTM": {
-   "n_tirages": 598,
-   "rang_p5": 62,
-   "rang_p95": 146,
-   "score_p5": 45.352,
-   "score_p95": 64.256
-  },
-  "GUM": {
-   "n_tirages": 467,
-   "rang_p5": 17,
-   "rang_p95": 85,
-   "score_p5": 60.136,
-   "score_p95": 71.0
-  },
-  "GUY": {
-   "n_tirages": 598,
-   "rang_p5": 46,
-   "rang_p95": 142,
-   "score_p5": 47.683,
-   "score_p95": 67.04
-  },
-  "HKG": {
-   "n_tirages": 598,
-   "rang_p5": 9,
-   "rang_p95": 73,
-   "score_p5": 60.464,
+   "n_tirages": 561,
+   "rang_p5": 23,
+   "rang_p95": 57,
+   "score_p5": 58.454,
    "score_p95": 74.994
   },
+  "DNK": {
+   "n_tirages": 559,
+   "rang_p5": 3,
+   "rang_p95": 26,
+   "score_p5": 64.009,
+   "score_p95": 84.524
+  },
+  "DOM": {
+   "n_tirages": 294,
+   "rang_p5": 18,
+   "rang_p95": 47,
+   "score_p5": 64.434,
+   "score_p95": 70.002
+  },
+  "DZA": {
+   "n_tirages": 278,
+   "rang_p5": 128,
+   "rang_p95": 157,
+   "score_p5": 31.277,
+   "score_p95": 39.826
+  },
+  "ECU": {
+   "n_tirages": 278,
+   "rang_p5": 74,
+   "rang_p95": 102,
+   "score_p5": 52.975,
+   "score_p95": 59.564
+  },
+  "EGY": {
+   "n_tirages": 294,
+   "rang_p5": 92,
+   "rang_p95": 149,
+   "score_p5": 30.49,
+   "score_p95": 46.878
+  },
+  "ESP": {
+   "n_tirages": 561,
+   "rang_p5": 11,
+   "rang_p95": 34,
+   "score_p5": 63.912,
+   "score_p95": 77.517
+  },
+  "EST": {
+   "n_tirages": 561,
+   "rang_p5": 3,
+   "rang_p95": 13,
+   "score_p5": 68.46,
+   "score_p95": 81.768
+  },
+  "ETH": {
+   "n_tirages": 278,
+   "rang_p5": 139,
+   "rang_p95": 166,
+   "score_p5": 20.374,
+   "score_p95": 34.14
+  },
+  "FIN": {
+   "n_tirages": 559,
+   "rang_p5": 7,
+   "rang_p95": 49,
+   "score_p5": 60.301,
+   "score_p95": 82.586
+  },
+  "FJI": {
+   "n_tirages": 294,
+   "rang_p5": 58,
+   "rang_p95": 96,
+   "score_p5": 53.087,
+   "score_p95": 63.606
+  },
+  "FRA": {
+   "n_tirages": 561,
+   "rang_p5": 30,
+   "rang_p95": 78,
+   "score_p5": 55.154,
+   "score_p95": 72.029
+  },
+  "GAB": {
+   "n_tirages": 294,
+   "rang_p5": 94,
+   "rang_p95": 155,
+   "score_p5": 29.194,
+   "score_p95": 47.979
+  },
+  "GBR": {
+   "n_tirages": 561,
+   "rang_p5": 2,
+   "rang_p95": 16,
+   "score_p5": 68.953,
+   "score_p95": 83.063
+  },
+  "GEO": {
+   "n_tirages": 294,
+   "rang_p5": 24,
+   "rang_p95": 63,
+   "score_p5": 60.853,
+   "score_p95": 69.841
+  },
+  "GHA": {
+   "n_tirages": 278,
+   "rang_p5": 20,
+   "rang_p95": 74,
+   "score_p5": 58.911,
+   "score_p95": 68.555
+  },
+  "GIN": {
+   "n_tirages": 278,
+   "rang_p5": 106,
+   "rang_p95": 139,
+   "score_p5": 40.838,
+   "score_p95": 50.408
+  },
+  "GMB": {
+   "n_tirages": 278,
+   "rang_p5": 83,
+   "rang_p95": 120,
+   "score_p5": 47.038,
+   "score_p95": 56.945
+  },
+  "GNB": {
+   "n_tirages": 190,
+   "rang_p5": 132,
+   "rang_p95": 153,
+   "score_p5": 35.017,
+   "score_p95": 44.62
+  },
+  "GNQ": {
+   "n_tirages": 190,
+   "rang_p5": 152,
+   "rang_p95": 171,
+   "score_p5": 15.858,
+   "score_p95": 21.022
+  },
+  "GRC": {
+   "n_tirages": 561,
+   "rang_p5": 32,
+   "rang_p95": 69,
+   "score_p5": 56.824,
+   "score_p95": 70.712
+  },
+  "GTM": {
+   "n_tirages": 294,
+   "rang_p5": 61,
+   "rang_p95": 95,
+   "score_p5": 53.814,
+   "score_p95": 62.518
+  },
+  "GUY": {
+   "n_tirages": 203,
+   "rang_p5": 90,
+   "rang_p95": 124,
+   "score_p5": 48.289,
+   "score_p95": 56.274
+  },
+  "HKG": {
+   "n_tirages": 294,
+   "rang_p5": 9,
+   "rang_p95": 63,
+   "score_p5": 62.511,
+   "score_p95": 72.254
+  },
   "HND": {
-   "n_tirages": 598,
-   "rang_p5": 98,
-   "rang_p95": 168,
-   "score_p5": 39.989,
-   "score_p95": 60.117
+   "n_tirages": 294,
+   "rang_p5": 77,
+   "rang_p95": 107,
+   "score_p5": 50.854,
+   "score_p95": 59.19
   },
   "HRV": {
-   "n_tirages": 600,
-   "rang_p5": 37,
-   "rang_p95": 102,
-   "score_p5": 55.224,
-   "score_p95": 71.383
+   "n_tirages": 552,
+   "rang_p5": 14,
+   "rang_p95": 70,
+   "score_p5": 57.643,
+   "score_p95": 75.173
   },
   "HTI": {
-   "n_tirages": 598,
-   "rang_p5": 124,
-   "rang_p95": 196,
-   "score_p5": 24.258,
-   "score_p95": 53.551
+   "n_tirages": 190,
+   "rang_p5": 73,
+   "rang_p95": 129,
+   "score_p5": 43.886,
+   "score_p95": 59.352
   },
   "HUN": {
-   "n_tirages": 600,
-   "rang_p5": 44,
-   "rang_p95": 96,
-   "score_p5": 57.323,
-   "score_p95": 67.29
+   "n_tirages": 561,
+   "rang_p5": 29,
+   "rang_p95": 71,
+   "score_p5": 58.541,
+   "score_p95": 68.061
   },
   "IDN": {
-   "n_tirages": 600,
-   "rang_p5": 13,
-   "rang_p95": 87,
-   "score_p5": 59.502,
-   "score_p95": 71.987
+   "n_tirages": 518,
+   "rang_p5": 17,
+   "rang_p95": 72,
+   "score_p5": 58.768,
+   "score_p95": 67.372
   },
   "IND": {
-   "n_tirages": 598,
-   "rang_p5": 63,
-   "rang_p95": 152,
-   "score_p5": 46.218,
-   "score_p95": 62.114
+   "n_tirages": 278,
+   "rang_p5": 33,
+   "rang_p95": 93,
+   "score_p5": 55.497,
+   "score_p95": 64.049
   },
   "IRL": {
-   "n_tirages": 600,
+   "n_tirages": 561,
    "rang_p5": 1,
-   "rang_p95": 19,
-   "score_p5": 68.833,
-   "score_p95": 85.465
+   "rang_p95": 10,
+   "score_p5": 71.154,
+   "score_p95": 85.07
   },
   "IRN": {
-   "n_tirages": 598,
-   "rang_p5": 190,
-   "rang_p95": 205,
-   "score_p5": 19.67,
-   "score_p95": 35.651
-  },
-  "IRQ": {
-   "n_tirages": 594,
-   "rang_p5": 183,
-   "rang_p95": 200,
-   "score_p5": 24.867,
-   "score_p95": 36.297
+   "n_tirages": 278,
+   "rang_p5": 139,
+   "rang_p95": 167,
+   "score_p5": 22.318,
+   "score_p95": 32.906
   },
   "ISL": {
-   "n_tirages": 600,
-   "rang_p5": 17,
-   "rang_p95": 67,
-   "score_p5": 58.604,
-   "score_p95": 77.226
+   "n_tirages": 559,
+   "rang_p5": 11,
+   "rang_p95": 34,
+   "score_p5": 62.08,
+   "score_p95": 80.17
   },
   "ISR": {
-   "n_tirages": 600,
-   "rang_p5": 33,
-   "rang_p95": 81,
-   "score_p5": 59.042,
-   "score_p95": 70.018
+   "n_tirages": 561,
+   "rang_p5": 27,
+   "rang_p95": 59,
+   "score_p5": 60.152,
+   "score_p95": 70.364
   },
   "ITA": {
-   "n_tirages": 600,
-   "rang_p5": 51,
-   "rang_p95": 137,
-   "score_p5": 50.523,
-   "score_p95": 68.466
+   "n_tirages": 559,
+   "rang_p5": 30,
+   "rang_p95": 87,
+   "score_p5": 53.507,
+   "score_p95": 73.342
   },
   "JAM": {
-   "n_tirages": 598,
-   "rang_p5": 89,
-   "rang_p95": 156,
-   "score_p5": 44.68,
-   "score_p95": 62.417
+   "n_tirages": 262,
+   "rang_p5": 52,
+   "rang_p95": 104,
+   "score_p5": 52.552,
+   "score_p95": 64.157
   },
   "JOR": {
-   "n_tirages": 598,
-   "rang_p5": 88,
-   "rang_p95": 162,
-   "score_p5": 45.425,
-   "score_p95": 56.743
+   "n_tirages": 203,
+   "rang_p5": 50,
+   "rang_p95": 103,
+   "score_p5": 52.715,
+   "score_p95": 61.068
   },
   "JPN": {
-   "n_tirages": 600,
-   "rang_p5": 27,
-   "rang_p95": 88,
-   "score_p5": 56.86,
-   "score_p95": 74.634
+   "n_tirages": 561,
+   "rang_p5": 17,
+   "rang_p95": 42,
+   "score_p5": 60.972,
+   "score_p95": 76.378
   },
   "KAZ": {
-   "n_tirages": 598,
-   "rang_p5": 95,
-   "rang_p95": 164,
-   "score_p5": 38.878,
-   "score_p95": 59.651
+   "n_tirages": 294,
+   "rang_p5": 82,
+   "rang_p95": 128,
+   "score_p5": 43.697,
+   "score_p95": 56.441
   },
   "KEN": {
-   "n_tirages": 600,
-   "rang_p5": 85,
-   "rang_p95": 156,
-   "score_p5": 44.977,
-   "score_p95": 58.654
+   "n_tirages": 518,
+   "rang_p5": 50,
+   "rang_p95": 122,
+   "score_p5": 43.894,
+   "score_p95": 55.513
   },
   "KGZ": {
-   "n_tirages": 598,
-   "rang_p5": 118,
-   "rang_p95": 171,
-   "score_p5": 37.191,
-   "score_p95": 55.429
+   "n_tirages": 278,
+   "rang_p5": 100,
+   "rang_p95": 130,
+   "score_p5": 44.342,
+   "score_p95": 54.414
   },
   "KHM": {
-   "n_tirages": 598,
-   "rang_p5": 114,
-   "rang_p95": 185,
-   "score_p5": 31.427,
-   "score_p95": 54.909
-  },
-  "KIR": {
-   "n_tirages": 594,
-   "rang_p5": 15,
+   "n_tirages": 278,
+   "rang_p5": 124,
    "rang_p95": 156,
-   "score_p5": 44.842,
-   "score_p95": 72.564
-  },
-  "KNA": {
-   "n_tirages": 598,
-   "rang_p5": 57,
-   "rang_p95": 173,
-   "score_p5": 41.81,
-   "score_p95": 65.943
+   "score_p5": 31.765,
+   "score_p95": 45.382
   },
   "KOR": {
-   "n_tirages": 600,
-   "rang_p5": 52,
-   "rang_p95": 118,
-   "score_p5": 52.784,
-   "score_p95": 68.514
+   "n_tirages": 561,
+   "rang_p5": 37,
+   "rang_p95": 79,
+   "score_p5": 54.705,
+   "score_p95": 67.594
   },
   "KWT": {
-   "n_tirages": 598,
-   "rang_p5": 72,
-   "rang_p95": 170,
-   "score_p5": 43.777,
-   "score_p95": 58.995
+   "n_tirages": 278,
+   "rang_p5": 90,
+   "rang_p95": 124,
+   "score_p5": 47.387,
+   "score_p95": 54.638
   },
   "LAO": {
-   "n_tirages": 598,
-   "rang_p5": 95,
-   "rang_p95": 197,
-   "score_p5": 27.633,
-   "score_p95": 58.314
+   "n_tirages": 203,
+   "rang_p5": 125,
+   "rang_p95": 159,
+   "score_p5": 31.935,
+   "score_p95": 40.692
   },
   "LBN": {
-   "n_tirages": 598,
-   "rang_p5": 20,
-   "rang_p95": 141,
-   "score_p5": 48.628,
-   "score_p95": 69.08
+   "n_tirages": 278,
+   "rang_p5": 18,
+   "rang_p95": 93,
+   "score_p5": 55.682,
+   "score_p95": 67.271
   },
   "LBR": {
-   "n_tirages": 598,
-   "rang_p5": 75,
-   "rang_p95": 191,
-   "score_p5": 36.118,
-   "score_p95": 59.367
+   "n_tirages": 203,
+   "rang_p5": 53,
+   "rang_p95": 116,
+   "score_p5": 48.322,
+   "score_p95": 60.499
   },
   "LBY": {
-   "n_tirages": 598,
-   "rang_p5": 178,
-   "rang_p95": 216,
-   "score_p5": 13.085,
-   "score_p95": 35.372
+   "n_tirages": 190,
+   "rang_p5": 148,
+   "rang_p95": 163,
+   "score_p5": 29.747,
+   "score_p95": 35.028
   },
   "LCA": {
-   "n_tirages": 598,
-   "rang_p5": 28,
-   "rang_p95": 141,
-   "score_p5": 46.959,
-   "score_p95": 73.488
-  },
-  "LIE": {
-   "n_tirages": 594,
-   "rang_p5": 1,
-   "rang_p95": 82,
-   "score_p5": 57.259,
-   "score_p95": 84.829
+   "n_tirages": 161,
+   "rang_p5": 14,
+   "rang_p95": 39,
+   "score_p5": 64.933,
+   "score_p95": 73.552
   },
   "LKA": {
-   "n_tirages": 598,
-   "rang_p5": 43,
-   "rang_p95": 149,
-   "score_p5": 42.874,
-   "score_p95": 67.884
+   "n_tirages": 294,
+   "rang_p5": 54,
+   "rang_p95": 100,
+   "score_p5": 51.919,
+   "score_p95": 64.039
   },
   "LSO": {
-   "n_tirages": 598,
-   "rang_p5": 103,
-   "rang_p95": 178,
-   "score_p5": 39.032,
-   "score_p95": 58.227
+   "n_tirages": 278,
+   "rang_p5": 87,
+   "rang_p95": 132,
+   "score_p5": 43.735,
+   "score_p95": 56.411
   },
   "LTU": {
-   "n_tirages": 600,
-   "rang_p5": 16,
-   "rang_p95": 45,
-   "score_p5": 62.518,
-   "score_p95": 76.938
+   "n_tirages": 561,
+   "rang_p5": 8,
+   "rang_p95": 21,
+   "score_p5": 66.072,
+   "score_p95": 78.834
   },
   "LUX": {
-   "n_tirages": 600,
-   "rang_p5": 21,
-   "rang_p95": 73,
-   "score_p5": 58.61,
-   "score_p95": 75.9
+   "n_tirages": 482,
+   "rang_p5": 16,
+   "rang_p95": 41,
+   "score_p5": 60.981,
+   "score_p95": 76.308
   },
   "LVA": {
-   "n_tirages": 600,
-   "rang_p5": 20,
-   "rang_p95": 57,
-   "score_p5": 60.284,
-   "score_p95": 76.266
-  },
-  "MAC": {
-   "n_tirages": 594,
-   "rang_p5": 1,
-   "rang_p95": 53,
-   "score_p5": 66.344,
-   "score_p95": 83.291
+   "n_tirages": 561,
+   "rang_p5": 12,
+   "rang_p95": 27,
+   "score_p5": 64.32,
+   "score_p95": 78.032
   },
   "MAR": {
-   "n_tirages": 600,
-   "rang_p5": 110,
-   "rang_p95": 159,
-   "score_p5": 44.37,
-   "score_p95": 55.45
-  },
-  "MCO": {
-   "n_tirages": 594,
-   "rang_p5": 7,
-   "rang_p95": 95,
-   "score_p5": 58.376,
-   "score_p95": 77.272
+   "n_tirages": 542,
+   "rang_p5": 48,
+   "rang_p95": 119,
+   "score_p5": 47.932,
+   "score_p95": 59.21
   },
   "MDA": {
-   "n_tirages": 600,
-   "rang_p5": 43,
-   "rang_p95": 102,
-   "score_p5": 55.048,
-   "score_p95": 68.57
+   "n_tirages": 534,
+   "rang_p5": 23,
+   "rang_p95": 65,
+   "score_p5": 58.032,
+   "score_p95": 70.112
   },
   "MDG": {
-   "n_tirages": 598,
-   "rang_p5": 46,
-   "rang_p95": 127,
-   "score_p5": 49.948,
-   "score_p95": 63.972
+   "n_tirages": 278,
+   "rang_p5": 98,
+   "rang_p95": 119,
+   "score_p5": 47.576,
+   "score_p95": 54.287
   },
   "MDV": {
-   "n_tirages": 598,
-   "rang_p5": 129,
-   "rang_p95": 167,
-   "score_p5": 38.848,
-   "score_p95": 52.774
+   "n_tirages": 278,
+   "rang_p5": 96,
+   "rang_p95": 128,
+   "score_p5": 44.001,
+   "score_p95": 54.812
   },
   "MEX": {
-   "n_tirages": 600,
-   "rang_p5": 78,
-   "rang_p95": 130,
-   "score_p5": 49.158,
-   "score_p95": 62.357
-  },
-  "MHL": {
-   "n_tirages": 594,
-   "rang_p5": 81,
-   "rang_p95": 179,
-   "score_p5": 40.277,
-   "score_p95": 61.635
+   "n_tirages": 561,
+   "rang_p5": 39,
+   "rang_p95": 94,
+   "score_p5": 51.288,
+   "score_p95": 63.514
   },
   "MKD": {
-   "n_tirages": 598,
-   "rang_p5": 42,
-   "rang_p95": 128,
-   "score_p5": 49.572,
-   "score_p95": 68.613
+   "n_tirages": 278,
+   "rang_p5": 36,
+   "rang_p95": 73,
+   "score_p5": 58.007,
+   "score_p95": 69.457
   },
   "MLI": {
-   "n_tirages": 598,
-   "rang_p5": 100,
-   "rang_p95": 167,
-   "score_p5": 41.301,
-   "score_p95": 54.757
+   "n_tirages": 278,
+   "rang_p5": 111,
+   "rang_p95": 148,
+   "score_p5": 36.567,
+   "score_p95": 49.112
   },
   "MLT": {
-   "n_tirages": 600,
-   "rang_p5": 9,
-   "rang_p95": 59,
-   "score_p5": 62.983,
-   "score_p95": 77.446
-  },
-  "MMR": {
-   "n_tirages": 598,
-   "rang_p5": 158,
-   "rang_p95": 211,
-   "score_p5": 17.542,
-   "score_p95": 44.951
+   "n_tirages": 542,
+   "rang_p5": 1,
+   "rang_p95": 27,
+   "score_p5": 66.581,
+   "score_p95": 84.929
   },
   "MNE": {
-   "n_tirages": 598,
-   "rang_p5": 64,
-   "rang_p95": 143,
-   "score_p5": 46.777,
-   "score_p95": 64.119
+   "n_tirages": 278,
+   "rang_p5": 48,
+   "rang_p95": 82,
+   "score_p5": 55.853,
+   "score_p95": 66.864
   },
   "MNG": {
-   "n_tirages": 598,
-   "rang_p5": 56,
-   "rang_p95": 123,
-   "score_p5": 49.526,
-   "score_p95": 67.93
+   "n_tirages": 294,
+   "rang_p5": 33,
+   "rang_p95": 76,
+   "score_p5": 56.841,
+   "score_p95": 69.015
   },
   "MOZ": {
-   "n_tirages": 598,
-   "rang_p5": 153,
-   "rang_p95": 187,
-   "score_p5": 30.805,
-   "score_p95": 47.782
+   "n_tirages": 278,
+   "rang_p5": 114,
+   "rang_p95": 141,
+   "score_p5": 39.361,
+   "score_p95": 48.002
   },
   "MRT": {
-   "n_tirages": 598,
-   "rang_p5": 135,
-   "rang_p95": 169,
-   "score_p5": 39.242,
-   "score_p95": 52.375
+   "n_tirages": 294,
+   "rang_p5": 86,
+   "rang_p95": 134,
+   "score_p5": 40.997,
+   "score_p95": 49.419
   },
   "MUS": {
-   "n_tirages": 598,
+   "n_tirages": 294,
    "rang_p5": 2,
-   "rang_p95": 25,
-   "score_p5": 70.653,
-   "score_p95": 80.356
+   "rang_p95": 20,
+   "score_p5": 72.428,
+   "score_p95": 79.933
   },
   "MWI": {
-   "n_tirages": 598,
-   "rang_p5": 32,
-   "rang_p95": 114,
-   "score_p5": 54.345,
-   "score_p95": 65.892
+   "n_tirages": 190,
+   "rang_p5": 75,
+   "rang_p95": 99,
+   "score_p5": 54.29,
+   "score_p95": 59.441
   },
   "MYS": {
-   "n_tirages": 600,
-   "rang_p5": 41,
-   "rang_p95": 105,
-   "score_p5": 53.569,
-   "score_p95": 67.018
+   "n_tirages": 542,
+   "rang_p5": 42,
+   "rang_p95": 90,
+   "score_p5": 54.133,
+   "score_p95": 63.048
   },
   "NAM": {
-   "n_tirages": 598,
-   "rang_p5": 54,
-   "rang_p95": 126,
-   "score_p5": 51.029,
-   "score_p95": 65.614
-  },
-  "NCL": {
-   "n_tirages": 380,
-   "rang_p5": 20,
-   "rang_p95": 66,
-   "score_p5": 66.307,
-   "score_p95": 67.64
+   "n_tirages": 250,
+   "rang_p5": 37,
+   "rang_p95": 74,
+   "score_p5": 59.567,
+   "score_p95": 67.71
   },
   "NER": {
-   "n_tirages": 598,
-   "rang_p5": 73,
-   "rang_p95": 158,
-   "score_p5": 40.765,
-   "score_p95": 61.776
+   "n_tirages": 278,
+   "rang_p5": 109,
+   "rang_p95": 137,
+   "score_p5": 40.879,
+   "score_p95": 50.665
   },
   "NGA": {
-   "n_tirages": 598,
-   "rang_p5": 133,
-   "rang_p95": 182,
-   "score_p5": 38.543,
-   "score_p95": 53.299
+   "n_tirages": 262,
+   "rang_p5": 88,
+   "rang_p95": 140,
+   "score_p5": 39.659,
+   "score_p95": 50.373
   },
   "NIC": {
-   "n_tirages": 598,
-   "rang_p5": 130,
-   "rang_p95": 186,
-   "score_p5": 32.048,
-   "score_p95": 52.103
+   "n_tirages": 278,
+   "rang_p5": 117,
+   "rang_p95": 144,
+   "score_p5": 37.138,
+   "score_p95": 46.911
   },
   "NLD": {
-   "n_tirages": 600,
-   "rang_p5": 10,
-   "rang_p95": 66,
-   "score_p5": 59.267,
-   "score_p95": 79.994
+   "n_tirages": 561,
+   "rang_p5": 7,
+   "rang_p95": 31,
+   "score_p5": 62.72,
+   "score_p95": 80.979
   },
   "NOR": {
-   "n_tirages": 600,
-   "rang_p5": 9,
-   "rang_p95": 52,
-   "score_p5": 61.117,
-   "score_p95": 79.746
+   "n_tirages": 559,
+   "rang_p5": 7,
+   "rang_p95": 32,
+   "score_p5": 62.407,
+   "score_p95": 82.056
   },
   "NPL": {
-   "n_tirages": 598,
-   "rang_p5": 79,
-   "rang_p95": 157,
-   "score_p5": 44.603,
-   "score_p95": 60.735
-  },
-  "NRU": {
-   "n_tirages": 598,
-   "rang_p5": 28,
-   "rang_p95": 160,
-   "score_p5": 45.454,
-   "score_p95": 68.777
+   "n_tirages": 278,
+   "rang_p5": 74,
+   "rang_p95": 114,
+   "score_p5": 48.188,
+   "score_p95": 59.317
   },
   "NZL": {
-   "n_tirages": 600,
+   "n_tirages": 561,
    "rang_p5": 4,
-   "rang_p95": 42,
-   "score_p5": 63.074,
-   "score_p95": 81.902
+   "rang_p95": 25,
+   "score_p5": 64.426,
+   "score_p95": 82.03
   },
   "OMN": {
-   "n_tirages": 598,
-   "rang_p5": 89,
-   "rang_p95": 154,
-   "score_p5": 45.534,
-   "score_p95": 57.672
+   "n_tirages": 278,
+   "rang_p5": 84,
+   "rang_p95": 121,
+   "score_p5": 48.436,
+   "score_p95": 56.712
   },
   "PAK": {
-   "n_tirages": 598,
-   "rang_p5": 92,
-   "rang_p95": 174,
-   "score_p5": 38.035,
-   "score_p95": 59.432
+   "n_tirages": 278,
+   "rang_p5": 94,
+   "rang_p95": 127,
+   "score_p5": 44.486,
+   "score_p95": 54.743
   },
   "PAN": {
-   "n_tirages": 598,
-   "rang_p5": 30,
-   "rang_p95": 102,
-   "score_p5": 52.885,
-   "score_p95": 71.371
+   "n_tirages": 294,
+   "rang_p5": 23,
+   "rang_p95": 54,
+   "score_p5": 61.867,
+   "score_p95": 70.116
   },
   "PER": {
-   "n_tirages": 600,
-   "rang_p5": 13,
-   "rang_p95": 63,
-   "score_p5": 60.883,
-   "score_p95": 75.538
+   "n_tirages": 542,
+   "rang_p5": 4,
+   "rang_p95": 38,
+   "score_p5": 65.078,
+   "score_p95": 78.215
   },
   "PHL": {
-   "n_tirages": 598,
-   "rang_p5": 80,
-   "rang_p95": 139,
-   "score_p5": 47.035,
-   "score_p95": 62.79
+   "n_tirages": 294,
+   "rang_p5": 70,
+   "rang_p95": 93,
+   "score_p5": 54.019,
+   "score_p95": 61.275
   },
   "PLW": {
-   "n_tirages": 598,
+   "n_tirages": 207,
    "rang_p5": 26,
-   "rang_p95": 138,
-   "score_p5": 50.618,
-   "score_p95": 71.595
+   "rang_p95": 102,
+   "score_p5": 53.799,
+   "score_p95": 69.378
   },
   "PNG": {
-   "n_tirages": 598,
-   "rang_p5": 45,
-   "rang_p95": 142,
-   "score_p5": 46.989,
-   "score_p95": 66.439
+   "n_tirages": 161,
+   "rang_p5": 62,
+   "rang_p95": 86,
+   "score_p5": 57.311,
+   "score_p95": 61.751
   },
   "POL": {
-   "n_tirages": 600,
-   "rang_p5": 42,
-   "rang_p95": 89,
-   "score_p5": 56.763,
-   "score_p95": 70.319
-  },
-  "PRI": {
-   "n_tirages": 571,
-   "rang_p5": 20,
-   "rang_p95": 88,
-   "score_p5": 59.786,
-   "score_p95": 70.418
-  },
-  "PRK": {
-   "n_tirages": 594,
-   "rang_p5": 203,
-   "rang_p95": 216,
-   "score_p5": 9.978,
-   "score_p95": 18.727
+   "n_tirages": 561,
+   "rang_p5": 24,
+   "rang_p95": 52,
+   "score_p5": 60.16,
+   "score_p95": 72.683
   },
   "PRT": {
-   "n_tirages": 600,
-   "rang_p5": 27,
-   "rang_p95": 82,
-   "score_p5": 57.434,
-   "score_p95": 74.327
+   "n_tirages": 561,
+   "rang_p5": 21,
+   "rang_p95": 50,
+   "score_p5": 59.34,
+   "score_p95": 75.912
   },
   "PRY": {
-   "n_tirages": 598,
-   "rang_p5": 33,
-   "rang_p95": 95,
-   "score_p5": 55.937,
-   "score_p95": 68.107
-  },
-  "PSE": {
-   "n_tirages": 571,
-   "rang_p5": 93,
-   "rang_p95": 185,
-   "score_p5": 36.558,
-   "score_p95": 54.728
-  },
-  "PYF": {
-   "n_tirages": 537,
-   "rang_p5": 30,
-   "rang_p95": 178,
-   "score_p5": 41.193,
-   "score_p95": 66.94
+   "n_tirages": 294,
+   "rang_p5": 20,
+   "rang_p95": 73,
+   "score_p5": 59.235,
+   "score_p95": 66.757
   },
   "QAT": {
-   "n_tirages": 598,
-   "rang_p5": 15,
-   "rang_p95": 131,
-   "score_p5": 52.506,
-   "score_p95": 71.198
+   "n_tirages": 278,
+   "rang_p5": 59,
+   "rang_p95": 115,
+   "score_p5": 48.819,
+   "score_p95": 60.676
   },
   "ROU": {
-   "n_tirages": 600,
-   "rang_p5": 49,
-   "rang_p95": 120,
-   "score_p5": 53.094,
-   "score_p95": 68.389
+   "n_tirages": 534,
+   "rang_p5": 10,
+   "rang_p95": 45,
+   "score_p5": 61.104,
+   "score_p95": 73.89
   },
   "RUS": {
-   "n_tirages": 598,
-   "rang_p5": 174,
-   "rang_p95": 202,
-   "score_p5": 22.89,
-   "score_p95": 41.9
+   "n_tirages": 278,
+   "rang_p5": 130,
+   "rang_p95": 158,
+   "score_p5": 30.889,
+   "score_p95": 40.462
   },
   "RWA": {
-   "n_tirages": 598,
-   "rang_p5": 107,
-   "rang_p95": 164,
-   "score_p5": 40.294,
-   "score_p95": 56.176
+   "n_tirages": 278,
+   "rang_p5": 122,
+   "rang_p95": 150,
+   "score_p5": 34.535,
+   "score_p95": 42.844
   },
   "SAU": {
-   "n_tirages": 598,
-   "rang_p5": 143,
-   "rang_p95": 189,
-   "score_p5": 32.612,
-   "score_p95": 46.434
+   "n_tirages": 278,
+   "rang_p5": 122,
+   "rang_p95": 154,
+   "score_p5": 33.217,
+   "score_p95": 42.103
   },
   "SDN": {
-   "n_tirages": 598,
-   "rang_p5": 155,
-   "rang_p95": 204,
-   "score_p5": 20.232,
-   "score_p95": 46.362
+   "n_tirages": 278,
+   "rang_p5": 122,
+   "rang_p95": 150,
+   "score_p5": 34.224,
+   "score_p95": 42.831
   },
   "SEN": {
-   "n_tirages": 598,
-   "rang_p5": 92,
-   "rang_p95": 145,
-   "score_p5": 45.43,
-   "score_p95": 60.746
+   "n_tirages": 294,
+   "rang_p5": 78,
+   "rang_p95": 108,
+   "score_p5": 51.26,
+   "score_p95": 56.192
   },
   "SGP": {
-   "n_tirages": 598,
-   "rang_p5": 2,
-   "rang_p95": 75,
-   "score_p5": 59.786,
-   "score_p95": 80.716
+   "n_tirages": 294,
+   "rang_p5": 7,
+   "rang_p95": 66,
+   "score_p5": 60.598,
+   "score_p95": 74.65
   },
   "SLB": {
-   "n_tirages": 598,
-   "rang_p5": 57,
-   "rang_p95": 151,
-   "score_p5": 46.649,
-   "score_p95": 63.669
+   "n_tirages": 278,
+   "rang_p5": 62,
+   "rang_p95": 106,
+   "score_p5": 51.974,
+   "score_p95": 61.057
   },
   "SLE": {
-   "n_tirages": 598,
-   "rang_p5": 81,
-   "rang_p95": 175,
-   "score_p5": 35.907,
-   "score_p95": 62.581
+   "n_tirages": 278,
+   "rang_p5": 87,
+   "rang_p95": 121,
+   "score_p5": 44.621,
+   "score_p95": 57.749
   },
   "SLV": {
-   "n_tirages": 598,
-   "rang_p5": 58,
-   "rang_p95": 125,
-   "score_p5": 49.6,
-   "score_p95": 65.314
-  },
-  "SMR": {
-   "n_tirages": 594,
-   "rang_p5": 1,
-   "rang_p95": 26,
-   "score_p5": 68.685,
-   "score_p95": 84.075
-  },
-  "SOM": {
-   "n_tirages": 594,
-   "rang_p5": 155,
-   "rang_p95": 211,
-   "score_p5": 12.463,
-   "score_p95": 44.61
+   "n_tirages": 278,
+   "rang_p5": 63,
+   "rang_p95": 94,
+   "score_p5": 55.406,
+   "score_p95": 62.175
   },
   "SRB": {
-   "n_tirages": 598,
-   "rang_p5": 78,
-   "rang_p95": 147,
-   "score_p5": 45.637,
-   "score_p95": 63.381
-  },
-  "SSD": {
-   "n_tirages": 594,
-   "rang_p5": 205,
-   "rang_p95": 218,
-   "score_p5": 5.328,
-   "score_p95": 10.153
+   "n_tirages": 278,
+   "rang_p5": 49,
+   "rang_p95": 87,
+   "score_p5": 55.48,
+   "score_p95": 66.796
   },
   "STP": {
-   "n_tirages": 598,
-   "rang_p5": 22,
-   "rang_p95": 115,
-   "score_p5": 52.875,
-   "score_p95": 70.215
+   "n_tirages": 190,
+   "rang_p5": 20,
+   "rang_p95": 65,
+   "score_p5": 61.746,
+   "score_p95": 69.097
   },
   "SUR": {
-   "n_tirages": 598,
-   "rang_p5": 59,
-   "rang_p95": 138,
-   "score_p5": 51.055,
-   "score_p95": 62.404
+   "n_tirages": 203,
+   "rang_p5": 54,
+   "rang_p95": 94,
+   "score_p5": 55.235,
+   "score_p95": 62.732
   },
   "SVK": {
-   "n_tirages": 600,
-   "rang_p5": 25,
-   "rang_p95": 73,
-   "score_p5": 58.65,
-   "score_p95": 75.066
+   "n_tirages": 561,
+   "rang_p5": 16,
+   "rang_p95": 34,
+   "score_p5": 63.083,
+   "score_p95": 77.054
   },
   "SVN": {
-   "n_tirages": 600,
-   "rang_p5": 36,
-   "rang_p95": 111,
-   "score_p5": 54.064,
-   "score_p95": 72.89
+   "n_tirages": 561,
+   "rang_p5": 28,
+   "rang_p95": 64,
+   "score_p5": 56.979,
+   "score_p95": 73.385
   },
   "SWE": {
-   "n_tirages": 600,
-   "rang_p5": 14,
-   "rang_p95": 83,
-   "score_p5": 58.057,
-   "score_p95": 78.101
+   "n_tirages": 559,
+   "rang_p5": 6,
+   "rang_p95": 37,
+   "score_p5": 62.577,
+   "score_p95": 83.124
   },
   "SWZ": {
-   "n_tirages": 598,
-   "rang_p5": 155,
-   "rang_p95": 191,
-   "score_p5": 30.399,
-   "score_p95": 47.643
+   "n_tirages": 294,
+   "rang_p5": 90,
+   "rang_p95": 148,
+   "score_p5": 34.434,
+   "score_p95": 44.416
   },
   "SYC": {
-   "n_tirages": 598,
-   "rang_p5": 45,
-   "rang_p95": 118,
-   "score_p5": 52.35,
-   "score_p95": 68.78
+   "n_tirages": 294,
+   "rang_p5": 21,
+   "rang_p95": 88,
+   "score_p5": 55.469,
+   "score_p95": 71.761
   },
   "SYR": {
-   "n_tirages": 598,
-   "rang_p5": 179,
-   "rang_p95": 214,
-   "score_p5": 13.332,
-   "score_p95": 41.02
+   "n_tirages": 278,
+   "rang_p5": 140,
+   "rang_p95": 168,
+   "score_p5": 20.126,
+   "score_p95": 34.005
   },
   "TCD": {
-   "n_tirages": 598,
-   "rang_p5": 115,
-   "rang_p95": 197,
-   "score_p5": 27.278,
-   "score_p95": 54.209
+   "n_tirages": 278,
+   "rang_p5": 135,
+   "rang_p95": 164,
+   "score_p5": 23.936,
+   "score_p95": 39.708
   },
   "TGO": {
-   "n_tirages": 598,
-   "rang_p5": 114,
-   "rang_p95": 172,
-   "score_p5": 39.793,
-   "score_p95": 54.179
+   "n_tirages": 278,
+   "rang_p5": 99,
+   "rang_p95": 127,
+   "score_p5": 44.795,
+   "score_p95": 53.407
   },
   "THA": {
-   "n_tirages": 600,
-   "rang_p5": 55,
-   "rang_p95": 122,
-   "score_p5": 52.267,
-   "score_p95": 63.771
+   "n_tirages": 542,
+   "rang_p5": 41,
+   "rang_p95": 101,
+   "score_p5": 52.754,
+   "score_p95": 61.628
   },
   "TJK": {
-   "n_tirages": 598,
-   "rang_p5": 112,
-   "rang_p95": 193,
-   "score_p5": 26.771,
-   "score_p95": 53.917
-  },
-  "TKM": {
-   "n_tirages": 594,
-   "rang_p5": 182,
-   "rang_p95": 212,
-   "score_p5": 13.999,
-   "score_p95": 38.268
+   "n_tirages": 190,
+   "rang_p5": 134,
+   "rang_p95": 154,
+   "score_p5": 33.95,
+   "score_p95": 43.32
   },
   "TLS": {
-   "n_tirages": 598,
-   "rang_p5": 53,
-   "rang_p95": 163,
-   "score_p5": 43.351,
-   "score_p95": 65.924
+   "n_tirages": 278,
+   "rang_p5": 74,
+   "rang_p95": 127,
+   "score_p5": 47.112,
+   "score_p95": 59.565
   },
   "TON": {
-   "n_tirages": 598,
-   "rang_p5": 67,
-   "rang_p95": 139,
-   "score_p5": 49.067,
-   "score_p95": 64.227
+   "n_tirages": 207,
+   "rang_p5": 51,
+   "rang_p95": 105,
+   "score_p5": 53.428,
+   "score_p95": 64.185
   },
   "TTO": {
-   "n_tirages": 598,
-   "rang_p5": 87,
-   "rang_p95": 161,
-   "score_p5": 43.406,
-   "score_p95": 63.144
-  },
-  "TUN": {
-   "n_tirages": 594,
-   "rang_p5": 148,
-   "rang_p95": 182,
-   "score_p5": 37.312,
-   "score_p95": 46.489
+   "n_tirages": 262,
+   "rang_p5": 64,
+   "rang_p95": 109,
+   "score_p5": 52.017,
+   "score_p95": 62.436
   },
   "TUR": {
-   "n_tirages": 600,
-   "rang_p5": 152,
-   "rang_p95": 181,
-   "score_p5": 36.186,
-   "score_p95": 46.821
-  },
-  "TUV": {
-   "n_tirages": 594,
-   "rang_p5": 17,
-   "rang_p95": 128,
-   "score_p5": 50.026,
-   "score_p95": 75.223
+   "n_tirages": 561,
+   "rang_p5": 52,
+   "rang_p95": 142,
+   "score_p5": 37.072,
+   "score_p95": 46.766
   },
   "TWN": {
-   "n_tirages": 592,
-   "rang_p5": 4,
-   "rang_p95": 69,
-   "score_p5": 61.289,
-   "score_p95": 77.028
+   "n_tirages": 169,
+   "rang_p5": 7,
+   "rang_p95": 51,
+   "score_p5": 65.036,
+   "score_p95": 74.409
   },
   "TZA": {
-   "n_tirages": 598,
-   "rang_p5": 125,
-   "rang_p95": 186,
-   "score_p5": 30.33,
-   "score_p95": 54.48
+   "n_tirages": 278,
+   "rang_p5": 105,
+   "rang_p95": 135,
+   "score_p5": 40.583,
+   "score_p95": 52.061
   },
   "UGA": {
-   "n_tirages": 598,
-   "rang_p5": 36,
-   "rang_p95": 148,
-   "score_p5": 45.438,
-   "score_p95": 65.25
+   "n_tirages": 190,
+   "rang_p5": 105,
+   "rang_p95": 137,
+   "score_p5": 41.6,
+   "score_p95": 53.889
   },
   "UKR": {
-   "n_tirages": 598,
-   "rang_p5": 132,
-   "rang_p95": 196,
-   "score_p5": 32.591,
-   "score_p95": 50.39
+   "n_tirages": 294,
+   "rang_p5": 79,
+   "rang_p95": 137,
+   "score_p5": 42.192,
+   "score_p95": 54.769
   },
   "URY": {
-   "n_tirages": 598,
-   "rang_p5": 29,
-   "rang_p95": 99,
-   "score_p5": 54.356,
-   "score_p95": 71.289
+   "n_tirages": 294,
+   "rang_p5": 9,
+   "rang_p95": 53,
+   "score_p5": 61.046,
+   "score_p95": 75.2
   },
   "USA": {
-   "n_tirages": 600,
-   "rang_p5": 10,
-   "rang_p95": 37,
-   "score_p5": 64.348,
-   "score_p95": 78.156
+   "n_tirages": 561,
+   "rang_p5": 4,
+   "rang_p95": 19,
+   "score_p5": 68.877,
+   "score_p95": 80.864
   },
   "UZB": {
-   "n_tirages": 598,
-   "rang_p5": 156,
-   "rang_p95": 192,
-   "score_p5": 28.236,
-   "score_p95": 46.96
-  },
-  "VCT": {
-   "n_tirages": 598,
-   "rang_p5": 15,
-   "rang_p95": 151,
-   "score_p5": 46.697,
-   "score_p95": 73.54
+   "n_tirages": 278,
+   "rang_p5": 127,
+   "rang_p95": 154,
+   "score_p5": 32.198,
+   "score_p95": 43.105
   },
   "VEN": {
-   "n_tirages": 598,
-   "rang_p5": 195,
-   "rang_p95": 214,
-   "score_p5": 16.305,
-   "score_p95": 24.983
-  },
-  "VIR": {
-   "n_tirages": 455,
-   "rang_p5": 99,
-   "rang_p95": 191,
-   "score_p5": 35.501,
-   "score_p95": 56.719
+   "n_tirages": 203,
+   "rang_p5": 143,
+   "rang_p95": 170,
+   "score_p5": 21.113,
+   "score_p95": 24.17
   },
   "VNM": {
-   "n_tirages": 598,
-   "rang_p5": 105,
-   "rang_p95": 176,
-   "score_p5": 33.705,
-   "score_p95": 57.713
+   "n_tirages": 294,
+   "rang_p5": 88,
+   "rang_p95": 137,
+   "score_p5": 37.23,
+   "score_p95": 51.874
   },
   "VUT": {
-   "n_tirages": 598,
-   "rang_p5": 30,
-   "rang_p95": 118,
-   "score_p5": 51.153,
-   "score_p95": 69.418
+   "n_tirages": 278,
+   "rang_p5": 60,
+   "rang_p95": 96,
+   "score_p5": 53.38,
+   "score_p95": 63.865
   },
   "WSM": {
-   "n_tirages": 598,
-   "rang_p5": 49,
-   "rang_p95": 117,
-   "score_p5": 51.234,
-   "score_p95": 66.783
-  },
-  "X-ABK": {
-   "n_tirages": 475,
-   "rang_p5": 180,
-   "rang_p95": 205,
-   "score_p5": 27.309,
-   "score_p95": 33.156
-  },
-  "X-CRM": {
-   "n_tirages": 475,
-   "rang_p5": 202,
-   "rang_p95": 214,
-   "score_p5": 15.966,
-   "score_p95": 22.339
-  },
-  "X-DON": {
-   "n_tirages": 475,
-   "rang_p5": 214,
-   "rang_p95": 221,
-   "score_p5": 0.0,
-   "score_p95": 1.147
-  },
-  "X-ESH": {
-   "n_tirages": 475,
-   "rang_p5": 199,
-   "rang_p95": 213,
-   "score_p5": 16.709,
-   "score_p95": 22.957
-  },
-  "X-GAZ": {
-   "n_tirages": 475,
-   "rang_p5": 213,
-   "rang_p95": 220,
-   "score_p5": 1.306,
-   "score_p95": 5.119
-  },
-  "X-KAI": {
-   "n_tirages": 475,
-   "rang_p5": 143,
-   "rang_p95": 178,
-   "score_p5": 39.551,
-   "score_p95": 47.079
-  },
-  "X-KAP": {
-   "n_tirages": 475,
-   "rang_p5": 139,
-   "rang_p95": 172,
-   "score_p5": 41.936,
-   "score_p95": 47.754
-  },
-  "X-NCY": {
-   "n_tirages": 475,
-   "rang_p5": 1,
-   "rang_p95": 22,
-   "score_p5": 75.349,
-   "score_p95": 79.429
-  },
-  "X-NKR": {
-   "n_tirages": 475,
-   "rang_p5": 215,
-   "rang_p95": 222,
-   "score_p5": 0.0,
-   "score_p95": 0.0
-  },
-  "X-OSS": {
-   "n_tirages": 475,
-   "rang_p5": 212,
-   "rang_p95": 219,
-   "score_p5": 1.665,
-   "score_p95": 6.19
-  },
-  "X-SML": {
-   "n_tirages": 475,
-   "rang_p5": 125,
-   "rang_p95": 158,
-   "score_p5": 47.445,
-   "score_p95": 49.504
-  },
-  "X-TIB": {
-   "n_tirages": 475,
-   "rang_p5": 203,
-   "rang_p95": 215,
-   "score_p5": 14.92,
-   "score_p95": 21.952
-  },
-  "X-TRN": {
-   "n_tirages": 475,
-   "rang_p5": 196,
-   "rang_p95": 210,
-   "score_p5": 20.438,
-   "score_p95": 24.155
-  },
-  "X-WBK": {
-   "n_tirages": 475,
-   "rang_p5": 192,
-   "rang_p95": 207,
-   "score_p5": 23.881,
-   "score_p95": 28.268
-  },
-  "XKX": {
-   "n_tirages": 594,
-   "rang_p5": 77,
-   "rang_p95": 162,
-   "score_p5": 42.194,
-   "score_p95": 58.382
-  },
-  "YEM": {
-   "n_tirages": 594,
-   "rang_p5": 200,
-   "rang_p95": 215,
-   "score_p5": 14.876,
-   "score_p95": 21.734
+   "n_tirages": 260,
+   "rang_p5": 44,
+   "rang_p95": 94,
+   "score_p5": 54.452,
+   "score_p95": 66.04
   },
   "ZAF": {
-   "n_tirages": 600,
-   "rang_p5": 70,
-   "rang_p95": 120,
-   "score_p5": 51.933,
-   "score_p95": 65.404
+   "n_tirages": 542,
+   "rang_p5": 29,
+   "rang_p95": 83,
+   "score_p5": 55.225,
+   "score_p95": 68.96
   },
   "ZMB": {
-   "n_tirages": 598,
-   "rang_p5": 130,
-   "rang_p95": 187,
-   "score_p5": 33.473,
-   "score_p95": 52.635
+   "n_tirages": 190,
+   "rang_p5": 75,
+   "rang_p95": 114,
+   "score_p5": 49.188,
+   "score_p95": 59.012
   },
   "ZWE": {
-   "n_tirages": 598,
-   "rang_p5": 182,
-   "rang_p95": 205,
-   "score_p5": 20.382,
-   "score_p95": 37.552
+   "n_tirages": 278,
+   "rang_p5": 140,
+   "rang_p95": 167,
+   "score_p5": 22.706,
+   "score_p95": 33.643
   }
  },
  "methode": "80 % des indicateurs retenus au hasard + poids Dirichlet(40·w)",

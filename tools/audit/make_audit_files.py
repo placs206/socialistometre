@@ -120,11 +120,11 @@ def main():
         nom = data["pays"][iso]["nom_fr"]; g = r["global"]
         obs = data["obs"].get(iso, {})
         for d in DIMS:
-            if r["n"][d] == 1:
-                k = next(x for x in r["norm"] if defs[x]["dim"] == d)
+            if r["n"][d] == 1 and r["dims"][d] is not None:
+                k = next(x for x in r["norm"] if x in defs and defs[x]["dim"] == d)
                 e = err.get(d, {}).get("par_k", {}).get("1", {})
                 add(categorie="couverture : dimension calculée sur 1 indicateur", iso3=iso, pays=nom, score_actuel=round(g, 2), rang_actuel=r["rang"], indicateur_ou_formule=f"{k} (seul indicateur de {d})",
-                    valeur_brute=obs[k]["valeur_brute"], source=obs[k]["source"], transformation=f"{S.indicator_defs(data)[k]['bornes']['regle']} → {r['norm'][k]:.1f}",
+                    valeur_brute=obs[k]["valeur_brute"], source=obs[k]["source"], transformation=f"{defs[k]['bornes']['regle']} → {r['norm'][k]:.1f}",
                     contribution=round(r["contributions"].get(k, 0), 2),
                     cause=f"La dimension {d} ({r['dims'][d]:.1f}) est égale à la valeur d'un seul indicateur ; erreur médiane d'une dimension à 1 indicateur : {e.get('mediane')} pts (P90 {e.get('p90')}).",
                     correction_proposee="DEC-01 (minimum d'indicateurs par dimension)", effet_correction=eff("DEC-01", "A3_B3_C2_D2", iso), certitude="élevée (fragilité démontrée sur les pays complets)", type_anomalie="fragilité méthodologique")
@@ -134,7 +134,10 @@ def main():
                 valeur_brute="", source="", transformation="Σ w_d·S_d / Σ w_d sur " + "+".join(r["disponibles"]), contribution="",
                 cause="Score global sur 2 dimensions : erreur médiane 5,4 pts (P90 15,3) par rapport à un score complet.",
                 correction_proposee="DEC-02 (3 dimensions minimum)", effet_correction=eff("DEC-02", "3_dimensions", iso), certitude="élevée", type_anomalie="fragilité méthodologique")
+        obs = dict(obs); obs.update(data["alt"].get(iso, {}))
         for k, v in r["norm"].items():
+            if k not in defs:
+                continue
             p = params[k]; x = obs[k]["valeur_brute"]
             if (x < min(p["bas"], p["haut"]) or x > max(p["bas"], p["haut"])) and r["n"][defs[k]["dim"]] <= 2 and abs(r["contributions"].get(k, 0)) >= 10 and defs[k]["bornes"]["regle"] == "percentile":
                 add(categorie="valeur écrêtée dominant une dimension peu couverte", iso3=iso, pays=nom, score_actuel=round(g, 2), rang_actuel=r["rang"], indicateur_ou_formule=k,

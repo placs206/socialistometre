@@ -1,5 +1,7 @@
 # Audit critique du Socialistomètre V1.1 — rapport de synthèse
 
+> **Suite (29 octobre 2026)** — 11 des 12 décisions ont été arbitrées par l'utilisateur (questionnaire) et appliquées : méthodologie **V1.2**, 171 scores globaux, édition `editions/v1.2`, comparaison `docs/COMPARAISON_V1.1_V1.2.md`. Écart avec les recommandations : DEC-03, C2 (écoles privées) est **conservé**. DEC-10 (retraites) reste ouvert. Le reste de ce rapport décrit l'état V1.1 audité.
+
 Audit du 28 octobre 2026, réalisé sur le dépôt `placs206/socialistometre` (commit `747fef8`, édition V1.1, données 2023, 237 entités dont 222 avec un score global). Tous les chiffres de ce rapport sont produits par les scripts du dépôt et peuvent être recalculés (voir la section « Reproduire »).
 
 **Conclusion en une phrase.** Le code calcule exactement ce que la méthode décrit (recalcul indépendant : écart maximal de 5·10⁻⁷, aucune erreur factuelle trouvée dans les données). Les classements aberrants viennent de **règles méthodologiques** : des dimensions calculées sur un seul indicateur, des scores globaux sur deux dimensions, deux proxys faibles, un double comptage et une asymétrie de couverture entre pays riches et pays pauvres. Ces règles sont des choix qui t'appartiennent. Elles sont désormais dans un **registre de 12 décisions arbitrables** ; **aucune n'a été appliquée au score officiel**.

@@ -29,7 +29,7 @@ class T(unittest.TestCase):
     def test_02_chargement_hors_ligne_sans_erreur(self):
         p = self.page(); p.wait_for_selector("#swarm circle")
         self.assertEqual(self.errs, []); self.assertEqual(self.reqs, [])
-        self.assertGreater(p.locator("#swarm circle").count(), 200)
+        self.assertEqual(p.locator("#swarm circle").count(), sum(1 for v in SC.values() if v["global"] is not None))
     def test_03_parite_js_python(self):
         p = self.page()
         res = p.evaluate("()=>__socialistometre.P.map(function(x){return [x.id,x.g,x.r,x.rc];})")
@@ -116,7 +116,8 @@ class T(unittest.TestCase):
         self.assertAlmostEqual(g, SC["FRA"]["global"], places=6)   # le score officiel n'a pas été modifié par la simulation
         self.assertEqual(self.errs, [])
     def test_10_fiche_complete(self):
-        p = self.page(); p.evaluate("()=>__socialistometre.openFiche('X-NCY')"); t = p.inner_text("#fiche")
+        p = self.page(); p.evaluate("()=>__socialistometre.openFiche('X-NCY')"); self.assertIn("Score global indisponible", p.inner_text("#fiche"))
+        p.evaluate("()=>__socialistometre.openFiche('CHL')"); t = p.inner_text("#fiche")
         for s_ in ("Couverture", "Fiabilité", "Contribution", "Anomalies détectées", "Décisions approuvées", "Sensibilité", "Du score à chaque valeur statistique", "L = "):
             self.assertIn(s_, t)
         p.evaluate("()=>__socialistometre.setScenario('recommande')"); p.evaluate("()=>__socialistometre.openFiche('FRA')")

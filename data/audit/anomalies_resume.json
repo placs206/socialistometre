@@ -1,17 +1,13 @@
 {
- "n": 319,
+ "n": 60,
  "par_categorie": {
-  "couverture : dimension calculée sur 1 indicateur": 109,
-  "proxy faible C2 influent": 49,
-  "score dominé par un seul indicateur": 28,
-  "compensation entre dimensions": 34,
-  "valeur écrêtée dominant une dimension peu couverte": 25,
-  "couverture : score global sur 2 dimensions": 23,
-  "borne D2 contraire à la règle écrite": 9,
-  "double comptage B5 ⊃ B6": 5,
-  "prélèvements faibles et faible capacité fiscale": 20,
+  "proxy faible C2 influent": 12,
+  "compensation entre dimensions": 10,
+  "borne D2 contraire à la règle écrite": 3,
+  "score dominé par un seul indicateur": 1,
+  "prélèvements faibles et faible capacité fiscale": 17,
   "cotisations obligatoires à des fonds privés non comptées": 1,
   "entités qui se recouvrent": 16
  },
- "n_pays": 160
+ "n_pays": 60
 }

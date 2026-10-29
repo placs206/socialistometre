@@ -294,7 +294,10 @@ def apply_overrides(data, overrides):
     if "regles" in overrides:
         d2["dim"]["regles_couverture"] = deep_merge(rules_of(data), overrides["regles"])
     alts = {a["id"]: a for a in d2["ind"].get("alternatives_sensibilite", [])}
+    present = {i["id"] for i in d2["ind"]["indicateurs"]}
     for aid in overrides.get("ajouter", []):
+        if aid in present:          # idempotence : surcharges déjà appliquées
+            continue
         a = copy.deepcopy(alts[aid]); a.setdefault("source_type", "intergouvernementale")
         d2["ind"]["indicateurs"].append(a)
         d2["obs"] = {iso: dict(v) for iso, v in (d2["obs"]).items()}

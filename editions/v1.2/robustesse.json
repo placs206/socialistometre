@@ -1,0 +1,1085 @@
+{
+ "version_methodologie": "1.2",
+ "graine": 20261028,
+ "tests": [
+  {
+   "id": "T01",
+   "nom": "Recalcul mathématique indépendant (numpy) de toutes les valeurs normalisées, dimensions et scores globaux",
+   "statut": "RÉUSSI",
+   "critique": true,
+   "detail": "3443 valeurs comparées ; écart maximal 4.99e-07 (arrondi du fichier : 1e-6)",
+   "mesures": {
+    "ecart_max": 4.994556732640376e-07,
+    "valeurs": 3443
+   }
+  },
+  {
+   "id": "T02",
+   "nom": "Détection des doublons et incohérences (clés, identifiants, noms, années, traçabilité, erreurs du journal)",
+   "statut": "RÉUSSI",
+   "critique": true,
+   "detail": "doublons observations=0, doublons identifiants=0, observations orphelines=0, noms en double=[], erreurs de journal=0, hors fenêtre=0, sans source/URL=0",
+   "mesures": {
+    "doublons": 0,
+    "orphelins": 0,
+    "erreurs_journal": 0
+   }
+  },
+  {
+   "id": "T03",
+   "nom": "Données brutes : empreintes SHA-256 du manifeste et relecture indépendante d'un échantillon (120 obs.)",
+   "statut": "RÉUSSI",
+   "critique": true,
+   "detail": "19 fichiers bruts : 0 empreinte(s) divergente(s) ; échantillon de 114 observations relu dans les fichiers bruts : 0 écart(s) ; 6 observation(s) Freedom House non rapprochables par nom exact (non vérifiées ici : [('SVK', 'D3'), ('SYR', 'A6'), ('RUS', 'D4'), ('FSM', 'A6'), ('KGZ', 'D4'), ('SVK', 'D2')])",
+   "mesures": {
+    "fichiers": 19,
+    "divergences": 0,
+    "echantillon": 114,
+    "ecarts": 0
+   }
+  },
+  {
+   "id": "T04",
+   "nom": "Données brutes et normalisées : plage [0,100], monotonie et sens d'orientation de chaque indicateur",
+   "statut": "RÉUSSI",
+   "critique": true,
+   "detail": "19 indicateurs contrôlés ; problèmes : aucun",
+   "mesures": {
+    "spearman_brut_norm_x_orientation": {
+     "A1": 0.9999,
+     "A2": 1.0,
+     "A3": 1.0,
+     "A4": 1.0,
+     "A6": 1.0,
+     "B2": 1.0,
+     "B3": 0.9999,
+     "B4": 0.9997,
+     "B6": 0.9999,
+     "B7": 0.9999,
+     "C1": 1.0,
+     "C2": 0.9999,
+     "C3": 0.9999,
+     "D1": 1.0,
+     "D2": 1.0,
+     "D3": 1.0,
+     "D4": 1.0,
+     "B5n": 0.9999,
+     "C4": 1.0
+    }
+   }
+  },
+  {
+   "id": "T05",
+   "nom": "Analyse de sensibilité aux pondérations (±10 points par dimension, poids égaux, 2 000 tirages Dirichlet)",
+   "statut": "AVERTISSEMENT",
+   "critique": false,
+   "detail": "Spearman minimal sur scénarios déterministes : 0.9568 ; Monte-Carlo : moyenne 0.9838, P5 0.9521, min 0.8242",
+   "mesures": {
+    "scenarios": {
+     "A -10%": {
+      "n": 171,
+      "spearman": 0.9872729018167855,
+      "decalage_rang_median": 5,
+      "decalage_rang_max": 23,
+      "ecart_score_moyen": 1.7831082212404883,
+      "ecart_score_max": 5.366260152709419
+     },
+     "A +10%": {
+      "n": 171,
+      "spearman": 0.9919048647610819,
+      "decalage_rang_median": 4,
+      "decalage_rang_max": 22,
+      "ecart_score_moyen": 1.7124618976461619,
+      "ecart_score_max": 4.89962883508252
+     },
+     "B -10%": {
+      "n": 171,
+      "spearman": 0.9921496628026976,
+      "decalage_rang_median": 3,
+      "decalage_rang_max": 22,
+      "ecart_score_moyen": 1.5662285691755728,
+      "ecart_score_max": 6.650721171238722
+     },
+     "B +10%": {
+      "n": 171,
+      "spearman": 0.9818345453236375,
+      "decalage_rang_median": 4,
+      "decalage_rang_max": 31,
+      "ecart_score_moyen": 1.5643494880105415,
+      "ecart_score_max": 6.650721171238729
+     },
+     "C -10%": {
+      "n": 171,
+      "spearman": 0.9884776921784626,
+      "decalage_rang_median": 4,
+      "decalage_rang_max": 29,
+      "ecart_score_moyen": 1.8462955347958234,
+      "ecart_score_max": 9.590836065476918
+     },
+     "C +10%": {
+      "n": 171,
+      "spearman": 0.9835553315573475,
+      "decalage_rang_median": 4,
+      "decalage_rang_max": 37,
+      "ecart_score_moyen": 1.7741369873727346,
+      "ecart_score_max": 9.009573273629837
+     },
+     "D -10%": {
+      "n": 171,
+      "spearman": 0.9836705306357549,
+      "decalage_rang_median": 4,
+      "decalage_rang_max": 34,
+      "ecart_score_moyen": 2.0098861907465824,
+      "ecart_score_max": 6.055478636860059
+     },
+     "D +10%": {
+      "n": 171,
+      "spearman": 0.9895528835769314,
+      "decalage_rang_median": 4,
+      "decalage_rang_max": 26,
+      "ecart_score_moyen": 1.9546356992286928,
+      "ecart_score_max": 5.709451286182336
+     },
+     "poids égaux 25 %": {
+      "n": 171,
+      "spearman": 0.9567619459044328,
+      "decalage_rang_median": 9,
+      "decalage_rang_max": 46,
+      "ecart_score_moyen": 3.101537161805047,
+      "ecart_score_max": 8.418508026924503
+     }
+    },
+    "monte_carlo": {
+     "tirages": 2000,
+     "loi": "Dirichlet(40·w)",
+     "spearman_min": 0.8242110063119495,
+     "spearman_moyen": 0.983807504739962,
+     "spearman_p5": 0.9520987832097343,
+     "decalage_rang_median_moyen": 4.2325
+    }
+   }
+  },
+  {
+   "id": "T06",
+   "nom": "Recalcul en retirant un indicateur à la fois (un recalcul par indicateur)",
+   "statut": "RÉUSSI",
+   "critique": false,
+   "detail": "Spearman minimal 0.9730 (retrait de A6) ; écart de score moyen max 2.52 pts",
+   "mesures": {
+    "A1": {
+     "n": 56,
+     "spearman": 0.9924812030075187,
+     "decalage_rang_median": 1.0,
+     "decalage_rang_max": 5,
+     "ecart_score_moyen": 1.4199082380291306,
+     "ecart_score_max": 3.6832463809896723,
+     "pays_les_plus_affectes": [
+      [
+       "Roumanie",
+       3.68
+      ],
+      [
+       "Mexique",
+       3.6
+      ],
+      [
+       "Moldavie",
+       3.48
+      ]
+     ],
+     "n_sans_score": 115
+    },
+    "A2": {
+     "n": 170,
+     "spearman": 0.9982388969290612,
+     "decalage_rang_median": 0.0,
+     "decalage_rang_max": 16,
+     "ecart_score_moyen": 0.33572594908690795,
+     "ecart_score_max": 2.9818374999999975,
+     "pays_les_plus_affectes": [
+      [
+       "Luxembourg",
+       2.98
+      ],
+      [
+       "Islande",
+       2.29
+      ],
+      [
+       "Canada",
+       2.2
+      ]
+     ],
+     "n_sans_score": 1
+    },
+    "A3": {
+     "n": 170,
+     "spearman": 0.9986785620507935,
+     "decalage_rang_median": 1.0,
+     "decalage_rang_max": 13,
+     "ecart_score_moyen": 0.25441328012054204,
+     "ecart_score_max": 2.712327519953142,
+     "pays_les_plus_affectes": [
+      [
+       "Kenya",
+       2.71
+      ],
+      [
+       "Maroc",
+       2.23
+      ],
+      [
+       "Costa Rica",
+       2.09
+      ]
+     ],
+     "n_sans_score": 1
+    },
+    "A4": {
+     "n": 56,
+     "spearman": 0.9850307587149693,
+     "decalage_rang_median": 1.0,
+     "decalage_rang_max": 12,
+     "ecart_score_moyen": 1.4148339349460284,
+     "ecart_score_max": 4.0130568731524505,
+     "pays_les_plus_affectes": [
+      [
+       "Pérou",
+       4.01
+      ],
+      [
+       "Mexique",
+       3.41
+      ],
+      [
+       "Arménie",
+       3.25
+      ]
+     ],
+     "n_sans_score": 115
+    },
+    "A6": {
+     "n": 55,
+     "spearman": 0.973015873015873,
+     "decalage_rang_median": 2,
+     "decalage_rang_max": 15,
+     "ecart_score_moyen": 1.3336931921398973,
+     "ecart_score_max": 3.290906026062835,
+     "pays_les_plus_affectes": [
+      [
+       "Chine",
+       3.29
+      ],
+      [
+       "Roumanie",
+       2.66
+      ],
+      [
+       "Brésil",
+       2.55
+      ]
+     ],
+     "n_sans_score": 116
+    },
+    "B2": {
+     "n": 171,
+     "spearman": 0.9996184030527756,
+     "decalage_rang_median": 0,
+     "decalage_rang_max": 8,
+     "ecart_score_moyen": 0.10827012198251354,
+     "ecart_score_max": 1.229261178834534,
+     "pays_les_plus_affectes": [
+      [
+       "Irlande",
+       1.23
+      ],
+      [
+       "Hongrie",
+       1.16
+      ],
+      [
+       "Suisse",
+       1.03
+      ]
+     ],
+     "n_sans_score": 0
+    },
+    "B3": {
+     "n": 168,
+     "spearman": 0.9842605574986966,
+     "decalage_rang_median": 3.5,
+     "decalage_rang_max": 39,
+     "ecart_score_moyen": 1.1586272978145697,
+     "ecart_score_max": 10.55427870086092,
+     "pays_les_plus_affectes": [
+      [
+       "Malte",
+       10.55
+      ],
+      [
+       "Argentine",
+       8.06
+      ],
+      [
+       "Brésil",
+       7.93
+      ]
+     ],
+     "n_sans_score": 3
+    },
+    "B4": {
+     "n": 171,
+     "spearman": 0.999515203878369,
+     "decalage_rang_median": 0,
+     "decalage_rang_max": 11,
+     "ecart_score_moyen": 0.11587328829498826,
+     "ecart_score_max": 1.8610812637132241,
+     "pays_les_plus_affectes": [
+      [
+       "Mexique",
+       1.86
+      ],
+      [
+       "Colombie",
+       1.75
+      ],
+      [
+       "Chili",
+       1.66
+      ]
+     ],
+     "n_sans_score": 0
+    },
+    "B6": {
+     "n": 168,
+     "spearman": 0.9844832735205835,
+     "decalage_rang_median": 3.0,
+     "decalage_rang_max": 38,
+     "ecart_score_moyen": 1.1621088691601642,
+     "ecart_score_max": 10.55427870086092,
+     "pays_les_plus_affectes": [
+      [
+       "Malte",
+       10.55
+      ],
+      [
+       "Argentine",
+       8.06
+      ],
+      [
+       "Brésil",
+       7.93
+      ]
+     ],
+     "n_sans_score": 3
+    },
+    "B7": {
+     "n": 171,
+     "spearman": 0.9989488084095327,
+     "decalage_rang_median": 0,
+     "decalage_rang_max": 13,
+     "ecart_score_moyen": 0.17841483753943027,
+     "ecart_score_max": 2.3428131685252964,
+     "pays_les_plus_affectes": [
+      [
+       "Chili",
+       2.34
+      ],
+      [
+       "Colombie",
+       2.25
+      ],
+      [
+       "Nouvelle-Zélande",
+       2.24
+      ]
+     ],
+     "n_sans_score": 0
+    },
+    "C1": {
+     "n": 170,
+     "spearman": 0.997169045132846,
+     "decalage_rang_median": 1.0,
+     "decalage_rang_max": 14,
+     "ecart_score_moyen": 0.5877971481383458,
+     "ecart_score_max": 3.1383354491299684,
+     "pays_les_plus_affectes": [
+      [
+       "Pays-Bas",
+       3.14
+      ],
+      [
+       "Islande",
+       3.11
+      ],
+      [
+       "Norvège",
+       3.04
+      ]
+     ],
+     "n_sans_score": 1
+    },
+    "C2": {
+     "n": 162,
+     "spearman": 0.9841537990377681,
+     "decalage_rang_median": 4.0,
+     "decalage_rang_max": 35,
+     "ecart_score_moyen": 2.519393802481955,
+     "ecart_score_max": 6.61207370585273,
+     "pays_les_plus_affectes": [
+      [
+       "Cambodge",
+       6.61
+      ],
+      [
+       "Tanzanie",
+       6.29
+      ],
+      [
+       "Macédoine du Nord",
+       6.02
+      ]
+     ],
+     "n_sans_score": 9
+    },
+    "C3": {
+     "n": 154,
+     "spearman": 0.9915029941595407,
+     "decalage_rang_median": 3.0,
+     "decalage_rang_max": 23,
+     "ecart_score_moyen": 1.5007979807385023,
+     "ecart_score_max": 6.43054963900709,
+     "pays_les_plus_affectes": [
+      [
+       "Éthiopie",
+       6.43
+      ],
+      [
+       "Syrie",
+       6.31
+      ],
+      [
+       "Sierra Leone",
+       5.21
+      ]
+     ],
+     "n_sans_score": 17
+    },
+    "D1": {
+     "n": 171,
+     "spearman": 0.9990976072191422,
+     "decalage_rang_median": 1,
+     "decalage_rang_max": 7,
+     "ecart_score_moyen": 0.664059053783448,
+     "ecart_score_max": 1.7080242234848413,
+     "pays_les_plus_affectes": [
+      [
+       "Sao Tomé-et-Principe",
+       1.71
+      ],
+      [
+       "Guyana",
+       1.71
+      ],
+      [
+       "Suriname",
+       1.66
+      ]
+     ],
+     "n_sans_score": 0
+    },
+    "D2": {
+     "n": 171,
+     "spearman": 0.9994792041663667,
+     "decalage_rang_median": 1,
+     "decalage_rang_max": 7,
+     "ecart_score_moyen": 0.3059541046650721,
+     "ecart_score_max": 1.3997849053030293,
+     "pays_les_plus_affectes": [
+      [
+       "Inde",
+       1.4
+      ],
+      [
+       "Kirghizstan",
+       1.22
+      ],
+      [
+       "Bhoutan",
+       1.18
+      ]
+     ],
+     "n_sans_score": 0
+    },
+    "D3": {
+     "n": 171,
+     "spearman": 0.9992392060863513,
+     "decalage_rang_median": 1,
+     "decalage_rang_max": 7,
+     "ecart_score_moyen": 0.4418637211589584,
+     "ecart_score_max": 1.5522960700757622,
+     "pays_les_plus_affectes": [
+      [
+       "Kirghizstan",
+       1.55
+      ],
+      [
+       "Maldives",
+       1.51
+      ],
+      [
+       "Bénin",
+       1.42
+      ]
+     ],
+     "n_sans_score": 0
+    },
+    "D4": {
+     "n": 171,
+     "spearman": 0.9992176062591499,
+     "decalage_rang_median": 1,
+     "decalage_rang_max": 8,
+     "ecart_score_moyen": 0.3827816481481481,
+     "ecart_score_max": 1.0489354261363673,
+     "pays_les_plus_affectes": [
+      [
+       "Bhoutan",
+       1.05
+      ],
+      [
+       "Burkina Faso",
+       0.98
+      ],
+      [
+       "Liban",
+       0.96
+      ]
+     ],
+     "n_sans_score": 0
+    },
+    "B5n": {
+     "n": 168,
+     "spearman": 0.9837493229939107,
+     "decalage_rang_median": 4.0,
+     "decalage_rang_max": 36,
+     "ecart_score_moyen": 1.1668987730140987,
+     "ecart_score_max": 10.55427870086092,
+     "pays_les_plus_affectes": [
+      [
+       "Malte",
+       10.55
+      ],
+      [
+       "Argentine",
+       8.06
+      ],
+      [
+       "Brésil",
+       7.93
+      ]
+     ],
+     "n_sans_score": 3
+    },
+    "C4": {
+     "n": 150,
+     "spearman": 0.9893186363838393,
+     "decalage_rang_median": 3.0,
+     "decalage_rang_max": 27,
+     "ecart_score_moyen": 1.420770890777124,
+     "ecart_score_max": 6.014559877095074,
+     "pays_les_plus_affectes": [
+      [
+       "Lesotho",
+       6.01
+      ],
+      [
+       "Ukraine",
+       5.18
+      ],
+      [
+       "Botswana",
+       4.9
+      ]
+     ],
+     "n_sans_score": 21
+    }
+   }
+  },
+  {
+   "id": "T07",
+   "nom": "Comparaison de plusieurs méthodes de normalisation (rang, z-score logistique, percentiles partout, P10-P90)",
+   "statut": "RÉUSSI",
+   "critique": false,
+   "detail": "Spearman minimal par rapport à la méthode principale : 0.9565",
+   "mesures": {
+    "rang": {
+     "n": 171,
+     "spearman": 0.9565051479588164,
+     "decalage_rang_median": 7,
+     "decalage_rang_max": 92,
+     "ecart_score_moyen": 7.133206325650465,
+     "ecart_score_max": 27.226637391774887
+    },
+    "zscore": {
+     "n": 171,
+     "spearman": 0.9664098687210503,
+     "decalage_rang_median": 6,
+     "decalage_rang_max": 90,
+     "ecart_score_moyen": 6.4950535818256006,
+     "ecart_score_max": 25.865205085602945
+    },
+    "minmax_percentiles_partout": {
+     "n": 171,
+     "spearman": 0.9746706026351789,
+     "decalage_rang_median": 4,
+     "decalage_rang_max": 86,
+     "ecart_score_moyen": 4.306578729875939,
+     "ecart_score_max": 21.448242619054383
+    },
+    "minmax_P10_P90": {
+     "n": 171,
+     "spearman": 1.0,
+     "decalage_rang_median": 0,
+     "decalage_rang_max": 0,
+     "ecart_score_moyen": 0.0,
+     "ecart_score_max": 0.0
+    }
+   }
+  },
+  {
+   "id": "T08",
+   "nom": "Stabilité des rangs et des scores (600 rééchantillonnages : 80 % des indicateurs + poids perturbés)",
+   "statut": "AVERTISSEMENT",
+   "critique": false,
+   "detail": "largeur médiane de l'intervalle de rang P5-P95 : 34 places ; P90 : 59 places ; intervalles enregistrés pour 171 entités (affichés dans l'interface)",
+   "mesures": {
+    "largeur_mediane": 34,
+    "largeur_p90": 59,
+    "n_entites": 171
+   }
+  },
+  {
+   "id": "T09",
+   "nom": "Comportement en présence de données manquantes (masquage aléatoire de 1/3 des indicateurs ; règle « dimension A exigée » ; avertissements)",
+   "statut": "RÉUSSI",
+   "critique": true,
+   "detail": "masquage 1/3 sur 88 pays complets × 300 tirages : écart absolu médian 2.57 pts, P95 10.15 pts, Spearman moyen 0.8725 ; règle assouplie (A non exigée) ajouterait 14 entités à score global (Afghanistan, Djibouti, Dominique, Grenade, Irak, Saint-Christophe-et-Niévès…) ; incohérences d'avertissements : 0",
+   "mesures": {
+    "ecart_median": 2.571130457974185,
+    "ecart_p95": 10.147529193906422,
+    "spearman_moyen": 0.8725441222083304,
+    "regle_assouplie_nouveaux": [
+     "Afghanistan",
+     "Djibouti",
+     "Dominique",
+     "Grenade",
+     "Irak",
+     "Saint-Christophe-et-Niévès",
+     "Îles Marshall",
+     "Myanmar (Birmanie)",
+     "Nauru",
+     "Somalie",
+     "Turkménistan",
+     "Tunisie",
+     "Saint-Vincent-et-les Grenadines",
+     "Kosovo"
+    ],
+    "regle_assouplie_spearman": 1.0
+   }
+  },
+  {
+   "id": "T10",
+   "nom": "Variantes d'indicateurs (tarif pondéré ; scolarisation privée secondaire) et redondances intra-dimension",
+   "statut": "RÉUSSI",
+   "critique": false,
+   "detail": "variantes : A1→A1alt ρ=0.9832, C2→C2alt ρ=0.9892 ; paires redondantes (|ρ|≥0,85) : {'D1~D2': {'n': 195, 'spearman': 0.963}, 'D1~D3': {'n': 195, 'spearman': 0.922}, 'D1~D4': {'n': 195, 'spearman': 0.949}, 'D2~D3': {'n': 210, 'spearman': 0.925}, 'D2~D4': {'n': 210, 'spearman': 0.936}, 'D3~D4': {'n': 210, 'spearman': 0.938}}",
+   "mesures": {
+    "variantes": {
+     "A1→A1alt": {
+      "n": 171,
+      "spearman": 0.9831737346101231,
+      "decalage_rang_median": 3,
+      "decalage_rang_max": 36,
+      "ecart_score_moyen": 1.6676724796555475,
+      "ecart_score_max": 8.785104487050504
+     },
+     "C2→C2alt": {
+      "n": 171,
+      "spearman": 0.9891616867065064,
+      "decalage_rang_median": 2,
+      "decalage_rang_max": 42,
+      "ecart_score_moyen": 0.9958397309588061,
+      "ecart_score_max": 8.166930533699734
+     }
+    },
+    "correlations_intra_dimension": {
+     "A1~A2": {
+      "n": 54,
+      "spearman": 0.425
+     },
+     "A1~A3": {
+      "n": 54,
+      "spearman": 0.538
+     },
+     "A1~A4": {
+      "n": 180,
+      "spearman": 0.475
+     },
+     "A1~A6": {
+      "n": 175,
+      "spearman": 0.419
+     },
+     "A2~A3": {
+      "n": 56,
+      "spearman": 0.57
+     },
+     "A2~A4": {
+      "n": 55,
+      "spearman": 0.505
+     },
+     "A2~A6": {
+      "n": 56,
+      "spearman": 0.477
+     },
+     "A3~A4": {
+      "n": 55,
+      "spearman": 0.643
+     },
+     "A3~A6": {
+      "n": 56,
+      "spearman": 0.677
+     },
+     "A4~A6": {
+      "n": 195,
+      "spearman": 0.836
+     },
+     "B2~B3": {
+      "n": 38,
+      "spearman": 0.246
+     },
+     "B2~B4": {
+      "n": 30,
+      "spearman": 0.061
+     },
+     "B2~B6": {
+      "n": 38,
+      "spearman": 0.532
+     },
+     "B2~B7": {
+      "n": 38,
+      "spearman": 0.286
+     },
+     "B2~B5n": {
+      "n": 38,
+      "spearman": 0.189
+     },
+     "B3~B4": {
+      "n": 33,
+      "spearman": 0.489
+     },
+     "B3~B6": {
+      "n": 93,
+      "spearman": -0.12
+     },
+     "B3~B7": {
+      "n": 38,
+      "spearman": -0.254
+     },
+     "B3~B5n": {
+      "n": 93,
+      "spearman": -0.121
+     },
+     "B4~B6": {
+      "n": 32,
+      "spearman": -0.348
+     },
+     "B4~B7": {
+      "n": 30,
+      "spearman": -0.354
+     },
+     "B4~B5n": {
+      "n": 32,
+      "spearman": 0.209
+     },
+     "B6~B7": {
+      "n": 38,
+      "spearman": 0.775
+     },
+     "B6~B5n": {
+      "n": 115,
+      "spearman": 0.437
+     },
+     "B7~B5n": {
+      "n": 38,
+      "spearman": 0.076
+     },
+     "C1~C2": {
+      "n": 53,
+      "spearman": -0.225
+     },
+     "C1~C3": {
+      "n": 55,
+      "spearman": -0.442
+     },
+     "C1~C4": {
+      "n": 56,
+      "spearman": 0.282
+     },
+     "C2~C3": {
+      "n": 150,
+      "spearman": 0.221
+     },
+     "C2~C4": {
+      "n": 148,
+      "spearman": 0.04
+     },
+     "C3~C4": {
+      "n": 158,
+      "spearman": -0.049
+     },
+     "D1~D2": {
+      "n": 195,
+      "spearman": 0.963
+     },
+     "D1~D3": {
+      "n": 195,
+      "spearman": 0.922
+     },
+     "D1~D4": {
+      "n": 195,
+      "spearman": 0.949
+     },
+     "D2~D3": {
+      "n": 210,
+      "spearman": 0.925
+     },
+     "D2~D4": {
+      "n": 210,
+      "spearman": 0.936
+     },
+     "D3~D4": {
+      "n": 210,
+      "spearman": 0.938
+     }
+    }
+   }
+  },
+  {
+   "id": "T11",
+   "nom": "Corrélations de rang entre dimensions (pays à score complet) — documentation de la relation liberté économique / liberté politique (Friedman, p. 51)",
+   "statut": "INFORMATIF",
+   "critique": false,
+   "detail": "n=88 ; A-B: -0.602, A-C: 0.074, A-D: 0.789, B-C: 0.078, B-D: -0.641, C-D: 0.114 (corrélation ≠ causalité)",
+   "mesures": {
+    "A-B": -0.602,
+    "A-C": 0.074,
+    "A-D": 0.789,
+    "B-C": 0.078,
+    "B-D": -0.641,
+    "C-D": 0.114
+   }
+  },
+  {
+   "id": "T12",
+   "nom": "Reproductibilité d'une édition : reconstruction complète depuis data/raw (jeu de données + scores) et comparaison d'empreintes",
+   "statut": "RÉUSSI",
+   "critique": true,
+   "detail": "5 fichiers recalculés ; divergences : aucune ; empreinte du jeu de données b9d0c6862fc6db70…",
+   "mesures": {
+    "empreintes": {
+     "data/processed/pays.csv": "75ddf7199989710db50a68a1276413232c4558306d653854ece7147fcf8ebd80",
+     "data/processed/observations.csv": "725df6b6579c80943a5ae0ca348ba0eae79b8549cc0c5d7e0b9996e4457921c3",
+     "data/processed/indicateurs_alt.csv": "46af9193d4e59865fa63be8bd8d58910a6d80ad2225d01c202a431be3d7dba81",
+     "data/processed/anomalies.csv": "8ab790e882111c91aa87a0fc332a130050c7506559d2560a268731ca07914825",
+     "data/processed/scores.json": "d0939c7c4c71688eef0731ff265bf1f981509fa898034c5fa5832c77ef273881"
+    },
+    "empreinte_jeu_de_donnees": "b9d0c6862fc6db704978e150f7035f47abf9b0f0025e18e27bbdd86be89ad5c7"
+   }
+  },
+  {
+   "id": "T13",
+   "nom": "Robustesse du scénario recommandé (non approuvé) : retrait d'un indicateur à la fois et méthodes de normalisation",
+   "statut": "RÉUSSI",
+   "critique": false,
+   "detail": "171 scores ; Spearman minimal au retrait d'un indicateur 0.9730 (A6) ; rang / z-score vs min-max : 0.9565 / 0.9664 (méthode officielle T06 : voir plus haut)",
+   "mesures": {
+    "retrait": {
+     "A1": {
+      "spearman": 0.9925,
+      "n_perdus": 115
+     },
+     "A2": {
+      "spearman": 0.9982,
+      "n_perdus": 1
+     },
+     "A3": {
+      "spearman": 0.9987,
+      "n_perdus": 1
+     },
+     "A4": {
+      "spearman": 0.985,
+      "n_perdus": 115
+     },
+     "A6": {
+      "spearman": 0.973,
+      "n_perdus": 116
+     },
+     "B2": {
+      "spearman": 0.9996,
+      "n_perdus": 0
+     },
+     "B3": {
+      "spearman": 0.9843,
+      "n_perdus": 3
+     },
+     "B4": {
+      "spearman": 0.9995,
+      "n_perdus": 0
+     },
+     "B6": {
+      "spearman": 0.9845,
+      "n_perdus": 3
+     },
+     "B7": {
+      "spearman": 0.9989,
+      "n_perdus": 0
+     },
+     "C1": {
+      "spearman": 0.9972,
+      "n_perdus": 1
+     },
+     "C2": {
+      "spearman": 0.9842,
+      "n_perdus": 9
+     },
+     "C3": {
+      "spearman": 0.9915,
+      "n_perdus": 17
+     },
+     "D1": {
+      "spearman": 0.9991,
+      "n_perdus": 0
+     },
+     "D2": {
+      "spearman": 0.9995,
+      "n_perdus": 0
+     },
+     "D3": {
+      "spearman": 0.9992,
+      "n_perdus": 0
+     },
+     "D4": {
+      "spearman": 0.9992,
+      "n_perdus": 0
+     },
+     "B5n": {
+      "spearman": 0.9837,
+      "n_perdus": 3
+     },
+     "C4": {
+      "spearman": 0.9893,
+      "n_perdus": 21
+     }
+    },
+    "normalisation": {
+     "rang": 0.9565,
+     "zscore": 0.9664
+    }
+   }
+  },
+  {
+   "id": "T14",
+   "nom": "Comparaison de périodes : méthode officielle appliquée aux données de la fenêtre 2016-2020 (FH 2021, PMR 2018) vs édition 2023",
+   "statut": "INFORMATIF",
+   "critique": false,
+   "detail": "166 entités communes ; Spearman 0.9772 ; variation absolue moyenne 1.65 pts ; plus fortes variations : Zimbabwe -12.0, Nicaragua -9.9, Fidji +8.5, Burkina Faso -7.6, Sao Tomé-et-Principe +7.1, Haïti -7.0 (mêlent évolutions réelles, révisions et changements de couverture)",
+   "mesures": {
+    "spearman": 0.9771654937660277,
+    "variation_moyenne": 1.649498421387931,
+    "plus_fortes": [
+     [
+      "ZWE",
+      -12.01
+     ],
+     [
+      "NIC",
+      -9.87
+     ],
+     [
+      "FJI",
+      8.52
+     ],
+     [
+      "BFA",
+      -7.6
+     ],
+     [
+      "STP",
+      7.06
+     ],
+     [
+      "HTI",
+      -7.0
+     ],
+     [
+      "MDV",
+      6.71
+     ],
+     [
+      "IND",
+      -6.64
+     ],
+     [
+      "MWI",
+      6.32
+     ],
+     [
+      "AGO",
+      -6.09
+     ],
+     [
+      "BHS",
+      5.61
+     ],
+     [
+      "ARE",
+      5.11
+     ],
+     [
+      "SDN",
+      -4.86
+     ],
+     [
+      "KHM",
+      -4.69
+     ],
+     [
+      "PNG",
+      4.66
+     ],
+     [
+      "UKR",
+      -4.14
+     ],
+     [
+      "MLI",
+      -3.99
+     ],
+     [
+      "HKG",
+      -3.84
+     ],
+     [
+      "NAM",
+      3.68
+     ],
+     [
+      "NER",
+      -3.48
+     ]
+    ]
+   }
+  }
+ ],
+ "echecs_critiques": []
+}

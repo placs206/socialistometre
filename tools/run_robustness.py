@@ -13,8 +13,17 @@ import scoring as S  # noqa: E402
 
 DIMS = S.DIMS
 SEED = 20261028
-data = S.load()
+RAW_DATA = S.load()
+data = S.apply_overrides(RAW_DATA, S.decisions_overrides(RAW_DATA))   # méthode officielle (décisions approuvées)
+R = S.rules_of(data)
 defs = S.indicator_defs(data)
+IW = {k: float(v.get("poids_interne", 1)) for k, v in defs.items()}
+
+
+def SC(nv, w, inc=None, min_dims=None, require_a=None):
+    """score_country avec les règles officielles (couverture, poids internes)."""
+    return S.score_country(nv, ind_dim, w, inc, R["min_dimensions"] if min_dims is None else min_dims,
+                           R["exiger_dimension_A"] if require_a is None else require_a, IW, R["min_indicateurs"])
 ind_dim = {k: v["dim"] for k, v in defs.items()}
 W0 = S.dim_weights(data)
 base, params, norm0 = S.compute(data)
@@ -52,9 +61,10 @@ def comparer(g_alt, label=""):
 def t01():
     import numpy as np
     obs = {}
-    for r in csv.DictReader(open(os.path.join(ROOT, "data/processed/observations.csv"), encoding="utf-8")):
-        obs.setdefault(r["indicateur"], {})[r["iso3"]] = float(r["valeur_brute"])
-    cfg = json.load(open(os.path.join(ROOT, "config/indicateurs.json"), encoding="utf-8"))["indicateurs"]
+    for f in ("observations.csv", "indicateurs_alt.csv"):
+        for r in csv.DictReader(open(os.path.join(ROOT, "data/processed", f), encoding="utf-8")):
+            obs.setdefault(r["indicateur"], {})[r["iso3"]] = float(r["valeur_brute"])
+    cfg = [i for i in data["ind"]["indicateurs"] if i.get("inclus", True)]   # configuration officielle effective
     normi = {}
     for i in cfg:
         v = np.array(list(obs[i["id"]].values()))
@@ -65,17 +75,18 @@ def t01():
         for c, x in obs[i["id"]].items():
             t = min(1.0, max(0.0, (x - lo) / (hi - lo)))
             normi.setdefault(c, {})[i["id"]] = 100 * t if i["orientation"] > 0 else 100 * (1 - t)
-    w = {"A": 0.45, "B": 0.20, "C": 0.20, "D": 0.15}
+    w = W0
     sc = json.load(open(os.path.join(ROOT, "data/processed/scores.json"), encoding="utf-8"))["pays"]
     maxdiff, n = 0.0, 0
-    for c, nv in normi.items():
+    for c in sc:
+        nv = normi.get(c, {})
         dims = {}
         for d in DIMS:
-            xs = [nv[i["id"]] for i in cfg if i["dim"] == d and i["id"] in nv]
-            dims[d] = float(np.mean(xs)) if xs else None
+            xs = [(nv[i["id"]], float(i.get("poids_interne", 1))) for i in cfg if i["dim"] == d and i["id"] in nv]
+            dims[d] = (sum(a * b for a, b in xs) / sum(b for _, b in xs)) if xs and len(xs) >= R["min_indicateurs"][d] else None
         avail = [d for d in DIMS if dims[d] is not None]
         g = None
-        if len(avail) >= 2 and dims["A"] is not None:
+        if len(avail) >= R["min_dimensions"] and (dims["A"] is not None or not R["exiger_dimension_A"]):
             g = sum(w[d] * dims[d] for d in avail) / sum(w[d] for d in avail)
         s = sc[c]
         for d in DIMS:
@@ -87,7 +98,8 @@ def t01():
         if g is not None:
             maxdiff = max(maxdiff, abs(g - s["global"])); n += 1
         for k, v in nv.items():
-            maxdiff = max(maxdiff, abs(v - s["indicateurs"][k]["norm"])); n += 1
+            if s["indicateurs"].get(k, {}).get("norm") is not None:
+                maxdiff = max(maxdiff, abs(v - s["indicateurs"][k]["norm"])); n += 1
     ok = maxdiff < 1e-4  # scores.json est arrondi à 6 décimales
     record("T01", "Recalcul mathématique indépendant (numpy) de toutes les valeurs normalisées, dimensions et scores globaux",
            "RÉUSSI" if ok else "ÉCHEC", f"{n} valeurs comparées ; écart maximal {maxdiff:.2e} (arrondi du fichier : 1e-6)", True, {"ecart_max": maxdiff, "valeurs": n})
@@ -246,7 +258,7 @@ def t06():
         inc = set(defs) - {k}
         g = {}
         for c in ranked:
-            r = S.score_country(norm0[c], ind_dim, W0, inc)
+            r = SC(norm0[c], W0, inc)
             g[c] = r["global"]
         cmp = comparer(g)
         pires = sorted(((abs(g0[c] - g[c]), c) for c in ranked if g[c] is not None), reverse=True)[:3]
@@ -294,7 +306,7 @@ def t08():
         w = {d: gam[i] / t for i, d in enumerate(DIMS)}
         g = {}
         for c in ranked:
-            g[c] = S.score_country(norm0[c], ind_dim, w, inc)["global"]
+            g[c] = SC(norm0[c], w, inc)["global"]
         rk = S.competition_rank({c: v for c, v in g.items() if v is not None})
         for c in ranked:
             if g[c] is not None:
@@ -327,7 +339,7 @@ def t09():
         g = {}
         for c in comp:
             nv = {k: v for k, v in norm0[c].items() if rnd.random() > 0.33}
-            g[c] = S.score_country(nv, ind_dim, W0)["global"]
+            g[c] = SC(nv, W0)["global"]
         got = [c for c in comp if g[c] is not None]
         errs += [abs(g[c] - g0[c]) for c in got]
         rhos.append(S.spearman([g0[c] for c in got], [g[c] for c in got]))
@@ -436,7 +448,8 @@ def t13():
         g2 = {k: r["global"] for k, r in r2.items() if r["global"] is not None}
         com = [c for c in rk if c in g2]
         meth[m] = round(S.spearman([g_r[c] for c in com], [g2[c] for c in com]), 4)
-    record("T13", "Robustesse du scénario recommandé (non approuvé) : retrait d'un indicateur à la fois et méthodes de normalisation",
+    nom13 = ("Robustesse du scénario recommandé (non approuvé)" if reco else "Robustesse de la méthode officielle (aucune décision en attente : scénario recommandé = méthode officielle)")
+    record("T13", nom13 + " : retrait d'un indicateur à la fois et méthodes de normalisation",
            "RÉUSSI" if pire >= 0.97 and min(meth.values()) >= 0.93 else "AVERTISSEMENT",
            f"{len(rk)} scores ; Spearman minimal au retrait d'un indicateur {pire:.4f} ({min(out, key=lambda x: out[x]['spearman'])}) ; "
            f"rang / z-score vs min-max : {meth['rang']:.4f} / {meth['zscore']:.4f} (méthode officielle T06 : voir plus haut)", False, {"retrait": out, "normalisation": meth})

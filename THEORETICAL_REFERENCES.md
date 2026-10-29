@@ -14,9 +14,9 @@ Aucun indicateur statistique ni aucun seuil n'est attribué à Friedman : les in
 | P02 | Libre-échange : droits de douane et surtout quotas sont des atteintes à la liberté d'échange | chap. 2, p. 85 ; chap. 4, p. 125 | A1 |
 | P03 | Contrôle des prix et des salaires, salaires minimaux légaux : atteinte au fonctionnement du marché | chap. 2, p. 85 ; chap. 2, p. 85 ; chap. 12, p. 297 | A3, B4 |
 | P04 | Les patentes (licences) professionnelles restreignent la liberté de choix de métier et ne se justifient pas par les principes libéraux | chap. 9, p. 222 ; chap. 9, p. 225 | A2 |
-| P05 | Les monopoles et cartels créés ou soutenus par l'État limitent arbitrairement les échanges volontaires | chap. 8, p. 207 | A2, A5 |
-| P06 | La réglementation détaillée des industries n'a, en général, pas de justification | chap. 2, p. 85 | A5 |
-| P07 | La fourniture publique (nationalisation) de l'enseignement est bien plus difficile à justifier que son financement public | chap. 6, p. 156 ; chap. 6, p. 156 | C1, C2, C4 (candidat) |
+| P05 | Les monopoles et cartels créés ou soutenus par l'État limitent arbitrairement les échanges volontaires | chap. 8, p. 207 | A2, A5 (candidat) |
+| P06 | La réglementation détaillée des industries n'a, en général, pas de justification | chap. 2, p. 85 | A5 (candidat) |
+| P07 | La fourniture publique (nationalisation) de l'enseignement est bien plus difficile à justifier que son financement public | chap. 6, p. 156 ; chap. 6, p. 156 | C1, C2, C4 |
 | P08 | Bons scolaires : financement public, choix des parents, fourniture par des établissements privés ou à but non lucratif agréés | chap. 6, p. 157 ; chap. 6, p. 162 | C2 |
 | P09 | La sécurité sociale obligatoire (retraite forcée, achat d'une annuité à l'État) restreint la liberté individuelle | chap. 2, p. 85 ; chap. 11, p. 283 | — (aucun indicateur : principe non mesuré) |
 | P10 | Impôt sur le revenu : taux uniforme plutôt que progressif ; un impôt progressif dont le seul but est de redistribuer est difficilement justifiable | chap. 10, p. 270 ; chap. 10, p. 270 | B2 |
@@ -24,10 +24,10 @@ Aucun indicateur statistique ni aucun seuil n'est attribué à Friedman : les in
 | P12 | Lutte contre la pauvreté par un impôt négatif sur le revenu, en espèces, au lieu de la multitude de programmes spécifiques | chap. 12, p. 297 ; chap. 12, p. 298 | — (aucun indicateur : principe non mesuré) |
 | P13 | Liberté d'expression, de publication et de réunion ; la liberté de défendre des causes impopulaires | chap. 1, p. 62 ; chap. 2, p. 85 ; chap. 1, p. 60 | D1, D3, D4 |
 | P14 | Liberté économique et liberté politique : relation complexe, « nullement unilatérale » | chap. 1, p. 51 | D1, D2 |
-| P15 | Coordination par l'échange volontaire plutôt que par la coercition centralisée | chap. 1, p. 56 ; chap. 1, p. 55 | A6, C4 (candidat) |
+| P15 | Coordination par l'échange volontaire plutôt que par la coercition centralisée | chap. 1, p. 56 ; chap. 1, p. 55 | A6, C4 |
 | P16 | Règle monétaire (croissance fixée de la masse monétaire) plutôt que pouvoir discrétionnaire | chap. 3, p. 109 | — (aucun indicateur : principe non mesuré) |
 | P17 | Taux de change flottants, déterminés par des transactions privées | chap. 4, p. 126 | — (aucun indicateur : principe non mesuré) |
-| P18 | Le poids de l'État se mesure à la part du revenu national qu'il absorbe ; l'accroissement de cette part est l'étatisme que combat Friedman | chap. 0, p. 35 ; chap. 0, p. 35 | B5, B5n (candidat) |
+| P18 | Le poids de l'État se mesure à la part du revenu national qu'il absorbe ; l'accroissement de cette part est l'étatisme que combat Friedman | chap. 0, p. 35 ; chap. 0, p. 35 | B5 (candidat), B5n |
 | P19 | La cotisation de sécurité sociale est une taxe qui frappe les salaires : elle compte parmi les prélèvements sur le travail | chap. 11, p. 283 | B6, B7 |
 | P20 | Un impôt fortement progressif sur le revenu est un obstacle sérieux à l'utilisation efficace des ressources ; il faut diminuer drastiquement les taux les plus élevés | chap. 8, p. 215 | B6, B7 |
 

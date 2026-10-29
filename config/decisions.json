@@ -53,14 +53,14 @@
     }
    ],
    "option_recommandee": "A3_B3_C2_D2",
-   "statut": "proposée",
-   "option_retenue": null,
-   "decision_utilisateur": null,
+   "statut": "approuvée",
+   "option_retenue": "A3_B3_C2_D2",
+   "decision_utilisateur": "approuvée",
    "date_proposition": "2026-10-28",
-   "date_decision": null,
-   "version_methode": "1.1",
-   "empreinte_configuration": null,
-   "commentaire_utilisateur": ""
+   "date_decision": "2026-10-29",
+   "version_methode": "1.2",
+   "empreinte_configuration": "b542b338e3914867cd31418a83f37fd7b55c225b7c1a101d1dc60c8025a7ceb8",
+   "commentaire_utilisateur": "questionnaire du 2026-10-29"
   },
   {
    "id": "DEC-02",
@@ -103,14 +103,14 @@
     }
    ],
    "option_recommandee": "3_dimensions",
-   "statut": "proposée",
-   "option_retenue": null,
-   "decision_utilisateur": null,
+   "statut": "approuvée",
+   "option_retenue": "3_dimensions",
+   "decision_utilisateur": "approuvée",
    "date_proposition": "2026-10-28",
-   "date_decision": null,
-   "version_methode": "1.1",
-   "empreinte_configuration": null,
-   "commentaire_utilisateur": ""
+   "date_decision": "2026-10-29",
+   "version_methode": "1.2",
+   "empreinte_configuration": "b542b338e3914867cd31418a83f37fd7b55c225b7c1a101d1dc60c8025a7ceb8",
+   "commentaire_utilisateur": "questionnaire du 2026-10-29"
   },
   {
    "id": "DEC-03",
@@ -157,14 +157,14 @@
     }
    ],
    "option_recommandee": "retirer",
-   "statut": "proposée",
-   "option_retenue": null,
-   "decision_utilisateur": null,
+   "statut": "approuvée",
+   "option_retenue": "garder",
+   "decision_utilisateur": "approuvée",
    "date_proposition": "2026-10-28",
-   "date_decision": null,
-   "version_methode": "1.1",
-   "empreinte_configuration": null,
-   "commentaire_utilisateur": ""
+   "date_decision": "2026-10-29",
+   "version_methode": "1.2",
+   "empreinte_configuration": "b542b338e3914867cd31418a83f37fd7b55c225b7c1a101d1dc60c8025a7ceb8",
+   "commentaire_utilisateur": "questionnaire du 2026-10-29 : C2 conservé ; approbation explicite d'un indicateur de niveau 3"
   },
   {
    "id": "DEC-04",
@@ -200,14 +200,14 @@
     }
    ],
    "option_recommandee": "retirer",
-   "statut": "proposée",
-   "option_retenue": null,
-   "decision_utilisateur": null,
+   "statut": "approuvée",
+   "option_retenue": "retirer",
+   "decision_utilisateur": "approuvée",
    "date_proposition": "2026-10-28",
-   "date_decision": null,
-   "version_methode": "1.1",
-   "empreinte_configuration": null,
-   "commentaire_utilisateur": ""
+   "date_decision": "2026-10-29",
+   "version_methode": "1.2",
+   "empreinte_configuration": "b542b338e3914867cd31418a83f37fd7b55c225b7c1a101d1dc60c8025a7ceb8",
+   "commentaire_utilisateur": "questionnaire du 2026-10-29"
   },
   {
    "id": "DEC-05",
@@ -262,14 +262,14 @@
     }
    ],
    "option_recommandee": "B5n",
-   "statut": "proposée",
-   "option_retenue": null,
-   "decision_utilisateur": null,
+   "statut": "approuvée",
+   "option_retenue": "B5n",
+   "decision_utilisateur": "approuvée",
    "date_proposition": "2026-10-28",
-   "date_decision": null,
-   "version_methode": "1.1",
-   "empreinte_configuration": null,
-   "commentaire_utilisateur": ""
+   "date_decision": "2026-10-29",
+   "version_methode": "1.2",
+   "empreinte_configuration": "b542b338e3914867cd31418a83f37fd7b55c225b7c1a101d1dc60c8025a7ceb8",
+   "commentaire_utilisateur": "questionnaire du 2026-10-29"
   },
   {
    "id": "DEC-06",
@@ -309,14 +309,14 @@
     }
    ],
    "option_recommandee": "echelle_naturelle",
-   "statut": "proposée",
-   "option_retenue": null,
-   "decision_utilisateur": null,
+   "statut": "approuvée",
+   "option_retenue": "echelle_naturelle",
+   "decision_utilisateur": "approuvée",
    "date_proposition": "2026-10-28",
-   "date_decision": null,
-   "version_methode": "1.1",
-   "empreinte_configuration": null,
-   "commentaire_utilisateur": ""
+   "date_decision": "2026-10-29",
+   "version_methode": "1.2",
+   "empreinte_configuration": "b542b338e3914867cd31418a83f37fd7b55c225b7c1a101d1dc60c8025a7ceb8",
+   "commentaire_utilisateur": "questionnaire du 2026-10-29"
   },
   {
    "id": "DEC-07",
@@ -352,14 +352,14 @@
     }
    ],
    "option_recommandee": "ajouter",
-   "statut": "proposée",
-   "option_retenue": null,
-   "decision_utilisateur": null,
+   "statut": "approuvée",
+   "option_retenue": "ajouter",
+   "decision_utilisateur": "approuvée",
    "date_proposition": "2026-10-28",
-   "date_decision": null,
-   "version_methode": "1.1",
-   "empreinte_configuration": null,
-   "commentaire_utilisateur": ""
+   "date_decision": "2026-10-29",
+   "version_methode": "1.2",
+   "empreinte_configuration": "b542b338e3914867cd31418a83f37fd7b55c225b7c1a101d1dc60c8025a7ceb8",
+   "commentaire_utilisateur": "questionnaire du 2026-10-29"
   },
   {
    "id": "DEC-08",
@@ -463,14 +463,14 @@
     }
    ],
    "option_recommandee": "figer",
-   "statut": "proposée",
-   "option_retenue": null,
-   "decision_utilisateur": null,
+   "statut": "approuvée",
+   "option_retenue": "figer",
+   "decision_utilisateur": "approuvée",
    "date_proposition": "2026-10-28",
-   "date_decision": null,
-   "version_methode": "1.1",
-   "empreinte_configuration": null,
-   "commentaire_utilisateur": ""
+   "date_decision": "2026-10-29",
+   "version_methode": "1.2",
+   "empreinte_configuration": "b542b338e3914867cd31418a83f37fd7b55c225b7c1a101d1dc60c8025a7ceb8",
+   "commentaire_utilisateur": "questionnaire du 2026-10-29"
   },
   {
    "id": "DEC-09",
@@ -511,14 +511,14 @@
     }
    ],
    "option_recommandee": "lecture_litterale",
-   "statut": "proposée",
-   "option_retenue": null,
-   "decision_utilisateur": null,
+   "statut": "approuvée",
+   "option_retenue": "lecture_litterale",
+   "decision_utilisateur": "approuvée",
    "date_proposition": "2026-10-28",
-   "date_decision": null,
-   "version_methode": "1.1",
-   "empreinte_configuration": null,
-   "commentaire_utilisateur": ""
+   "date_decision": "2026-10-29",
+   "version_methode": "1.2",
+   "empreinte_configuration": "b542b338e3914867cd31418a83f37fd7b55c225b7c1a101d1dc60c8025a7ceb8",
+   "commentaire_utilisateur": "questionnaire du 2026-10-29 : lecture littérale P18 + avertissement"
   },
   {
    "id": "DEC-10",
@@ -591,14 +591,14 @@
     }
    ],
    "option_recommandee": "garder",
-   "statut": "proposée",
-   "option_retenue": null,
-   "decision_utilisateur": null,
+   "statut": "approuvée",
+   "option_retenue": "garder",
+   "decision_utilisateur": "approuvée",
    "date_proposition": "2026-10-28",
-   "date_decision": null,
-   "version_methode": "1.1",
-   "empreinte_configuration": null,
-   "commentaire_utilisateur": ""
+   "date_decision": "2026-10-29",
+   "version_methode": "1.2",
+   "empreinte_configuration": "b542b338e3914867cd31418a83f37fd7b55c225b7c1a101d1dc60c8025a7ceb8",
+   "commentaire_utilisateur": "questionnaire du 2026-10-29"
   },
   {
    "id": "DEC-12",
@@ -654,14 +654,14 @@
     }
    ],
    "option_recommandee": "theorique",
-   "statut": "proposée",
-   "option_retenue": null,
-   "decision_utilisateur": null,
+   "statut": "approuvée",
+   "option_retenue": "theorique",
+   "decision_utilisateur": "approuvée",
    "date_proposition": "2026-10-28",
-   "date_decision": null,
-   "version_methode": "1.1",
-   "empreinte_configuration": null,
-   "commentaire_utilisateur": ""
+   "date_decision": "2026-10-29",
+   "version_methode": "1.2",
+   "empreinte_configuration": "b542b338e3914867cd31418a83f37fd7b55c225b7c1a101d1dc60c8025a7ceb8",
+   "commentaire_utilisateur": "questionnaire du 2026-10-29"
   }
  ]
 }

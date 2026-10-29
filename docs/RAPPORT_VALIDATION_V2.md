@@ -1,6 +1,6 @@
 # Rapport de validation — édition V2.0.0 (2026-10-29)
 
-Statut : **VALIDÉ** — 37 tests sur 37 réussis (26 pipeline, 11 interface), aucun ignoré ; résultats test par test dans `docs/validation.json` (régénéré par `tools/validate.py`). Tests exécutés dans Chromium 153 (Playwright), contexte hors ligne.
+Statut : **VALIDÉ** — 38 tests sur 38 réussis (26 pipeline, 12 interface ; test_12 ajouté en V2.0.1), aucun ignoré ; résultats test par test dans `docs/validation.json` (régénéré par `tools/validate.py`). Tests exécutés dans Chromium 153 (Playwright), contexte hors ligne.
 
 ## 1. État initial du dépôt
 

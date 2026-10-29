@@ -1,8 +1,8 @@
 {
  "date": "2026-10-29",
  "statut": "VALIDÉ",
- "n_tests": 37,
- "n_reussis": 37,
+ "n_tests": 38,
+ "n_reussis": 38,
  "n_ignores": 0,
  "echecs_critiques": [],
  "tests": [
@@ -263,6 +263,13 @@
    "nom": "test_11_mobile_sans_debordement",
    "resultat": "RÉUSSI",
    "critique": false,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_html",
+   "nom": "test_12_noms_g20_et_clic_affiche_le_nom",
+   "resultat": "RÉUSSI",
+   "critique": true,
    "detail": ""
   }
  ]

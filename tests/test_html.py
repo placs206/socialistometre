@@ -142,6 +142,21 @@ class T(unittest.TestCase):
         self.assertIn("Test de contestation", p.inner_text("#fiche"))
         self.assertEqual(before, p.evaluate("()=>JSON.stringify(__socialistometre.D.obs)"))
 
+    def test_12_noms_g20_et_clic_affiche_le_nom(self):
+        p = self.page()
+        n = p.locator("#chart text.lbl").count()
+        self.assertGreaterEqual(n, 15)
+        self.assertLessEqual(n, 19)  # seulement une sélection, pas les 162 pays
+        self.assertEqual(p.locator("#chart text.lbl[data-for=CHL]").count(), 0)
+        bb = p.locator("#chart circle[data-id=CHL]").bounding_box()
+        p.mouse.click(bb["x"] + bb["width"] / 2 + 3, bb["y"] + bb["height"] / 2)  # clic légèrement à côté : point le plus proche
+        self.assertIn("Chili", p.inner_text("#pick"))
+        self.assertEqual(p.locator("#chart text.lbl[data-for=CHL]").count(), 1)  # le nom reste affiché
+        p.click("#pick button[data-a=fiche]")
+        self.assertTrue(p.is_visible("#s-fiche"))
+        self.assertIn("Chili", p.inner_text("#fiche"))
+        self.assertEqual(self.errs, [])
+
     def test_11_mobile_sans_debordement(self):
         p = self.page(390, 844)
         self.assertLessEqual(p.evaluate("()=>document.documentElement.scrollWidth"), 390)

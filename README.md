@@ -36,7 +36,7 @@ archive/v1/        code, données, documentation et HTML de l'ancien indice comp
 
 ```
 pip install -r requirements.txt && python3 -m playwright install chromium
-python3 tools/validate.py AAAA-MM-JJ        # build + coordonnées + HTML + 37 tests ; code 1 si un test critique échoue
+python3 tools/validate.py AAAA-MM-JJ        # build + coordonnées + HTML + 38 tests ; code 1 si un test critique échoue
 python3 tools/make_edition.py AAAA-MM-JJ    # archive editions/v<version>/ (refusé si non validé)
 ```
 

@@ -36,6 +36,8 @@ section[hidden]{display:none}
 .tools .sp{flex:1}
 #tip{position:absolute;pointer-events:none;background:var(--panel);border:1px solid var(--rule);padding:8px 10px;font-size:.84rem;max-width:300px;box-shadow:0 2px 8px rgba(20,30,40,.15);display:none;z-index:5}
 #tip b{display:block;margin-bottom:2px}
+#pick{position:absolute;left:66px;top:12px;background:var(--panel);border:1px solid var(--sel);padding:8px 10px;font-size:.86rem;max-width:min(320px,80%);box-shadow:0 2px 10px rgba(20,30,40,.18);display:none;z-index:6}
+#pick b{display:block;font-size:1rem;margin-bottom:2px;color:var(--sel)}
 .legend{font-size:.85rem;color:var(--muted);display:flex;gap:16px;flex-wrap:wrap;padding:8px 10px}
 .legend svg{vertical-align:middle;margin-right:4px}
 table{border-collapse:collapse;width:100%;font-size:.9rem}
@@ -96,7 +98,8 @@ p{max-width:85ch}
     <label>Région<select id="region"><option value="">Toutes</option></select></label>
     <label>Rechercher un pays<input type="search" id="q" placeholder="Nom ou code ISO"></label>
     <label>Seuil d'avertissement d'écart entre périodes (années)<input type="number" id="seuil" min="0" max="10" step="0.5"></label>
-    <label class="chk"><input type="checkbox" id="labels"> Afficher les noms</label>
+    <label>Noms affichés sur le graphique<select id="lblmode"><option value="g20">Pays du G20 (par défaut)</option><option value="aucun">Seulement les pays cliqués</option><option value="tous">Tous (illisible à l'échelle mondiale)</option></select></label>
+    <button class="btn" id="unpin">Effacer les noms ajoutés par clic</button>
     <label class="chk"><input type="checkbox" id="sec" checked> Indices de comparaison dans les infobulles et fiches</label>
     <label class="chk"><input type="checkbox" id="ctxchk" checked> Données contextuelles dans les fiches</label>
     <button class="btn primary" id="reset">Revenir à la configuration officielle</button>
@@ -106,6 +109,7 @@ p{max-width:85ch}
     <div class="chartwrap">
      <svg id="chart" viewBox="0 0 800 620" role="img" aria-label="Nuage de points : liberté économique en abscisse, démocratie libérale en ordonnée"></svg>
      <div id="tip"></div>
+     <div id="pick" role="dialog" aria-live="polite"></div>
      <div class="tools">
       <button class="btn" id="zin" aria-label="Zoomer">+</button>
       <button class="btn" id="zout" aria-label="Dézoomer">−</button>
@@ -114,7 +118,7 @@ p{max-width:85ch}
      </div>
      <div class="legend" id="legend"></div>
     </div>
-    <p class="small muted">Faites glisser pour déplacer, molette ou boutons pour zoomer. Cliquez sur un point pour ouvrir sa fiche ; Maj+clic l'ajoute à la comparaison. Les quadrants ne portent volontairement aucune étiquette : 50 n'est pas un seuil idéologique.</p>
+    <p class="small muted">Faites glisser pour déplacer, molette ou boutons pour zoomer. Par défaut, seuls les pays du G20 sont nommés. Cliquez (ou touchez) un point pour afficher son nom et ses valeurs ; le nom reste affiché, et la fiche s'ouvre depuis l'encadré. Maj+clic ajoute à la comparaison. Les quadrants ne portent volontairement aucune étiquette : 50 n'est pas un seuil idéologique.</p>
    </div>
   </div>
  </section>
@@ -150,10 +154,11 @@ var D = /*__DATA__*/null;
 var MAIN={fraser:"efw_summary",heritage:"ief_overall",vdem:"v2x_libdem",freedomhouse:"fiw_total"};
 var LBL={fraser:"Fraser — Economic Freedom of the World",heritage:"Heritage — Index of Economic Freedom",vdem:"V-Dem — indice de démocratie libérale",freedomhouse:"Freedom House — Freedom in the World"};
 var SHORT={fraser:"Fraser",heritage:"Heritage",vdem:"V-Dem",freedomhouse:"Freedom House"};
+var G20=["ARG","AUS","BRA","CAN","CHN","DEU","FRA","GBR","IDN","IND","ITA","JPN","KOR","MEX","RUS","SAU","TUR","USA","ZAF"];
 var STATUT=["Deux coordonnées","Économie seulement","Politique seulement","Aucune coordonnée"];
 var PAYS={};D.pays.forEach(function(p){PAYS[p.iso3]=p;});
 var OFF=D.scen[D.meta.scenario_officiel];
-var S={xs:OFF.x,ys:OFF.y,mode:OFF.mode,seuil:D.meta.seuil_ecart,region:"",q:"",sel:[],labels:false,sec:true,ctx:true,cur:null,view:null};
+var S={xs:OFF.x,ys:OFF.y,mode:OFF.mode,seuil:D.meta.seuil_ecart,region:"",q:"",sel:[],lbl:"g20",pins:[],pick:null,sec:true,ctx:true,cur:null,view:null};
 var FULL={x0:-2,x1:102,y0:-2,y1:102};
 function $(id){return document.getElementById(id);}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
@@ -180,7 +185,7 @@ function syncControls(){
  opts($("ys"),[["vdem",LBL.vdem+(OFF.y==="vdem"?" (officiel)":"")],["freedomhouse",LBL.freedomhouse+" (comparaison)"]],S.ys);
  opts($("mode"),MODES.map(function(m){return [m,(m==="recent"?"Plus récente disponible":"Année commune "+m.split(":")[1])+(m===OFF.mode?" (officiel)":"")];}),S.mode);
  opts($("xed"),edOpts(S.xs),"");opts($("yed"),edOpts(S.ys),"");
- $("seuil").value=S.seuil;$("labels").checked=S.labels;$("sec").checked=S.sec;$("ctxchk").checked=S.ctx;$("q").value=S.q;$("region").value=S.region;
+ $("seuil").value=S.seuil;$("lblmode").value=S.lbl;$("sec").checked=S.sec;$("ctxchk").checked=S.ctx;$("q").value=S.q;$("region").value=S.region;
 }
 function pickEdition(src,ed){
  if(!ed)return;var ys=edYears(src,ed),best=null;
@@ -229,19 +234,47 @@ function drawChart(){
  h.push('<g clip-path="url(#clip)">');
  var pts=points();
  pts.sort(function(a,b){return (S.sel.indexOf(a.id)>=0||matchQ(a.id)?1:0)-(S.sel.indexOf(b.id)>=0||matchQ(b.id)?1:0);});
+ var lab=[];
  pts.forEach(function(p){
-  var hi=S.sel.indexOf(p.id)>=0,mq=matchQ(p.id),far=p.r[2]!=null&&p.r[2]>S.seuil;
-  var col=hi||mq?"var(--sel)":"var(--pt)",rad=hi||mq?6.5:4.5;
-  h.push('<circle data-id="'+p.id+'" cx="'+sx(p.x).toFixed(2)+'" cy="'+sy(p.y).toFixed(2)+'" r="'+rad+'" fill="'+(far?"var(--panel)":col)+'" fill-opacity="'+(far?1:0.78)+'" stroke="'+col+'" stroke-width="'+(far?1.6:0.8)+'" tabindex="-1"/>');
-  if(S.labels||hi||mq)h.push('<text x="'+(sx(p.x)+8).toFixed(1)+'" y="'+(sy(p.y)+4).toFixed(1)+'" font-size="11.5" fill="var(--ink)" pointer-events="none">'+esc(name(p.id))+'</text>');
+  var hi=S.sel.indexOf(p.id)>=0,mq=matchQ(p.id),pin=S.pins.indexOf(p.id)>=0||S.pick===p.id,far=p.r[2]!=null&&p.r[2]>S.seuil;
+  var strong=hi||mq||pin,col=strong?"var(--sel)":"var(--pt)",rad=strong?6.5:4.5;
+  p.cx=sx(p.x);p.cy=sy(p.y);
+  h.push('<circle data-id="'+p.id+'" cx="'+p.cx.toFixed(2)+'" cy="'+p.cy.toFixed(2)+'" r="'+rad+'" fill="'+(far?"var(--panel)":col)+'" fill-opacity="'+(far?1:0.78)+'" stroke="'+col+'" stroke-width="'+(far?1.6:0.8)+'" tabindex="-1"/>');
+  if(strong||S.lbl==="tous"||(S.lbl==="g20"&&G20.indexOf(p.id)>=0))lab.push({p:p,strong:strong});
  });
+ h.push(placeLabels(lab,pts));
  h.push("</g>");svg.innerHTML=h.join("");
  var nfar=pts.filter(function(p){return p.r[2]!=null&&p.r[2]>S.seuil;}).length;
  $("counts").textContent=pts.length+" points affichés sur "+s.comptes.complet+" entités à deux coordonnées";
  $("legend").innerHTML='<span><svg width="12" height="12"><circle cx="6" cy="6" r="4.5" fill="var(--pt)" fill-opacity=".78"/></svg>périodes des deux coordonnées distantes d\'au plus '+fx(S.seuil)+' an(s)</span>'+
   '<span><svg width="12" height="12"><circle cx="6" cy="6" r="4.5" fill="var(--panel)" stroke="var(--pt)" stroke-width="1.6"/></svg>écart de période supérieur au seuil ('+nfar+' point(s)) : ce n\'est pas une photographie simultanée</span>'+
-  '<span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="var(--sel)"/></svg>sélection ou recherche</span>';
+  '<span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="var(--sel)"/></svg>pays cliqué, recherché ou comparé</span>';
 }
+/* Placement des étiquettes : position libre la plus proche du point (8 positions, puis plus loin avec trait de rappel) */
+function placeLabels(lab,pts){
+ var boxes=[],out=[],fs=12,x0=M.l,x1=W-M.r,y0=M.t,y1=H-M.b;
+ function hit(b){for(var k=0;k<boxes.length;k++){var o=boxes[k];if(b.x<o.x+o.w&&b.x+b.w>o.x&&b.y<o.y+o.h&&b.y+b.h>o.y)return true;}
+  for(k=0;k<pts.length;k++){var q=pts[k];if(q.cx>b.x-3&&q.cx<b.x+b.w+3&&q.cy>b.y-3&&q.cy<b.y+b.h+3)return true;}return false;}
+ lab.sort(function(a,b){return (b.strong?1:0)-(a.strong?1:0);});
+ lab.forEach(function(l){
+  var p=l.p,t=name(p.id),w=t.length*fs*0.56+6,hgt=fs+4,best=null;
+  var dirs=[[1,0],[-1,0],[0,-1],[0,1],[1,-1],[-1,-1],[1,1],[-1,1]];
+  for(var d=0;d<5&&!best;d++){var r=8+d*14;
+   for(var k=0;k<dirs.length;k++){var dx=dirs[k][0],dy=dirs[k][1];
+    var bx=dx>0?p.cx+r:dx<0?p.cx-r-w:p.cx-w/2,by=dy<0?p.cy-r-hgt:dy>0?p.cy+r:p.cy-hgt/2;
+    var b={x:bx,y:by,w:w,h:hgt};if(bx<x0||bx+w>x1||by<y0||by+hgt>y1)continue;
+    if(!hit(b)){best=b;best.lead=d>0;break;}}}
+  if(!best){if(!l.strong)return;var bx2=Math.min(Math.max(p.cx+8,x0),x1-w);best={x:bx2,y:Math.max(y0,p.cy-hgt-8),w:w,h:hgt,lead:true};}
+  boxes.push(best);
+  if(best.lead)out.push('<line x1="'+p.cx.toFixed(1)+'" y1="'+p.cy.toFixed(1)+'" x2="'+(best.x+(best.x>p.cx?0:best.w)).toFixed(1)+'" y2="'+(best.y+best.h/2).toFixed(1)+'" stroke="var(--muted)" stroke-width=".8" pointer-events="none"/>');
+  out.push('<text class="lbl" data-for="'+p.id+'" x="'+(best.x+3).toFixed(1)+'" y="'+(best.y+fs).toFixed(1)+'" font-size="'+fs+'" font-weight="'+(l.strong?650:500)+'" fill="'+(l.strong?"var(--sel)":"var(--ink)")+'" stroke="var(--panel)" stroke-width="3" paint-order="stroke" stroke-linejoin="round" pointer-events="none">'+esc(t)+'</text>');
+ });
+ return out.join("");}
+function nearest(e){var q=svgPt(e),best=null,bd=1e9;points().forEach(function(p){var dx=sx(p.x)-q.x,dy=sy(p.y)-q.y,d=dx*dx+dy*dy;if(d<bd){bd=d;best=p.id;}});
+ var r=$("chart").getBoundingClientRect(),tol=18*W/r.width;return bd<=tol*tol?best:null;}
+function showPick(i){var el=$("pick");if(!i){el.style.display="none";return;}
+ el.innerHTML=tipHtml(i)+'<div class="row" style="margin-top:6px"><button class="btn" data-a="fiche">Ouvrir la fiche</button><button class="btn" data-a="cmp">'+(S.sel.indexOf(i)>=0?"Retirer de la comparaison":"Comparer")+'</button><button class="btn" data-a="close" aria-label="Fermer">×</button></div>';
+ el.style.display="block";el.dataset.id=i;}
 function tipHtml(i){
  var r=scen().p[i],s=scen(),h="<b>"+esc(name(i))+"</b>";
  [["x",0],["y",1]].forEach(function(a){var src=s[a[0]],o=r[a[1]];
@@ -263,8 +296,12 @@ chart.addEventListener("pointermove",function(e){
   if(moved){var v=drag.v,kx=(v.x1-v.x0)/(W-M.l-M.r),ky=(v.y1-v.y0)/(H-M.t-M.b);S.view={x0:v.x0-dx*kx,x1:v.x1-dx*kx,y0:v.y0+dy*ky,y1:v.y1+dy*ky};drawChart();tip.style.display="none";}return;}
  if(t.tagName==="circle"&&t.dataset.id){tip.innerHTML=tipHtml(t.dataset.id);tip.style.display="block";var r=chart.getBoundingClientRect(),bx=e.clientX-r.left+14,by=e.clientY-r.top+14;
   if(bx>r.width-300)bx=Math.max(4,bx-320);tip.style.left=bx+"px";tip.style.top=by+"px";}else tip.style.display="none";});
-chart.addEventListener("pointerup",function(e){var t=document.elementFromPoint(e.clientX,e.clientY);drag=null;
- if(!moved&&t&&t.tagName==="circle"&&t.dataset.id){if(e.shiftKey){toggleSel(t.dataset.id);}else openFiche(t.dataset.id);}});
+chart.addEventListener("pointerup",function(e){drag=null;if(moved)return;var i=nearest(e);
+ if(!i){S.pick=null;showPick(null);drawChart();return;}
+ if(e.shiftKey){toggleSel(i);return;}
+ if(S.pins.indexOf(i)<0)S.pins.push(i);S.pick=i;$("tip").style.display="none";showPick(i);drawChart();});
+$("pick").addEventListener("click",function(e){var b=e.target.closest("button[data-a]");if(!b)return;var i=this.dataset.id,a=b.dataset.a;
+ if(a==="fiche")openFiche(i);else if(a==="cmp"){toggleSel(i);showPick(i);}else{S.pick=null;showPick(null);drawChart();}});
 chart.addEventListener("pointerleave",function(){$("tip").style.display="none";});
 $("zin").onclick=function(){zoomAt(0.7);};$("zout").onclick=function(){zoomAt(1/0.7);};$("zreset").onclick=function(){S.view=null;drawChart();};
 
@@ -406,7 +443,7 @@ $("mode").onchange=function(){S.mode=this.value;render();};
 $("xed").onchange=function(){pickEdition(S.xs,this.value);};$("yed").onchange=function(){pickEdition(S.ys,this.value);};
 $("region").onchange=function(){S.region=this.value;render();};$("q").oninput=function(){S.q=this.value.trim();drawChart();};
 $("seuil").onchange=function(){var v=parseFloat(this.value);if(!isNaN(v)&&v>=0)S.seuil=v;render();};
-$("labels").onchange=function(){S.labels=this.checked;render();};$("sec").onchange=function(){S.sec=this.checked;render();};$("ctxchk").onchange=function(){S.ctx=this.checked;render();};
+$("lblmode").onchange=function(){S.lbl=this.value;render();};$("unpin").onclick=function(){S.pins=[];S.pick=null;render();};$("sec").onchange=function(){S.sec=this.checked;render();};$("ctxchk").onchange=function(){S.ctx=this.checked;render();};
 $("reset").onclick=resetOfficial;
 var rsz=null;window.addEventListener("resize",function(){clearTimeout(rsz);rsz=setTimeout(function(){if(CUR==="graphique")drawChart();},120);});
 window.__socialistometre={D:D,S:S,render:render,show:show,points:points,scen:scen,setScenario:function(x,y,m){S.xs=x;S.ys=y;S.mode=m;render();},reset:resetOfficial,openFiche:openFiche};

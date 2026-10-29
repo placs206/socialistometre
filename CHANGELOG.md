@@ -1,5 +1,10 @@
 # Journal des modifications
 
+## V2.0.1 — 2026-10-29 (interface seulement ; méthodologie 2.0.0 et données inchangées)
+- Graphique : noms des pays du G20 affichés par défaut, placés sans chevauchement (trait de rappel si nécessaire) ; réglage « Seulement les pays cliqués » ou « Tous ».
+- Clic ou toucher sur un point (point le plus proche, tolérance 18 px) : encadré avec le nom et les valeurs, nom conservé sur le graphique ; la fiche s'ouvre depuis l'encadré.
+- Test d'interface ajouté (test_12) : 38 tests.
+
 ## V2.0.0 — 2026-10-29 (méthodologie 2.0.0) — rupture de méthode
 - Demande du porteur du projet : remplacer l'indice composite par un repère à deux axes fondé exclusivement sur des indices internationaux publiés ; aucune notation propre au projet.
 - Coordonnées officielles : X = Fraser EFW (édition 2025, données 2023, × 10) ; Y = V-Dem LDI (v16, données 2025, × 100). Comparaisons séparées : Heritage IEF 2026 (X) et Freedom House FIW 2026 + historique 2012-2023 (Y). Aucune moyenne entre sources.

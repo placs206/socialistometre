@@ -1,0 +1,23 @@
+{
+ "version_methodologie": "2.0.0",
+ "date_version": "2026-10-29",
+ "configuration_officielle": {
+  "axe_x": {"source": "fraser", "indicateur": "efw_summary"},
+  "axe_y": {"source": "vdem", "indicateur": "v2x_libdem"},
+  "mode_periode": "recent"
+ },
+ "options_comparaison": {
+  "axe_x": [{"source": "fraser", "indicateur": "efw_summary"}, {"source": "heritage", "indicateur": "ief_overall"}],
+  "axe_y": [{"source": "vdem", "indicateur": "v2x_libdem"}, {"source": "freedomhouse", "indicateur": "fiw_total"}]
+ },
+ "regles": {
+  "mode_recent": "Pour chaque entité et chaque source : observation dont l'année de référence est la plus récente parmi les éditions importées.",
+  "mode_annee": "Pour chaque entité et chaque source : observation dont l'année de référence est égale à l'année choisie (Heritage 2026 : année de référence 2025 = fin de la période 2e sem. 2024 – 1er sem. 2025). Aucune interpolation, aucun report d'une autre année.",
+  "ecart_periode": "Écart en années entre les milieux des périodes mesurées par les deux coordonnées.",
+  "divergence": "Différence en points 0-100 entre deux indices du même axe pour la même entité (année la plus récente de chacun) ; descriptive, sans arbitrage.",
+  "absence": "Une coordonnée absente reste absente : jamais zéro, jamais estimée."
+ },
+ "seuil_ecart_annees": 1.0,
+ "seuil_divergence_points": 15,
+ "note_seuils": "Seuils d'affichage d'avertissements uniquement (modifiables dans l'interface, sans effet sur les coordonnées). Le milieu de l'échelle (50) n'est pas un seuil idéologique."
+}

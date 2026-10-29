@@ -1,0 +1,15 @@
+{
+ "fichiers": {
+  "efw2025.pdf": {
+   "content_type": "application/pdf",
+   "date_collecte": "2026-10-29",
+   "http": 200,
+   "note": "Rapport officiel EFW 2025 (copie du membre de l'Economic Freedom Network Liberales Institut)",
+   "octets": 2310999,
+   "sha256": "f344cc4788604856ab3205bc2f45fb2db38f6d4afa6ea012073281b7ea9c82e2",
+   "url": "https://www.libinst.ch/wp-content/uploads/2025/09/EFOTW-2025.pdf",
+   "versionne": false
+  }
+ },
+ "source": "fraser"
+}

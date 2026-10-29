@@ -1,0 +1,431 @@
+{
+ "avertissement": "Comparaison descriptive : l'indice V1 (score composite 0-100, 4 dimensions pondérées 45/20/20/15) et les coordonnées V2 (scores officiels Fraser et V-Dem) ne mesurent pas la même chose.",
+ "exemples": {
+  "CHE": {
+   "v1_global": 75.11,
+   "v1_rang": 5,
+   "x": 82.8,
+   "y": 84.3
+  },
+  "CHL": {
+   "v1_global": 77.71,
+   "v1_rang": 1,
+   "x": 76.5,
+   "y": 78.1
+  },
+  "CHN": {
+   "v1_global": 44.92,
+   "v1_rang": 162,
+   "x": 61.3,
+   "y": 3.9
+  },
+  "CUB": {
+   "v1_global": 37.17,
+   "v1_rang": 188,
+   "x": null,
+   "y": 5.7
+  },
+  "DNK": {
+   "v1_global": 70.59,
+   "v1_rang": 14,
+   "x": 80.2,
+   "y": 88.4
+  },
+  "FRA": {
+   "v1_global": 60.85,
+   "v1_rang": 73,
+   "x": 73.9,
+   "y": 80.0
+  },
+  "HKG": {
+   "v1_global": 68.15,
+   "v1_rang": 24,
+   "x": 85.5,
+   "y": 14.2
+  },
+  "IRL": {
+   "v1_global": 76.33,
+   "v1_rang": 3,
+   "x": 80.5,
+   "y": 82.2
+  },
+  "MUS": {
+   "v1_global": 75.67,
+   "v1_rang": 4,
+   "x": 77.3,
+   "y": 63.9
+  },
+  "RUS": {
+   "v1_global": 31.93,
+   "v1_rang": 196,
+   "x": 50.9,
+   "y": 5.6
+  },
+  "SGP": {
+   "v1_global": 70.27,
+   "v1_rang": 16,
+   "x": 85.0,
+   "y": 36.0
+  },
+  "SWE": {
+   "v1_global": 67.4,
+   "v1_rang": 31,
+   "x": 75.6,
+   "y": 85.3
+  },
+  "USA": {
+   "v1_global": 70.68,
+   "v1_rang": 13,
+   "x": 81.0,
+   "y": 57.1
+  },
+  "VEN": {
+   "v1_global": 21.58,
+   "v1_rang": 210,
+   "x": 31.1,
+   "y": 4.2
+  },
+  "X-NCY": {
+   "v1_global": 76.81,
+   "v1_rang": 2,
+   "x": null,
+   "y": null
+  },
+  "X-NKR": {
+   "v1_global": 0.0,
+   "v1_rang": 222,
+   "x": null,
+   "y": null
+  }
+ },
+ "n_v1_avec_score": 222,
+ "n_v1_et_v2_complet": 162,
+ "spearman_v1_dimA_vs_x_fraser": 0.8639,
+ "spearman_v1_dimD_vs_y_vdem": 0.9525,
+ "spearman_v1_global_vs_x_fraser": 0.8102,
+ "spearman_v1_global_vs_y_vdem": 0.7903,
+ "v1_absents_de_fraser_et_vdem": [
+  "ABW",
+  "AND",
+  "ASM",
+  "ATG",
+  "BMU",
+  "CYM",
+  "DMA",
+  "FSM",
+  "GRD",
+  "GRL",
+  "GUM",
+  "KIR",
+  "KNA",
+  "LCA",
+  "LIE",
+  "MAC",
+  "MCO",
+  "MHL",
+  "NCL",
+  "NRU",
+  "PLW",
+  "PRI",
+  "PSE",
+  "PYF",
+  "SMR",
+  "TON",
+  "TUV",
+  "VCT",
+  "VIR",
+  "WSM",
+  "X-ABK",
+  "X-CRM",
+  "X-DON",
+  "X-ESH",
+  "X-KAI",
+  "X-KAP",
+  "X-NCY",
+  "X-NKR",
+  "X-OSS",
+  "X-TIB",
+  "X-TRN"
+ ],
+ "v1_scores_sur_7_indicateurs_ou_moins": [
+  {
+   "iso3": "X-NCY",
+   "nom": "Chypre du Nord",
+   "v1_global": 76.81,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 2,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "MAC",
+   "nom": "R.A.S. chinoise de Macao",
+   "v1_global": 72.54,
+   "v1_n_indicateurs": 7,
+   "v1_rang": 9,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "CYM",
+   "nom": "Îles Caïmans",
+   "v1_global": 70.53,
+   "v1_n_indicateurs": 7,
+   "v1_rang": 15,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "TWN",
+   "nom": "Taïwan",
+   "v1_global": 69.88,
+   "v1_n_indicateurs": 7,
+   "v1_rang": 18,
+   "x": 80.3,
+   "y": 70.4
+  },
+  {
+   "iso3": "ASM",
+   "nom": "Samoa américaines",
+   "v1_global": 67.07,
+   "v1_n_indicateurs": 3,
+   "v1_rang": 34,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "NCL",
+   "nom": "Nouvelle-Calédonie",
+   "v1_global": 67.03,
+   "v1_n_indicateurs": 2,
+   "v1_rang": 35,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "BMU",
+   "nom": "Bermudes",
+   "v1_global": 66.43,
+   "v1_n_indicateurs": 6,
+   "v1_rang": 38,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "GUM",
+   "nom": "Guam",
+   "v1_global": 66.02,
+   "v1_n_indicateurs": 3,
+   "v1_rang": 43,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "PRI",
+   "nom": "Porto Rico",
+   "v1_global": 64.6,
+   "v1_n_indicateurs": 5,
+   "v1_rang": 50,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "ABW",
+   "nom": "Aruba",
+   "v1_global": 54.82,
+   "v1_n_indicateurs": 6,
+   "v1_rang": 113,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "GRL",
+   "nom": "Groenland",
+   "v1_global": 50.97,
+   "v1_n_indicateurs": 5,
+   "v1_rang": 133,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "PYF",
+   "nom": "Polynésie française",
+   "v1_global": 50.64,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 135,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "X-SML",
+   "nom": "Somaliland",
+   "v1_global": 48.68,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 149,
+   "x": null,
+   "y": 29.7
+  },
+  {
+   "iso3": "VIR",
+   "nom": "Îles Vierges des États-Unis",
+   "v1_global": 46.13,
+   "v1_n_indicateurs": 3,
+   "v1_rang": 156,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "X-KAP",
+   "nom": "Cachemire pakistanais",
+   "v1_global": 45.28,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 160,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "PSE",
+   "nom": "Territoires palestiniens",
+   "v1_global": 44.83,
+   "v1_n_indicateurs": 5,
+   "v1_rang": 164,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "X-KAI",
+   "nom": "Cachemire indien",
+   "v1_global": 43.96,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 170,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "X-ABK",
+   "nom": "Abkhazie",
+   "v1_global": 29.93,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 201,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "X-WBK",
+   "nom": "Cisjordanie",
+   "v1_global": 25.49,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 206,
+   "x": null,
+   "y": 11.4
+  },
+  {
+   "iso3": "X-TRN",
+   "nom": "Transnistrie",
+   "v1_global": 22.57,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 208,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "X-ESH",
+   "nom": "Sahara occidental",
+   "v1_global": 20.31,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 212,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "X-CRM",
+   "nom": "Crimée",
+   "v1_global": 19.44,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 213,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "X-TIB",
+   "nom": "Tibet",
+   "v1_global": 18.75,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 214,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "YEM",
+   "nom": "Yémen",
+   "v1_global": 17.91,
+   "v1_n_indicateurs": 7,
+   "v1_rang": 215,
+   "x": 50.8,
+   "y": 4.3
+  },
+  {
+   "iso3": "PRK",
+   "nom": "Corée du Nord",
+   "v1_global": 14.63,
+   "v1_n_indicateurs": 7,
+   "v1_rang": 216,
+   "x": null,
+   "y": 1.4
+  },
+  {
+   "iso3": "SSD",
+   "nom": "Soudan du Sud",
+   "v1_global": 7.45,
+   "v1_n_indicateurs": 7,
+   "v1_rang": 217,
+   "x": null,
+   "y": 6.4
+  },
+  {
+   "iso3": "ERI",
+   "nom": "Érythrée",
+   "v1_global": 6.54,
+   "v1_n_indicateurs": 7,
+   "v1_rang": 218,
+   "x": null,
+   "y": 0.9
+  },
+  {
+   "iso3": "X-OSS",
+   "nom": "Ossétie du Sud",
+   "v1_global": 3.58,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 219,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "X-GAZ",
+   "nom": "Bande de Gaza",
+   "v1_global": 2.88,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 220,
+   "x": null,
+   "y": 5.8
+  },
+  {
+   "iso3": "X-DON",
+   "nom": "Donbass oriental",
+   "v1_global": 0.52,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 221,
+   "x": null,
+   "y": null
+  },
+  {
+   "iso3": "X-NKR",
+   "nom": "Haut-Karabagh",
+   "v1_global": 0.0,
+   "v1_n_indicateurs": 4,
+   "v1_rang": 222,
+   "x": null,
+   "y": null
+  }
+ ]
+}

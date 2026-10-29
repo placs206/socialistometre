@@ -1,0 +1,269 @@
+{
+ "date": "2026-10-29",
+ "statut": "VALIDÉ",
+ "n_tests": 37,
+ "n_reussis": 37,
+ "n_ignores": 0,
+ "echecs_critiques": [],
+ "tests": [
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_aucune_coordonnee_inventee",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_changer_de_source_ne_modifie_pas_les_donnees_brutes",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_contexte_sans_effet_sur_les_coordonnees",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_divergences_descriptives",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_donnee_manquante_jamais_zero",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_fichier_a_jour_et_reproductible",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_independance_ordre_des_lignes",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_pas_de_moyenne_entre_sources",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_regles_de_periode",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_un_seul_scenario_officiel_conforme_a_la_configuration",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_annees_et_periodes",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_conservation_des_scores_sources",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_echelles_officielles",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_pas_de_doublon",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_tracabilite_complete",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_transformation_conserve_le_classement",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_transformation_exacte_et_reversible",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_cas_sensibles_documentes",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_identifiants_valides_et_uniques",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_toutes_les_entites_sources_sont_rattachees",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_effectifs_extractions",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_extraction_reproductible_depuis_les_fichiers_officiels",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_fraser_coherence_interne",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_freedomhouse_total_egal_pr_plus_cl",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_heritage_rangs_et_bornes",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_pipeline",
+   "nom": "test_manifestes_fichiers_versionnes",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_html",
+   "nom": "test_01_aucune_ressource_externe",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_html",
+   "nom": "test_02_hors_ligne_sans_erreur",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_html",
+   "nom": "test_03_parite_graphique_donnees",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_html",
+   "nom": "test_04_fiche_coherente_avec_le_graphique",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_html",
+   "nom": "test_05_mode_comparaison_distinct_et_donnees_intactes",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_html",
+   "nom": "test_06_absence_affichee_jamais_zero",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_html",
+   "nom": "test_07_onglets_recherche_tri_comparaison",
+   "resultat": "RÉUSSI",
+   "critique": false,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_html",
+   "nom": "test_08_zoom_et_reinitialisation",
+   "resultat": "RÉUSSI",
+   "critique": false,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_html",
+   "nom": "test_09_periode_commune",
+   "resultat": "RÉUSSI",
+   "critique": true,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_html",
+   "nom": "test_10_contestation_sans_effet_sur_les_donnees",
+   "resultat": "RÉUSSI",
+   "critique": false,
+   "detail": ""
+  },
+  {
+   "module": "tests.test_html",
+   "nom": "test_11_mobile_sans_debordement",
+   "resultat": "RÉUSSI",
+   "critique": false,
+   "detail": ""
+  }
+ ]
+}

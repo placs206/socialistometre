@@ -1,0 +1,100 @@
+{
+ "comptes_scenario_officiel": {
+  "aucune": 57,
+  "complet": 162,
+  "x_seulement": 3,
+  "y_seulement": 17
+ },
+ "date_generation": "2026-10-29",
+ "edition": "V2.0.0",
+ "editions_sources": {
+  "fraser": {
+   "efw2025": "importee",
+   "efw2026": "non_importee"
+  },
+  "freedomhouse": {
+   "fiw2013_2024": "importee",
+   "fiw2025": "non_importee",
+   "fiw2026": "importee"
+  },
+  "heritage": {
+   "ief2026": "importee"
+  },
+  "vdem": {
+   "v16": "importee"
+  }
+ },
+ "empreinte_jeu_de_donnees_sha256": "a955b439c463ef2196e28af15cef4b159d74342ee806e33efa25d36e9639236c",
+ "empreintes_fichiers": {
+  "config/contexte.json": "2ce1a20ccc12ed737b396f5f860f8e6cd5a29b9370c6f36ef22e4b1d931136ca",
+  "config/parametres.json": "a0af02bedcd6d169abfd26981af72c43d43cd0e59b9ee34ca5750844448508fd",
+  "config/sources.json": "1407f69c3287c844014a9bc063011962c024f325d7b00fd103d22617f5702b27",
+  "data/processed/anomalies.csv": "7318608c636f84bdad1fa49bb165ebc0fa32337112fdb639b2a98371b9c4f121",
+  "data/processed/contexte.csv": "bbcb53ce98de7001792993fdc2953ab64e804e913875df5f906fb376821070f5",
+  "data/processed/coordonnees.json": "4f8705e1af84dd006b2db9cf5022fff6acf05eaffc922bc77ccb126c2c4d9690",
+  "data/processed/observations.csv": "12a6b3d0b9ea0bcaf8a869296580a7940b91806e3ab13290b60dd01aeaa2327d",
+  "data/raw/fraser/efw2025_extraction.csv": "e9fda7a36ef38316a436fac980460ab0d849f167b8a5bf9c896daf8baff9457f",
+  "data/raw/freedomhouse/fiw2013_2024_extraction.csv": "e533fb46ded5303c8aee473b39361ee101a3f32f4ef37fac4937922cfbee0de8",
+  "data/raw/freedomhouse/fiw2026_extraction.csv": "d7d1d1c8b851756a6e7da0ddcdba1ff53d1b3501afc46ee9a69ec6aa6bb53b2d",
+  "data/raw/heritage/ief2026_extraction.csv": "7c6c1a7ac9beab0f6d2fa13b2b0cc3e70187d4b673d47e097b58f3701933de55",
+  "data/raw/vdem/vdem_v16_extraction.csv": "57963630206fd6328142235e248a18f7196a16b4a238a8e97f10354adba25eb2",
+  "data/reference/correspondances.csv": "eb723aeff2a3f4952a32dcfe565ddaefe045b0165fcac586664da6d5462314d9",
+  "data/reference/pays.csv": "1783047cfd86b7b95fc6506b7b76cca4c80579ed8d811dad3e826d9c904bf4a0",
+  "docs/validation.json": "2e6966f5fe3255dc49af810c3f2a87169a44daf8d93466d552331e540f41aacf",
+  "index.html": "4001314d7f5d7ee2bc102ed6d962639ebf1d0c1ce43341c82b3533f32ff84a64"
+ },
+ "parametres": {
+  "configuration_officielle": {
+   "axe_x": {
+    "indicateur": "efw_summary",
+    "source": "fraser"
+   },
+   "axe_y": {
+    "indicateur": "v2x_libdem",
+    "source": "vdem"
+   },
+   "mode_periode": "recent"
+  },
+  "date_version": "2026-10-29",
+  "note_seuils": "Seuils d'affichage d'avertissements uniquement (modifiables dans l'interface, sans effet sur les coordonnées). Le milieu de l'échelle (50) n'est pas un seuil idéologique.",
+  "options_comparaison": {
+   "axe_x": [
+    {
+     "indicateur": "efw_summary",
+     "source": "fraser"
+    },
+    {
+     "indicateur": "ief_overall",
+     "source": "heritage"
+    }
+   ],
+   "axe_y": [
+    {
+     "indicateur": "v2x_libdem",
+     "source": "vdem"
+    },
+    {
+     "indicateur": "fiw_total",
+     "source": "freedomhouse"
+    }
+   ]
+  },
+  "regles": {
+   "absence": "Une coordonnée absente reste absente : jamais zéro, jamais estimée.",
+   "divergence": "Différence en points 0-100 entre deux indices du même axe pour la même entité (année la plus récente de chacun) ; descriptive, sans arbitrage.",
+   "ecart_periode": "Écart en années entre les milieux des périodes mesurées par les deux coordonnées.",
+   "mode_annee": "Pour chaque entité et chaque source : observation dont l'année de référence est égale à l'année choisie (Heritage 2026 : année de référence 2025 = fin de la période 2e sem. 2024 – 1er sem. 2025). Aucune interpolation, aucun report d'une autre année.",
+   "mode_recent": "Pour chaque entité et chaque source : observation dont l'année de référence est la plus récente parmi les éditions importées."
+  },
+  "seuil_divergence_points": 15,
+  "seuil_ecart_annees": 1.0,
+  "version_methodologie": "2.0.0"
+ },
+ "reproduction": "python3 tools/validate.py AAAA-MM-JJ (après éventuellement python3 tools/collect.py et ré-extraction)",
+ "tests": {
+  "ignores": 0,
+  "reussis": 37,
+  "statut": "VALIDÉ",
+  "total": 37
+ }
+}

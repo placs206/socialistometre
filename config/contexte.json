@@ -1,0 +1,20 @@
+{
+ "avertissement": "Données contextuelles descriptives : elles n'ont AUCUN poids dans les coordonnées et ne sont pas des mesures directes du « socialisme » ni du « libéralisme ». Chacune décrit une réalité particulière qui ne suffit pas, isolément, à caractériser un système économique.",
+ "fenetre_annees": [2019, 2025],
+ "regle_annee": "dernière valeur publiée dans la fenêtre ; l'année réelle est affichée avec chaque valeur",
+ "indicateurs": [
+  {"id": "depenses_publiques", "libelle": "Charges des administrations publiques", "unite": "% du PIB", "source": "Banque mondiale (WDI) ← FMI, statistiques de finances publiques", "fichier": "wb_GC.XPN.TOTL.GD.ZS.json", "url": "https://data.worldbank.org/indicator/GC.XPN.TOTL.GD.ZS", "limites": "Administration centrale pour de nombreux pays (pas les collectivités locales ni la sécurité sociale) : comparabilité limitée entre pays."},
+  {"id": "recettes_fiscales", "libelle": "Recettes fiscales", "unite": "% du PIB", "source": "Banque mondiale (WDI) ← FMI", "fichier": "wb_GC.TAX.TOTL.GD.ZS.json", "url": "https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS", "limites": "Administration centrale ; exclut en général les cotisations sociales."},
+  {"id": "prelevements_obligatoires", "libelle": "Prélèvements obligatoires totaux (impôts, taxes et cotisations sociales)", "unite": "% du PIB", "source": "OCDE – Global Revenue Statistics", "fichier": "oecd_rev_global.csv", "url": "https://www.oecd.org/en/data/datasets/global-revenue-statistics-database.html", "limites": "Couverture limitée aux pays de la base OCDE ; toutes administrations publiques."},
+  {"id": "coin_fiscal", "libelle": "Coin fiscal moyen sur le travail (célibataire, salaire moyen)", "unite": "% du coût du travail", "source": "OCDE – Taxing Wages", "fichier": "oecd_tw_comp.csv", "url": "https://www.oecd.org/en/publications/taxing-wages_20725124.html", "limites": "Pays de l'OCDE et quelques partenaires seulement."},
+  {"id": "taux_marginal_ir", "libelle": "Taux marginal supérieur statutaire de l'impôt sur le revenu", "unite": "%", "source": "OCDE – Tax Database", "fichier": "oecd_pit_top.csv", "url": "https://www.oecd.org/en/data/datasets/oecd-tax-database.html", "limites": "Taux statutaire ; ne mesure ni l'assiette ni le seuil d'application."},
+  {"id": "consommation_publique", "libelle": "Consommation finale des administrations publiques", "unite": "% du PIB", "source": "Banque mondiale (WDI) ← comptes nationaux", "fichier": "wb_NE.CON.GOVT.ZS.json", "url": "https://data.worldbank.org/indicator/NE.CON.GOVT.ZS", "limites": "Exclut les transferts sociaux en espèces et l'investissement public."},
+  {"id": "cotisations_sociales", "libelle": "Cotisations sociales", "unite": "% des recettes publiques", "source": "Banque mondiale (WDI) ← FMI", "fichier": "wb_GC.REV.SOCL.ZS.json", "url": "https://data.worldbank.org/indicator/GC.REV.SOCL.ZS", "limites": "Part des recettes, pas niveau ; administration centrale."},
+  {"id": "pib_habitant", "libelle": "PIB par habitant en parité de pouvoir d'achat", "unite": "$ internationaux constants de 2021", "source": "Banque mondiale (WDI) ← PCI", "fichier": "wb_NY.GDP.PCAP.PP.KD.json", "url": "https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD", "limites": "Mesure de niveau de vie moyen, sans lien de définition avec les axes."}
+ ],
+ "non_retenus": [
+  {"libelle": "Dépenses sociales publiques (% du PIB)", "raison": "Base OCDE SOCX limitée aux pays de l'OCDE et non collectée dans cette version ; aucune série mondiale homogène vérifiée."},
+  {"libelle": "Part des entreprises publiques", "raison": "Aucune série mondiale institutionnelle homogène identifiée (les indicateurs PMR de l'OCDE mesurent la réglementation, pas la part)."},
+  {"libelle": "Indicateurs de redistribution (Gini avant/après transferts)", "raison": "Couverture et années très hétérogènes ; non collectés dans cette version."}
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "fichiers": {
+  "ief2026.pdf": {
+   "content_type": "application/pdf",
+   "date_collecte": "2026-10-29",
+   "http": 200,
+   "note": "Rapport officiel 2026 Index of Economic Freedom (PDF, 428 p.)",
+   "octets": 18661865,
+   "sha256": "441b14ec54279af544f8b781300f23b388913c4bd0b5841e18f78ce513a37cc7",
+   "url": "https://static.heritage.org/index/pdf/2026/2026_indexofeconomicfreedom.pdf",
+   "versionne": false
+  }
+ },
+ "source": "heritage"
+}

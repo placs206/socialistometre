@@ -1,0 +1,92 @@
+{
+ "fichiers": {
+  "oecd_pit_top.csv": {
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "note": "OECD SDMX-CSV (startPeriod=2014) ; copie du fichier collecté pour la V1 (archive/v1/data/raw), SHA-256 identique",
+   "octets": 336702,
+   "sha256": "3b37150a15f91351be21d78622560041a6fc89452cf0cd3b8d86a18b3cc6d048",
+   "url": "https://sdmx.oecd.org/public/rest/data/OECD.CTP.TPS,DSD_TAX_PIT@DF_PIT_TOP_EARN_THRESH,1.0/all?startPeriod=2014&dimensionAtObservation=AllDimensions",
+   "versionne": true
+  },
+  "oecd_rev_global.csv": {
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "note": "OECD SDMX-CSV (startPeriod=2019) ; fichier complet reçu : 28442073 octets, SHA-256 d971bfad3623b50b4f045ca89813c2704dab81541349bd48c36e6916dc6cb618 ; conservé : 1943/254136 lignes (S13, % du PIB, codes _T, T_1100, T_2000, T_3000) ; copie du fichier collecté pour la V1 (archive/v1/data/raw), SHA-256 identique",
+   "octets": 214735,
+   "sha256": "cc86dcf39dca6bb162d1a17da7959c0d522a126318459e7e5352262182840910",
+   "url": "https://sdmx.oecd.org/public/rest/data/OECD.CTP.TPS,DSD_REV_COMP_GLOBAL@DF_RSGLOBAL,1.0/all?startPeriod=2019&dimensionAtObservation=AllDimensions",
+   "versionne": true
+  },
+  "oecd_tw_comp.csv": {
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "note": "OECD SDMX-CSV (startPeriod=2019) ; copie du fichier collecté pour la V1 (archive/v1/data/raw), SHA-256 identique",
+   "octets": 2669654,
+   "sha256": "158e6f4defadbf9e82df7df2ff5d16ef05774351637ef0e369ef32f2e0bfa07a",
+   "url": "https://sdmx.oecd.org/public/rest/data/OECD.CTP.TPS,DSD_TAX_WAGES_COMP@DF_TW_COMP,1.0/all?startPeriod=2019&dimensionAtObservation=AllDimensions",
+   "versionne": true
+  },
+  "wb_GC.REV.SOCL.ZS.json": {
+   "content_type": "application/json;charset=utf-8",
+   "date_collecte": "2026-10-29",
+   "http": 200,
+   "note": "WDI : Cotisations sociales (% des recettes)",
+   "octets": 652403,
+   "sha256": "e6afbd52fdefb89d6499c5a474db54bf1557078ce3b580cbe190d5f683c84e5d",
+   "url": "https://api.worldbank.org/v2/country/all/indicator/GC.REV.SOCL.ZS?date=2015:2025&format=json&per_page=20000&source=2",
+   "versionne": true
+  },
+  "wb_GC.TAX.TOTL.GD.ZS.json": {
+   "content_type": "application/json;charset=utf-8",
+   "date_collecte": "2026-10-29",
+   "http": 200,
+   "note": "WDI : Recettes fiscales (% du PIB)",
+   "octets": 629694,
+   "sha256": "c7df78dbed06aa99fc5c7fbf3cc5068b4f1633c96ff682579c919815978f6629",
+   "url": "https://api.worldbank.org/v2/country/all/indicator/GC.TAX.TOTL.GD.ZS?date=2015:2025&format=json&per_page=20000&source=2",
+   "versionne": true
+  },
+  "wb_GC.XPN.TOTL.GD.ZS.json": {
+   "content_type": "application/json;charset=utf-8",
+   "date_collecte": "2026-10-29",
+   "http": 200,
+   "note": "WDI : Charges des administrations publiques (% du PIB)",
+   "octets": 615180,
+   "sha256": "44a535db59aabf5528bc1c88f1ee6574bc577c71cd1d826ddba86596a292b1a3",
+   "url": "https://api.worldbank.org/v2/country/all/indicator/GC.XPN.TOTL.GD.ZS?date=2015:2025&format=json&per_page=20000&source=2",
+   "versionne": true
+  },
+  "wb_NE.CON.GOVT.ZS.json": {
+   "content_type": "application/json;charset=utf-8",
+   "date_collecte": "2026-10-29",
+   "http": 200,
+   "note": "WDI : Consommation finale des administrations publiques (% du PIB)",
+   "octets": 738016,
+   "sha256": "2273fac0dc623bd706e28ece27319b1f03449372fcabbbd2309c764bc85af371",
+   "url": "https://api.worldbank.org/v2/country/all/indicator/NE.CON.GOVT.ZS?date=2015:2025&format=json&per_page=20000&source=2",
+   "versionne": true
+  },
+  "wb_NY.GDP.PCAP.PP.KD.json": {
+   "content_type": "application/json;charset=utf-8",
+   "date_collecte": "2026-10-29",
+   "http": 200,
+   "note": "WDI : PIB par habitant, PPA ($ internationaux constants 2021)",
+   "octets": 727423,
+   "sha256": "d7e2936eddc62284d5ada111333052ea9d7e4b35f516233e750fec893a992aa9",
+   "url": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.PP.KD?date=2015:2025&format=json&per_page=20000&source=2",
+   "versionne": true
+  },
+  "wb_countries.json": {
+   "content_type": "application/json;charset=utf-8",
+   "date_collecte": "2026-10-29",
+   "http": 200,
+   "note": "Métadonnées pays Banque mondiale (région, revenu)",
+   "octets": 113954,
+   "sha256": "c9acf3932785191a649cbc04c3056af4cf64a236e5c3b49d49be25ddb0440bce",
+   "url": "https://api.worldbank.org/v2/country?format=json&per_page=400",
+   "versionne": true
+  }
+ },
+ "source": "contexte"
+}

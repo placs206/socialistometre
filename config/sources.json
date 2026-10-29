@@ -1,0 +1,165 @@
+{
+ "version_schema": "2.0",
+ "note": "Définitions officielles des quatre indices sources. Les échelles indiquées ont été vérifiées dans la documentation de l'édition importée (voir champ 'verification_echelle'). Toute nouvelle édition doit être ajoutée ici, jamais substituée silencieusement.",
+ "sources": {
+  "fraser": {
+   "organisme": "Fraser Institute (avec l'Economic Freedom Network)",
+   "indice": "Economic Freedom of the World (EFW) — Summary Index",
+   "axe": "X",
+   "role_v2": "principal",
+   "page_methodologie": "https://www.fraserinstitute.org/economic-freedom/approach",
+   "page_donnees": "https://www.fraserinstitute.org/economic-freedom/dataset",
+   "licence": "Données publiées par le Fraser Institute ; citation obligatoire (« Gwartney, Lawson, Murphy et al., Economic Freedom of the World: <année> Annual Report, Fraser Institute »). Le rapport PDF n'est pas redistribué dans le dépôt ; seules les valeurs officielles extraites (scores) sont versionnées, avec attribution.",
+   "editions": {
+    "efw2025": {
+     "nom": "Economic Freedom of the World: 2025 Annual Report",
+     "auteurs": "James Gwartney, Robert A. Lawson, Ryan H. Murphy et al.",
+     "date_publication": "2025-09",
+     "annee_reference": 2023,
+     "periode_debut": "2023-01-01",
+     "periode_fin": "2023-12-31",
+     "echelle": {"min": 0, "max": 10, "sens": "plus élevé = plus de liberté économique"},
+     "verification_echelle": "Rapport EFW 2025, chap. 1 : notes de 0 à 10 pour l'indice synthétique et les 5 domaines (tableau 1.2, figures 1.1a-b).",
+     "url_source": "https://www.libinst.ch/wp-content/uploads/2025/09/EFOTW-2025.pdf",
+     "provenance": "Rapport officiel complet (PDF Adobe InDesign, auteur James Gwartney) hébergé par le Liberales Institut (Zurich), membre de l'Economic Freedom Network. Les copies sur fraserinstitute.org et cato.org n'ont pas pu être téléchargées depuis l'environnement de travail (protection anti-robots Cloudflare / Incapsula).",
+     "extraction": "fraser/efw2025_extraction.csv",
+     "statut": "importee"
+    },
+    "efw2026": {
+     "nom": "Economic Freedom of the World: 2026 Annual Report",
+     "date_publication": "2026-10",
+     "annee_reference": 2024,
+     "periode_debut": "2024-01-01",
+     "periode_fin": "2024-12-31",
+     "echelle": {"min": 0, "max": 10, "sens": "plus élevé = plus de liberté économique"},
+     "url_source": "https://www.fraserinstitute.org/economic-freedom/dataset",
+     "statut": "non_importee",
+     "raison": "Édition publiée en octobre 2026 (couvre 2024, 165 pays). Fichiers inaccessibles depuis l'environnement de travail : fraserinstitute.org et cato.org renvoient une page anti-robots (HTTP 403 Cloudflare, Incapsula) ; l'API du site efotw.org n'a pas été appelée faute d'autorisation. Importable dès que le fichier officiel « master index data for researchers » (.xlsx) est déposé dans data/raw/fraser/_telechargements/ (voir src/importers/fraser.py)."
+    }
+   },
+   "edition_officielle_v2": "efw2025",
+   "composantes": [
+    {"id": "area1", "nom": "Taille de l'État", "nom_officiel": "Area 1: Size of Government"},
+    {"id": "area2", "nom": "Système juridique et droits de propriété", "nom_officiel": "Area 2: Legal System & Property Rights"},
+    {"id": "area3", "nom": "Monnaie saine", "nom_officiel": "Area 3: Sound Money"},
+    {"id": "area4", "nom": "Liberté d'échanger internationalement", "nom_officiel": "Area 4: Freedom to Trade Internationally"},
+    {"id": "area5", "nom": "Réglementation", "nom_officiel": "Area 5: Regulation"}
+   ]
+  },
+  "heritage": {
+   "organisme": "The Heritage Foundation",
+   "indice": "Index of Economic Freedom (IEF) — Overall score",
+   "axe": "X",
+   "role_v2": "comparaison",
+   "page_methodologie": "https://www.heritage.org/index/pages/about",
+   "page_donnees": "https://www.heritage.org/index/pages/all-country-scores",
+   "licence": "© The Heritage Foundation. Le PDF n'est pas redistribué ; seules les valeurs officielles extraites sont versionnées, avec attribution (« 2026 Index of Economic Freedom, The Heritage Foundation »).",
+   "editions": {
+    "ief2026": {
+     "nom": "2026 Index of Economic Freedom",
+     "date_publication": "2026-02",
+     "annee_reference": 2025,
+     "periode_debut": "2024-07-01",
+     "periode_fin": "2025-06-30",
+     "periode_libelle": "2e semestre 2024 – 1er semestre 2025",
+     "echelle": {"min": 0, "max": 100, "sens": "plus élevé = plus de liberté économique"},
+     "verification_echelle": "PDF 2026, annexe méthodologique : 12 composantes notées de 0 à 100, pondérées également ; période d'analyse du 2e semestre 2024 au 1er semestre 2025 (données arrêtées au 30 juin 2025).",
+     "url_source": "https://static.heritage.org/index/pdf/2026/2026_indexofeconomicfreedom.pdf",
+     "provenance": "PDF officiel téléchargé sur static.heritage.org ; tableau « 2026 Index of Economic Freedom World Rankings » (p. 19 à 23 du PDF). heritage.org (pages HTML) inaccessible depuis l'environnement (Cloudflare).",
+     "extraction": "heritage/ief2026_extraction.csv",
+     "statut": "importee"
+    }
+   },
+   "edition_officielle_v2": "ief2026",
+   "composantes": [
+    {"id": "property_rights", "nom": "Droits de propriété", "nom_officiel": "Property Rights"},
+    {"id": "judicial_effectiveness", "nom": "Efficacité judiciaire", "nom_officiel": "Judicial Effectiveness"},
+    {"id": "government_integrity", "nom": "Intégrité de l'État", "nom_officiel": "Government Integrity"},
+    {"id": "tax_burden", "nom": "Charge fiscale", "nom_officiel": "Tax Burden"},
+    {"id": "government_spending", "nom": "Dépenses publiques", "nom_officiel": "Government Spending"},
+    {"id": "fiscal_health", "nom": "Santé budgétaire", "nom_officiel": "Fiscal Health"},
+    {"id": "business_freedom", "nom": "Liberté d'entreprendre", "nom_officiel": "Business Freedom"},
+    {"id": "labor_freedom", "nom": "Liberté du travail", "nom_officiel": "Labor Freedom"},
+    {"id": "monetary_freedom", "nom": "Liberté monétaire", "nom_officiel": "Monetary Freedom"},
+    {"id": "trade_freedom", "nom": "Liberté des échanges", "nom_officiel": "Trade Freedom"},
+    {"id": "investment_freedom", "nom": "Liberté d'investissement", "nom_officiel": "Investment Freedom"},
+    {"id": "financial_freedom", "nom": "Liberté financière", "nom_officiel": "Financial Freedom"}
+   ]
+  },
+  "vdem": {
+   "organisme": "V-Dem Institute (Université de Göteborg)",
+   "indice": "Liberal Democracy Index (v2x_libdem)",
+   "axe": "Y",
+   "role_v2": "principal",
+   "page_methodologie": "https://v-dem.net/documents/71/methodology_v16.pdf",
+   "page_donnees": "https://v-dem.net/data/the-v-dem-dataset/",
+   "licence": "Creative Commons Attribution-Partage dans les mêmes conditions (CC BY-SA 4.0). Citation : Coppedge, Michael et al. 2026. « V-Dem [Country-Year/Country-Date] Dataset v16 ». Varieties of Democracy (V-Dem) Project. L'extrait versionné (data/raw/vdem/vdem_v16_extraction.csv) est diffusé sous la même licence.",
+   "editions": {
+    "v16": {
+     "nom": "V-Dem Dataset v16",
+     "date_publication": "2026-03",
+     "annee_reference": "par année (1789-2025)",
+     "annee_max": 2025,
+     "echelle": {"min": 0, "max": 1, "sens": "plus élevé = démocratie libérale plus réalisée"},
+     "verification_echelle": "Codebook v16, § 2.1.2 : « Scale: Interval, from low to high (0-1) » ; *_codelow/*_codehigh = intervalle contenant 68 % de la masse de probabilité (HPD).",
+     "url_source": "https://github.com/vdeminstitute/vdemdata (commit f4dd26922e658442524dfd954bf14f7ebe622d5d, « v16 release », 2026-03-17)",
+     "provenance": "Paquet R officiel « vdemdata » (version 16.0) maintenu par le V-Dem Institute (mainteneuse : Linnea Fox, v-dem.net), fichier data/vdem.RData. Le téléchargement direct sur v-dem.net exige un formulaire nominatif (courriel) qui n'a pas été rempli au nom de l'utilisateur.",
+     "url_codebook": "https://v-dem.net/documents/70/codebook_v16.pdf",
+     "extraction": "vdem/vdem_v16_extraction.csv",
+     "statut": "importee"
+    }
+   },
+   "edition_officielle_v2": "v16",
+   "composantes": [
+    {"id": "v2x_polyarchy", "nom": "Indice de démocratie électorale", "nom_officiel": "Electoral democracy index (v2x_polyarchy)"},
+    {"id": "v2x_liberal", "nom": "Indice de la composante libérale", "nom_officiel": "Liberal component index (v2x_liberal)"}
+   ]
+  },
+  "freedomhouse": {
+   "organisme": "Freedom House",
+   "indice": "Freedom in the World — Total score (droits politiques + libertés civiles)",
+   "axe": "Y",
+   "role_v2": "comparaison",
+   "page_methodologie": "https://freedomhouse.org/reports/freedom-world/freedom-world-research-methodology",
+   "page_donnees": "https://freedomhouse.org/countries/freedom-world/scores",
+   "licence": "Données gratuites pour un usage personnel, académique et non lucratif avec attribution (« Freedom House, Freedom in the World <édition> ») ; usage commercial sur demande (https://freedomhouse.org/data-request).",
+   "editions": {
+    "fiw2026": {
+     "nom": "Freedom in the World 2026",
+     "date_publication": "2026-02",
+     "annee_reference": 2025,
+     "periode_debut": "2025-01-01",
+     "periode_fin": "2025-12-31",
+     "echelle": {"min": 0, "max": 100, "sens": "plus élevé = plus libre", "remarque": "Droits politiques 0-40 et libertés civiles 0-60 ; la question discrétionnaire B peut retrancher jusqu'à 4 points aux droits politiques, d'où d'éventuels scores officiels légèrement négatifs."},
+     "verification_echelle": "Page officielle des scores (colonnes « Freedom in the World Score /100 », « Political Rights », « Civil Liberties ») ; FAQ et méthodologie FIW.",
+     "url_source": "https://freedomhouse.org/countries/freedom-world/scores",
+     "provenance": "Tableau HTML officiel « Global Freedom Scores », liens d'édition « /freedom-world/2026 » pour les 208 entités ; aucun tableur FIW 2026 téléchargeable n'a été trouvé sur freedomhouse.org.",
+     "extraction": "freedomhouse/fiw2026_extraction.csv",
+     "statut": "importee"
+    },
+    "fiw2013_2024": {
+     "nom": "Freedom in the World 2013-2024 (All Data)",
+     "date_publication": "2024-02",
+     "annee_reference": "édition N = année civile N-1 (2012-2023)",
+     "echelle": {"min": 0, "max": 100, "sens": "plus élevé = plus libre"},
+     "verification_echelle": "Classeur officiel « All_data_FIW_2013-2024.xlsx », colonnes PR (0-40), CL (0-60), Total (0-100).",
+     "url_source": "https://freedomhouse.org/sites/default/files/2024-02/All_data_FIW_2013-2024.xlsx",
+     "provenance": "Fichier officiel collecté le 2026-10-28 pour la V1 (SHA-256 identique), réutilisé pour le mode historique.",
+     "extraction": "freedomhouse/fiw2013_2024_extraction.csv",
+     "statut": "importee"
+    },
+    "fiw2025": {
+     "nom": "Freedom in the World 2025",
+     "annee_reference": 2024,
+     "statut": "non_importee",
+     "raison": "Aucun fichier de données FIW 2025 accessible localisé ; la page des scores ne présente que l'édition courante. L'année 2024 est donc absente pour Freedom House (aucune valeur n'est interpolée)."
+    }
+   },
+   "edition_officielle_v2": "fiw2026",
+   "composantes": [
+    {"id": "fiw_pr", "nom": "Droits politiques", "nom_officiel": "Political Rights (0-40)", "echelle": {"min": 0, "max": 40}},
+    {"id": "fiw_cl", "nom": "Libertés civiles", "nom_officiel": "Civil Liberties (0-60)", "echelle": {"min": 0, "max": 60}}
+   ]
+  }
+ }
+}

@@ -1,0 +1,24 @@
+{
+ "fichiers": {
+  "fiw2026_scores.html": {
+   "content_type": "text/html; charset=utf-8",
+   "date_collecte": "2026-10-29",
+   "http": 200,
+   "note": "Page officielle « Global Freedom Scores » (édition FIW 2026)",
+   "octets": 380453,
+   "sha256": "c8b75f7d355b8d0ac2c44b5fadba3ee86293dd2d57a0028f4a93439ce6d6b94d",
+   "url": "https://freedomhouse.org/countries/freedom-world/scores",
+   "versionne": false
+  },
+  "freedomhouse_fiw_2013-2024.xlsx": {
+   "date_collecte": "2026-10-28",
+   "http": 200,
+   "note": "Freedom House, Freedom in the World 2013-2024 (ONG ; édition 2024 = année civile 2023) ; copie du fichier collecté pour la V1, SHA-256 identique",
+   "octets": 457464,
+   "sha256": "69030b4738ca1b282ab38551dbe4da8abbf2b9250b679bd9dc5da3e31f9b6981",
+   "url": "https://freedomhouse.org/sites/default/files/2024-02/All_data_FIW_2013-2024.xlsx",
+   "versionne": true
+  }
+ },
+ "source": "freedomhouse"
+}

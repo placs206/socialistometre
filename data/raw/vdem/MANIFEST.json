@@ -1,0 +1,35 @@
+{
+ "fichiers": {
+  "DESCRIPTION": {
+   "content_type": "",
+   "date_collecte": "2026-10-29",
+   "http": 200,
+   "note": "Paquet officiel vdemdata 16.0",
+   "octets": 1140,
+   "sha256": "1ac0a3b691861b1052b298043f66c62ab3e747cceb844f73a940df0f57304d43",
+   "url": "https://github.com/vdeminstitute/vdemdata/blob/f4dd26922e658442524dfd954bf14f7ebe622d5d/DESCRIPTION",
+   "versionne": false
+  },
+  "codebook.RData": {
+   "content_type": "",
+   "date_collecte": "2026-10-29",
+   "http": 200,
+   "note": "Paquet officiel vdemdata 16.0",
+   "octets": 148633,
+   "sha256": "2840d879cb9071b1f742f5f18c5373518a586ac90454b58dbf5f4309077f0700",
+   "url": "https://github.com/vdeminstitute/vdemdata/blob/f4dd26922e658442524dfd954bf14f7ebe622d5d/data/codebook.RData",
+   "versionne": false
+  },
+  "vdem.RData": {
+   "content_type": "",
+   "date_collecte": "2026-10-29",
+   "http": 200,
+   "note": "Paquet officiel vdemdata 16.0",
+   "octets": 33878255,
+   "sha256": "39b412d39a061c18f20c98e4ad4d6355b05a0441df31be4ee9aec420dc3d95ea",
+   "url": "https://github.com/vdeminstitute/vdemdata/blob/f4dd26922e658442524dfd954bf14f7ebe622d5d/data/vdem.RData",
+   "versionne": false
+  }
+ },
+ "source": "vdem"
+}

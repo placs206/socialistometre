@@ -1,430 +1,416 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Socialistomètre — indice mondial inspiré de Milton Friedman</title>
+<title>Socialistomètre V2 — repère économique et politique</title>
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--ink:#1d2430;--mut:#5b6575;--line:#d9dee6;--acc:#1f4e8c;--s:#b5412c;--l:#1f6fa8;--A:#1f4e8c;--B:#a35a00;--C:#5a7d2a;--D:#7a3d8c}
-@media (prefers-color-scheme:dark){:root{--bg:#12161c;--card:#1b212b;--ink:#e6eaf0;--mut:#9aa6b8;--line:#2d3644;--acc:#7fb0ea;--s:#e0715c;--l:#6fb2e6;--A:#7fb0ea;--B:#e0a24d;--C:#9cc760;--D:#c48ad6}}
+:root{--bg:#f6f7f5;--panel:#ffffff;--ink:#1e2a33;--muted:#5f6b74;--rule:#d5dbdf;--grid:#e7ebed;--grid2:#f0f2f3;--off:#2f5d7c;--off-soft:#dce7ef;--cmp:#9a6412;--cmp-soft:#f6ead5;--warn:#8a3b2e;--warn-soft:#f6e1dc;--sel:#c2410c;--pt:#2f5d7c;--focus:#1d4ed8}
+@media (prefers-color-scheme:dark){:root{--bg:#141a1e;--panel:#1b2227;--ink:#e3e8ea;--muted:#9aa6ae;--rule:#33404a;--grid:#26313a;--grid2:#1f282f;--off:#8fb8d6;--off-soft:#22384a;--cmp:#e0aa55;--cmp-soft:#3a2d16;--warn:#f0a090;--warn-soft:#3d221d;--sel:#fb923c;--pt:#8fb8d6;--focus:#93c5fd}}
 *{box-sizing:border-box}
-body{margin:0;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-header{padding:14px 16px;background:var(--card);border-bottom:1px solid var(--line)}
-h1{font-size:20px;margin:0}h2{font-size:17px;margin:0 0 8px}h3{font-size:15px;margin:14px 0 6px}
-.sub{color:var(--mut);font-size:13px}
-nav{display:flex;flex-wrap:wrap;gap:4px;padding:8px 12px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
-nav button{border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:6px 10px;border-radius:6px;cursor:pointer;font:inherit;font-size:14px}
-nav button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
-main{padding:12px 16px;max-width:1280px;margin:0 auto}
-section{display:none}section.on{display:block}
-.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:12px}
-.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-input[type=text],input[type=search],select{padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit;max-width:100%}
-button.b{padding:6px 10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;cursor:pointer;font:inherit}
-button.b:hover{border-color:var(--acc)}
-.tablewrap{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:13.5px}
-th,td{padding:5px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{cursor:pointer;white-space:nowrap;background:var(--bg);position:sticky;top:0}
-td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
-tr.sel td{background:rgba(31,78,140,.12)}
-tr:hover td{background:rgba(127,127,127,.08)}
-.warn{background:#fff4d6;color:#5c4400;border:1px solid #e8cf85;border-radius:6px;padding:8px 10px;font-size:13px;margin:8px 0}
-@media (prefers-color-scheme:dark){.warn{background:#3a3217;color:#f1dc9a;border-color:#6b5a21}}
-.pill{display:inline-block;padding:1px 7px;border-radius:10px;font-size:12px;border:1px solid var(--line);color:var(--mut)}
-.bar{height:12px;background:var(--line);border-radius:6px;position:relative;min-width:80px}
-.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:6px;display:block}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
-svg text{fill:var(--ink);font:11px system-ui,sans-serif}
-svg .ax{stroke:var(--line)}svg .mut{fill:var(--mut)}
-.sl{display:grid;grid-template-columns:minmax(120px,1.3fr) 3fr 56px;gap:8px;align-items:center;margin:6px 0}
-.sl input{width:100%}
-#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);padding:4px 8px;border-radius:5px;font-size:12px;z-index:50;display:none;max-width:260px}
-.chip{display:inline-flex;align-items:center;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:2px 4px 2px 10px;margin:2px}
-.chip button{border:0;background:none;color:var(--mut);cursor:pointer;font-size:15px}
-.mini{font-size:12.5px;color:var(--mut)}
-a{color:var(--acc)}
-.cite{border-left:3px solid var(--line);padding-left:8px;margin:4px 0;color:var(--mut);font-size:13px}
-details{margin:6px 0}summary{cursor:pointer}
-footer{padding:16px;color:var(--mut);font-size:12.5px;text-align:center}
-@media (max-width:600px){main{padding:8px}.sl{grid-template-columns:1fr 56px}.sl label{grid-column:1/3}}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif;-webkit-text-size-adjust:100%}
+.num,td.n,th.n{font-variant-numeric:tabular-nums}
+header{padding:16px 20px 8px;border-bottom:1px solid var(--rule);background:var(--panel)}
+h1{font-size:1.35rem;margin:0;font-weight:650;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:2px 0 0;font-size:.92rem;max-width:80ch}
+nav{display:flex;flex-wrap:wrap;gap:2px;padding:0 20px;background:var(--panel);border-bottom:1px solid var(--rule)}
+nav button{border:0;background:none;color:var(--muted);padding:10px 12px;font:inherit;cursor:pointer;border-bottom:2px solid transparent}
+nav button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--off);font-weight:600}
+button,select,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+main{padding:16px 20px 40px}
+section[hidden]{display:none}
+.mode{margin:0 0 12px;padding:8px 12px;border-left:4px solid var(--off);background:var(--off-soft);font-size:.92rem}
+.mode.cmp{border-color:var(--cmp);background:var(--cmp-soft)}
+.layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:860px){.layout{grid-template-columns:1fr}}
+.rail{background:var(--panel);border:1px solid var(--rule);padding:12px;display:grid;gap:10px}
+.rail label{display:grid;gap:2px;font-size:.88rem;color:var(--muted)}
+.rail select,.rail input[type=number],.rail input[type=search],input[type=search]{width:100%;padding:6px 8px;border:1px solid var(--rule);background:var(--bg);border-radius:4px}
+.rail .chk{display:flex;gap:8px;align-items:center;color:var(--ink)}
+.btn{padding:6px 10px;border:1px solid var(--rule);background:var(--bg);border-radius:4px;cursor:pointer}
+.btn.primary{border-color:var(--off);color:var(--off)}
+.chartwrap{background:var(--panel);border:1px solid var(--rule);position:relative}
+#chart{display:block;width:100%;height:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.tools{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 10px;border-top:1px solid var(--rule);font-size:.88rem;color:var(--muted)}
+.tools .sp{flex:1}
+#tip{position:absolute;pointer-events:none;background:var(--panel);border:1px solid var(--rule);padding:8px 10px;font-size:.84rem;max-width:300px;box-shadow:0 2px 8px rgba(20,30,40,.15);display:none;z-index:5}
+#tip b{display:block;margin-bottom:2px}
+.legend{font-size:.85rem;color:var(--muted);display:flex;gap:16px;flex-wrap:wrap;padding:8px 10px}
+.legend svg{vertical-align:middle;margin-right:4px}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{padding:5px 8px;border-bottom:1px solid var(--grid);text-align:left;vertical-align:top}
+th{font-weight:600;color:var(--muted);cursor:default;white-space:nowrap}
+th[data-k]{cursor:pointer}
+td.n,th.n{text-align:right}
+tbody tr:hover{background:var(--grid2)}
+.tw{overflow-x:auto;background:var(--panel);border:1px solid var(--rule)}
+.card{background:var(--panel);border:1px solid var(--rule);padding:14px 16px;margin:0 0 14px}
+.card h2{font-size:1.08rem;margin:0 0 8px;font-weight:650}
+.card h3{font-size:.98rem;margin:14px 0 6px;font-weight:600}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+.flag{display:inline-block;padding:0 6px;border-radius:3px;font-size:.8rem;background:var(--warn-soft);color:var(--warn);margin-left:4px}
+.flag.info{background:var(--off-soft);color:var(--off)}
+.flag.cmp{background:var(--cmp-soft);color:var(--cmp)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.coord{font-size:2rem;font-weight:650;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.coord small{font-size:.9rem;color:var(--muted);font-weight:400;letter-spacing:0}
+a{color:var(--off)}
+.bar{height:8px;background:var(--grid);position:relative;border-radius:2px;min-width:80px}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--off);border-radius:2px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+textarea{width:100%;min-height:70px;padding:6px 8px;border:1px solid var(--rule);background:var(--bg);border-radius:4px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--rule);border-radius:12px;padding:1px 8px;font-size:.85rem;background:var(--bg)}
+.chip button{border:0;background:none;cursor:pointer;color:var(--muted);padding:0 0 0 4px}
+p{max-width:85ch}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <header>
-<h1>Socialistomètre <span class="sub">— indice mondial continu, 0 = pôle socialisant · 100 = pôle libéral</span></h1>
-<div class="sub">Indice contemporain construit à partir de <em>Capitalisme et liberté</em> de Milton Friedman, avec des choix méthodologiques explicites. Ce n'est pas un indice publié par Friedman. <span id="hdrmeta"></span></div>
+ <h1>Socialistomètre V2 — liberté économique et démocratie libérale</h1>
+ <p class="sub" id="subtitle"></p>
 </header>
-<nav id="nav"></nav>
+<nav role="tablist" aria-label="Sections">
+ <button role="tab" data-t="graphique" aria-selected="true">Graphique</button>
+ <button role="tab" data-t="tableau" aria-selected="false">Tableau</button>
+ <button role="tab" data-t="fiche" aria-selected="false">Fiche pays</button>
+ <button role="tab" data-t="comparer" aria-selected="false">Comparer</button>
+ <button role="tab" data-t="incomplets" aria-selected="false">Données incomplètes</button>
+ <button role="tab" data-t="methode" aria-selected="false">Sources et méthode</button>
+ <button role="tab" data-t="correspondances" aria-selected="false">Correspondances</button>
+</nav>
 <main>
+ <div class="mode" id="modebar" role="status"></div>
 
-<section id="s-classement" class="on">
-<div class="card">
-<h2>Tous les pays sur le curseur 0–100</h2>
-<div class="row">
-<input type="search" id="q" placeholder="Rechercher un pays ou un territoire…" aria-label="Recherche" size="28">
-<label>Zoom de <input type="number" id="zmin" min="0" max="99" value="0" style="width:64px"> à <input type="number" id="zmax" min="1" max="100" value="100" style="width:64px"></label>
-<button class="b" id="zreset">Réinitialiser le zoom</button>
-<label><input type="checkbox" id="onlycomplet"> Seulement les scores « complets » (4 dimensions)</label>
-</div>
-<div id="wnotice"></div>
-<svg id="swarm" width="100%" height="230" role="img" aria-label="Positions des pays sur l'axe 0 à 100"></svg>
-<div class="mini">Chaque point est une entité ; les points creux ont un score partiel (moins de 4 dimensions). Cliquer sur un point ouvre la fiche. Un score n'a de sens qu'avec sa fiabilité : voir le tableau.</div>
-</div>
-<div class="card">
-<div class="row"><h2 style="margin:0">Classement</h2><span class="mini" id="cnt"></span></div>
-<div class="tablewrap" style="max-height:560px;overflow:auto"><table id="tbl"></table></div>
-</div>
-</section>
+ <section id="s-graphique">
+  <div class="layout">
+   <div class="rail" aria-label="Réglages">
+    <label>Axe horizontal (économie)<select id="xs"></select></label>
+    <label>Édition (axe horizontal)<select id="xed"></select></label>
+    <label>Axe vertical (politique)<select id="ys"></select></label>
+    <label>Édition (axe vertical)<select id="yed"></select></label>
+    <label>Période de référence<select id="mode"></select></label>
+    <label>Région<select id="region"><option value="">Toutes</option></select></label>
+    <label>Rechercher un pays<input type="search" id="q" placeholder="Nom ou code ISO"></label>
+    <label>Seuil d'avertissement d'écart entre périodes (années)<input type="number" id="seuil" min="0" max="10" step="0.5"></label>
+    <label class="chk"><input type="checkbox" id="labels"> Afficher les noms</label>
+    <label class="chk"><input type="checkbox" id="sec" checked> Indices de comparaison dans les infobulles et fiches</label>
+    <label class="chk"><input type="checkbox" id="ctxchk" checked> Données contextuelles dans les fiches</label>
+    <button class="btn primary" id="reset">Revenir à la configuration officielle</button>
+    <div class="small muted" id="selinfo"></div>
+   </div>
+   <div>
+    <div class="chartwrap">
+     <svg id="chart" viewBox="0 0 800 620" role="img" aria-label="Nuage de points : liberté économique en abscisse, démocratie libérale en ordonnée"></svg>
+     <div id="tip"></div>
+     <div class="tools">
+      <button class="btn" id="zin" aria-label="Zoomer">+</button>
+      <button class="btn" id="zout" aria-label="Dézoomer">−</button>
+      <button class="btn" id="zreset">Réinitialiser la vue</button>
+      <span class="sp"></span><span id="counts" class="num"></span>
+     </div>
+     <div class="legend" id="legend"></div>
+    </div>
+    <p class="small muted">Faites glisser pour déplacer, molette ou boutons pour zoomer. Cliquez sur un point pour ouvrir sa fiche ; Maj+clic l'ajoute à la comparaison. Les quadrants ne portent volontairement aucune étiquette : 50 n'est pas un seuil idéologique.</p>
+   </div>
+  </div>
+ </section>
 
-<section id="s-comparer">
-<div class="card">
-<h2>Comparer plusieurs pays</h2>
-<div class="row"><input type="search" id="cq" list="dl" placeholder="Ajouter un pays…" size="26"><datalist id="dl"></datalist><button class="b" id="cadd">Ajouter</button><button class="b" id="cclear">Vider</button></div>
-<div id="chips"></div>
-<div id="cmp"></div>
-</div>
-</section>
+ <section id="s-tableau" hidden>
+  <div class="row" style="margin-bottom:10px">
+   <input type="search" id="tq" placeholder="Filtrer par nom" style="max-width:260px">
+   <select id="tstat"><option value="">Toutes les couvertures</option><option value="0">Deux coordonnées</option><option value="1">Économie seulement</option><option value="2">Politique seulement</option><option value="3">Aucune coordonnée</option></select>
+   <span class="small muted" id="tinfo"></span>
+  </div>
+  <div class="tw"><table id="tbl"><thead></thead><tbody></tbody></table></div>
+ </section>
 
-<section id="s-fiche">
-<div class="card">
-<div class="row"><h2 style="margin:0">Fiche détaillée</h2><select id="fsel" aria-label="Pays"></select></div>
-<div id="fiche"></div>
-</div>
-</section>
+ <section id="s-fiche" hidden>
+  <div class="row" style="margin-bottom:10px"><select id="fsel" aria-label="Choisir un pays"></select></div>
+  <div id="fiche"></div>
+ </section>
 
-<section id="s-dispersion">
-<div class="card">
-<h2>Graphique de dispersion</h2>
-<div class="row"><label>Axe X <select id="sx"></select></label><label>Axe Y <select id="sy"></select></label></div>
-<svg id="scat" width="100%" height="460" role="img" aria-label="Dispersion de deux dimensions"></svg>
-<div class="mini" id="scatinfo"></div>
-</div>
-</section>
+ <section id="s-comparer" hidden>
+  <div class="card"><div class="row"><select id="csel" aria-label="Ajouter un pays"></select><button class="btn" id="cadd">Ajouter</button><button class="btn" id="cclear">Vider</button></div>
+  <div class="chips" id="cchips" style="margin-top:8px"></div></div>
+  <div class="tw" id="cmp"></div>
+ </section>
 
-<section id="s-distribution">
-<div class="card">
-<h2>Distribution des scores</h2>
-<div class="row"><label>Variable <select id="dsel"></select></label></div>
-<svg id="hist" width="100%" height="320" role="img" aria-label="Histogramme"></svg>
-<div class="mini" id="histinfo"></div>
-</div>
-</section>
-
-<section id="s-poids">
-<div class="card">
-<h2>Pondérations interactives</h2>
-<div class="warn">Les pondérations officielles de la méthodologie V1.x sont fixes : 45 / 20 / 20 / 15. Toute autre valeur ci-dessous est un <b>scénario d'exploration</b>, non une nouvelle version de l'indice ; les scores et rangs de tous les onglets sont recalculés immédiatement.</div>
-<div id="sliders"></div>
-<div class="row"><button class="b" id="wreset">Revenir aux pondérations officielles (45/20/20/15)</button><button class="b" id="weq">Poids égaux (25 % chacune)</button></div>
-<div id="wsum" class="mini" style="margin-top:8px"></div>
-</div>
-</section>
-
-<section id="s-methode">
-<div class="card" id="meth"></div>
-</section>
-
+ <section id="s-incomplets" hidden><div id="inc"></div></section>
+ <section id="s-methode" hidden><div id="meth"></div></section>
+ <section id="s-correspondances" hidden><div id="corr"></div></section>
 </main>
-<footer id="foot"></footer>
-<div id="tip"></div>
-
 <script>
 "use strict";
-var DATA = /*__DATA__*/null;
+var D = /*__DATA__*/null;
 (function(){
-var DIMS = ["A","B","C","D"];
-var DN = {}; DATA.dimensions.forEach(function(d){DN[d.id]=d.nom;});
-var W0 = {}; DATA.dimensions.forEach(function(d){W0[d.id]=d.poids;});
-var W = Object.assign({}, W0);
-var IND = {}; DATA.indicateurs.forEach(function(i){IND[i.id]=i;});
-var P = DATA.pays;
-var BYID = {}; P.forEach(function(p){BYID[p.id]=p;});
-var COL = {A:"var(--A)",B:"var(--B)",C:"var(--C)",D:"var(--D)",G:"var(--acc)"};
-var state = {sel:null, cmp:[], sortKey:"rang", sortDir:1, zmin:0, zmax:100, q:"", onlyComplet:false, tab:"classement"};
-
+var MAIN={fraser:"efw_summary",heritage:"ief_overall",vdem:"v2x_libdem",freedomhouse:"fiw_total"};
+var LBL={fraser:"Fraser — Economic Freedom of the World",heritage:"Heritage — Index of Economic Freedom",vdem:"V-Dem — indice de démocratie libérale",freedomhouse:"Freedom House — Freedom in the World"};
+var SHORT={fraser:"Fraser",heritage:"Heritage",vdem:"V-Dem",freedomhouse:"Freedom House"};
+var STATUT=["Deux coordonnées","Économie seulement","Politique seulement","Aucune coordonnée"];
+var PAYS={};D.pays.forEach(function(p){PAYS[p.iso3]=p;});
+var OFF=D.scen[D.meta.scenario_officiel];
+var S={xs:OFF.x,ys:OFF.y,mode:OFF.mode,seuil:D.meta.seuil_ecart,region:"",q:"",sel:[],labels:false,sec:true,ctx:true,cur:null,view:null};
+var FULL={x0:-2,x1:102,y0:-2,y1:102};
 function $(id){return document.getElementById(id);}
-function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
-function f1(x){return x==null?"—":(Math.round(x*10)/10).toFixed(1).replace(".",",");}
-function fn(x,d){if(x==null)return "—";var s=Number(x).toFixed(d==null?2:d);return s.replace(".",",");}
-function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");}
-function weightsModified(){return DIMS.some(function(d){return Math.abs(W[d]-W0[d])>1e-9;});}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function f1(v){return v==null?"—":(Math.round(v*10)/10).toLocaleString("fr-FR",{minimumFractionDigits:1,maximumFractionDigits:1});}
+function fx(v,d){if(v===0)v=0;return v==null?"—":(Object.is(Number(v),-0)?0:Number(v)).toLocaleString("fr-FR",{maximumFractionDigits:d==null?2:d});}
+function sid(){return S.xs+"|"+S.ys+"|"+S.mode;}
+function scen(){return D.scen[sid()];}
+function name(i){return PAYS[i]?PAYS[i].nom_fr:i;}
+function edName(src,ed){var e=D.sources[src].editions[ed];return e?e.nom:ed;}
+function per(src,ed,an){var e=D.sources[src].editions[ed];if(e&&e.periode_libelle)return e.periode_libelle;return String(an);}
+function modeLbl(m){return m==="recent"?"plus récente disponible":"année "+m.split(":")[1];}
 
-/* ---- Calcul (miroir de engine/scoring.py : moyenne pondérée sur les dimensions disponibles, A exigée, >= 2 dimensions) ---- */
-function globalScore(dims, w){
-  if(dims.A==null) return null;
-  var num=0, den=0, n=0;
-  DIMS.forEach(function(d){ if(dims[d]!=null && w[d]>0){ num+=w[d]*dims[d]; den+=w[d]; } if(dims[d]!=null) n++; });
-  if(n<2 || den<=0) return null;
-  return num/den;
+/* ---------- réglages ---------- */
+function opts(sel,list,val){sel.innerHTML=list.map(function(o){return '<option value="'+esc(o[0])+'"'+(o[2]?" disabled":"")+(o[0]===val?" selected":"")+">"+esc(o[1])+"</option>";}).join("");}
+var MODES=[];Object.keys(D.scen).forEach(function(k){var m=D.scen[k].mode;if(MODES.indexOf(m)<0)MODES.push(m);});
+MODES.sort(function(a,b){return a==="recent"?-1:b==="recent"?1:a<b?-1:1;});
+function edOpts(src){
+ var eds=D.sources[src].editions,out=[["","Selon la période choisie"]];
+ Object.keys(eds).forEach(function(k){var e=eds[k];out.push([k,e.nom+(e.statut==="importee"?"":" (non importée)"),e.statut!=="importee"]);});
+ return out;}
+function edYears(src,ed){var ys={};Object.keys(D.obs).forEach(function(i){var a=(D.obs[i][src]||{})[MAIN[src]]||[];a.forEach(function(r){if(r[3]===ed)ys[r[0]]=1;});});return ys;}
+function syncControls(){
+ opts($("xs"),[["fraser",LBL.fraser+(OFF.x==="fraser"?" (officiel)":"")],["heritage",LBL.heritage+" (comparaison)"]],S.xs);
+ opts($("ys"),[["vdem",LBL.vdem+(OFF.y==="vdem"?" (officiel)":"")],["freedomhouse",LBL.freedomhouse+" (comparaison)"]],S.ys);
+ opts($("mode"),MODES.map(function(m){return [m,(m==="recent"?"Plus récente disponible":"Année commune "+m.split(":")[1])+(m===OFF.mode?" (officiel)":"")];}),S.mode);
+ opts($("xed"),edOpts(S.xs),"");opts($("yed"),edOpts(S.ys),"");
+ $("seuil").value=S.seuil;$("labels").checked=S.labels;$("sec").checked=S.sec;$("ctxchk").checked=S.ctx;$("q").value=S.q;$("region").value=S.region;
 }
-function compRank(items){ /* items: [{id,v}] -> rang de compétition (1 = score le plus élevé) */
-  var s = items.slice().sort(function(a,b){return b.v-a.v;});
-  var r = {}, last=null, rk=0;
-  s.forEach(function(it,i){ if(last===null || it.v!==last){rk=i+1; last=it.v;} r[it.id]=rk; });
-  return r;
-}
-function recompute(){
-  var items=[], itemsC=[];
-  P.forEach(function(p){
-    p.g = globalScore(p.dims, W);
-    if(p.g!=null){ items.push({id:p.id,v:Math.round(p.g*1e6)/1e6}); if(p.couv==="complet") itemsC.push({id:p.id,v:Math.round(p.g*1e6)/1e6}); }
-  });
-  var r = compRank(items), rc = compRank(itemsC);
-  P.forEach(function(p){ p.r = p.g==null?null:r[p.id]; p.rc = (p.g==null||p.couv!=="complet")?null:rc[p.id]; });
-}
+function pickEdition(src,ed){
+ if(!ed)return;var ys=edYears(src,ed),best=null;
+ MODES.forEach(function(m){if(m!=="recent"&&ys[+m.split(":")[1]])best=m;});
+ if(best){S.mode=best;}else{alert("Cette édition ne couvre aucune des périodes disponibles pour le graphique.");}
+ render();}
+var regs={};D.pays.forEach(function(p){if(p.region)regs[p.region]=1;});
+$("region").innerHTML+=Object.keys(regs).sort().map(function(r){return "<option>"+esc(r)+"</option>";}).join("");
 
-/* ---- Tooltip ---- */
-var tip = $("tip");
-function showTip(e,html){ tip.innerHTML=html; tip.style.display="block"; var x=e.clientX+12,y=e.clientY+12; if(x+270>window.innerWidth) x=e.clientX-270; if(y+60>window.innerHeight) y=e.clientY-50; tip.style.left=Math.max(4,x)+"px"; tip.style.top=Math.max(4,y)+"px"; }
-function hideTip(){ tip.style.display="none"; }
+/* ---------- bandeau de mode ---------- */
+function modeBar(){
+ var s=scen(),off=s.officiel,el=$("modebar");
+ el.className="mode"+(off?"":" cmp");
+ el.innerHTML=(off?"<b>Configuration officielle</b> (méthodologie "+esc(D.meta.version)+") : ":"<b>Mode comparaison — scénario exploratoire, non officiel et non enregistré.</b> ")+
+  "X = "+esc(LBL[s.x])+", Y = "+esc(LBL[s.y])+", période : "+esc(modeLbl(s.mode))+". "+
+  (off?"":'<button class="btn" id="back2">Revenir à la configuration officielle</button>');
+ if(!off)$("back2").onclick=resetOfficial;
+ $("subtitle").textContent="Coordonnées tirées exclusivement des scores officiels publiés : X = "+SHORT[OFF.x]+", Y = "+SHORT[OFF.y]+" ; Heritage et Freedom House en comparaison. Empreinte du jeu de données : "+D.meta.empreinte.slice(0,16)+"…";
+}
+function resetOfficial(){S.xs=OFF.x;S.ys=OFF.y;S.mode=OFF.mode;S.seuil=D.meta.seuil_ecart;S.view=null;render();}
 
-/* ---- SVG helpers ---- */
-var NS="http://www.w3.org/2000/svg";
-function el(tag,attrs,parent){ var e=document.createElementNS(NS,tag); for(var k in attrs) e.setAttribute(k,attrs[k]); if(parent) parent.appendChild(e); return e; }
-function svgW(svg){ var w=svg.getBoundingClientRect().width; return w>50?w:600; }
+/* ---------- graphique ---------- */
+var W=800,H=620,M={l:58,r:16,t:16,b:52};
+function view(){return S.view||FULL;}
+function sx(v){var w=view();return M.l+(v-w.x0)/(w.x1-w.x0)*(W-M.l-M.r);}
+function sy(v){var w=view();return H-M.b-(v-w.y0)/(w.y1-w.y0)*(H-M.t-M.b);}
+function ticks(a,b){var span=b-a,st=span>60?10:span>25?5:span>10?2:span>4?1:0.5,out=[];for(var t=Math.ceil(a/st)*st;t<=b+1e-9;t+=st)out.push(Math.round(t*100)/100+0);return out;}
+function visible(i){var p=PAYS[i];if(S.region&&(!p||p.region!==S.region))return false;return true;}
+function matchQ(i){if(!S.q)return false;var q=S.q.toLowerCase(),p=PAYS[i];return i.toLowerCase()===q||(p&&(p.nom_fr.toLowerCase().indexOf(q)>=0||p.nom_en.toLowerCase().indexOf(q)>=0));}
+function points(){var s=scen(),out=[];Object.keys(s.p).forEach(function(i){var r=s.p[i];if(r[3]===0&&visible(i))out.push({id:i,x:r[0][0],y:r[1][0],r:r});});return out;}
+function drawChart(){
+ var s=scen(),svg=$("chart"),h=[];
+ var cw=svg.clientWidth||800;W=Math.round(Math.max(340,Math.min(800,cw)));H=Math.round(Math.max(360,W*0.78));svg.setAttribute("viewBox","0 0 "+W+" "+H);
+ var w=view();
+ var miny=0;Object.keys(s.p).forEach(function(i){var r=s.p[i];if(r[1]&&r[1][0]<miny)miny=r[1][0];});
+ if(!S.view&&miny<0){FULL.y0=Math.floor(miny)-2;}else if(!S.view){FULL.y0=-2;}
+ h.push('<defs><clipPath id="clip"><rect x="'+M.l+'" y="'+M.t+'" width="'+(W-M.l-M.r)+'" height="'+(H-M.t-M.b)+'"/></clipPath>'+
+  '<pattern id="mm" width="'+((W-M.l-M.r)/(w.x1-w.x0))+'" height="'+((H-M.t-M.b)/(w.y1-w.y0))+'" patternUnits="userSpaceOnUse" x="'+sx(0)+'" y="'+sy(0)+'"><path d="M0 0H200M0 0V200" stroke="var(--grid2)" stroke-width="1" fill="none"/></pattern></defs>');
+ h.push('<rect x="'+M.l+'" y="'+M.t+'" width="'+(W-M.l-M.r)+'" height="'+(H-M.t-M.b)+'" fill="var(--panel)" stroke="var(--rule)"/>');
+ if(w.x1-w.x0<=40)h.push('<rect clip-path="url(#clip)" x="'+M.l+'" y="'+M.t+'" width="'+(W-M.l-M.r)+'" height="'+(H-M.t-M.b)+'" fill="url(#mm)"/>');
+ ticks(w.x0,w.x1).forEach(function(t){h.push('<line x1="'+sx(t)+'" x2="'+sx(t)+'" y1="'+M.t+'" y2="'+(H-M.b)+'" stroke="var(--grid)"/><text x="'+sx(t)+'" y="'+(H-M.b+16)+'" text-anchor="middle" font-size="12" fill="var(--muted)">'+fx(t)+'</text>');});
+ ticks(w.y0,w.y1).forEach(function(t){h.push('<line x1="'+M.l+'" x2="'+(W-M.r)+'" y1="'+sy(t)+'" y2="'+sy(t)+'" stroke="var(--grid)"/><text x="'+(M.l-6)+'" y="'+(sy(t)+4)+'" text-anchor="end" font-size="12" fill="var(--muted)">'+fx(t)+'</text>');});
+ if(w.y0<0&&w.y1>0)h.push('<line x1="'+M.l+'" x2="'+(W-M.r)+'" y1="'+sy(0)+'" y2="'+sy(0)+'" stroke="var(--muted)" stroke-dasharray="3 3"/>');
+ h.push('<text x="'+((M.l+W-M.r)/2)+'" y="'+(H-12)+'" text-anchor="middle" font-size="13" fill="var(--ink)">Liberté économique : '+esc(SHORT[s.x])+' (0-100)</text>');
+ h.push('<text transform="translate(16 '+((M.t+H-M.b)/2)+') rotate(-90)" text-anchor="middle" font-size="13" fill="var(--ink)">Libéralisme politique : '+esc(SHORT[s.y])+' (0-100)</text>');
+ h.push('<g clip-path="url(#clip)">');
+ var pts=points();
+ pts.sort(function(a,b){return (S.sel.indexOf(a.id)>=0||matchQ(a.id)?1:0)-(S.sel.indexOf(b.id)>=0||matchQ(b.id)?1:0);});
+ pts.forEach(function(p){
+  var hi=S.sel.indexOf(p.id)>=0,mq=matchQ(p.id),far=p.r[2]!=null&&p.r[2]>S.seuil;
+  var col=hi||mq?"var(--sel)":"var(--pt)",rad=hi||mq?6.5:4.5;
+  h.push('<circle data-id="'+p.id+'" cx="'+sx(p.x).toFixed(2)+'" cy="'+sy(p.y).toFixed(2)+'" r="'+rad+'" fill="'+(far?"var(--panel)":col)+'" fill-opacity="'+(far?1:0.78)+'" stroke="'+col+'" stroke-width="'+(far?1.6:0.8)+'" tabindex="-1"/>');
+  if(S.labels||hi||mq)h.push('<text x="'+(sx(p.x)+8).toFixed(1)+'" y="'+(sy(p.y)+4).toFixed(1)+'" font-size="11.5" fill="var(--ink)" pointer-events="none">'+esc(name(p.id))+'</text>');
+ });
+ h.push("</g>");svg.innerHTML=h.join("");
+ var nfar=pts.filter(function(p){return p.r[2]!=null&&p.r[2]>S.seuil;}).length;
+ $("counts").textContent=pts.length+" points affichés sur "+s.comptes.complet+" entités à deux coordonnées";
+ $("legend").innerHTML='<span><svg width="12" height="12"><circle cx="6" cy="6" r="4.5" fill="var(--pt)" fill-opacity=".78"/></svg>périodes des deux coordonnées distantes d\'au plus '+fx(S.seuil)+' an(s)</span>'+
+  '<span><svg width="12" height="12"><circle cx="6" cy="6" r="4.5" fill="var(--panel)" stroke="var(--pt)" stroke-width="1.6"/></svg>écart de période supérieur au seuil ('+nfar+' point(s)) : ce n\'est pas une photographie simultanée</span>'+
+  '<span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="var(--sel)"/></svg>sélection ou recherche</span>';
+}
+function tipHtml(i){
+ var r=scen().p[i],s=scen(),h="<b>"+esc(name(i))+"</b>";
+ [["x",0],["y",1]].forEach(function(a){var src=s[a[0]],o=r[a[1]];
+  h+=SHORT[src]+" : "+(o?f1(o[0])+" <span class='muted'>(officiel "+esc(o[1])+" ; "+esc(per(src,o[2],o[3]))+")</span>":"<span class='muted'>absent</span>")+"<br>";});
+ if(r[2]!=null)h+="Écart entre périodes : "+fx(r[2])+" an(s)"+(r[2]>S.seuil?' <span class="flag">au-delà du seuil</span>':"");
+ if(S.sec){var dv=D.div[i];if(dv){Object.keys(dv).forEach(function(k){var d=dv[k];h+="<br><span class='muted'>"+SHORT[d.a]+" − "+SHORT[d.b]+" : "+(d.diff>0?"+":"")+f1(d.diff)+" pt</span>";});}}
+ return h;}
+var drag=null,moved=false;
+function svgPt(e){var r=$("chart").getBoundingClientRect();return {x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*H/r.height};}
+function inv(p){var w=view();return {x:w.x0+(p.x-M.l)/(W-M.l-M.r)*(w.x1-w.x0),y:w.y0+(H-M.b-p.y)/(H-M.t-M.b)*(w.y1-w.y0)};}
+function zoomAt(f,c){var w=view(),cx=c?c.x:(w.x0+w.x1)/2,cy=c?c.y:(w.y0+w.y1)/2;var nw={x0:cx-(cx-w.x0)*f,x1:cx+(w.x1-cx)*f,y0:cy-(cy-w.y0)*f,y1:cy+(w.y1-cy)*f};
+ if(nw.x1-nw.x0>FULL.x1-FULL.x0){S.view=null;}else if(nw.x1-nw.x0<2){return;}else S.view=nw;drawChart();}
+var chart=$("chart");
+chart.addEventListener("wheel",function(e){e.preventDefault();zoomAt(e.deltaY<0?0.8:1.25,inv(svgPt(e)));},{passive:false});
+chart.addEventListener("pointerdown",function(e){drag={p:svgPt(e),v:Object.assign({},view())};moved=false;chart.setPointerCapture(e.pointerId);});
+chart.addEventListener("pointermove",function(e){
+ var t=e.target,tip=$("tip");
+ if(drag){var q=svgPt(e),dx=q.x-drag.p.x,dy=q.y-drag.p.y;if(Math.abs(dx)+Math.abs(dy)>3)moved=true;
+  if(moved){var v=drag.v,kx=(v.x1-v.x0)/(W-M.l-M.r),ky=(v.y1-v.y0)/(H-M.t-M.b);S.view={x0:v.x0-dx*kx,x1:v.x1-dx*kx,y0:v.y0+dy*ky,y1:v.y1+dy*ky};drawChart();tip.style.display="none";}return;}
+ if(t.tagName==="circle"&&t.dataset.id){tip.innerHTML=tipHtml(t.dataset.id);tip.style.display="block";var r=chart.getBoundingClientRect(),bx=e.clientX-r.left+14,by=e.clientY-r.top+14;
+  if(bx>r.width-300)bx=Math.max(4,bx-320);tip.style.left=bx+"px";tip.style.top=by+"px";}else tip.style.display="none";});
+chart.addEventListener("pointerup",function(e){var t=document.elementFromPoint(e.clientX,e.clientY);drag=null;
+ if(!moved&&t&&t.tagName==="circle"&&t.dataset.id){if(e.shiftKey){toggleSel(t.dataset.id);}else openFiche(t.dataset.id);}});
+chart.addEventListener("pointerleave",function(){$("tip").style.display="none";});
+$("zin").onclick=function(){zoomAt(0.7);};$("zout").onclick=function(){zoomAt(1/0.7);};$("zreset").onclick=function(){S.view=null;drawChart();};
 
-/* ---- Navigation ---- */
-var TABS=[["classement","Classement"],["comparer","Comparer"],["fiche","Fiche pays"],["dispersion","Dispersion"],["distribution","Distribution"],["poids","Pondérations"],["methode","Méthodologie & tests"]];
-function buildNav(){
-  var nav=$("nav");
-  TABS.forEach(function(t){ var b=document.createElement("button"); b.textContent=t[1]; b.setAttribute("data-t",t[0]); b.onclick=function(){go(t[0]);}; nav.appendChild(b); });
+/* ---------- tableau ---------- */
+var TS={k:"nom",d:1};
+function tableRows(){var s=scen();return D.pays.map(function(p){var r=s.p[p.iso3]||[null,null,null,3];return {id:p.iso3,nom:p.nom_fr,region:p.region,x:r[0]?r[0][0]:null,xo:r[0]?r[0][1]:"",xa:r[0]?per(s.x,r[0][2],r[0][3]):"",y:r[1]?r[1][0]:null,yo:r[1]?r[1][1]:"",ya:r[1]?per(s.y,r[1][2],r[1][3]):"",ec:r[2],st:r[3]};});}
+function drawTable(){
+ var s=scen(),q=($("tq").value||"").toLowerCase(),st=$("tstat").value;
+ var rows=tableRows().filter(function(r){return (!q||r.nom.toLowerCase().indexOf(q)>=0||r.id.toLowerCase()===q)&&(st===""||String(r.st)===st);});
+ rows.sort(function(a,b){var va=a[TS.k],vb=b[TS.k];if(va==null&&vb==null)return 0;if(va==null)return 1;if(vb==null)return -1;return (typeof va==="number"?va-vb:String(va).localeCompare(String(vb),"fr"))*TS.d;});
+ var cols=[["nom","Pays ou territoire"],["region","Région"],["x","X ("+SHORT[s.x]+", 0-100)","n"],["xo","X officiel","n"],["xa","Période X"],["y","Y ("+SHORT[s.y]+", 0-100)","n"],["yo","Y officiel","n"],["ya","Période Y"],["ec","Écart (ans)","n"],["st","Couverture"]];
+ $("tbl").tHead.innerHTML="<tr>"+cols.map(function(c){return '<th data-k="'+c[0]+'" class="'+(c[2]||"")+'" scope="col">'+esc(c[1])+(TS.k===c[0]?(TS.d>0?" ▲":" ▼"):"")+"</th>";}).join("")+"</tr>";
+ $("tbl").tBodies[0].innerHTML=rows.map(function(r){return '<tr data-id="'+r.id+'"><td><a href="#" data-f="'+r.id+'">'+esc(r.nom)+"</a></td><td>"+esc(r.region)+'</td><td class="n">'+f1(r.x)+'</td><td class="n">'+esc(r.xo)+"</td><td>"+esc(r.xa)+'</td><td class="n">'+f1(r.y)+'</td><td class="n">'+esc(r.yo)+"</td><td>"+esc(r.ya)+'</td><td class="n">'+(r.ec==null?"—":fx(r.ec)+(r.ec>S.seuil?' <span class="flag">!</span>':""))+"</td><td>"+STATUT[r.st]+"</td></tr>";}).join("");
+ $("tinfo").textContent=rows.length+" ligne(s) — scénario "+(s.officiel?"officiel":"de comparaison");
 }
-function go(t){
-  state.tab=t;
-  Array.prototype.forEach.call(document.querySelectorAll("section"),function(s){s.classList.toggle("on", s.id==="s-"+t);});
-  Array.prototype.forEach.call($("nav").children,function(b){b.classList.toggle("on", b.getAttribute("data-t")===t);});
-  render();
-}
-function openFiche(id){ state.sel=id; $("fsel").value=id; go("fiche"); }
+$("tbl").addEventListener("click",function(e){var k=e.target.closest("th")&&e.target.closest("th").dataset.k;if(k){TS.d=TS.k===k?-TS.d:1;TS.k=k;drawTable();return;}var a=e.target.closest("a[data-f]");if(a){e.preventDefault();openFiche(a.dataset.f);}});
+$("tq").oninput=drawTable;$("tstat").onchange=drawTable;
 
-/* ---- Classement : curseur + tableau ---- */
-function visibleCountries(){
-  var q=norm(state.q);
-  return P.filter(function(p){ return (!q || norm(p.nom).indexOf(q)>=0 || norm(p.nom_en).indexOf(q)>=0 || p.id.toLowerCase()===q); });
+/* ---------- fiche ---------- */
+function series(i,src,ind){return ((D.obs[i]||{})[src]||{})[ind]||[];}
+function last(i,src,ind){var a=series(i,src,ind);return a.length?a[a.length-1]:null;}
+function srcBlock(i,src){
+ var o=last(i,src,MAIN[src]),so=D.sources[src];
+ var h='<div class="card"><h3>'+esc(LBL[src])+(src===OFF.x||src===OFF.y?' <span class="flag info">coordonnée officielle</span>':' <span class="flag cmp">comparaison</span>')+"</h3>";
+ if(!o){
+  var comp=so.composantes.filter(function(c){return last(i,src,c.id);});
+  h+='<p class="muted">Aucun score global publié pour cette entité dans les éditions importées.'+(comp.length?" Des composantes officielles sont toutefois publiées (ci-dessous).":"")+"</p>";
+ }else{
+  var e=so.editions[o[3]];
+  h+='<div class="coord">'+f1(o[2])+' <small>/ 100</small></div><div class="small">Score officiel : <b class="num">'+esc(o[1])+"</b> sur l'échelle "+e.echelle.min+"–"+e.echelle.max+(o[5]?' <span class="flag">hors échelle nominale</span>':"")+"<br>"+esc(e.nom)+", période mesurée : "+esc(per(src,o[3],o[0]))+(o[4]?", rang officiel "+esc(o[4]):"")+(o[6]?"<br>"+esc(o[6]):"")+'<br>Nom dans la source : '+esc(o[7])+'<br><a href="'+esc(so.page_methodologie)+'" target="_blank" rel="noopener">Méthodologie</a> · <a href="'+esc(e.url_source||so.page_donnees)+'" target="_blank" rel="noopener">Source</a></div>';
+ }
+ var rows=so.composantes.map(function(c){var r=last(i,src,c.id);return r?"<tr><td>"+esc(c.nom)+'<br><span class="small muted">'+esc(c.nom_officiel)+'</span></td><td class="n">'+esc(r[1])+'</td><td class="n">'+f1(r[2])+'</td><td class="n">'+esc(r[0])+"</td></tr>":"";}).join("");
+ if(rows)h+='<h3>Composantes officielles</h3><div class="tw"><table><thead><tr><th>Composante</th><th class="n">Officiel</th><th class="n">0-100</th><th class="n">Année</th></tr></thead><tbody>'+rows+"</tbody></table></div>";
+ if(src==="vdem"){var lo=last(i,"vdem","v2x_libdem_codelow"),hi=last(i,"vdem","v2x_libdem_codehigh");if(lo&&hi)h+='<p class="small muted">Incertitude publiée par V-Dem (intervalle à 68 %) : '+f1(lo[2])+" à "+f1(hi[2])+" sur 100.</p>";}
+ var hist=series(i,src,MAIN[src]);
+ if(hist.length>1)h+='<details><summary class="small">Historique ('+hist.length+" années)</summary>"+'<div class="tw"><table><thead><tr><th class="n">Année</th><th class="n">Officiel</th><th class="n">0-100</th><th>Édition</th></tr></thead><tbody>'+hist.slice().reverse().map(function(r){return '<tr><td class="n">'+r[0]+'</td><td class="n">'+esc(r[1])+'</td><td class="n">'+f1(r[2])+"</td><td>"+esc(edName(src,r[3]))+"</td></tr>";}).join("")+"</tbody></table></div></details>";
+ return h+"</div>";}
+function ctxBlock(i){
+ var rows=(D.ctx[i]||[]),cfg={};D.ctx_cfg.indicateurs.forEach(function(c){cfg[c.id]=c;});
+ var h='<div class="card"><h2>Données contextuelles</h2><p class="small muted">'+esc(D.ctx_cfg.avertissement)+"</p>";
+ if(!rows.length)return h+'<p class="muted">Aucune donnée contextuelle disponible pour cette entité.</p></div>';
+ return h+'<div class="tw"><table><thead><tr><th>Indicateur</th><th class="n">Valeur</th><th>Unité</th><th class="n">Année</th><th>Source</th></tr></thead><tbody>'+rows.map(function(r){var c=cfg[r[0]];return "<tr><td>"+esc(c.libelle)+'</td><td class="n">'+fx(r[2],1)+"</td><td>"+esc(c.unite)+'</td><td class="n">'+r[1]+'</td><td class="small"><a href="'+esc(c.url)+'" target="_blank" rel="noopener">'+esc(c.source)+"</a><br><span class='muted'>"+esc(c.limites)+"</span></td></tr>";}).join("")+"</tbody></table></div></div>";}
+function loadContest(){try{return JSON.parse(localStorage.getItem("socialistometre.contestations")||"[]");}catch(e){return [];}}
+function saveContest(a){try{localStorage.setItem("socialistometre.contestations",JSON.stringify(a));return true;}catch(e){return false;}}
+function contestBlock(i){
+ var repo=D.contest.filter(function(c){return c.iso3===i;}),loc=loadContest().filter(function(c){return c.iso3===i;});
+ var h='<div class="card"><h2>Contester un score</h2><p class="small">Une contestation documente un désaccord ; elle ne modifie jamais les données de référence. Seule une correction publiée par l\'organisme source, importée dans une nouvelle édition versionnée, peut changer une valeur. Consultez d\'abord la source officielle (liens ci-dessus).</p>';
+ h+='<h3>Contestations versionnées dans le dépôt</h3>'+(repo.length?"<ul>"+repo.map(function(c){return "<li>"+esc(c.date)+" — "+esc(c.source)+" / "+esc(c.indicateur)+" : "+esc(c.motif)+" <span class='muted'>("+esc(c.statut)+")</span></li>";}).join("")+"</ul>":'<p class="small muted">Aucune.</p>')+'<p class="small muted">Corrections officielles des organismes enregistrées : aucune.</p>';
+ h+='<h3>Mes contestations (enregistrées dans ce navigateur uniquement)</h3>'+(loc.length?"<ul>"+loc.map(function(c){return "<li>"+esc(c.date)+" — "+esc(c.source)+" : "+esc(c.motif)+"</li>";}).join("")+"</ul>":'<p class="small muted">Aucune.</p>');
+ h+='<div class="row"><select id="ct-src">'+Object.keys(LBL).map(function(k){return "<option value='"+k+"'>"+esc(LBL[k])+"</option>";}).join("")+'</select></div><textarea id="ct-motif" placeholder="Motif et références (URL, page, document)"></textarea><div class="row"><button class="btn" id="ct-save">Enregistrer la contestation</button><button class="btn" id="ct-exp">Exporter toutes mes contestations (JSON)</button><span class="small muted" id="ct-msg"></span></div></div>';
+ return h;}
+function divBlock(i){
+ var dv=D.div[i];if(!dv)return "";
+ var h='<div class="card"><h2>Divergences entre organismes</h2><p class="small muted">Différences descriptives entre deux indices du même axe (dernière année de chacun). Le projet ne tranche pas : les définitions, méthodes et périodes diffèrent.</p><ul>';
+ Object.keys(dv).forEach(function(k){var d=dv[k];h+="<li>"+(k==="economique"?"Économie":"Politique")+" : "+SHORT[d.a]+" ("+d.an_a+") − "+SHORT[d.b]+" ("+d.an_b+") = <b class='num'>"+(d.diff>0?"+":"")+f1(d.diff)+"</b> point(s)"+(Math.abs(d.diff)>=D.meta.seuil_div?' <span class="flag">divergence forte (≥ '+D.meta.seuil_div+" pts)</span>":"")+"</li>";});
+ return h+"</ul></div>";}
+function missingBlock(i){
+ var ms=[],p=PAYS[i];Object.keys(MAIN).forEach(function(s){if(!last(i,s,MAIN[s]))ms.push(LBL[s]);});
+ var an=D.anom.filter(function(a){return a.iso3===i;}),cr=D.corr.filter(function(c){return c.iso3===i&&c.note;});
+ var h='<div class="card"><h2>Données manquantes et limites</h2>';
+ h+=ms.length?"<p>Score global absent pour : "+ms.map(esc).join(" ; ")+". Aucune valeur de remplacement n'est utilisée.</p>":"<p>Les quatre indices publient un score global pour cette entité.</p>";
+ if(an.length)h+="<ul class='small'>"+an.map(function(a){return "<li>"+esc(a.detail)+"</li>";}).join("")+"</ul>";
+ if(cr.length)h+="<p class='small'>Correspondance géographique : "+cr.map(function(c){return esc(c.source+" « "+c.nom_source+" » : "+c.note);}).join(" ; ")+"</p>";
+ if(p&&p.type==="territoire")h+="<p class='small'>Statut : "+esc(p.statut_politique)+"</p>";
+ return h+"</div>";}
+function openFiche(i){S.cur=i;show("fiche");drawFiche();}
+function drawFiche(){
+ var i=S.cur||"FRA";$("fsel").value=i;var p=PAYS[i],o=D.scen[D.meta.scenario_officiel].p[i],s=scen(),c=s.p[i];
+ var h='<div class="card"><h2>'+esc(p.nom_fr)+' <span class="muted small">('+esc(i)+")</span></h2><p class=\"small muted\">"+esc(p.region||"Région non renseignée")+" — "+esc(p.statut_politique)+"</p>";
+ h+='<div class="grid2"><div><div class="small muted">Coordonnées officielles (X '+SHORT[OFF.x]+", Y "+SHORT[OFF.y]+')</div><div class="coord">'+(o[0]?f1(o[0][0]):"—")+" ; "+(o[1]?f1(o[1][0]):"—")+'</div><div class="small">'+(o[0]?"X : "+esc(per(OFF.x,o[0][2],o[0][3])):"X absent")+" — "+(o[1]?"Y : "+esc(per(OFF.y,o[1][2],o[1][3])):"Y absent")+(o[2]!=null?"<br>Écart entre périodes : "+fx(o[2])+" an(s)"+(o[2]>S.seuil?' <span class="flag">pas une photographie simultanée</span>':""):"")+"</div></div>";
+ if(!s.officiel)h+='<div><div class="small muted">Scénario de comparaison affiché (X '+SHORT[s.x]+", Y "+SHORT[s.y]+", "+esc(modeLbl(s.mode))+')</div><div class="coord" style="color:var(--cmp)">'+(c[0]?f1(c[0][0]):"—")+" ; "+(c[1]?f1(c[1][0]):"—")+"</div></div>";
+ h+="</div></div>";
+ var order=[OFF.x,OFF.y].concat(S.sec?["heritage","freedomhouse"]:[]);
+ h+='<div class="grid2">'+order.map(function(sr){return srcBlock(i,sr);}).join("")+"</div>";
+ if(S.sec)h+=divBlock(i);
+ h+=missingBlock(i);
+ if(S.ctx)h+=ctxBlock(i);
+ h+=contestBlock(i);
+ $("fiche").innerHTML=h;
+ $("ct-save").onclick=function(){var m=$("ct-motif").value.trim();if(!m){$("ct-msg").textContent="Indiquez un motif.";return;}var a=loadContest();a.push({iso3:i,source:$("ct-src").value,motif:m,date:new Date().toISOString().slice(0,10),statut:"contestation utilisateur (non validée)"});$("ct-msg").textContent=saveContest(a)?"Enregistrée dans ce navigateur. Exportez-la pour la verser au dépôt.":"Stockage indisponible : exportez immédiatement.";drawFiche();};
+ $("ct-exp").onclick=function(){var b=new Blob([JSON.stringify(loadContest(),null,1)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="contestations.json";document.body.appendChild(a);a.click();a.remove();};
 }
-function renderSwarm(){
-  var svg=$("swarm"); while(svg.firstChild) svg.removeChild(svg.firstChild);
-  var W_=svgW(svg), H=230, m=24, r=4.2;
-  var lo=state.zmin, hi=state.zmax; if(hi<=lo){hi=lo+1;}
-  var X=function(v){return m+(v-lo)/(hi-lo)*(W_-2*m);};
-  el("line",{x1:m,x2:W_-m,y1:H-26,y2:H-26,"class":"ax"},svg);
-  var step = (hi-lo)>60?10:((hi-lo)>25?5:((hi-lo)>10?2:1));
-  for(var v=Math.ceil(lo/step)*step; v<=hi; v+=step){ el("line",{x1:X(v),x2:X(v),y1:H-30,y2:H-22,"class":"ax"},svg); var t=el("text",{x:X(v),y:H-8,"text-anchor":"middle","class":"mut"},svg); t.textContent=v; }
-  var t0=el("text",{x:m,y:12,"class":"mut"},svg); t0.textContent="◀ pôle socialisant";
-  var t1=el("text",{x:W_-m,y:12,"text-anchor":"end","class":"mut"},svg); t1.textContent="pôle libéral ▶";
-  var q=norm(state.q), hasQ=q.length>0;
-  var pts=P.filter(function(p){return p.g!=null && p.g>=lo && p.g<=hi && (!state.onlyComplet || p.couv==="complet");}).sort(function(a,b){return a.g-b.g;});
-  var rows=[]; /* empilement : dernier x occupé par rangée */
-  var maxRows=Math.floor((H-60)/(2*r+0.6));
-  pts.forEach(function(p){
-    var x=X(p.g), row=0;
-    while(row<maxRows && rows[row]!==undefined && x-rows[row]<2*r+0.5) row++;
-    if(row>=maxRows) row=maxRows-1;
-    rows[row]=x; p._x=x; p._row=row;
-  });
-  pts.forEach(function(p){
-    var y=H-36-p._row*(2*r+0.6);
-    var match = hasQ && (norm(p.nom).indexOf(q)>=0||norm(p.nom_en).indexOf(q)>=0);
-    var sel = (state.cmp.indexOf(p.id)>=0)||state.sel===p.id;
-    var c=el("circle",{cx:p._x,cy:y,r:(match||sel)?r+2.2:r,fill:p.couv==="complet"?"var(--acc)":"var(--card)",stroke:match?"var(--s)":"var(--acc)","stroke-width":match?2.5:1.2,opacity:(hasQ&&!match)?0.25:1,style:"cursor:pointer"},svg);
-    c.addEventListener("mousemove",function(e){showTip(e,"<b>"+esc(p.nom)+"</b><br>Score : "+f1(p.g)+" · rang "+(p.r)+"<br>Fiabilité : "+f1(p.fiab.fiabilite)+" ("+esc(p.fiab.niveau)+")<br>Couverture : "+esc(p.couv));});
-    c.addEventListener("mouseleave",hideTip);
-    c.addEventListener("click",function(){openFiche(p.id);});
-  });
-}
-var COLS=[["r","Rang","n"],["nom","Pays / territoire",""],["g","Score","n"],["A","A","n"],["B","B","n"],["C","C","n"],["D","D","n"],["fiab","Fiabilité","n"],["couv","Couverture",""]];
-function sortVal(p,k){
-  if(k==="r"||k==="rang") return p.r==null?1e9:p.r;
-  if(k==="nom") return norm(p.nom);
-  if(k==="g") return p.g==null?-1e9:-p.g;
-  if(DIMS.indexOf(k)>=0) return p.dims[k]==null?1e9:-p.dims[k];
-  if(k==="fiab") return -p.fiab.fiabilite;
-  if(k==="couv") return p.couv;
-  return 0;
-}
-function renderTable(){
-  var list=visibleCountries().filter(function(p){return !state.onlyComplet||p.couv==="complet";});
-  var k=state.sortKey==="rang"?"r":state.sortKey;
-  list.sort(function(a,b){var x=sortVal(a,k),y=sortVal(b,k); if(x<y)return -state.sortDir; if(x>y)return state.sortDir; return norm(a.nom)<norm(b.nom)?-1:1;});
-  $("cnt").textContent=list.length+" entité(s) affichée(s) sur "+P.length+" · "+P.filter(function(p){return p.g!=null;}).length+" avec un score global";
-  var h="<thead><tr>"+COLS.map(function(c){var arrow=(c[0]===k)?(state.sortDir>0?" ▲":" ▼"):""; return "<th class='"+c[2]+"' data-k='"+c[0]+"'>"+c[1]+arrow+"</th>";}).join("")+"</tr></thead><tbody>";
-  list.forEach(function(p){
-    h+="<tr"+(state.cmp.indexOf(p.id)>=0?" class='sel'":"")+"><td class='n'>"+(p.r==null?"—":p.r)+"</td><td><a href='#' data-f='"+p.id+"'>"+esc(p.nom)+"</a>"+(p.type==="territoire"?" <span class='pill'>territoire</span>":"")+"</td><td class='n'><b>"+f1(p.g)+"</b></td>"+
-    DIMS.map(function(d){return "<td class='n'>"+f1(p.dims[d])+"</td>";}).join("")+
-    "<td class='n' title='"+esc(p.fiab.niveau)+"'>"+f1(p.fiab.fiabilite)+"</td><td>"+esc(p.couv)+(p.g==null?" (pas de score global)":"")+"</td></tr>";
-  });
-  var t=$("tbl"); t.innerHTML=h+"</tbody>";
-  Array.prototype.forEach.call(t.querySelectorAll("th"),function(th){th.onclick=function(){var kk=th.getAttribute("data-k"); if(state.sortKey===kk||(kk==="r"&&state.sortKey==="rang")) state.sortDir*=-1; else {state.sortKey=kk;state.sortDir=1;} renderTable();};});
-  Array.prototype.forEach.call(t.querySelectorAll("a[data-f]"),function(a){a.onclick=function(e){e.preventDefault();openFiche(a.getAttribute("data-f"));};});
-}
-function renderWNotice(){
-  $("wnotice").innerHTML = weightsModified()? "<div class='warn'>⚠ Pondérations modifiées ("+DIMS.map(function(d){return d+" "+Math.round(W[d]*100)+" %";}).join(" · ")+") : scénario d'exploration, différent de la méthodologie officielle. Les rangs affichés sont recalculés.</div>" : "";
-}
-function renderClassement(){ renderWNotice(); renderSwarm(); renderTable(); }
+$("fsel").innerHTML=D.pays.slice().sort(function(a,b){return a.nom_fr.localeCompare(b.nom_fr,"fr");}).map(function(p){return '<option value="'+p.iso3+'">'+esc(p.nom_fr)+"</option>";}).join("");
+$("fsel").onchange=function(){S.cur=this.value;drawFiche();};
 
-/* ---- Barres de dimensions ---- */
-function bar(v,color){ return "<div class='bar' title='"+f1(v)+"'><i style='width:"+(v==null?0:Math.max(0,Math.min(100,v)))+"%;background:"+color+"'></i></div>"; }
+/* ---------- comparaison ---------- */
+function toggleSel(i){var k=S.sel.indexOf(i);if(k>=0)S.sel.splice(k,1);else S.sel.push(i);render();}
+$("csel").innerHTML=$("fsel").innerHTML;
+$("cadd").onclick=function(){var v=$("csel").value;if(S.sel.indexOf(v)<0)S.sel.push(v);render();};
+$("cclear").onclick=function(){S.sel=[];render();};
+function drawCmp(){
+ $("cchips").innerHTML=S.sel.map(function(i){return '<span class="chip">'+esc(name(i))+'<button data-rm="'+i+'" aria-label="Retirer '+esc(name(i))+'">×</button></span>';}).join("")||'<span class="small muted">Ajoutez des pays ici, ou Maj+clic sur le graphique.</span>';
+ if(!S.sel.length){$("cmp").innerHTML="";return;}
+ var s=scen(),rows=[["Coordonnée X (scénario affiché)",function(i){var r=s.p[i][0];return r?f1(r[0])+" <span class='muted small'>("+esc(per(s.x,r[2],r[3]))+")</span>":"—";}],["Coordonnée Y (scénario affiché)",function(i){var r=s.p[i][1];return r?f1(r[0])+" <span class='muted small'>("+esc(per(s.y,r[2],r[3]))+")</span>":"—";}]];
+ Object.keys(MAIN).forEach(function(src){rows.push([LBL[src]+" — officiel",function(i){var r=last(i,src,MAIN[src]);return r?esc(r[1])+" <span class='muted small'>/"+D.sources[src].editions[r[3]].echelle.max+", "+esc(per(src,r[3],r[0]))+"</span>":"—";}]);});
+ ["fraser","heritage","vdem","freedomhouse"].forEach(function(src){D.sources[src].composantes.forEach(function(c){rows.push([SHORT[src]+" : "+c.nom,function(i){var r=last(i,src,c.id);return r?esc(r[1]):"—";}]);});});
+ $("cmp").innerHTML="<table><thead><tr><th></th>"+S.sel.map(function(i){return "<th>"+esc(name(i))+"</th>";}).join("")+"</tr></thead><tbody>"+rows.map(function(r){return "<tr><td>"+esc(r[0])+"</td>"+S.sel.map(function(i){return '<td class="n">'+r[1](i)+"</td>";}).join("")+"</tr>";}).join("")+"</tbody></table>";}
+$("cchips").addEventListener("click",function(e){var b=e.target.closest("button[data-rm]");if(b)toggleSel(b.dataset.rm);});
 
-/* ---- Comparer ---- */
-function renderCompare(){
-  var chips=$("chips"); chips.innerHTML="";
-  state.cmp.forEach(function(id){ var s=document.createElement("span"); s.className="chip"; s.innerHTML=esc(BYID[id].nom)+" <button aria-label='Retirer'>×</button>"; s.querySelector("button").onclick=function(){state.cmp=state.cmp.filter(function(x){return x!==id;});renderCompare();}; chips.appendChild(s); });
-  var c=$("cmp");
-  if(state.cmp.length<2){ c.innerHTML="<p class='mini'>Ajoutez au moins deux pays ou territoires.</p>"; return; }
-  var L=state.cmp.map(function(id){return BYID[id];});
-  var h="<div class='tablewrap'><table><thead><tr><th>Mesure</th>"+L.map(function(p){return "<th class='n'><a href='#' data-f='"+p.id+"'>"+esc(p.nom)+"</a></th>";}).join("")+"</tr></thead><tbody>";
-  h+="<tr><td><b>Score global</b></td>"+L.map(function(p){return "<td class='n'><b>"+f1(p.g)+"</b> <span class='mini'>(rang "+(p.r==null?"—":p.r)+")</span></td>";}).join("")+"</tr>";
-  DIMS.forEach(function(d){ h+="<tr><td>"+d+" · "+esc(DN[d])+"</td>"+L.map(function(p){return "<td class='n'>"+f1(p.dims[d])+bar(p.dims[d],COLS_[d])+"<span class='mini'>"+p.n_dim[d]+" ind.</span></td>";}).join("")+"</tr>"; });
-  h+="<tr><td>Fiabilité</td>"+L.map(function(p){return "<td class='n'>"+f1(p.fiab.fiabilite)+" <span class='mini'>"+esc(p.fiab.niveau)+"</span></td>";}).join("")+"</tr>";
-  h+="<tr><td>Couverture</td>"+L.map(function(p){return "<td class='n'>"+esc(p.couv)+" · "+p.fiab.n_indicateurs+"/"+p.fiab.n_indicateurs_total+"</td>";}).join("")+"</tr>";
-  DATA.indicateurs.forEach(function(i){ h+="<tr><td class='mini'>"+i.id+" · "+esc(i.nom)+"</td>"+L.map(function(p){var o=p.ind[i.id]; return "<td class='n mini'>"+(o?fn(o[0])+" "+esc(i.unite)+" <br>→ "+f1(o[1])+" ("+o[2]+")":"—")+"</td>";}).join("")+"</tr>"; });
-  c.innerHTML=h+"</tbody></table></div><p class='mini'>— : indicateur non disponible pour cette entité (non remplacé, non estimé). Valeur brute → valeur normalisée (0–100) entre parenthèses l'année.</p>";
-  Array.prototype.forEach.call(c.querySelectorAll("a[data-f]"),function(a){a.onclick=function(e){e.preventDefault();openFiche(a.getAttribute("data-f"));};});
-}
-var COLS_={A:"var(--A)",B:"var(--B)",C:"var(--C)",D:"var(--D)"};
+/* ---------- incomplets ---------- */
+function drawInc(){
+ var s=scen(),g=[[],[],[],[]];D.pays.forEach(function(p){var r=s.p[p.iso3];g[r?r[3]:3].push(p);});
+ var h='<div class="card"><h2>Données incomplètes — scénario '+(s.officiel?"officiel":"de comparaison")+"</h2><p class='small'>"+g[0].length+" entité(s) à deux coordonnées, "+g[1].length+" avec la seule coordonnée économique, "+g[2].length+" avec la seule coordonnée politique, "+g[3].length+" sans aucune coordonnée. Les entités incomplètes n'apparaissent pas sur le graphique ; aucune coordonnée n'est estimée et l'absence n'est jamais codée zéro.</p></div>";
+ [[1,"Coordonnée politique absente ("+SHORT[s.y]+")"],[2,"Coordonnée économique absente ("+SHORT[s.x]+")"],[3,"Aucune coordonnée"]].forEach(function(k){
+  h+='<div class="card"><h3>'+esc(k[1])+" — "+g[k[0]].length+'</h3><div class="tw"><table><thead><tr><th>Entité</th><th>Type</th><th>Région</th><th>Indices disponibles (autres scénarios)</th></tr></thead><tbody>'+g[k[0]].map(function(p){var av=Object.keys(MAIN).filter(function(sr){return last(p.iso3,sr,MAIN[sr]);}).map(function(sr){return SHORT[sr];});return '<tr><td><a href="#" data-f="'+p.iso3+'">'+esc(p.nom_fr)+"</a></td><td>"+esc(p.type)+"</td><td>"+esc(p.region)+"</td><td>"+(av.join(", ")||"aucun")+"</td></tr>";}).join("")+"</tbody></table></div></div>";});
+ $("inc").innerHTML=h;}
+$("inc").addEventListener("click",function(e){var a=e.target.closest("a[data-f]");if(a){e.preventDefault();openFiche(a.dataset.f);}});
 
-/* ---- Fiche ---- */
-function renderFiche(){
-  var p=BYID[state.sel]; var c=$("fiche");
-  if(!p){c.innerHTML="";return;}
-  var h="<h3 style='margin-top:10px'>"+esc(p.nom)+" <span class='mini'>("+esc(p.nom_en)+" · "+esc(p.id)+")</span></h3>";
-  h+="<div class='mini'>"+esc(p.type)+" · "+esc(p.region)+" · "+esc(p.revenu)+(p.statut_pol?" · Statut : "+esc(p.statut_pol):"")+"</div>";
-  h+="<div class='row' style='margin:10px 0'><div style='font-size:34px;font-weight:700'>"+(p.g==null?"Score global indisponible":f1(p.g))+"</div>"+(p.g!=null?"<div>rang <b>"+p.r+"</b> / "+P.filter(function(x){return x.g!=null;}).length+(p.rc?" · rang parmi les scores complets : <b>"+p.rc+"</b>":"")+"</div>":"")+"</div>";
-  if(p.stab && !weightsModified()) h+="<div class='mini'>Stabilité (600 rééchantillonnages) : rang plausible "+p.stab.rang_p5+" – "+p.stab.rang_p95+" ; score "+f1(p.stab.score_p5)+" – "+f1(p.stab.score_p95)+".</div>";
-  h+="<div class='warn'>Fiabilité des données : <b>"+f1(p.fiab.fiabilite)+" / 100 ("+esc(p.fiab.niveau)+")</b> — couverture "+Math.round(p.fiab.couverture*100)+" % ("+p.fiab.n_indicateurs+"/"+p.fiab.n_indicateurs_total+" indicateurs), qualité des sources "+Math.round(p.fiab.qualite_source*100)+" %, fraîcheur "+Math.round(p.fiab.anciennete*100)+" %, comparabilité "+Math.round(p.fiab.comparabilite*100)+" %. Statut de couverture : <b>"+esc(p.couv)+"</b>."+(p.absentes.length?" Dimensions absentes : "+p.absentes.join(", ")+".":"")+"</div>";
-  if(p.avert.length) h+="<details><summary>Avertissements et limites ("+p.avert.length+")</summary><ul>"+p.avert.map(function(a){return "<li>"+esc(a)+"</li>";}).join("")+"</ul></details>";
-  h+="<h3>Décomposition par dimension</h3><div class='tablewrap'><table><thead><tr><th>Dimension</th><th class='n'>Poids</th><th class='n'>Score</th><th>Indicateurs</th><th></th></tr></thead><tbody>";
-  var wsum=0; DIMS.forEach(function(d){if(p.dims[d]!=null)wsum+=W[d];});
-  DIMS.forEach(function(d){ h+="<tr><td>"+d+" · "+esc(DN[d])+"</td><td class='n'>"+Math.round(W[d]*100)+" %"+(p.dims[d]!=null&&wsum>0&&p.g!=null?" <span class='mini'>(effectif "+Math.round(W[d]/wsum*100)+" %)</span>":"")+"</td><td class='n'><b>"+f1(p.dims[d])+"</b></td><td class='n'>"+p.n_dim[d]+" / "+DATA.indicateurs.filter(function(i){return i.dim===d;}).length+"</td><td style='min-width:120px'>"+bar(p.dims[d],COLS_[d])+"</td></tr>"; });
-  h+="</tbody></table></div>";
-  h+="<h3>Indicateurs : valeurs brutes, normalisées, années et sources</h3><div class='tablewrap'><table><thead><tr><th>Id</th><th>Indicateur</th><th class='n'>Brut</th><th class='n'>Norm. 0–100</th><th class='n'>Année</th><th>Validation</th><th>Source</th></tr></thead><tbody>";
-  DATA.indicateurs.forEach(function(i){
-    var o=p.ind[i.id];
-    h+="<tr><td>"+i.id+"</td><td>"+esc(i.nom)+"<div class='mini'>sens : "+(i.orientation>0?"valeur élevée → pôle libéral":"valeur élevée → pôle socialisant")+"</div></td>";
-    if(o) h+="<td class='n'>"+fn(o[0])+" "+esc(i.unite)+"</td><td class='n'><b>"+f1(o[1])+"</b></td><td class='n'>"+o[2]+"</td><td>"+esc(o[3])+(o[5]?"<div class='mini'>"+esc(o[5])+"</div>":"")+"</td><td><a href='"+esc(i.url)+"' target='_blank' rel='noopener'>"+esc(i.source)+"</a><div class='mini'>révision source : "+esc(o[4]||"n.d.")+" · collecte : "+esc(DATA.meta.collecte)+"</div></td>";
-    else h+="<td class='n' colspan='4'><span class='mini'>donnée non disponible (non estimée, non substituée)</span></td><td><a href='"+esc(i.url)+"' target='_blank' rel='noopener'>"+esc(i.source)+"</a></td>";
-    h+="</tr>";
-  });
-  h+="</tbody></table></div>";
-  c.innerHTML=h;
-}
+/* ---------- méthode ---------- */
+function drawMeth(){
+ var h='<div class="card"><h2>Principe</h2><p>Chaque pays ou territoire est un point (X, Y). X reprend l\'indice de liberté économique d\'un organisme, Y son indice de démocratie libérale. Les deux axes sont indépendants : aucune moyenne entre sources, aucun ajustement, aucune note attribuée par le projet. Les seules opérations sont des changements d\'échelle affines fixes vers 0-100, exacts et réversibles. Le milieu de l\'échelle n\'est pas un seuil idéologique et les quadrants ne sont pas nommés.</p>';
+ h+="<ul>"+Object.keys(D.meta.regles).map(function(k){return "<li>"+esc(D.meta.regles[k])+"</li>";}).join("")+"</ul><p class='small muted'>"+esc(D.meta.note_seuils)+"</p></div>";
+ h+='<div class="card"><h2>Sources, éditions et transformations</h2><div class="tw"><table><thead><tr><th>Source</th><th>Rôle</th><th>Édition</th><th>Période mesurée</th><th>Échelle officielle</th><th>Transformation vers 0-100</th><th>Statut</th></tr></thead><tbody>';
+ Object.keys(D.sources).forEach(function(k){var s=D.sources[k];Object.keys(s.editions).forEach(function(e){var ed=s.editions[e],sc=ed.echelle;
+  h+="<tr><td>"+esc(LBL[k])+'<br><span class="small muted">'+esc(s.organisme)+"</span></td><td>"+(s.role_v2==="principal"?"coordonnée officielle ("+s.axe+")":"comparaison ("+s.axe+")")+"</td><td>"+esc(ed.nom)+(ed.date_publication?'<br><span class="small muted">publiée '+esc(ed.date_publication)+"</span>":"")+"</td><td>"+esc(ed.periode_libelle||ed.annee_reference||"")+"</td><td>"+(sc?sc.min+"–"+sc.max:"—")+"</td><td>"+(sc?(sc.min===0&&sc.max===100?"identité":"v × "+(100/sc.max)+" ; réciproque v100 ÷ "+(100/sc.max)):"—")+"</td><td>"+(ed.statut==="importee"?"importée":'<span class="flag">non importée</span><br><span class="small">'+esc(ed.raison||"")+"</span>")+"</td></tr>";});});
+ h+="</tbody></table></div></div>";
+ h+='<div class="card"><h2>Licences et attribution</h2><ul>'+Object.keys(D.sources).map(function(k){return "<li><b>"+esc(LBL[k])+"</b> : "+esc(D.sources[k].licence)+' <a href="'+esc(D.sources[k].page_methodologie)+'" target="_blank" rel="noopener">méthodologie</a></li>';}).join("")+"</ul></div>";
+ var v=D.validation;h+='<div class="card"><h2>Tests de validation</h2><p class="small">Statut : <b>'+esc(v.statut)+"</b>"+(v.date?" — exécutés le "+esc(v.date):"")+'</p><div class="tw"><table><thead><tr><th>Test</th><th>Résultat</th><th>Critique</th></tr></thead><tbody>'+(v.tests||[]).map(function(t){return "<tr><td>"+esc(t.nom)+"</td><td>"+esc(t.resultat)+"</td><td>"+(t.critique?"oui":"non")+"</td></tr>";}).join("")+"</tbody></table></div></div>";
+ h+='<div class="card"><h2>Limites</h2><ul><li>Les quatre indices reposent en partie sur des évaluations d\'experts et des choix de pondération propres à chaque organisme ; leurs biais éventuels sont transmis tels quels.</li><li>Fraser (édition 2025) mesure 2023, V-Dem et Freedom House 2025, Heritage le 2e semestre 2024 et le 1er semestre 2025 : le mode « plus récente » n\'est pas une photographie simultanée. Le mode « année commune 2023 » aligne Fraser, V-Dem et Freedom House sur la même année.</li><li>L\'édition EFW 2026 (données 2024) est publiée mais n\'a pas pu être importée (voir le tableau des éditions).</li><li>Les composantes économiques de Fraser et de Heritage n\'ont ni les mêmes définitions ni les mêmes pondérations ; leurs scores ne sont pas interchangeables.</li><li>Le premier indice composite (V1, 2026-10-28) est archivé dans archive/v1 et editions/ ; il n\'est pas comparable aux coordonnées V2.</li></ul><p class="small muted">Empreinte SHA-256 du jeu de données : <span class="num">'+esc(D.meta.empreinte)+"</span></p></div>";
+ $("meth").innerHTML=h;}
 
-/* ---- Dispersion ---- */
-function dimVal(p,k){ return k==="G"?p.g:p.dims[k]; }
-function renderScatter(){
-  var kx=$("sx").value, ky=$("sy").value, svg=$("scat"); while(svg.firstChild) svg.removeChild(svg.firstChild);
-  var w=svgW(svg), h=460, m={l:46,r:16,t:14,b:42};
-  var X=function(v){return m.l+v/100*(w-m.l-m.r);}, Y=function(v){return h-m.b-v/100*(h-m.t-m.b);};
-  for(var v=0;v<=100;v+=20){ el("line",{x1:X(v),x2:X(v),y1:Y(0),y2:Y(100),"class":"ax",opacity:.5},svg); el("line",{x1:X(0),x2:X(100),y1:Y(v),y2:Y(v),"class":"ax",opacity:.5},svg); var a=el("text",{x:X(v),y:h-m.b+14,"text-anchor":"middle","class":"mut"},svg);a.textContent=v; var b=el("text",{x:m.l-6,y:Y(v)+4,"text-anchor":"end","class":"mut"},svg);b.textContent=v; }
-  var lx=el("text",{x:(w+m.l)/2,y:h-6,"text-anchor":"middle"},svg); lx.textContent=LBL[kx]+" (0 = socialisant · 100 = libéral)";
-  var ly=el("text",{x:12,y:h/2,"text-anchor":"middle",transform:"rotate(-90 12 "+h/2+")"},svg); ly.textContent=LBL[ky];
-  var pts=P.filter(function(p){return dimVal(p,kx)!=null&&dimVal(p,ky)!=null;});
-  var xs=pts.map(function(p){return dimVal(p,kx);}), ys=pts.map(function(p){return dimVal(p,ky);});
-  pts.forEach(function(p){
-    var c=el("circle",{cx:X(dimVal(p,kx)),cy:Y(dimVal(p,ky)),r:(state.cmp.indexOf(p.id)>=0||state.sel===p.id)?6:3.6,fill:p.couv==="complet"?"var(--acc)":"var(--card)",stroke:"var(--acc)","stroke-width":1.1,opacity:.8,style:"cursor:pointer"},svg);
-    c.addEventListener("mousemove",function(e){showTip(e,"<b>"+esc(p.nom)+"</b><br>"+LBL[kx]+" : "+f1(dimVal(p,kx))+"<br>"+LBL[ky]+" : "+f1(dimVal(p,ky)));});
-    c.addEventListener("mouseleave",hideTip); c.addEventListener("click",function(){openFiche(p.id);});
-  });
-  var rho = pts.length>3 ? spearman(xs,ys) : null;
-  $("scatinfo").textContent=pts.length+" entités ayant les deux valeurs · corrélation de rang de Spearman : "+(rho==null?"—":fn(rho,3))+" · une corrélation n'est pas une causalité. Points pleins : score complet ; creux : partiel.";
-}
-var LBL={A:"A · Libéralisme économique",B:"B · Redistribution et protection sociale",C:"C · Place de l'État",D:"D · Libertés individuelles et politiques",G:"Score global"};
-function ranks(a){ var idx=a.map(function(v,i){return [v,i];}).sort(function(x,y){return x[0]-y[0];}); var r=new Array(a.length); var i=0; while(i<idx.length){ var j=i; while(j+1<idx.length&&idx[j+1][0]===idx[i][0]) j++; var avg=(i+j)/2+1; for(var k=i;k<=j;k++) r[idx[k][1]]=avg; i=j+1; } return r; }
-function spearman(x,y){ var a=ranks(x),b=ranks(y),n=a.length,ma=0,mb=0,i; for(i=0;i<n;i++){ma+=a[i];mb+=b[i];} ma/=n;mb/=n; var sab=0,saa=0,sbb=0; for(i=0;i<n;i++){sab+=(a[i]-ma)*(b[i]-mb);saa+=(a[i]-ma)*(a[i]-ma);sbb+=(b[i]-mb)*(b[i]-mb);} return sab/Math.sqrt(saa*sbb); }
+/* ---------- correspondances ---------- */
+function drawCorr(){
+ var only=$("cm")&&$("cm").checked;
+ var rows=D.corr.filter(function(c){return !only||c.methode==="manuel";});
+ $("corr").innerHTML='<div class="card"><h2>Correspondance géographique</h2><p class="small">Chaque entité de chaque source est rattachée explicitement à un identifiant stable (ISO 3166-1 alpha-3, ou code interne X-… pour les territoires sans code ISO). Les rapprochements « manuel » sont à revérifier à chaque nouvelle édition. Aucun rapprochement approximatif n\'est fait à la construction.</p><label class="chk small"><input type="checkbox" id="cm"'+(only?" checked":"")+"> N'afficher que les rapprochements manuels</label></div>"+
+ '<div class="tw"><table><thead><tr><th>Source</th><th>Édition</th><th>Nom ou code dans la source</th><th>Identifiant</th><th>Entité</th><th>Méthode</th><th>Note</th></tr></thead><tbody>'+rows.map(function(c){return "<tr><td>"+esc(SHORT[c.source])+"</td><td>"+esc(c.edition)+"</td><td>"+esc(c.nom_source)+(c.code_source?" ("+esc(c.code_source)+")":"")+"</td><td>"+esc(c.iso3)+"</td><td>"+esc(name(c.iso3))+"</td><td>"+esc(c.methode)+'</td><td class="small">'+esc(c.note)+"</td></tr>";}).join("")+"</tbody></table></div>";
+ $("cm").onchange=drawCorr;}
 
-/* ---- Distribution ---- */
-function renderHist(){
-  var k=$("dsel").value, svg=$("hist"); while(svg.firstChild) svg.removeChild(svg.firstChild);
-  var w=svgW(svg), h=320, m={l:40,r:12,t:12,b:36}, nb=20;
-  var vals=P.map(function(p){return dimVal(p,k);}).filter(function(v){return v!=null;});
-  var bins=[]; for(var i=0;i<nb;i++) bins.push(0);
-  vals.forEach(function(v){ var b=Math.min(nb-1,Math.floor(v/100*nb)); bins[b]++; });
-  var mx=Math.max.apply(null,bins.concat([1]));
-  var bw=(w-m.l-m.r)/nb;
-  for(var t=0;t<=mx;t+=Math.max(1,Math.ceil(mx/5))){ var y=h-m.b-t/mx*(h-m.t-m.b); el("line",{x1:m.l,x2:w-m.r,y1:y,y2:y,"class":"ax",opacity:.5},svg); var tx=el("text",{x:m.l-5,y:y+4,"text-anchor":"end","class":"mut"},svg); tx.textContent=t; }
-  bins.forEach(function(c,i){ var bh=c/mx*(h-m.t-m.b); var r=el("rect",{x:m.l+i*bw+1,y:h-m.b-bh,width:Math.max(1,bw-2),height:bh,fill:COL[k]||"var(--acc)",opacity:.85},svg);
-    r.addEventListener("mousemove",function(e){showTip(e,(i*5)+"–"+((i+1)*5)+" : "+c+" entité(s)");}); r.addEventListener("mouseleave",hideTip); });
-  for(var v=0;v<=100;v+=10){ var a=el("text",{x:m.l+v/100*(w-m.l-m.r),y:h-m.b+15,"text-anchor":"middle","class":"mut"},svg); a.textContent=v; }
-  var s=vals.slice().sort(function(a,b){return a-b;}); var q=function(p){var i=(s.length-1)*p, lo=Math.floor(i), hi=Math.ceil(i); return s[lo]+(s[hi]-s[lo])*(i-lo);};
-  var mean=vals.reduce(function(a,b){return a+b;},0)/vals.length;
-  $("histinfo").textContent=LBL[k]+" : n="+vals.length+" · moyenne "+f1(mean)+" · médiane "+f1(q(.5))+" · quartiles "+f1(q(.25))+" – "+f1(q(.75))+" · min "+f1(s[0])+" · max "+f1(s[s.length-1])+" (barres de 5 points).";
-}
-
-/* ---- Pondérations ---- */
-function buildSliders(){
-  var c=$("sliders"); c.innerHTML="";
-  DIMS.forEach(function(d){
-    var r=document.createElement("div"); r.className="sl";
-    r.innerHTML="<label for='w"+d+"'><b>"+d+"</b> · "+esc(DN[d])+" <span class='mini'>(officiel : "+Math.round(W0[d]*100)+" %)</span></label><input type='range' id='w"+d+"' min='0' max='100' step='1' value='"+Math.round(W[d]*100)+"'><span id='wv"+d+"' class='n'>"+Math.round(W[d]*100)+" %</span>";
-    c.appendChild(r);
-    r.querySelector("input").oninput=function(e){ setRawWeight(d, +e.target.value); };
-  });
-  updateWSum();
-}
-var RAW={};
-function setRawWeight(d,v){ RAW[d]=v; var tot=0; DIMS.forEach(function(x){ if(RAW[x]==null) RAW[x]=Math.round(W[x]*100); tot+=RAW[x]; });
-  if(tot<=0){ tot=1; }
-  DIMS.forEach(function(x){ W[x]=RAW[x]/tot; $("wv"+x).textContent=RAW[x]+" %"; });
-  updateWSum(); recompute(); render(); }
-function updateWSum(){ var tot=0; DIMS.forEach(function(x){tot+=(RAW[x]==null?Math.round(W[x]*100):RAW[x]);}); $("wsum").textContent="Somme saisie : "+tot+" %. Les poids sont normalisés pour totaliser 100 % ; poids effectifs : "+DIMS.map(function(d){return d+" "+fn(W[d]*100,1)+" %";}).join(" · ")+". Pour un pays sans une dimension, les poids restants sont renormalisés (avertissement de comparabilité dans sa fiche)."; }
-function setWeights(obj){ DIMS.forEach(function(d){RAW[d]=Math.round(obj[d]*100);W[d]=obj[d];}); buildSliders(); recompute(); render(); }
-
-/* ---- Méthodologie ---- */
-function renderMeth(){
-  var M=DATA.meta, h="";
-  h+="<h2>Méthodologie V"+esc(M.version)+"</h2>";
-  h+="<p>Indice contemporain, construit à partir du seul ouvrage <em>Capitalisme et liberté</em> de Milton Friedman (traduction Leduc.s 2010, pagination imprimée). <b>Il n'est pas attribué à Friedman</b> : les choix de mesure sont ceux de ce projet. 0 = pôle socialisant, 100 = pôle libéral ; aucun pays n'est étiqueté politiquement, le score continu est le résultat.</p>";
-  h+="<h3>Formules</h3><ul><li>Normalisation (principale, « minmax ») : <code>t = clip((x − bas)/(haut − bas), 0, 1)</code> ; score = 100·t si l'indicateur est orienté +1, 100·(1−t) s'il est orienté −1. Bornes fixes pour les échelles naturelles, percentiles P5–P95 mondiaux pour A1, B1, B3, C2, C3.</li><li>Score de dimension = moyenne simple des indicateurs disponibles (poids égaux).</li><li>Score global = moyenne pondérée des dimensions disponibles (45/20/20/15), poids renormalisés sur les dimensions disponibles.</li><li>Règle V1 : "+esc(M.regle)+"</li><li>Fiabilité = 100·(0,4·couverture + 0,2·qualité des sources + 0,2·fraîcheur + 0,2·comparabilité). Elle est présentée séparément du score.</li><li>Année de référence "+esc(M.annee)+", fenêtre 2019–2023 : dernière valeur non nulle, année réelle conservée.</li></ul>";
-  h+="<p class='mini'>Jeu de données : empreinte SHA-256 <code>"+esc(M.hash)+"</code> · collecte : "+esc(M.collecte)+" · "+M.n+" entités, "+M.n_score+" avec score global.</p>";
-  h+="<h3>Principes de Friedman retenus (citations vérifiées automatiquement, page imprimée)</h3>";
-  DATA.principes.forEach(function(p){ h+="<details><summary><b>"+esc(p.id)+"</b> · "+esc(p.nom)+"</summary><p>"+esc(p.resume)+"</p>"+p.refs.map(function(r){return "<div class='cite'>« "+esc(r.citation)+" » — chap. "+r.chap+", p. "+r.page+"</div>";}).join("")+"</details>"; });
-  h+="<h3>Dictionnaire des indicateurs admis ("+DATA.indicateurs.length+")</h3><div class='tablewrap'><table><thead><tr><th>Id</th><th>Dim.</th><th>Indicateur</th><th>Sens</th><th>Principes</th><th>Source</th></tr></thead><tbody>";
-  DATA.indicateurs.forEach(function(i){ h+="<tr><td>"+i.id+"</td><td>"+i.dim+"</td><td>"+esc(i.nom)+" <span class='mini'>["+esc(i.unite)+"]</span><div class='mini'><b>Lien avec Friedman :</b> "+esc(i.lien)+"</div><div class='mini'><b>Limites :</b> "+esc(i.limites)+"</div>"+(i.chevauchement?"<div class='mini'><b>Chevauchement :</b> "+esc(i.chevauchement)+"</div>":"")+"</td><td>"+(i.orientation>0?"+1 (élevé = libéral)":"−1 (élevé = socialisant)")+"</td><td>"+esc(i.principes.join(", "))+"</td><td><a href='"+esc(i.url)+"' target='_blank' rel='noopener'>"+esc(i.source)+"</a> <span class='pill'>"+esc(i.source_type)+"</span></td></tr>"; });
-  h+="</tbody></table></div>";
-  h+="<h3>Candidats exclus</h3><ul>"+DATA.exclus.map(function(e){return "<li><b>"+esc(e.candidat)+"</b> ("+esc(e.principe||"—")+") : "+esc(e.raison)+"</li>";}).join("")+"</ul>";
-  h+="<h3>Limites principales</h3><ul><li>La dimension C ne compte que 3 indicateurs admissibles (cible 5–10 non atteinte) ; B en compte 6 dont 3 de prélèvements (B5, B6, B7) fortement liés entre eux. Aucun indicateur n'a été ajouté sans justification suffisante dans le corpus.</li><li>La couverture OCDE (A2, A3, B2, B4, B7, C1) est limitée : la composition des dimensions B et C diffère d'un pays à l'autre ; comparer les scores en regardant la couverture et la fiabilité.</li><li>Les prélèvements (B5, B6, B7) mesurent le financement de l'État sans distinguer impôts, taxes et cotisations (décision V1.1) ; ils ne disent rien de l'usage des fonds ni des déficits.</li><li>Les indicateurs D (Freedom House, WGI) sont fortement corrélés entre eux ; la dimension D est peu discriminante entre eux et corrélée à A (voir tests).</li><li>Freedom House est une ONG (qualité de source pondérée 0,8) ; WGI sont des indicateurs agrégés de perception.</li><li>Corrélation n'est pas causalité. Le texte de <em>Free to Choose</em> n'étant pas accessible, il n'est pas utilisé.</li></ul>";
-  h+="<h3>Tests de robustesse et de validation</h3><div class='tablewrap'><table><thead><tr><th>Test</th><th>Résultat</th><th>Détail</th></tr></thead><tbody>"+DATA.tests.map(function(t){return "<tr><td><b>"+esc(t.id)+"</b> "+esc(t.nom)+(t.critique?" <span class='pill'>critique</span>":"")+"</td><td>"+esc(t.statut)+"</td><td class='mini'>"+esc(t.detail)+"</td></tr>";}).join("")+"</tbody></table></div>";
-  h+="<h3>Audit</h3><p>Ce fichier contient l'ensemble des données de l'édition (valeurs brutes, normalisées, années, statuts, sources et URL). L'onglet « Fiche pays » liste chaque observation. Le dépôt GitHub contient les données brutes, le moteur de calcul Python et les tests permettant de reproduire cette édition.</p>";
-  $("meth").innerHTML=h;
-}
-
-/* ---- Rendu ---- */
-function render(){
-  if(state.tab==="classement") renderClassement();
-  else if(state.tab==="comparer") renderCompare();
-  else if(state.tab==="fiche") renderFiche();
-  else if(state.tab==="dispersion") renderScatter();
-  else if(state.tab==="distribution") renderHist();
-}
-
-/* ---- Initialisation ---- */
-function init(){
-  $("hdrmeta").textContent="Édition V"+DATA.meta.version+" · données "+DATA.meta.annee+" · "+DATA.meta.n+" entités.";
-  $("foot").textContent="Socialistomètre V"+DATA.meta.version+" · empreinte du jeu de données "+DATA.meta.hash.slice(0,16)+"… · fichier autonome, aucune connexion requise (les liens de sources s'ouvrent avec Internet).";
-  buildNav(); recompute();
-  var fs=$("fsel"); P.forEach(function(p){var o=document.createElement("option");o.value=p.id;o.textContent=p.nom;fs.appendChild(o);});
-  var fra=BYID.FRA?"FRA":P[0].id; state.sel=fra; fs.value=fra; fs.onchange=function(){state.sel=fs.value;renderFiche();};
-  var dl=$("dl"); P.forEach(function(p){var o=document.createElement("option");o.value=p.nom;dl.appendChild(o);});
-  ["sx","sy"].forEach(function(id,i){var s=$(id);["G","A","B","C","D"].forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=LBL[k];s.appendChild(o);}); s.value=i===0?"A":"D"; s.onchange=renderScatter;});
-  var ds=$("dsel"); ["G","A","B","C","D"].forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=LBL[k];ds.appendChild(o);}); ds.onchange=renderHist;
-  $("q").oninput=function(e){state.q=e.target.value;renderClassement();};
-  $("onlycomplet").onchange=function(e){state.onlyComplet=e.target.checked;renderClassement();};
-  function zoom(){var a=+$("zmin").value,b=+$("zmax").value; if(isNaN(a)||isNaN(b))return; state.zmin=Math.max(0,Math.min(99,a)); state.zmax=Math.max(state.zmin+1,Math.min(100,b)); renderSwarm();}
-  $("zmin").onchange=zoom; $("zmax").onchange=zoom;
-  $("zreset").onclick=function(){$("zmin").value=0;$("zmax").value=100;zoom();};
-  $("cadd").onclick=function(){var v=norm($("cq").value); var p=P.filter(function(x){return norm(x.nom)===v;})[0]||P.filter(function(x){return norm(x.nom).indexOf(v)>=0&&v;})[0]; if(p&&state.cmp.indexOf(p.id)<0){state.cmp.push(p.id);} $("cq").value=""; renderCompare();};
-  $("cq").onkeydown=function(e){if(e.key==="Enter")$("cadd").onclick();};
-  $("cclear").onclick=function(){state.cmp=[];renderCompare();};
-  $("wreset").onclick=function(){setWeights(W0);}; $("weq").onclick=function(){setWeights({A:.25,B:.25,C:.25,D:.25});};
-  buildSliders(); renderMeth();
-  window.addEventListener("resize",function(){render();});
-  /* présélection de comparaison */
-  ["FRA","DEU","USA","CHE"].forEach(function(i){if(BYID[i]) state.cmp.push(i);});
-  go("classement");
-  window.__socialistometre={recompute:recompute,P:P,W:W,state:state,setWeights:setWeights,globalScore:globalScore,go:go,render:render,openFiche:openFiche};
-}
-init();
+/* ---------- navigation ---------- */
+var CUR="graphique";
+function show(t){CUR=t;Array.prototype.forEach.call(document.querySelectorAll("nav button"),function(b){b.setAttribute("aria-selected",b.dataset.t===t?"true":"false");});
+ Array.prototype.forEach.call(document.querySelectorAll("main section"),function(s){s.hidden=s.id!=="s-"+t;});drawCurrent();}
+function drawCurrent(){({graphique:drawChart,tableau:drawTable,fiche:drawFiche,comparer:drawCmp,incomplets:drawInc,methode:drawMeth,correspondances:drawCorr})[CUR]();}
+Array.prototype.forEach.call(document.querySelectorAll("nav button"),function(b){b.onclick=function(){show(b.dataset.t);};});
+function render(){if(!D.scen[sid()]){S.mode="recent";}syncControls();modeBar();$("selinfo").textContent=S.sel.length?S.sel.length+" pays sélectionné(s) pour la comparaison.":"";drawCurrent();}
+$("xs").onchange=function(){S.xs=this.value;render();};$("ys").onchange=function(){S.ys=this.value;render();};
+$("mode").onchange=function(){S.mode=this.value;render();};
+$("xed").onchange=function(){pickEdition(S.xs,this.value);};$("yed").onchange=function(){pickEdition(S.ys,this.value);};
+$("region").onchange=function(){S.region=this.value;render();};$("q").oninput=function(){S.q=this.value.trim();drawChart();};
+$("seuil").onchange=function(){var v=parseFloat(this.value);if(!isNaN(v)&&v>=0)S.seuil=v;render();};
+$("labels").onchange=function(){S.labels=this.checked;render();};$("sec").onchange=function(){S.sec=this.checked;render();};$("ctxchk").onchange=function(){S.ctx=this.checked;render();};
+$("reset").onclick=resetOfficial;
+var rsz=null;window.addEventListener("resize",function(){clearTimeout(rsz);rsz=setTimeout(function(){if(CUR==="graphique")drawChart();},120);});
+window.__socialistometre={D:D,S:S,render:render,show:show,points:points,scen:scen,setScenario:function(x,y,m){S.xs=x;S.ys=y;S.mode=m;render();},reset:resetOfficial,openFiche:openFiche};
+render();
 })();
 </script>
 </body>
